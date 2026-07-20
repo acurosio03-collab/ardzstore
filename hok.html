@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARDZ STORE - Honor Of Kings</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+ARDZ STORE
+</div>
+
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="ml.html">ML</a>
+<a href="ff.html">FF</a>
+<a href="pubg.html">PUBG</a>
+<a href="hok.html">HOK</a>
+<a href="roblox.html">Roblox</a>
+
+</nav>
+
+</header>
+
+
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>
+TOP UP HONOR OF KINGS
+</h1>
+
+<p>
+Token HOK Murah • Cepat • Aman
+</p>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+
+<div class="topup-container">
+
+
+<h2>
+Masukkan Player ID HOK
+</h2>
+
+
+<input 
+type="text" 
+id="userid"
+placeholder="Masukkan Player ID">
+
+
+
+<h2>
+Pilih Token HOK
+</h2>
+
+
+
+<div class="game-list">
+
+
+
+<div class="card" onclick="pilihProduk('80 Token',15000)">
+
+<h3>80 Token</h3>
+<p>Rp15.000</p>
+
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('240 Token',45000)">
+
+<h3>240 Token</h3>
+<p>Rp45.000</p>
+
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('400 Token',75000)">
+
+<h3>400 Token</h3>
+<p>Rp75.000</p>
+
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('800 Token',150000)">
+
+<h3>800 Token</h3>
+<p>Rp150.000</p>
+
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('1200 Token',220000)">
+
+<h3>1200 Token</h3>
+<p>Rp220.000</p>
+
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('2400 Token',450000)">
+
+<h3>2400 Token</h3>
+<p>Rp450.000</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+<h2>
+Metode Pembayaran
+</h2>
+
+
+
+<select id="payment">
+
+<option>DANA</option>
+<option>OVO</option>
+<option>GoPay</option>
+<option>QRIS</option>
+<option>Bank Transfer</option>
+
+</select>
+
+
+
+<div class="pay">
+
+<img src="dana.png">
+
+<img src="ovo.png">
+
+<img src="gopay.png">
+
+<img src="qris.png">
+
+</div>
+
+
+
+
+<h2>
+Nomor WhatsApp
+</h2>
+
+
+<input 
+type="text" 
+id="nomorwa"
+placeholder="08xxxxxxxxxx">
+
+
+
+
+
+<div class="invoice">
+
+
+<h3>
+Detail Pesanan
+</h3>
+
+
+<p>
+<b>Game :</b> Honor Of Kings
+</p>
+
+
+<p>
+<b>Produk :</b>
+<span id="produk">
+Belum Dipilih
+</span>
+</p>
+
+
+<p>
+<b>Total :</b>
+<span id="total">
+Rp0
+</span>
+</p>
+
+
+
+</div>
+
+
+
+
+<button onclick="checkoutHOK()">
+
+CHECKOUT SEKARANG
+
+</button>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+<footer>
+
+<h3>
+ARDZ STORE
+</h3>
+
+<p>
+Top Up Game Murah • Aman • Terpercaya
+</p>
+
+</footer>
+
+
+
+
+
+
+<script>
+
+
+let produk="";
+let harga=0;
+
+
+
+function pilihProduk(nama,total){
+
+
+produk=nama;
+
+harga=total;
+
+
+document.getElementById("produk").innerHTML=nama;
+
+
+document.getElementById("total").innerHTML=
+"Rp "+total.toLocaleString("id-ID");
+
+
+}
+
+
+
+
+
+function checkoutHOK(){
+
+
+
+let id=document.getElementById("userid").value;
+
+let payment=document.getElementById("payment").value;
+
+let wa=document.getElementById("nomorwa").value;
+
+
+
+if(id==""){
+
+alert("Masukkan Player ID HOK!");
+
+return;
+
+}
+
+
+
+if(produk==""){
+
+alert("Pilih Token terlebih dahulu!");
+
+return;
+
+}
+
+
+
+
+let admin="6282295071107"; 
+// Ganti nomor ini dengan WhatsApp kamu
+
+
+
+let pesan=
+`Halo Admin ARDZ STORE
+
+Saya ingin Top Up Honor Of Kings
+
+??????????????
+
+?? Game : Honor Of Kings
+
+?? Player ID : ${id}
+
+?? Produk : ${produk}
+
+?? Total : Rp ${harga.toLocaleString("id-ID")}
+
+?? Pembayaran : ${payment}
+
+?? Nomor WA : ${wa}
+
+??????????????
+
+Mohon diproses.
+Terima kasih.`;
+
+
+
+window.open(
+
+"https://wa.me/"+admin+"?text="+encodeURIComponent(pesan),
+
+"_blank"
+
+);
+
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>

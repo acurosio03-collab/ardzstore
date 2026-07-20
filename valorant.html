@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARDZ STORE - Valorant</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+ARDZ STORE
+</div>
+
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="ml.html">ML</a>
+<a href="ff.html">FF</a>
+<a href="pubg.html">PUBG</a>
+<a href="hok.html">HOK</a>
+<a href="roblox.html">Roblox</a>
+<a href="valorant.html">Valorant</a>
+
+</nav>
+
+</header>
+
+
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>
+TOP UP VALORANT POINTS
+</h1>
+
+<p>
+VP Valorant Murah • Cepat • Aman
+</p>
+
+</div>
+
+</section>
+
+
+
+
+<section>
+
+
+<div class="topup-container">
+
+
+<h2>
+Masukkan Riot ID
+</h2>
+
+
+<input 
+type="text"
+id="userid"
+placeholder="Contoh: Nama#1234">
+
+
+
+<h2>
+Pilih Valorant Points
+</h2>
+
+
+
+<div class="game-list">
+
+
+
+<div class="card" onclick="pilihProduk('125 VP',20000)">
+<h3>125 VP</h3>
+<p>Rp20.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('420 VP',60000)">
+<h3>420 VP</h3>
+<p>Rp60.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('700 VP',95000)">
+<h3>700 VP</h3>
+<p>Rp95.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('1375 VP',180000)">
+<h3>1375 VP</h3>
+<p>Rp180.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('2400 VP',300000)">
+<h3>2400 VP</h3>
+<p>Rp300.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('4000 VP',500000)">
+<h3>4000 VP</h3>
+<p>Rp500.000</p>
+</div>
+
+
+
+</div>
+
+
+
+
+<h2>
+Metode Pembayaran
+</h2>
+
+
+
+<select id="payment">
+
+<option>DANA</option>
+<option>OVO</option>
+<option>GoPay</option>
+<option>QRIS</option>
+<option>Bank Transfer</option>
+
+</select>
+
+
+
+
+<div class="pay">
+
+<img src="dana.png">
+
+<img src="ovo.png">
+
+<img src="gopay.png">
+
+<img src="qris.png">
+
+</div>
+
+
+
+
+
+<h2>
+Nomor WhatsApp
+</h2>
+
+
+<input
+type="text"
+id="nomorwa"
+placeholder="08xxxxxxxxxx">
+
+
+
+
+
+<div class="invoice">
+
+
+<h3>
+Detail Pesanan
+</h3>
+
+
+<p>
+<b>Game :</b> Valorant
+</p>
+
+
+<p>
+<b>Produk :</b>
+<span id="produk">
+Belum Dipilih
+</span>
+</p>
+
+
+<p>
+<b>Total :</b>
+<span id="total">
+Rp0
+</span>
+</p>
+
+
+
+</div>
+
+
+
+
+<button onclick="checkoutValorant()">
+
+CHECKOUT SEKARANG
+
+</button>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<footer>
+
+<h3>
+ARDZ STORE
+</h3>
+
+<p>
+Top Up Game Murah • Aman • Terpercaya
+</p>
+
+</footer>
+
+
+
+
+
+<script>
+
+
+let produk="";
+let harga=0;
+
+
+
+function pilihProduk(nama,total){
+
+produk=nama;
+harga=total;
+
+
+document.getElementById("produk").innerHTML=nama;
+
+
+document.getElementById("total").innerHTML=
+"Rp "+total.toLocaleString("id-ID");
+
+}
+
+
+
+
+function checkoutValorant(){
+
+
+let id=document.getElementById("userid").value;
+
+let payment=document.getElementById("payment").value;
+
+let wa=document.getElementById("nomorwa").value;
+
+
+
+if(id==""){
+
+alert("Masukkan Riot ID terlebih dahulu!");
+
+return;
+
+}
+
+
+
+if(produk==""){
+
+alert("Pilih Valorant Points terlebih dahulu!");
+
+return;
+
+}
+
+
+
+let admin="6282295071107";
+// Ganti dengan nomor WhatsApp kamu
+
+
+
+let pesan=
+`Halo Admin ARDZ STORE
+
+Saya ingin Top Up Valorant
+
+??????????????
+
+?? Game : Valorant
+
+?? Riot ID : ${id}
+
+?? Produk : ${produk}
+
+?? Total : Rp ${harga.toLocaleString("id-ID")}
+
+?? Pembayaran : ${payment}
+
+?? Nomor WA : ${wa}
+
+??????????????
+
+Mohon diproses.
+Terima kasih.`;
+
+
+
+window.open(
+
+"https://wa.me/"+admin+"?text="+encodeURIComponent(pesan),
+
+"_blank"
+
+);
+
+
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>

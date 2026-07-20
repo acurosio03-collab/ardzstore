@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARDZ STORE - PUBG Mobile</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="logo">
+ARDZ STORE
+</div>
+
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="ml.html">ML</a>
+<a href="ff.html">FF</a>
+<a href="pubg.html">PUBG</a>
+<a href="hok.html">HOK</a>
+<a href="roblox.html">Roblox</a>
+
+</nav>
+
+</header>
+
+
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>
+TOP UP PUBG MOBILE
+</h1>
+
+<p>
+UC PUBG Murah • Cepat • Aman
+</p>
+
+</div>
+
+</section>
+
+
+
+<section>
+
+
+<div class="topup-container">
+
+
+<h2>
+Masukkan PUBG ID
+</h2>
+
+
+<input 
+type="text"
+id="userid"
+placeholder="Masukkan Player ID PUBG">
+
+
+
+<h2>
+Pilih UC PUBG
+</h2>
+
+
+
+<div class="game-list">
+
+
+
+<div class="card" onclick="pilihProduk('60 UC',15000)">
+<h3>60 UC</h3>
+<p>Rp15.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('325 UC',75000)">
+<h3>325 UC</h3>
+<p>Rp75.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('660 UC',150000)">
+<h3>660 UC</h3>
+<p>Rp150.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('1800 UC',350000)">
+<h3>1800 UC</h3>
+<p>Rp350.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('3850 UC',700000)">
+<h3>3850 UC</h3>
+<p>Rp700.000</p>
+</div>
+
+
+
+<div class="card" onclick="pilihProduk('8100 UC',1400000)">
+<h3>8100 UC</h3>
+<p>Rp1.400.000</p>
+</div>
+
+
+
+</div>
+
+
+
+
+<h2>
+Metode Pembayaran
+</h2>
+
+
+<select id="payment">
+
+<option>DANA</option>
+<option>OVO</option>
+<option>GoPay</option>
+<option>QRIS</option>
+<option>Bank Transfer</option>
+
+</select>
+
+
+
+
+<div class="pay">
+
+<img src="dana.png">
+
+<img src="ovo.png">
+
+<img src="gopay.png">
+
+<img src="qris.png">
+
+</div>
+
+
+
+
+
+<h2>
+Nomor WhatsApp
+</h2>
+
+
+<input
+type="text"
+id="nomorwa"
+placeholder="08xxxxxxxxxx">
+
+
+
+
+
+<div class="invoice">
+
+
+<h3>
+Detail Pesanan
+</h3>
+
+
+<p>
+<b>Game :</b> PUBG Mobile
+</p>
+
+
+<p>
+<b>Produk :</b>
+<span id="produk">
+Belum Dipilih
+</span>
+</p>
+
+
+<p>
+<b>Total :</b>
+<span id="total">
+Rp0
+</span>
+</p>
+
+
+
+</div>
+
+
+
+
+
+<button onclick="checkoutPUBG()">
+
+CHECKOUT SEKARANG
+
+</button>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+<footer>
+
+<h3>
+ARDZ STORE
+</h3>
+
+<p>
+Top Up Game Murah • Aman • Terpercaya
+</p>
+
+</footer>
+
+
+
+
+
+
+<script>
+
+
+let produk="";
+let harga=0;
+
+
+
+function pilihProduk(nama,total){
+
+
+produk=nama;
+
+harga=total;
+
+
+document.getElementById("produk").innerHTML=nama;
+
+
+document.getElementById("total").innerHTML=
+"Rp "+total.toLocaleString("id-ID");
+
+
+}
+
+
+
+
+
+function checkoutPUBG(){
+
+
+
+let id=document.getElementById("userid").value;
+
+let payment=document.getElementById("payment").value;
+
+let wa=document.getElementById("nomorwa").value;
+
+
+
+if(id==""){
+
+alert("Masukkan PUBG ID!");
+
+return;
+
+}
+
+
+
+if(produk==""){
+
+alert("Pilih UC terlebih dahulu!");
+
+return;
+
+}
+
+
+
+
+let admin="6282295071107";
+// Ganti dengan nomor WhatsApp kamu
+
+
+
+
+let pesan=
+`Halo Admin ARDZ STORE
+
+Saya ingin Top Up PUBG Mobile
+
+??????????????
+
+?? Game : PUBG Mobile
+
+?? Player ID : ${id}
+
+?? Produk : ${produk}
+
+?? Total : Rp ${harga.toLocaleString("id-ID")}
+
+?? Pembayaran : ${payment}
+
+?? Nomor WA : ${wa}
+
+??????????????
+
+Mohon diproses.
+Terima kasih.`;
+
+
+
+
+window.open(
+
+"https://wa.me/"+admin+"?text="+encodeURIComponent(pesan),
+
+"_blank"
+
+);
+
+
+
+}
+
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARDZ STORE - Free Fire</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">ARDZ STORE</div>
+
+<nav>
+<a href="index.html">Home</a>
+<a href="ml.html">ML</a>
+<a href="ff.html">FF</a>
+<a href="pubg.html">PUBG</a>
+<a href="hok.html">HOK</a>
+<a href="roblox.html">Roblox</a>
+<a href="valorant.html">Valorant</a>
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-text">
+
+<h1>TOP UP FREE FIRE</h1>
+
+<p>Diamond Free Fire Murah • Cepat • Aman 24 Jam</p>
+
+</div>
+
+</section>
+
+<section>
+
+<div class="topup-container">
+
+<h2>Masukkan Player ID</h2>
+
+<input
+type="text"
+id="userid"
+placeholder="Masukkan Player ID Free Fire">
+
+<h2>Pilih Diamond</h2>
+
+<div class="game-list">
+
+<div class="card" onclick="pilihProduk('70 Diamond',10000)">
+<h3>70 Diamond</h3>
+<p>Rp10.000</p>
+</div>
+
+<div class="card" onclick="pilihProduk('140 Diamond',20000)">
+<h3>140 Diamond</h3>
+<p>Rp20.000</p>
+</div>
+
+<div class="card" onclick="pilihProduk('355 Diamond',50000)">
+<h3>355 Diamond</h3>
+<p>Rp50.000</p>
+</div>
+
+<div class="card" onclick="pilihProduk('720 Diamond',100000)">
+<h3>720 Diamond</h3>
+<p>Rp100.000</p>
+</div>
+
+<div class="card" onclick="pilihProduk('1450 Diamond',200000)">
+<h3>1450 Diamond</h3>
+<p>Rp200.000</p>
+</div>
+
+<div class="card" onclick="pilihProduk('Member Mingguan',30000)">
+<h3>Member Mingguan</h3>
+<p>Rp30.000</p>
+</div>
+
+</div>
+
+<h2>Metode Pembayaran</h2>
+
+<select id="payment">
+<option>DANA</option>
+<option>OVO</option>
+<option>GoPay</option>
+<option>QRIS</option>
+<option>Bank Transfer</option>
+</select>
+
+<div class="pay">
+
+<img src="dana.png" alt="DANA">
+<img src="ovo.png" alt="OVO">
+<img src="gopay.png" alt="GoPay">
+<img src="qris.png" alt="QRIS">
+
+</div>
+
+<h2>Nomor WhatsApp</h2>
+
+<input
+type="text"
+id="nomorwa"
+placeholder="08xxxxxxxxxx">
+
+<div class="invoice">
+
+<h3>Detail Pesanan</h3>
+
+<p><b>Game :</b> Free Fire</p>
+
+<p><b>Produk :</b>
+<span id="produk">Belum Dipilih</span>
+</p>
+
+<p><b>Total :</b>
+<span id="total">Rp0</span>
+</p>
+
+</div>
+
+<button onclick="checkoutFF()">
+
+CHECKOUT SEKARANG
+
+</button>
+
+</div>
+
+</section>
+
+<footer>
+
+<h3>ARDZ STORE</h3>
+
+<p>Top Up Game Murah • Aman • Terpercaya</p>
+
+</footer>
+
+<script>
+
+let produk="";
+let harga=0;
+
+function pilihProduk(nama,total){
+
+produk=nama;
+harga=total;
+
+document.getElementById("produk").innerHTML=nama;
+document.getElementById("total").innerHTML="Rp "+total.toLocaleString("id-ID");
+
+}
+
+function checkoutFF(){
+
+let id=document.getElementById("userid").value;
+let payment=document.getElementById("payment").value;
+let wa=document.getElementById("nomorwa").value;
+
+if(id==""){
+alert("Masukkan Player ID!");
+return;
+}
+
+if(produk==""){
+alert("Pilih Diamond terlebih dahulu!");
+return;
+}
+
+let admin="6282295071107"; // Ganti dengan nomor WA kamu
+
+let pesan=
+`Halo Admin ARDZ STORE
+
+Saya ingin Top Up Free Fire
+
+??????????????
+
+?? Game : Free Fire
+?? Player ID : ${id}
+?? Produk : ${produk}
+?? Total : Rp ${harga.toLocaleString("id-ID")}
+?? Pembayaran : ${payment}
+?? Nomor WA : ${wa}
+
+??????????????
+
+Mohon diproses.
+Terima kasih.`;
+
+window.open(
+"https://wa.me/"+admin+"?text="+encodeURIComponent(pesan),
+"_blank");
+
+}
+
+</script>
+
+</body>
+</html>
