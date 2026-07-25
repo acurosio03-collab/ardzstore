@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARDZ STORE - Admin Login</title>
+
+<link rel="stylesheet" href="../style.css">
+
+<style>
+
+body{
+background:#f4f7fb;
+font-family:Arial,sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.login-box{
+
+width:400px;
+max-width:95%;
+
+background:white;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+}
+
+.logo{
+
+font-size:32px;
+
+font-weight:bold;
+
+text-align:center;
+
+color:#0099ff;
+
+margin-bottom:10px;
+
+}
+
+h2{
+
+text-align:center;
+
+margin-bottom:30px;
+
+}
+
+input{
+
+width:100%;
+
+padding:15px;
+
+margin:10px 0;
+
+border-radius:10px;
+
+border:1px solid #ddd;
+
+box-sizing:border-box;
+
+font-size:16px;
+
+}
+
+button{
+
+width:100%;
+
+padding:15px;
+
+background:#0099ff;
+
+border:none;
+
+color:white;
+
+font-size:18px;
+
+font-weight:bold;
+
+border-radius:10px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+background:#0077dd;
+
+}
+
+.footer{
+
+text-align:center;
+
+margin-top:20px;
+
+color:#666;
+
+font-size:14px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<div class="logo">
+ARDZ STORE
+</div>
+
+<h2>LOGIN ADMIN</h2>
+
+<input
+type="text"
+id="username"
+placeholder="Username">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button onclick="login()">
+
+LOGIN
+
+</button>
+
+<div class="footer">
+
+© 2026 ARDZ STORE
+
+</div>
+
+</div>
+
+<script>
+
+function login(){
+
+let user=document.getElementById("username").value;
+
+let pass=document.getElementById("password").value;
+
+if(user=="admin" && pass=="ardz123"){
+
+window.location.href="dashboard.html";
+
+}else{
+
+alert("Username atau Password salah!");
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
