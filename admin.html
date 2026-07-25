@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard Admin - ARDZ STORE</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#f4f7fb;
+display:flex;
+}
+
+.sidebar{
+
+width:250px;
+height:100vh;
+
+background:#0f172a;
+
+color:white;
+
+position:fixed;
+
+left:0;
+
+top:0;
+
+padding:20px;
+
+}
+
+.sidebar h2{
+
+text-align:center;
+
+margin-bottom:30px;
+
+color:#38bdf8;
+
+}
+
+.sidebar a{
+
+display:block;
+
+padding:15px;
+
+margin-bottom:10px;
+
+text-decoration:none;
+
+color:white;
+
+border-radius:10px;
+
+transition:.3s;
+
+}
+
+.sidebar a:hover{
+
+background:#1e293b;
+
+}
+
+.main{
+
+margin-left:250px;
+
+padding:30px;
+
+width:100%;
+
+}
+
+.title{
+
+font-size:30px;
+
+font-weight:bold;
+
+margin-bottom:25px;
+
+}
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+}
+
+.card{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+
+}
+
+.card h3{
+
+color:#777;
+
+margin-bottom:10px;
+
+}
+
+.card h1{
+
+color:#0099ff;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>ARDZ STORE</h2>
+
+<a href="#">🏠 Dashboard</a>
+
+<a href="#">🎮 Kelola Game</a>
+
+<a href="#">📱 SMM Panel</a>
+
+<a href="#">💳 Payment</a>
+
+<a href="#">📦 Transaksi</a>
+
+<a href="#">📊 Laporan</a>
+
+<a href="#">⚙️ Pengaturan</a>
+
+<a href="login.html">🚪 Logout</a>
+
+</div>
+
+<div class="main">
+
+<div class="title">
+
+Dashboard Admin
+
+</div>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Total Pesanan</h3>
+
+<h1>0</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Pendapatan Hari Ini</h3>
+
+<h1>Rp0</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Total Produk</h3>
+
+<h1>36</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Status Server</h3>
+
+<h1 style="color:green;">
+ONLINE
+</h1>
+
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>
