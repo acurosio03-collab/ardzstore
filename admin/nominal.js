@@ -1,71 +1,83 @@
-let nominal = JSON.parse(localStorage.getItem("nominal")) || [];
+let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 
 const form = document.getElementById("nominalForm");
-
 const list = document.getElementById("listNominal");
+
+function formatRupiah(angka){
+    return "Rp " + Number(angka).toLocaleString("id-ID");
+}
 
 function tampilkan(){
 
-list.innerHTML="";
+    list.innerHTML="";
 
-nominal.forEach((item,index)=>{
+    if(dataNominal.length===0){
+        list.innerHTML="<p>Belum ada data nominal.</p>";
+        return;
+    }
 
-const jual =
-Number(item.supplier)+Number(item.profit);
+    dataNominal.forEach((item,index)=>{
 
-list.innerHTML +=`
+        let hargaJual =
+        Number(item.supplier)+Number(item.margin);
+
+        list.innerHTML+=`
 
 <div class="nominal-card">
 
-<h3>${item.produk}</h3>
+<h3>${item.game}</h3>
 
-<p>Supplier : Rp ${item.supplier}</p>
+<b>${item.produk}</b>
 
-<p>Profit : Rp ${item.profit}</p>
+<p>Supplier : ${formatRupiah(item.supplier)}</p>
 
-<h2>Harga Jual Rp ${jual}</h2>
+<p>Margin : ${formatRupiah(item.margin)}</p>
+
+<h2>${formatRupiah(hargaJual)}</h2>
 
 <button onclick="hapus(${index})">
-
-Hapus
-
+🗑 Hapus
 </button>
 
 </div>
 
 `;
 
-});
+    });
 
 }
 
-form.onsubmit=function(e){
+form.addEventListener("submit",function(e){
 
 e.preventDefault();
 
-nominal.push({
+const game=document.getElementById("game").value;
+const produk=document.getElementById("produk").value;
+const supplier=document.getElementById("supplier").value;
+const margin=document.getElementById("profit").value;
 
-produk:produk.value,
+dataNominal.push({
 
-supplier:supplier.value,
-
-profit:profit.value
+game,
+produk,
+supplier,
+margin
 
 });
 
-localStorage.setItem("nominal",JSON.stringify(nominal));
-
-tampilkan();
+localStorage.setItem("nominal",JSON.stringify(dataNominal));
 
 form.reset();
 
-}
+tampilkan();
+
+});
 
 function hapus(index){
 
-nominal.splice(index,1);
+dataNominal.splice(index,1);
 
-localStorage.setItem("nominal",JSON.stringify(nominal));
+localStorage.setItem("nominal",JSON.stringify(dataNominal));
 
 tampilkan();
 
