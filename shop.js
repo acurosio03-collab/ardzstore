@@ -26,10 +26,10 @@ if (container) {
 
             <div class="card">
 
-            
-<img src="${item.gambar}" width="60"><br>
-${item.nama}
-</td>
+            <img src="${item.gambar}"
+     alt="${item.nama}"
+     style="width:100%; height:180px; object-fit:cover; border-radius:10px;">
+
 
                 <h3>${item.nama}</h3>
 
