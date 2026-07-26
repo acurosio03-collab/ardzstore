@@ -65,11 +65,13 @@ margin
 
 });
 
-localStorage.setItem("nominal",JSON.stringify(dataNominal));
+localStorage.setItem("nominal", JSON.stringify(dataNominal));
 
 form.reset();
 
 tampilkan();
+
+alert("Nominal berhasil disimpan!");
 
 });
 
