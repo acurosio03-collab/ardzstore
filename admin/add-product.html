@@ -71,30 +71,32 @@ font-weight:bold;
 
 <h2>Tambah Produk Baru</h2>
 
-<form>
+<form id="productForm">
 
 <label>Nama Game</label>
-<input type="text" placeholder="Contoh : Mobile Legends">
+<input type="text" id="nama" placeholder="Mobile Legends" required>
 
 <label>Harga</label>
-<input type="number" placeholder="5000">
+<input type="number" id="harga" placeholder="5000" required>
 
 <label>Upload Gambar</label>
-<input type="file">
+<input type="file" id="gambar">
 
 <label>Status</label>
-<select>
-<option>Aktif</option>
-<option>Nonaktif</option>
+<select id="status">
+    <option value="Aktif">Aktif</option>
+    <option value="Nonaktif">Nonaktif</option>
 </select>
 
 <button type="submit">Simpan Produk</button>
 
 </form>
 
+<button type="submit">Simpan Produk</button>
+
 <a href="products.html" class="back">← Kembali ke Kelola Produk</a>
 
 </div>
-
+script src="app.js"></script>
 </body>
 </html>
