@@ -1,21 +1,52 @@
+// ================================
+// ARDZ STORE - SHOP
+// ================================
+
 const products = JSON.parse(localStorage.getItem("products")) || [];
 
 const container = document.getElementById("shop-products");
 
 if (container) {
-    container.className = "game-list";
+
     container.innerHTML = "";
 
-    products.forEach(item => {
-        container.innerHTML += `
-        <div class="card">
-            <img src="logo.jpeg" alt="${item.nama}">
-            <h3>${item.nama}</h3>
-            <p>Rp ${item.harga}</p>
-            <a href="https://wa.me/6282295071107?text=Halo, saya ingin top up ${item.nama}" class="buy-btn">
-                BELI
-            </a>
-        </div>
+    if(products.length===0){
+
+        container.innerHTML=`
+        <p style="text-align:center;color:white;">
+        Belum ada produk terbaru.
+        </p>
         `;
-    });
+
+    }else{
+
+        products.forEach(item=>{
+
+            container.innerHTML+=`
+
+            <div class="card">
+
+                <img src="logo.jpeg" alt="${item.nama}">
+
+                <h3>${item.nama}</h3>
+
+                <p>💰 Rp ${item.harga}</p>
+
+                <p style="color:#00ff99;">
+                ${item.status}
+                </p>
+
+                <a class="buy-btn"
+                href="https://wa.me/6282295071107?text=Halo Admin ARDZ STORE,%0ASaya ingin top up:%0A🎮 ${item.nama}%0A💰 Rp ${item.harga}">
+                BELI SEKARANG
+                </a>
+
+            </div>
+
+            `;
+
+        });
+
+    }
+
 }
