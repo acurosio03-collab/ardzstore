@@ -1,21 +1,24 @@
-// Ambil data dari localStorage
+// ===============================
+// ARDZ STORE - NOMINAL.JS
+// ===============================
+
+// Ambil data
 let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 
-// ======================
-// FORMAT RUPIAH
-// ======================
+// Format Rupiah
 function formatRupiah(angka){
     return "Rp " + Number(angka).toLocaleString("id-ID");
 }
 
-// ======================
-// SIMPAN NOMINAL
-// ======================
+// ===============================
+// TAMBAH NOMINAL
+// ===============================
+
 const form = document.getElementById("nominalForm");
 
 if(form){
 
-    form.addEventListener("submit", function(e){
+    form.addEventListener("submit",function(e){
 
         e.preventDefault();
 
@@ -31,11 +34,9 @@ if(form){
             profit
         });
 
-        localStorage.setItem("nominal", JSON.stringify(dataNominal));
+        localStorage.setItem("nominal",JSON.stringify(dataNominal));
 
-console.log("Data tersimpan:", localStorage.getItem("nominal"));
-
-alert("Nominal berhasil ditambahkan!");
+        alert("Nominal berhasil ditambahkan!");
 
         form.reset();
 
@@ -43,20 +44,23 @@ alert("Nominal berhasil ditambahkan!");
 
 }
 
-// ======================
+// ===============================
 // TAMPILKAN DATA
-// ======================
+// ===============================
+
 function tampilkan(){
 
     const list = document.getElementById("listNominal");
 
     if(!list) return;
 
+    dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
+
     list.innerHTML = "";
 
-    if(dataNominal.length == 0){
+    if(dataNominal.length==0){
 
-        list.innerHTML = "<p>Belum ada nominal.</p>";
+        list.innerHTML="<p>Belum ada nominal.</p>";
 
         return;
 
@@ -64,48 +68,63 @@ function tampilkan(){
 
     dataNominal.forEach((item,index)=>{
 
-        const hargaJual = item.supplier + item.profit;
+        const hargaJual =
+        Number(item.supplier)+Number(item.profit);
 
         list.innerHTML += `
-        <div class="card">
 
-            <h3>${item.game}</h3>
+<div class="card">
 
-            <p><b>${item.produk}</b></p>
+<h3>${item.game}</h3>
 
-            <p>Supplier : ${formatRupiah(item.supplier)}</p>
+<p><b>${item.produk}</b></p>
 
-            <p>Profit : ${formatRupiah(item.profit)}</p>
+<p>Harga Supplier : ${formatRupiah(item.supplier)}</p>
 
-            <h2>${formatRupiah(hargaJual)}</h2>
+<p>Profit : ${formatRupiah(item.profit)}</p>
 
-            <button onclick="hapus(${index})">
-                Hapus
-            </button>
+<h2>${formatRupiah(hargaJual)}</h2>
 
-        </div>
-        `;
+<button onclick="editNominal(${index})">
+✏️ Edit
+</button>
+
+<button onclick="hapus(${index})">
+🗑 Hapus
+</button>
+
+</div>
+
+`;
 
     });
 
 }
 
-// ======================
-// HAPUS DATA
-// ======================
-function hapus(index){
+// ===============================
+// EDIT NOMINAL
+// ===============================
 
-    if(confirm("Hapus nominal ini?")){
+function editNominal(index){
 
-        dataNominal.splice(index,1);
+    dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 
-        localStorage.setItem("nominal", JSON.stringify(dataNominal));
+    let item = dataNominal[index];
 
-        tampilkan();
+    let game = prompt("Game",item.game);
+    if(game===null) return;
 
-    }
+    let produk = prompt("Nama Produk",item.produk);
+    if(produk===null) return;
 
-}
+    let supplier = prompt("Harga Supplier",item.supplier);
+    if(supplier===null) return;
 
-// Jalankan saat membuka list
-tampilkan();
+    let profit = prompt("Profit",item.profit);
+    if(profit===null) return;
+
+    dataNominal[index]={
+        game:game,
+        produk:produk,
+        supplier:Number(supplier),
+        profit:Number(profit)
