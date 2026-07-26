@@ -105,3 +105,22 @@ function tambahNominal(){
 
     location.reload();
 }
+function tampilNominal() {
+    let data = JSON.parse(localStorage.getItem("nominal")) || [];
+
+    let html = "";
+
+    data.forEach((item, index) => {
+        html += `
+        <div class="card">
+            <h3>${item.nama}</h3>
+            <p>Rp ${Number(item.harga).toLocaleString("id-ID")}</p>
+
+            <button onclick="editNominal(${index})">Edit</button>
+            <button onclick="hapusNominal(${index})">Hapus</button>
+        </div>
+        `;
+    });
+
+    document.getElementById("listNominal").innerHTML = html;
+}
