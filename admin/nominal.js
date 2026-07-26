@@ -33,7 +33,9 @@ if(form){
 
         localStorage.setItem("nominal", JSON.stringify(dataNominal));
 
-        alert("Nominal berhasil ditambahkan!");
+console.log("Data tersimpan:", localStorage.getItem("nominal"));
+
+alert("Nominal berhasil ditambahkan!");
 
         form.reset();
 
