@@ -1,128 +1,144 @@
-// ===============================
-// ARDZ STORE - app.js
-// ===============================
+// ==========================
+// ARDZ STORE APP
+// ==========================
 
-// Ambil data dari LocalStorage
 let products = JSON.parse(localStorage.getItem("products")) || [];
 
-// ===============================
+// ==========================
 // SIMPAN PRODUK
-// ===============================
+// ==========================
 const form = document.getElementById("productForm");
 
-if (form) {
+if(form){
 
-    form.addEventListener("submit", function(e){
+form.addEventListener("submit",function(e){
 
-        e.preventDefault();
+e.preventDefault();
 
-        const nama = document.getElementById("nama").value;
-        const harga = document.getElementById("harga").value;
-        const status = document.getElementById("status").value;
+const nama=document.getElementById("nama").value;
+const harga=document.getElementById("harga").value;
+const status=document.getElementById("status").value;
 
-        products.push({
-            id: Date.now(),
-            nama: nama,
-            harga: harga,
-            status: status
-        });
+products.push({
 
-        localStorage.setItem("products", JSON.stringify(products));
+id:Date.now(),
 
-        alert("Produk berhasil ditambahkan!");
+nama:nama,
 
-        window.location.href = "products.html";
+harga:harga,
 
-    });
+status:status
+
+});
+
+localStorage.setItem("products",JSON.stringify(products));
+
+alert("Produk berhasil ditambahkan!");
+
+window.location.href="products.html";
+
+});
 
 }
 
-// ===============================
+// ==========================
 // TAMPILKAN PRODUK
-// ===============================
-const tbody = document.getElementById("product-list");
+// ==========================
 
-if (tbody) {
+function loadProducts(){
 
-    tampilkanProduk();
+const tbody=document.getElementById("product-list");
 
-}
+if(!tbody) return;
 
-function tampilkanProduk(){
+tbody.innerHTML="";
 
-    tbody.innerHTML = "";
+products.forEach((item,index)=>{
 
-    products.forEach((item,index)=>{
+tbody.innerHTML+=`
 
-        tbody.innerHTML += `
-        <tr>
+<tr>
 
-            <td>${index+1}</td>
+<td>${index+1}</td>
 
-            <td>${item.nama}</td>
+<td>${item.nama}</td>
 
-            <td>Rp ${item.harga}</td>
+<td>Rp ${item.harga}</td>
 
-            <td>${item.status}</td>
+<td>${item.status}</td>
 
-            <td>
+<td>
 
-                <button onclick="editProduk(${item.id})">
-                    Edit
-                </button>
+<button class="edit" onclick="editProduct(${item.id})">
 
-                <button onclick="hapusProduk(${item.id})">
-                    Hapus
-                </button>
+Edit
 
-            </td>
+</button>
 
-        </tr>
-        `;
+<button class="delete" onclick="deleteProduct(${item.id})">
 
-    });
+Hapus
 
-}
+</button>
 
-// ===============================
-// HAPUS PRODUK
-// ===============================
-function hapusProduk(id){
+</td>
 
-    if(confirm("Yakin ingin menghapus produk?")){
+</tr>
 
-        products = products.filter(item => item.id !== id);
+`;
 
-        localStorage.setItem("products", JSON.stringify(products));
-
-        tampilkanProduk();
-
-    }
+});
 
 }
 
-// ===============================
-// EDIT PRODUK
-// ===============================
-function editProduk(id){
+loadProducts();
 
-    const produk = products.find(item => item.id === id);
+// ==========================
+// HAPUS
+// ==========================
 
-    if(!produk) return;
+function deleteProduct(id){
 
-    const namaBaru = prompt("Nama Game", produk.nama);
+if(confirm("Hapus produk ini?")){
 
-    if(namaBaru === null) return;
+products=products.filter(item=>item.id!=id);
 
-    const hargaBaru = prompt("Harga", produk.harga);
+localStorage.setItem("products",JSON.stringify(products));
 
-    if(hargaBaru === null) return;
+loadProducts();
 
-    produk.nama = namaBaru;
-    produk.harga = hargaBaru;
+}
 
-    localStorage.setItem("products", JSON.stringify(products));
+}
 
-    tampilkanProduk();
+// ==========================
+// EDIT
+// ==========================
+
+function editProduct(id){
+
+const data=products.find(item=>item.id==id);
+
+if(!data) return;
+
+const nama=prompt("Nama Game",data.nama);
+
+if(nama===null) return;
+
+const harga=prompt("Harga",data.harga);
+
+if(harga===null) return;
+
+const status=prompt("Status",data.status);
+
+if(status===null) return;
+
+data.nama=nama;
+data.harga=harga;
+data.status=status;
+
+localStorage.setItem("products",JSON.stringify(products));
+
+loadProducts();
 
 }
