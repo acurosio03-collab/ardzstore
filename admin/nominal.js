@@ -107,24 +107,30 @@ function tampilkan(){
 
 function editNominal(index){
 
-    dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
-
     let item = dataNominal[index];
 
-    let game = prompt("Game",item.game);
-    if(game===null) return;
+    let game = prompt("Game", item.game);
+    if(game === null) return;
 
-    let produk = prompt("Nama Produk",item.produk);
-    if(produk===null) return;
+    let produk = prompt("Nama Produk", item.produk);
+    if(produk === null) return;
 
-    let supplier = prompt("Harga Supplier",item.supplier);
-    if(supplier===null) return;
+    let supplier = prompt("Harga Supplier", item.supplier);
+    if(supplier === null) return;
 
-    let profit = prompt("Profit",item.profit);
-    if(profit===null) return;
+    let profit = prompt("Profit", item.profit);
+    if(profit === null) return;
 
-    dataNominal[index]={
-        game:game,
-        produk:produk,
-        supplier:Number(supplier),
-        profit:Number(profit)
+    dataNominal[index] = {
+        game: game,
+        produk: produk,
+        supplier: Number(supplier),
+        profit: Number(profit)
+    };
+
+    localStorage.setItem("nominal", JSON.stringify(dataNominal));
+
+    tampilkan();
+
+    alert("Nominal berhasil diubah!");
+}
