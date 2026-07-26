@@ -100,3 +100,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+const addProduct = document.getElementById("addProduct");
+
+if (addProduct) {
+    addProduct.addEventListener("click", function () {
+
+        const nama = prompt("Nama Game:");
+        if (!nama) return;
+
+        const harga = prompt("Harga:");
+        if (!harga) return;
+
+        const tbody = document.querySelector("tbody");
+
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+            <td>${tbody.rows.length + 1}</td>
+            <td>${nama}</td>
+            <td>Rp${harga}</td>
+            <td>Aktif</td>
+            <td>
+                <button class="edit">Edit</button>
+                <button class="delete">Hapus</button>
+            </td>
+        `;
+
+        tbody.appendChild(row);
+    });
+}
