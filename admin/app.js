@@ -129,3 +129,6 @@ if (addProduct) {
         tbody.appendChild(row);
     });
 }
+document.getElementById("addProduct").onclick = function () {
+    alert("Tombol berhasil diklik!");
+};
