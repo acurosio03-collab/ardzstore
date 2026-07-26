@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tambah Produk - ARDZ STORE</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#eef2f7;
+margin:0;
+}
+
+.container{
+max-width:700px;
+margin:40px auto;
+background:#fff;
+padding:25px;
+border-radius:15px;
+box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+h2{
+margin-bottom:20px;
+color:#0099ff;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+}
+
+input,select{
+width:100%;
+padding:12px;
+margin-top:5px;
+border:1px solid #ccc;
+border-radius:8px;
+}
+
+button{
+margin-top:20px;
+padding:12px 25px;
+background:#00aaff;
+color:#fff;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#0088dd;
+}
+
+.back{
+display:inline-block;
+margin-top:20px;
+text-decoration:none;
+color:#0099ff;
+font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Tambah Produk Baru</h2>
+
+<form>
+
+<label>Nama Game</label>
+<input type="text" placeholder="Contoh : Mobile Legends">
+
+<label>Harga</label>
+<input type="number" placeholder="5000">
+
+<label>Upload Gambar</label>
+<input type="file">
+
+<label>Status</label>
+<select>
+<option>Aktif</option>
+<option>Nonaktif</option>
+</select>
+
+<button type="submit">Simpan Produk</button>
+
+</form>
+
+<a href="products.html" class="back">← Kembali ke Kelola Produk</a>
+
+</div>
+
+</body>
+</html>
