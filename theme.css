@@ -310,3 +310,140 @@ transform:translateY(-3px);
 box-shadow:0 0 25px rgba(0,212,255,.4);
 
 }
+/* ==========================
+      HERO SECTION
+========================== */
+
+.hero{
+
+width:90%;
+
+margin:auto;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:80px 0;
+
+gap:50px;
+
+flex-wrap:wrap;
+
+}
+
+.hero-left{
+
+flex:1;
+
+}
+
+.hero-right{
+
+flex:1;
+
+text-align:center;
+
+}
+
+.hero-right img{
+
+width:380px;
+
+max-width:100%;
+
+filter:drop-shadow(0 0 30px #7C3AED);
+
+animation:float 4s ease-in-out infinite;
+
+}
+
+@keyframes float{
+
+0%{transform:translateY(0);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0);}
+
+}
+
+.badge{
+
+display:inline-block;
+
+background:rgba(124,58,237,.2);
+
+border:1px solid #7C3AED;
+
+padding:10px 18px;
+
+border-radius:50px;
+
+margin-bottom:20px;
+
+}
+
+.hero h1{
+
+font-size:58px;
+
+line-height:70px;
+
+margin-bottom:20px;
+
+}
+
+.hero h1 span{
+
+color:#00CFFF;
+
+}
+
+.hero p{
+
+color:#B9C3E3;
+
+font-size:18px;
+
+line-height:30px;
+
+margin-bottom:30px;
+
+}
+
+.hero-button{
+
+display:flex;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+.contact-btn{
+
+padding:12px 22px;
+
+border:2px solid #00CFFF;
+
+border-radius:12px;
+
+text-decoration:none;
+
+color:white;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+.contact-btn:hover{
+
+background:#00CFFF;
+
+color:#000;
+
+}
