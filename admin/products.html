@@ -8,119 +8,70 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
-background:white;
-border-radius:15px;
+background:#fff;
+border-radius:10px;
 overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+th,td{
+padding:15px;
+text-align:center;
+border-bottom:1px solid #ddd;
 }
 
 th{
 background:#0099ff;
-color:white;
-padding:15px;
-}
-
-td{
-padding:15px;
-text-align:center;
-border-bottom:1px solid #eee;
+color:#fff;
 }
 
 .btn{
 padding:8px 15px;
 border:none;
-border-radius:8px;
+border-radius:6px;
 cursor:pointer;
-font-weight:bold;
+text-decoration:none;
 }
 
 .edit{
-background:#ffc107;
-color:black;
+background:orange;
+color:#fff;
 }
 
 .delete{
-background:#dc3545;
-color:white;
+background:red;
+color:#fff;
 }
 
 .add{
-background:#28a745;
-color:white;
-padding:12px 20px;
+display:inline-block;
 margin-bottom:20px;
+background:#28a745;
+color:#fff;
+padding:10px 15px;
+border-radius:6px;
+text-decoration:none;
 }
-
 </style>
 
 </head>
 
 <body>
 
-<div class="sidebar">
-
-<div class="logo">
-ARDZ STORE
-</div>
-
-<ul>
-
-<li><a href="dashboard.html">🏠 Dashboard</a></li>
-
-<li><a href="products.html">🎮 Kelola Game</a></li>
-
-<li><a href="#">📱 Kelola SMM</a></li>
-
-<li><a href="#">💳 Pembayaran</a></li>
-
-<li><a href="#">📦 Pesanan</a></li>
-
-<li><a href="#">👥 Pelanggan</a></li>
-
-<li><a href="#">⚙️ Pengaturan</a></li>
-
-<li><a href="login.html">🚪 Logout</a></li>
-
-</ul>
-
-</div>
-
 <div class="main">
-
-<div class="header">
 
 <h1>Kelola Produk</h1>
 
-<div class="admin-box">
-Admin
-</div>
-
-</div>
-
-<a href="add-product.html" class="btn">
-    + Tambah Produk
+<a href="add-product.html" class="add">
++ Tambah Produk
 </a>
-<table>
-
-<tr>
-
-<th>No</th>
-
-<th>Game</th>
-
-<th>Harga</th>
-
-<th>Status</th>
-
-<th>Aksi</th>
 
 <table>
 
+<thead>
 <tr>
 <th>No</th>
 <th>Game</th>
@@ -128,81 +79,7 @@ Admin
 <th>Status</th>
 <th>Aksi</th>
 </tr>
-
-<tbody id="product-list">
-</tbody>
-
-</table>
-
-<table>
-
-<tr>
-<th>No</th>
-<th>Game</th>
-<th>Harga</th>
-<th>Status</th>
-<th>Aksi</th>
-</tr>
-
-<tbody id="product-list">
-</tbody>
-
-</table>
-
-<table>
-
-<tr>
-<th>No</th>
-<th>Game</th>
-<th>Harga</th>
-<th>Status</th>
-<th>Aksi</th>
-</tr>
-
-<tbody id="product-list">
-</tbody>
-
-</table>
-    
-<table>
-
-<tr>
-<th>No</th>
-<th>Game</th>
-<th>Harga</th>
-<th>Status</th>
-<th>Aksi</th>
-</tr>
-
-<tbody id="product-list">
-</tbody>
-
-</table>
-
-<table>
-
-<tr>
-<th>No</th>
-<th>Game</th>
-<th>Harga</th>
-<th>Status</th>
-<th>Aksi</th>
-</tr>
-
-<tbody id="product-list">
-</tbody>
-
-</table>
-    
-<table>
-
-<tr>
-<th>No</th>
-<th>Game</th>
-<th>Harga</th>
-<th>Status</th>
-<th>Aksi</th>
-</tr>
+</thead>
 
 <tbody id="product-list">
 </tbody>
@@ -210,7 +87,8 @@ Admin
 </table>
 
 </div>
-  
+
 <script src="app.js"></script>
+
 </body>
 </html>
