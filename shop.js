@@ -21,7 +21,7 @@ if (container) {
     }else{
 
         products.forEach(item=>{
-
+console.log(item);
             container.innerHTML+=`
 
             <div class="card">
