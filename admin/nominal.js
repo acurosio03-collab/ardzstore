@@ -86,3 +86,22 @@ tampilkan();
 }
 
 tampilkan();
+function tambahNominal(){
+
+    let data = JSON.parse(localStorage.getItem("nominal")) || [];
+
+    let nama = document.getElementById("nama").value;
+    let harga = document.getElementById("harga").value;
+
+    data.push({
+        id: Date.now(),
+        nama: nama,
+        harga: harga
+    });
+
+    localStorage.setItem("nominal", JSON.stringify(data));
+
+    alert("Nominal berhasil ditambahkan");
+
+    location.reload();
+}
