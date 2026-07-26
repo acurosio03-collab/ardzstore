@@ -75,3 +75,28 @@ document.addEventListener("DOMContentLoaded",()=>{
     tampilkanProduk();
 
 });
+document.addEventListener("DOMContentLoaded", function () {
+
+    const addBtn = document.getElementById("addProduct");
+
+    if (addBtn) {
+        addBtn.addEventListener("click", function () {
+            alert("Fitur tambah produk akan dibuat pada langkah berikutnya.");
+        });
+    }
+
+    document.querySelectorAll(".edit").forEach(btn => {
+        btn.addEventListener("click", function () {
+            alert("Edit produk.");
+        });
+    });
+
+    document.querySelectorAll(".delete").forEach(btn => {
+        btn.addEventListener("click", function () {
+            if (confirm("Yakin ingin menghapus produk?")) {
+                this.closest("tr").remove();
+            }
+        });
+    });
+
+});
