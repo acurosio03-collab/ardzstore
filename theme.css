@@ -617,3 +617,76 @@ color:#BFC8E6;
 font-size:16px;
 
 }
+/*==============================
+FOOTER
+==============================*/
+
+footer{
+
+margin-top:100px;
+
+padding:60px 10%;
+
+background:#11172D;
+
+text-align:center;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.footer-logo h2{
+
+font-size:34px;
+
+background:linear-gradient(90deg,#7C3AED,#00D4FF);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+margin-bottom:15px;
+
+}
+
+.footer-logo p{
+
+color:#BFC8E6;
+
+margin-bottom:30px;
+
+}
+
+.footer-menu{
+
+display:flex;
+
+justify-content:center;
+
+gap:30px;
+
+flex-wrap:wrap;
+
+margin-bottom:30px;
+
+}
+
+.footer-menu a{
+
+color:white;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.footer-menu a:hover{
+
+color:#00D4FF;
+
+}
+
+.copyright{
+
+color:#8E97B8;
