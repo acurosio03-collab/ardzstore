@@ -132,3 +132,28 @@ if (addProduct) {
 document.getElementById("addProduct").onclick = function () {
     alert("Tombol berhasil diklik!");
 };
+const form = document.getElementById("productForm");
+
+if (form) {
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const nama = document.getElementById("nama").value;
+        const harga = document.getElementById("harga").value;
+        const status = document.getElementById("status").value;
+
+        let products = JSON.parse(localStorage.getItem("products")) || [];
+
+        products.push({
+            nama: nama,
+            harga: harga,
+            status: status
+        });
+
+        localStorage.setItem("products", JSON.stringify(products));
+
+        alert("Produk berhasil ditambahkan!");
+
+        window.location.href = "products.html";
+    });
+}
