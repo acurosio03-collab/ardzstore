@@ -3,127 +3,69 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARDZ STORE - Dashboard Admin</title>
+
+<title>Dashboard Admin - ARDZ STORE</title>
 
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="theme.css">
 
 </head>
 
 <body>
 
+<div class="admin-layout">
+
 <div class="sidebar">
 
-<div class="logo">
-ARDZ STORE
-</div>
+<h2>ARDZ STORE</h2>
 
-<ul>
-
-<li><a href="#">🏠 Dashboard</a></li>
-
-<li><a href="products.html">🎮 Kelola Game</a></li>
-
-<li><a href="#">📱 Kelola SMM</a></li>
-
-<li><a href="#">💳 Pembayaran</a></li>
-
-<li><a href="#">📦 Pesanan</a></li>
-
-<li><a href="#">👥 Pelanggan</a></li>
-
-<li><a href="#">⚙️ Pengaturan</a></li>
-
-<li><a href="login.html">🚪 Logout</a></li>
-
-</ul>
+<a href="dashboard.html">🏠 Dashboard</a>
+<a href="products.html">🎮 Produk</a>
+<a href="add-product.html">➕ Tambah Produk</a>
+<a href="../index.html">🌐 Website</a>
+<a href="login.html">🚪 Logout</a>
 
 </div>
 
-<div class="main">
-
-<div class="header">
+<div class="content">
 
 <h1>Dashboard Admin</h1>
 
-<div class="admin-box">
-Admin
-</div>
-
-</div>
-
 <div class="cards">
 
-<div class="card">
+<div class="card-admin">
+<h2 id="totalProduk">0</h2>
+<p>Total Produk</p>
+</div>
 
-<h3>Total Pesanan</h3>
-
+<div class="card-admin">
 <h2>0</h2>
-
+<p>Pesanan Hari Ini</p>
 </div>
 
-<div class="card">
-
-<h3>Pendapatan Hari Ini</h3>
-
+<div class="card-admin">
 <h2>Rp0</h2>
-
+<p>Pendapatan</p>
 </div>
 
-<div class="card">
-
-<h3>Total Produk</h3>
-
-<h2>35</h2>
-
+<div class="card-admin">
+<h2>Aktif</h2>
+<p>Status Website</p>
 </div>
 
-<div class="card">
-
-<h3>Status Server</h3>
-
-<h2 class="status">ONLINE</h2>
+</div>
 
 </div>
 
 </div>
 
-<div class="table-box">
+<script>
 
-<h2>Pesanan Terbaru</h2>
+const produk=JSON.parse(localStorage.getItem("products"))||[];
 
-<br>
+document.getElementById("totalProduk").innerText=produk.length;
 
-<table>
-
-<tr>
-
-<th>No</th>
-
-<th>Produk</th>
-
-<th>Status</th>
-
-<th>Total</th>
-
-</tr>
-
-<tr>
-
-<td>1</td>
-
-<td>Belum ada pesanan</td>
-
-<td>-</td>
-
-<td>Rp0</td>
-
-</tr>
-
-</table>
-
-</div>
-
-</div>
+</script>
 
 </body>
 </html>
