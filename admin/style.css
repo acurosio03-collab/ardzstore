@@ -316,3 +316,42 @@ margin-top:20px;
 border-radius:15px;
 
 }
+.nominal-card{
+
+background:#161E38;
+
+padding:20px;
+
+border-radius:18px;
+
+margin-top:20px;
+
+border:1px solid rgba(124,58,237,.25);
+
+transition:.3s;
+
+}
+
+.nominal-card:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 0 25px rgba(124,58,237,.5);
+
+}
+
+.nominal-card h2{
+
+color:#00D4FF;
+
+margin:10px 0;
+
+}
+
+.nominal-card button{
+
+background:#FF4D6D;
+
+margin-top:10px;
+
+}
