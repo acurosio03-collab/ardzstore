@@ -26,7 +26,7 @@ if (container) {
 
             <div class="card">
 
-                <img src="${item.gambar}" alt="${item.nama}">
+                <img src="${item.image}">
 
                 <h3>${item.nama}</h3>
 
