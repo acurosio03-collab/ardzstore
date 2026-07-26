@@ -11,31 +11,41 @@ const form = document.getElementById("productForm");
 
 if(form){
 
-form.addEventListener("submit",function(e){
+form.addEventListener("submit", function(e){
 
-e.preventDefault();
+    e.preventDefault();
 
-const nama=document.getElementById("nama").value;
-const harga=document.getElementById("harga").value;
-const status=document.getElementById("status").value;
+    const nama = document.getElementById("nama").value;
+    const harga = document.getElementById("harga").value;
+    const status = document.getElementById("status").value;
 
-products.push({
+    const file = document.getElementById("gambar").files[0];
 
-id:Date.now(),
+    if(!file){
+        alert("Pilih gambar terlebih dahulu!");
+        return;
+    }
 
-nama:nama,
+    const reader = new FileReader();
 
-harga:harga,
+    reader.onload = function(){
 
-status:status
+        products.push({
+            id: Date.now(),
+            nama: nama,
+            harga: harga,
+            status: status,
+            gambar: reader.result
+        });
 
-});
+        localStorage.setItem("products", JSON.stringify(products));
 
-localStorage.setItem("products",JSON.stringify(products));
+        alert("Produk berhasil ditambahkan!");
 
-alert("Produk berhasil ditambahkan!");
+        window.location.href = "products.html";
+    }
 
-window.location.href="products.html";
+    reader.readAsDataURL(file);
 
 });
 
@@ -61,7 +71,10 @@ tbody.innerHTML+=`
 
 <td>${index+1}</td>
 
-<td>${item.nama}</td>
+<td>
+<img src="${item.gambar}" width="60"><br>
+${item.nama}
+</td>
 
 <td>Rp ${item.harga}</td>
 
