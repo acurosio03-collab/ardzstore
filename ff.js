@@ -11,91 +11,114 @@ function pilihProduk(nama,total){
         "Rp " + total.toLocaleString("id-ID");
 }
 
-function loadFF(){
+function loadff(){
 
     let data = JSON.parse(localStorage.getItem("nominal")) || [];
+
+    console.log("Data nominal:", data);
 
     let html = "";
 
     data.forEach(item=>{
 
-        if(item.game=="Free Fire"){
+        console.log("Item:", item);
 
-            let jual =
-                Number(item.supplier)+Number(item.profit);
+        if(item.game && item.game.toLowerCase().includes("mobile")){
+
+            let jual = Number(item.supplier) + Number(item.profit);
 
             html += `
-            <div class="card"
-            onclick="pilihProduk('${item.produk}',${jual})">
-
+            <div class="card" onclick="pilihProduk('${item.produk}', ${jual})">
                 <h3>${item.produk}</h3>
-
                 <p>Rp ${jual.toLocaleString("id-ID")}</p>
-
             </div>
             `;
-
         }
 
     });
 
     document.getElementById("ff-products").innerHTML = html;
 
+    console.log("HTML:", html);
+
 }
 
-loadFF();
+loadff();
 
-function checkoutFF(){
+function checkoutff(){
 
-    let userid=document.getElementById("userid").value;
-    let payment=document.getElementById("payment").value;
-    let wa=document.getElementById("nomorwa").value;
+    let userid =
+        document.getElementById("userid").value;
+
+    let zoneid =
+        document.getElementById("zoneid").value;
+
+    let payment =
+        document.getElementById("payment").value;
+
+    let wa =
+        document.getElementById("nomorwa").value;
 
     if(userid==""){
-        alert("Masukkan User ID!");
+        alert("Masukkan User ID");
+        return;
+    }
+
+    if(zoneid==""){
+        alert("Masukkan Zone ID");
         return;
     }
 
     if(produk==""){
-        alert("Pilih Diamond terlebih dahulu!");
+        alert("Pilih Diamond");
         return;
     }
 
+    let orders =
+        JSON.parse(localStorage.getItem("orders")) || [];
+
+    orders.push({
+
+        game:"free fire",
+
+        userid:userid,
+
+        zoneid:zoneid,
+
+        produk:produk,
+
+        total:harga,
+
+        payment:payment,
+
+        wa:wa,
+
+        status:"Menunggu",
+
+        waktu:new Date().toLocaleString("id-ID")
+
+    });
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
     let admin="6282295071107";
 
-    let pesan=`Halo Admin ARDZ STORE
+    let pesan=`Halo Admin
 
-// ========================
-// SIMPAN PESANAN
-// ========================
+Game : free fire
+User ID : ${userid}
+Zone ID : ${zoneid}
+Produk : ${produk}
+Total : Rp ${harga.toLocaleString("id-ID")}
+Pembayaran : ${payment}
+WA : ${wa}`;
 
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-orders.push({
-
-    game: "free fire",
-
-    userid: userid,
-
-    zoneid: zoneid,
-
-    produk: produk,
-
-    total: harga,
-
-    payment: payment,
-
-    wa: wa,
-
-    status: "Menunggu",
-
-    waktu: new Date().toLocaleString("id-ID")
-
-});
-
-localStorage.setItem("orders", JSON.stringify(orders));
     window.open(
-        "https://wa.me/"+admin+"?text="+encodeURIComponent(pesan),
+        "https://wa.me/"+admin+
+        "?text="+encodeURIComponent(pesan),
         "_blank"
     );
 
