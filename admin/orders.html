@@ -9,21 +9,47 @@
 
 <body>
 
-<h1>📦 Kelola Pesanan</h1>
+<header class="admin-header">
+    <h1>📦 Kelola Pesanan</h1>
 
-<p>Semua pesanan pelanggan akan tampil di sini.</p>
+    <a href="dashboard.html" class="btn-back">
+        ⬅ Dashboard
+    </a>
+</header>
 
-<div id="ordersList">
+<div class="stats">
 
-<p>Belum ada pesanan.</p>
+    <div class="stat-card">
+        <h2 id="totalOrder">0</h2>
+        <p>Total Pesanan</p>
+    </div>
+
+    <div class="stat-card waiting">
+        <h2 id="waitingOrder">0</h2>
+        <p>Menunggu</p>
+    </div>
+
+    <div class="stat-card process">
+        <h2 id="processOrder">0</h2>
+        <p>Diproses</p>
+    </div>
+
+    <div class="stat-card success">
+        <h2 id="doneOrder">0</h2>
+        <p>Selesai</p>
+    </div>
 
 </div>
 
-<br>
+<input
+type="text"
+id="searchOrder"
+placeholder="🔍 Cari berdasarkan Game / User ID..."
+onkeyup="cariOrder()">
 
-<a href="dashboard.html">
-⬅ Kembali ke Dashboard
-</a>
+<br><br>
+
+<div id="ordersList"></div>
 
 <script src="orders.js"></script>
 
