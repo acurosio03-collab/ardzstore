@@ -89,10 +89,9 @@ function tampilkan(){
 ✏️ Edit
 </button>
 
-<button onclick="hapus(${index})">
-🗑 Hapus
+<button onclick="hapusSemuaNominal()">
+    🗑️ Hapus Semua Nominal
 </button>
-
 </div>
 
 `;
