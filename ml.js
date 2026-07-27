@@ -13,20 +13,21 @@ function pilihProduk(nama,total){
 
 function loadml(){
 
-    let data = JSON.parse(localStorage.getItem("nominal")) || [];
+    
+           let data = JSON.parse(localStorage.getItem("nominal")) || [];
+
+function loadML(){
 
     let html = "";
 
     data.forEach(item=>{
 
-        if(item.game=="mobile legends"){
+        if(item.game.toLowerCase().includes("mobile")){
 
-            let jual =
-                Number(item.supplier)+Number(item.profit);
+            let jual = Number(item.supplier) + Number(item.profit);
 
             html += `
-            <div class="card"
-            onclick="pilihProduk('${item.produk}',${jual})">
+            <div class="card" onclick="pilihProduk('${item.produk}',${jual})">
 
                 <h3>${item.produk}</h3>
 
@@ -38,6 +39,12 @@ function loadml(){
         }
 
     });
+
+    document.getElementById("ml-products").innerHTML = html;
+
+}
+
+loadML();
 
     document.getElementById("ml-products").innerHTML = html;
 
