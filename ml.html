@@ -57,7 +57,7 @@ placeholder="Masukkan Zone ID">
 
 <h2>Pilih Diamond</h2>
 
-<div id="ml-products" class="game-list">
+<div id="ml-products" class="game-list"></div>
 
 <h2>Metode Pembayaran</h2>
 
@@ -118,69 +118,6 @@ CHECKOUT SEKARANG
 <p>Top Up Game Murah • Aman • Terpercaya</p>
 
 </footer>
-
-let produk="";
-let harga=0;
-
-function pilihProduk(nama,total){
-
-produk=nama;
-harga=total;
-
-document.getElementById("produk").innerHTML=nama;
-document.getElementById("total").innerHTML="Rp "+total.toLocaleString("id-ID");
-
-}
-
-function checkoutML(){
-
-let userid=document.getElementById("userid").value;
-let zoneid=document.getElementById("zoneid").value;
-let payment=document.getElementById("payment").value;
-let wa=document.getElementById("nomorwa").value;
-
-if(userid==""){
-alert("Masukkan User ID!");
-return;
-}
-
-if(zoneid==""){
-alert("Masukkan Zone ID!");
-return;
-}
-
-if(produk==""){
-alert("Pilih Diamond terlebih dahulu!");
-return;
-}
-
-let admin="6282295071107"; // Ganti dengan nomor WhatsApp kamu
-
-let pesan=
-`Halo Admin ARDZ STORE
-
-Saya ingin Top Up Mobile Legends
-
-??????????????
-
-?? Game : Mobile Legends
-?? User ID : ${userid}
-?? Zone ID : ${zoneid}
-?? Produk : ${produk}
-?? Total : Rp ${harga.toLocaleString("id-ID")}
-?? Pembayaran : ${payment}
-?? Nomor WA : ${wa}
-
-??????????????
-
-Mohon diproses.
-Terima kasih.`;
-
-window.open(
-"https://wa.me/"+admin+"?text="+encodeURIComponent(pesan),
-"_blank");
-
-}
 
 <script src="ml.js"></script>
 
