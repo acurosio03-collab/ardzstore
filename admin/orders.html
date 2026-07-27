@@ -1,57 +1,182 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kelola Pesanan - ARDZ STORE</title>
-<link rel="stylesheet" href="style.css">
-</head>
+// =========================
+// ARDZ STORE - ORDERS.JS
+// =========================
 
-<body>
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-<header class="admin-header">
-    <h1>📦 Kelola Pesanan</h1>
+function rupiah(angka){
+    return "Rp " + Number(angka).toLocaleString("id-ID");
+}
 
-    <a href="dashboard.html" class="btn-back">
-        ⬅ Dashboard
-    </a>
-</header>
+// =========================
+// TAMPILKAN PESANAN
+// =========================
 
-<div class="stats">
+function tampilkanOrders(data = orders){
 
-    <div class="stat-card">
-        <h2 id="totalOrder">0</h2>
-        <p>Total Pesanan</p>
-    </div>
+    const list = document.getElementById("ordersList");
 
-    <div class="stat-card waiting">
-        <h2 id="waitingOrder">0</h2>
-        <p>Menunggu</p>
-    </div>
+    if(!list) return;
 
-    <div class="stat-card process">
-        <h2 id="processOrder">0</h2>
-        <p>Diproses</p>
-    </div>
+    list.innerHTML = "";
 
-    <div class="stat-card success">
-        <h2 id="doneOrder">0</h2>
-        <p>Selesai</p>
-    </div>
+    let menunggu = 0;
+    let diproses = 0;
+    let selesai = 0;
+
+    data.forEach((item,index)=>{
+
+        let statusClass = "";
+
+        if(item.status=="Menunggu"){
+            menunggu++;
+            statusClass="status-menunggu";
+        }
+
+        if(item.status=="Diproses"){
+            diproses++;
+            statusClass="status-proses";
+        }
+
+        if(item.status=="Selesai"){
+            selesai++;
+            statusClass="status-selesai";
+        }
+
+        list.innerHTML += `
+
+<div class="order-card">
+
+<h3>🎮 ${item.game}</h3>
+
+<p><b>User ID :</b> ${item.userid}</p>
+
+${item.zoneid ? `<p><b>Zone ID :</b> ${item.zoneid}</p>` : ""}
+
+<p><b>Produk :</b> ${item.produk}</p>
+
+<p><b>Total :</b> ${rupiah(item.total)}</p>
+
+<p><b>Pembayaran :</b> ${item.payment}</p>
+
+<p><b>WhatsApp :</b> ${item.wa}</p>
+
+<p><b>Waktu :</b> ${item.waktu}</p>
+
+<p>
+
+<b>Status :</b>
+
+<span class="status ${statusClass}">
+${item.status}
+</span>
+
+</p>
+
+<button class="btn edit"
+onclick="ubahStatus(${index})">
+
+🔄 Ubah Status
+
+</button>
+
+<button class="btn delete"
+onclick="hapusOrder(${index})">
+
+🗑 Hapus
+
+</button>
 
 </div>
 
-<input
-type="text"
-id="searchOrder"
-placeholder="🔍 Cari berdasarkan Game / User ID..."
-onkeyup="cariOrder()">
+`;
 
-<br><br>
+    });
 
-<div id="ordersList"></div>
+    document.getElementById("totalOrder").innerHTML = orders.length;
+    document.getElementById("waitingOrder").innerHTML = menunggu;
+    document.getElementById("processOrder").innerHTML = diproses;
+    document.getElementById("doneOrder").innerHTML = selesai;
 
-<script src="orders.js"></script>
+    if(data.length==0){
 
-</body>
-</html>
+        list.innerHTML="<p>Tidak ada pesanan.</p>";
+
+    }
+
+}
+
+// =========================
+// UBAH STATUS
+// =========================
+
+function ubahStatus(index){
+
+    if(orders[index].status=="Menunggu"){
+
+        orders[index].status="Diproses";
+
+    }else if(orders[index].status=="Diproses"){
+
+        orders[index].status="Selesai";
+
+    }else{
+
+        orders[index].status="Menunggu";
+
+    }
+
+    localStorage.setItem("orders",JSON.stringify(orders));
+
+    tampilkanOrders();
+
+}
+
+// =========================
+// HAPUS
+// =========================
+
+function hapusOrder(index){
+
+    if(confirm("Hapus pesanan ini?")){
+
+        orders.splice(index,1);
+
+        localStorage.setItem("orders",JSON.stringify(orders));
+
+        tampilkanOrders();
+
+    }
+
+}
+
+// =========================
+// CARI PESANAN
+// =========================
+
+function cariOrder(){
+
+    let keyword = document
+    .getElementById("searchOrder")
+    .value
+    .toLowerCase();
+
+    let hasil = orders.filter(item=>{
+
+        return (
+
+            item.game.toLowerCase().includes(keyword) ||
+
+            item.userid.toLowerCase().includes(keyword)
+
+        );
+
+    });
+
+    tampilkanOrders(hasil);
+
+}
+
+// =========================
+
+tampilkanOrders();
