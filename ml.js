@@ -11,12 +11,9 @@ function pilihProduk(nama,total){
         "Rp " + total.toLocaleString("id-ID");
 }
 
-function loadml(){
-
-    
-           let data = JSON.parse(localStorage.getItem("nominal")) || [];
-
 function loadML(){
+
+    let data = JSON.parse(localStorage.getItem("nominal")) || [];
 
     let html = "";
 
@@ -24,10 +21,12 @@ function loadML(){
 
         if(item.game.toLowerCase().includes("mobile")){
 
-            let jual = Number(item.supplier) + Number(item.profit);
+            let jual =
+                Number(item.supplier)+Number(item.profit);
 
             html += `
-            <div class="card" onclick="pilihProduk('${item.produk}',${jual})">
+            <div class="card"
+            onclick="pilihProduk('${item.produk}',${jual})">
 
                 <h3>${item.produk}</h3>
 
@@ -46,64 +45,80 @@ function loadML(){
 
 loadML();
 
-    document.getElementById("ml-products").innerHTML = html;
+function checkoutML(){
 
-}
+    let userid =
+        document.getElementById("userid").value;
 
-loadml();
+    let zoneid =
+        document.getElementById("zoneid").value;
 
-function checkoutml(){
+    let payment =
+        document.getElementById("payment").value;
 
-    let userid=document.getElementById("userid").value;
-    let payment=document.getElementById("payment").value;
-    let wa=document.getElementById("nomorwa").value;
+    let wa =
+        document.getElementById("nomorwa").value;
 
     if(userid==""){
-        alert("Masukkan User ID!");
+        alert("Masukkan User ID");
+        return;
+    }
+
+    if(zoneid==""){
+        alert("Masukkan Zone ID");
         return;
     }
 
     if(produk==""){
-        alert("Pilih Diamond terlebih dahulu!");
+        alert("Pilih Diamond");
         return;
     }
 
+    let orders =
+        JSON.parse(localStorage.getItem("orders")) || [];
+
+    orders.push({
+
+        game:"Mobile Legends",
+
+        userid:userid,
+
+        zoneid:zoneid,
+
+        produk:produk,
+
+        total:harga,
+
+        payment:payment,
+
+        wa:wa,
+
+        status:"Menunggu",
+
+        waktu:new Date().toLocaleString("id-ID")
+
+    });
+
+    localStorage.setItem(
+        "orders",
+        JSON.stringify(orders)
+    );
+
     let admin="6282295071107";
 
-    let pesan=`Halo Admin ARDZ STORE
+    let pesan=`Halo Admin
 
-// ========================
-// SIMPAN PESANAN
-// ========================
-
-let orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-orders.push({
-
-    game: "Mobile Legends",
-
-    userid: userid,
-
-    zoneid: zoneid,
-
-    produk: produk,
-
-    total: harga,
-
-    payment: payment,
-
-    wa: wa,
-
-    status: "Menunggu",
-
-    waktu: new Date().toLocaleString("id-ID")
-
-});
-
-localStorage.setItem("orders", JSON.stringify(orders));
+Game : Mobile Legends
+User ID : ${userid}
+Zone ID : ${zoneid}
+Produk : ${produk}
+Total : Rp ${harga.toLocaleString("id-ID")}
+Pembayaran : ${payment}
+WA : ${wa}`;
 
     window.open(
-        "https://wa.me/"+admin+"?text="+encodeURIComponent(pesan),
+        "https://wa.me/"+admin+
+        "?text="+encodeURIComponent(pesan),
         "_blank"
     );
 
