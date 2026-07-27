@@ -46,7 +46,10 @@ function tampilkanOrders(data = orders){
         list.innerHTML += `
 
 <div class="order-card">
-
+<button class="btn" onclick="lihatDetail(${index})">
+👁 Detail
+</button>
+    
 <h3>🎮 ${item.game}</h3>
 
 <p><b>User ID :</b> ${item.userid}</p>
@@ -180,3 +183,19 @@ function cariOrder(){
 // =========================
 
 tampilkanOrders();
+<!-- Detail Modal -->
+<div id="detailModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="tutupModal()">&times;</span>
+
+        <h2>📋 Detail Pesanan</h2>
+
+        <div id="modalBody"></div>
+
+    </div>
+
+</div>
+
+<script src="orders.js"></script>
