@@ -84,51 +84,7 @@ Pilih UC PUBG
 
 
 
-<div class="card" onclick="pilihProduk('60 UC',15000)">
-<h3>60 UC</h3>
-<p>Rp15.000</p>
 </div>
-
-
-
-<div class="card" onclick="pilihProduk('325 UC',75000)">
-<h3>325 UC</h3>
-<p>Rp75.000</p>
-</div>
-
-
-
-<div class="card" onclick="pilihProduk('660 UC',150000)">
-<h3>660 UC</h3>
-<p>Rp150.000</p>
-</div>
-
-
-
-<div class="card" onclick="pilihProduk('1800 UC',350000)">
-<h3>1800 UC</h3>
-<p>Rp350.000</p>
-</div>
-
-
-
-<div class="card" onclick="pilihProduk('3850 UC',700000)">
-<h3>3850 UC</h3>
-<p>Rp700.000</p>
-</div>
-
-
-
-<div class="card" onclick="pilihProduk('8100 UC',1400000)">
-<h3>8100 UC</h3>
-<p>Rp1.400.000</p>
-</div>
-
-
-
-</div>
-
-
 
 
 <h2>
@@ -245,43 +201,6 @@ Top Up Game Murah • Aman • Terpercaya
 </footer>
 
 
-
-
-
-
-<script>
-
-
-let produk="";
-let harga=0;
-
-
-
-function pilihProduk(nama,total){
-
-
-produk=nama;
-
-harga=total;
-
-
-document.getElementById("produk").innerHTML=nama;
-
-
-document.getElementById("total").innerHTML=
-"Rp "+total.toLocaleString("id-ID");
-
-
-}
-
-
-
-
-
-function checkoutPUBG(){
-
-
-
 let id=document.getElementById("userid").value;
 
 let payment=document.getElementById("payment").value;
@@ -358,7 +277,7 @@ window.open(
 
 
 
-</script>
+<script src="pubg.js"></script>
 
 
 </body>
