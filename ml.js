@@ -19,7 +19,7 @@ function loadml(){
 
     data.forEach(item=>{
 
-        if(item.game=="mobile legend"){
+        if(item.game=="mobile legends"){
 
             let jual =
                 Number(item.supplier)+Number(item.profit);
