@@ -55,8 +55,18 @@ ${item.status}
 
 </p>
 
-<button onclick="ubahStatus(${index})">
-Ubah Status
+<button class="btn"
+onclick="lihatDetail(${index})">
+
+👁 Detail
+
+</button>
+
+<button class="btn edit"
+onclick="ubahStatus(${index})">
+
+🔄 Ubah Status
+
 </button>
 
 <button onclick="hapusOrder(${index})">
@@ -113,7 +123,39 @@ function hapusOrder(index){
 
         tampilkanOrders();
 
-    }
+    function lihatDetail(index){
+
+    let item = orders[index];
+
+    document.getElementById("detailIsi").innerHTML=`
+
+<p><b>🎮 Game :</b> ${item.game}</p>
+
+<p><b>👤 User ID :</b> ${item.userid}</p>
+
+<p><b>🆔 Zone ID :</b> ${item.zoneid || "-"}</p>
+
+<p><b>💎 Produk :</b> ${item.produk}</p>
+
+<p><b>💰 Total :</b> ${rupiah(item.total)}</p>
+
+<p><b>💳 Pembayaran :</b> ${item.payment}</p>
+
+<p><b>📱 WhatsApp :</b> ${item.wa}</p>
+
+<p><b>📅 Waktu :</b> ${item.waktu}</p>
+
+<p><b>📌 Status :</b> ${item.status}</p>
+
+`;
+
+    document.getElementById("detailModal").style.display="block";
+
+}
+
+function tutupModal(){
+
+    document.getElementById("detailModal").style.display="none";
 
 }
 
