@@ -15,31 +15,31 @@ function loadML(){
 
     let data = JSON.parse(localStorage.getItem("nominal")) || [];
 
+    console.log("Data nominal:", data);
+
     let html = "";
 
     data.forEach(item=>{
 
-        if(item.game.toLowerCase().includes("mobile")){
+        console.log("Item:", item);
 
-            let jual =
-                Number(item.supplier)+Number(item.profit);
+        if(item.game && item.game.toLowerCase().includes("mobile")){
+
+            let jual = Number(item.supplier) + Number(item.profit);
 
             html += `
-            <div class="card"
-            onclick="pilihProduk('${item.produk}',${jual})">
-
+            <div class="card" onclick="pilihProduk('${item.produk}', ${jual})">
                 <h3>${item.produk}</h3>
-
                 <p>Rp ${jual.toLocaleString("id-ID")}</p>
-
             </div>
             `;
-
         }
 
     });
 
     document.getElementById("ml-products").innerHTML = html;
+
+    console.log("HTML:", html);
 
 }
 
