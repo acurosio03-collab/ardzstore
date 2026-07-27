@@ -65,17 +65,35 @@ function checkoutFF(){
 
     let pesan=`Halo Admin ARDZ STORE
 
-Saya ingin Top Up Free Fire
+// ========================
+// SIMPAN PESANAN
+// ========================
 
-Game : Free Fire
-User ID : ${userid}
-Produk : ${produk}
-Total : Rp ${harga.toLocaleString("id-ID")}
-Pembayaran : ${payment}
-Nomor WA : ${wa}
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-Mohon diproses.`;
+orders.push({
 
+    game: "free fire",
+
+    userid: userid,
+
+    zoneid: zoneid,
+
+    produk: produk,
+
+    total: harga,
+
+    payment: payment,
+
+    wa: wa,
+
+    status: "Menunggu",
+
+    waktu: new Date().toLocaleString("id-ID")
+
+});
+
+localStorage.setItem("orders", JSON.stringify(orders));
     window.open(
         "https://wa.me/"+admin+"?text="+encodeURIComponent(pesan),
         "_blank"
