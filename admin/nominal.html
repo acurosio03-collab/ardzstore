@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Kelola Nominal</title>
+<title>ARDZ STORE - Kelola Nominal</title>
 
 <link rel="stylesheet" href="admin.css">
 
 </head>
 
+
 <body>
+
+
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
@@ -19,62 +24,151 @@
 🎮 ARDZ STORE
 </div>
 
-<a href="dashboard.html">🏠 Dashboard</a>
-<a class="active" href="nominal.html">💎 Nominal</a>
-<a href="orders.html">🛒 Pesanan</a>
+
+<a href="dashboard.html">
+🏠 Dashboard
+</a>
+
+
+<a class="active" href="nominal.html">
+💎 Kelola Nominal
+</a>
+
+
+<a href="orders.html">
+🛒 Pesanan
+</a>
+
+
+<a href="#">
+💳 Pembayaran
+</a>
+
+
+<a href="#">
+⚙ Pengaturan
+</a>
+
+
+<a href="../index.html">
+🌍 Website
+</a>
+
 
 </div>
 
+
+
+<!-- MAIN -->
+
 <div class="main">
 
-<h1>Kelola Nominal</h1>
+
+<h1 class="title">
+💎 Kelola Nominal
+</h1>
+
+
 
 <div class="box">
 
-<input
+
+<input 
 type="text"
 id="search"
-placeholder="Cari produk..."
+placeholder="🔍 Cari produk..."
 onkeyup="cariProduk()">
 
-<br><br>
+
 
 <select id="filterGame" onchange="filterGame()">
 
-<option value="Semua">Semua Game</option>
+<option value="Semua">
+Semua Game
+</option>
 
-<option>Mobile Legends</option>
 
-<option>Free Fire</option>
+<option value="Mobile Legends">
+Mobile Legends
+</option>
 
-<option>PUBG Mobile</option>
 
-<option>Valorant</option>
+<option value="Free Fire">
+Free Fire
+</option>
 
-<option>Honor Of Kings</option>
 
-<option>Roblox</option>
+<option value="PUBG Mobile">
+PUBG Mobile
+</option>
+
+
+<option value="Valorant">
+Valorant
+</option>
+
+
+<option value="Honor Of Kings">
+Honor Of Kings
+</option>
+
+
+<option value="Roblox">
+Roblox
+</option>
+
 
 </select>
 
-<button onclick="bukaModal()">
+
+
+<button class="btn-add"
+onclick="bukaModal()">
 
 ➕ Tambah Produk
 
 </button>
 
+
 </div>
+
+
+
+
+<!-- TABEL DATA -->
+
+<div class="box">
 
 <div id="tableNominal">
 
 </div>
 
+
 </div>
 
-<!-- MODAL -->
+
+
+</div>
+
+
+
+
+
+<!-- MODAL TAMBAH EDIT -->
+
 <div id="modalNominal" class="modal">
 
+
 <div class="modal-content">
+
+
+<span class="close"
+onclick="tutupModal()">
+
+×
+</span>
+
+
 
 <h2 id="judulModal">
 
@@ -82,19 +176,42 @@ Tambah Nominal
 
 </h2>
 
-<input id="game" placeholder="Game">
 
-<input id="produk" placeholder="Nama Produk">
 
-<input id="supplier" type="number" placeholder="Harga Supplier">
+<input
+id="game"
+placeholder="Nama Game">
 
-<input id="profit" type="number" placeholder="Profit">
 
-<button onclick="simpanNominal()">
+<input
+id="produk"
+placeholder="Nama Produk">
+
+
+<input
+id="supplier"
+type="number"
+placeholder="Harga Supplier">
+
+
+
+<input
+id="profit"
+type="number"
+placeholder="Profit">
+
+
+
+
+
+<button class="btn-save"
+onclick="simpanNominal()">
 
 💾 Simpan
 
 </button>
+
+
 
 <button onclick="tutupModal()">
 
@@ -102,11 +219,21 @@ Batal
 
 </button>
 
-</div>
+
 
 </div>
+
+
+</div>
+
+
+
+
+
 
 <script src="nominal.js"></script>
 
+
 </body>
+
 </html>
