@@ -1,78 +1,134 @@
+// ===============================
+// ARDZ STORE - FREE FIRE
+// ===============================
+
+// Ambil data dari panel admin
 let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 
-let area = document.getElementById("listHarga");
+let area = document.getElementById("ff-products");
 
+let produkDipilih = "";
+let hargaDipilih = 0;
 
-function tampilHarga(){
+// ===============================
+// TAMPILKAN PRODUK
+// ===============================
+function tampilHarga() {
 
-if(!area) return;
+    if (!area) return;
 
+    area.innerHTML = "";
 
-area.innerHTML="";
+    let dataFF = dataNominal.filter(item =>
+        item.game &&
+        item.game.toLowerCase().trim() === "free fire"
+    );
 
+    if (dataFF.length === 0) {
 
-dataNominal.forEach(item=>{
+        area.innerHTML = `
+        <div class="produk">
+            <h3>Belum ada produk Free Fire</h3>
+            <p>Silakan tambahkan dari Panel Admin.</p>
+        </div>
+        `;
 
+        return;
+    }
 
-if(item.game.toLowerCase()=="free fire"){
+    dataFF.forEach((item) => {
 
+        let harga =
+            Number(item.supplier) +
+            Number(item.profit);
 
-let harga =
-Number(item.supplier)+Number(item.profit);
+        area.innerHTML += `
 
+        <div class="produk">
 
+            <h3>${item.produk}</h3>
 
-area.innerHTML += `
+            <p>
+            Harga :
+            <b>Rp ${harga.toLocaleString("id-ID")}</b>
+            </p>
 
-<div class="produk">
+            <button onclick="pilihProduk('${item.produk}',${harga})">
 
+            Pilih
 
-<h3>${item.produk}</h3>
+            </button>
 
+        </div>
 
-<p>
-Rp ${harga.toLocaleString("id-ID")}
-</p>
+        `;
 
-
-<button onclick="checkout('${item.produk}', '${harga}')">
-
-Top Up
-
-</button>
-
-
-</div>
-
-
-`;
-
-
-}
-
-
-});
-
-
-}
-
-
-function checkout(produk,harga){
-
-
-let pesan =
-`Halo ARDZ STORE%0A
-Saya ingin Top Up:%0A
-Produk : ${produk}%0A
-Harga : Rp ${harga}`;
-
-
-window.open(
-"https://wa.me/6282295071107?text="+pesan
-);
-
+    });
 
 }
 
+// ===============================
+// PILIH PRODUK
+// ===============================
+function pilihProduk(produk, harga) {
 
+    produkDipilih = produk;
+    hargaDipilih = harga;
+
+    document.getElementById("produk").innerHTML = produk;
+
+    document.getElementById("total").innerHTML =
+        "Rp " + harga.toLocaleString("id-ID");
+
+}
+
+// ===============================
+// CHECKOUT
+// ===============================
+function checkoutFF() {
+
+    let userid =
+        document.getElementById("userid").value;
+
+    let payment =
+        document.getElementById("payment").value;
+
+    let nomor =
+        document.getElementById("nomorwa").value;
+
+    if (userid == "") {
+        alert("Masukkan Player ID");
+        return;
+    }
+
+    if (produkDipilih == "") {
+        alert("Pilih Diamond terlebih dahulu");
+        return;
+    }
+
+    let pesan =
+`Halo Admin ARDZ STORE
+
+Saya ingin Top Up Free Fire
+
+Player ID : ${userid}
+
+Produk : ${produkDipilih}
+
+Harga : Rp ${hargaDipilih.toLocaleString("id-ID")}
+
+Pembayaran : ${payment}
+
+Nomor WA : ${nomor}`;
+
+    window.open(
+        "https://wa.me/6282295071107?text=" +
+        encodeURIComponent(pesan)
+    );
+
+}
+
+// ===============================
+// MULAI
+// ===============================
 tampilHarga();
