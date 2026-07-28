@@ -41,7 +41,7 @@ list.innerHTML += `
 
 
 <p>
-💎 Diamond Free Fire
+💎 Diamond honor of kings
 </p>
 
 
