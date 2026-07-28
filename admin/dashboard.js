@@ -1,50 +1,130 @@
-let nominal =
-JSON.parse(localStorage.getItem("nominal")) || [];
+// =====================================
+// ARDZ STORE - DASHBOARD.JS
+// =====================================
 
-let orders =
-JSON.parse(localStorage.getItem("orders")) || [];
+// Ambil data
+let nominal = JSON.parse(localStorage.getItem("nominal")) || [];
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-document.getElementById("totalProduk").innerHTML =
-nominal.length;
+// ===============================
+// TOTAL PRODUK
+// ===============================
 
-document.getElementById("totalOrder").innerHTML =
-orders.length;
+let totalProduk = document.getElementById("totalProduk");
 
-let pending =
-orders.filter(x=>x.status=="Menunggu");
+if(totalProduk){
+    totalProduk.innerHTML = nominal.length;
+}
 
-document.getElementById("pendingOrder").innerHTML =
-pending.length;
+// ===============================
+// TOTAL PESANAN
+// ===============================
 
-let selesai =
-orders.filter(x=>x.status=="Selesai");
+let totalPesanan = document.getElementById("totalPesanan");
 
-document.getElementById("selesaiOrder").innerHTML =
-selesai.length;
+if(totalPesanan){
+    totalPesanan.innerHTML = orders.length;
+}
 
-let aktivitas="";
+// ===============================
+// PRODUK TERBARU
+// ===============================
 
-orders.slice().reverse().slice(0,5).forEach(item=>{
+let lastProducts = document.getElementById("lastProducts");
 
-aktivitas+=`
+if(lastProducts){
 
-<div class="activity">
+    if(nominal.length==0){
 
-<b>${item.game}</b>
+        lastProducts.innerHTML=`
+        <tr>
+            <td colspan="3">
+            Belum ada produk
+            </td>
+        </tr>
+        `;
 
-<br>
+    }else{
 
-${item.produk}
+        let html="";
 
-<br>
+        nominal.slice(-5).reverse().forEach(item=>{
 
-<small>${item.waktu}</small>
+            let harga =
+            Number(item.supplier)+Number(item.profit);
 
-</div>
+            html+=`
 
-`;
+            <tr>
 
-});
+            <td>${item.game}</td>
 
-document.getElementById("aktivitas").innerHTML=
-aktivitas || "Belum ada aktivitas.";
+            <td>${item.produk}</td>
+
+            <td>
+            Rp ${harga.toLocaleString("id-ID")}
+            </td>
+
+            </tr>
+
+            `;
+
+        });
+
+        lastProducts.innerHTML=html;
+
+    }
+
+}
+
+// ===============================
+// PESANAN TERBARU
+// ===============================
+
+let lastOrders = document.getElementById("lastOrders");
+
+if(lastOrders){
+
+    if(orders.length==0){
+
+        lastOrders.innerHTML=`
+        <tr>
+            <td colspan="3">
+            Belum ada pesanan
+            </td>
+        </tr>
+        `;
+
+    }else{
+
+        let html="";
+
+        orders.slice(-5).reverse().forEach(item=>{
+
+            html+=`
+
+            <tr>
+
+            <td>${item.game}</td>
+
+            <td>${item.produk}</td>
+
+            <td>${item.status}</td>
+
+            </tr>
+
+            `;
+
+        });
+
+        lastOrders.innerHTML=html;
+
+    }
+
+}
+
+// ===============================
+// SELAMAT DATANG
+// ===============================
+
+console.log("Dashboard ARDZ STORE aktif");
