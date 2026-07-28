@@ -1,143 +1,138 @@
-// ===============================
-// ARDZ STORE - MOBILE LEGENDS
-// ===============================
-
-// Ambil data dari panel admin
 let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 
-let area = document.getElementById("ml-products");
+let list = document.getElementById("ml-products");
 
-let produkDipilih = "";
-let hargaDipilih = 0;
 
-// ===============================
-// TAMPILKAN PRODUK
-// ===============================
-function tampilHarga() {
+function loadml(){
 
-    if (!area) return;
+if(!list) return;
 
-    area.innerHTML = "";
 
-    let dataFF = dataNominal.filter(item =>
-        item.game &&
-        item.game.toLowerCase().trim() === "mobile legends"
-    );
+list.innerHTML="";
 
-    if (dataFF.length === 0) {
 
-        area.innerHTML = `
-        <div class="produk">
-            <h3>Belum ada produk mobile legends</h3>
-            <p>Silakan tambahkan dari Panel Admin.</p>
-        </div>
-        `;
+dataNominal.forEach((item)=>{
 
-        return;
-    }
 
-    dataFF.forEach((item) => {
+let game =
+item.game.toLowerCase().trim();
 
-        let harga =
-            Number(item.supplier) +
-            Number(item.profit);
 
-        area.innerHTML += `
+if(
+game.includes("mobile") ||
+game.includes("ml")
+){
 
-<div class="produk">
 
-<img src="img/ff-diamond.png" class="produk-img">
+let harga =
+Number(item.supplier)+Number(item.profit);
+
+
+
+list.innerHTML += `
+
+<div class="produk-card">
+
+
+<img src="diamond.png" class="icon-diamond">
 
 
 <h3>${item.produk}</h3>
+
 
 <p>
 💎 Diamond mobile legends
 </p>
 
-<b>
+
+<h2>
 Rp ${harga.toLocaleString("id-ID")}
-</b>
+</h2>
 
 
-<br><br>
+<button onclick="
+pilihProduk(
+'${item.produk}',
+'${harga}'
+)
+">
 
+Pilih
 
-<button onclick="checkout('${item.produk}', '${harga}')">
-Top Up
 </button>
 
 
 </div>
 
+
 `;
 
-    });
+}
+
+
+});
+
 
 }
 
-// ===============================
-// PILIH PRODUK
-// ===============================
-function pilihProduk(produk, harga) {
 
-    produkDipilih = produk;
-    hargaDipilih = harga;
 
-    document.getElementById("produk").innerHTML = produk;
+function pilihProduk(nama,harga){
 
-    document.getElementById("total").innerHTML =
-        "Rp " + harga.toLocaleString("id-ID");
 
-}
+document.getElementById("produk").innerHTML=nama;
 
-// ===============================
-// CHECKOUT
-// ===============================
-function checkoutml() {
 
-    let userid =
-        document.getElementById("userid").value;
+document.getElementById("total").innerHTML=
+"Rp "+Number(harga)
+.toLocaleString("id-ID");
 
-    let payment =
-        document.getElementById("payment").value;
-
-    let nomor =
-        document.getElementById("nomorwa").value;
-
-    if (userid == "") {
-        alert("Masukkan Player ID");
-        return;
-    }
-
-    if (produkDipilih == "") {
-        alert("Pilih Diamond terlebih dahulu");
-        return;
-    }
-
-    let pesan =
-`Halo Admin ARDZ STORE
-
-Saya ingin Top Up mobile legends
-
-Player ID : ${userid}
-
-Produk : ${produkDipilih}
-
-Harga : Rp ${hargaDipilih.toLocaleString("id-ID")}
-
-Pembayaran : ${payment}
-
-Nomor WA : ${nomor}`;
-
-    window.open(
-        "https://wa.me/6282295071107?text=" +
-        encodeURIComponent(pesan)
-    );
 
 }
 
-// ===============================
-// MULAI
-// ===============================
-tampilHarga();
+
+
+function checkoutFF(){
+
+
+let produk=
+document.getElementById("produk").innerHTML;
+
+
+let total=
+document.getElementById("total").innerHTML;
+
+
+let id=
+document.getElementById("userid").value;
+
+
+
+let pesan=
+
+`Halo ARDZ STORE
+
+Game : mobile legends
+
+ID :
+${id}
+
+Produk :
+${produk}
+
+Harga :
+${total}`;
+
+
+
+window.open(
+"https://wa.me/6282295071107?text="+
+encodeURIComponent(pesan)
+);
+
+
+}
+
+
+
+loadFF();
