@@ -1,482 +1,250 @@
-// ==================================
-// ARDZ STORE - NOMINAL ADMIN JS
-// ==================================
+// ===============================
+// ARDZ STORE - NOMINAL JS
+// ===============================
 
-
-let dataNominal =
-JSON.parse(localStorage.getItem("nominal")) || [];
-
+let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 
 let editIndex = -1;
 
 
-// ==================================
-// FORMAT RUPIAH
-// ==================================
+// tampilkan data
+function tampilkan(){
 
-function rupiah(angka){
-
-    return "Rp " + Number(angka)
-    .toLocaleString("id-ID");
-
-}
-
-
-
-// ==================================
-// BUKA MODAL
-// ==================================
-
-function bukaModal(index = -1){
-
-
-    document.getElementById("modalNominal")
-    .style.display = "flex";
-
-
-    editIndex = index;
-
-
-
-    if(index >= 0){
-
-
-        let item = dataNominal[index];
-
-
-        document.getElementById("judulModal")
-        .innerHTML = "Edit Nominal";
-
-
-        document.getElementById("game").value =
-        item.game;
-
-
-        document.getElementById("produk").value =
-        item.produk;
-
-
-        document.getElementById("supplier").value =
-        item.supplier;
-
-
-        document.getElementById("profit").value =
-        item.profit;
-
-
-
-    }else{
-
-
-        document.getElementById("judulModal")
-        .innerHTML = "Tambah Nominal";
-
-
-        document.getElementById("game").value="";
-        document.getElementById("produk").value="";
-        document.getElementById("supplier").value="";
-        document.getElementById("profit").value="";
-
-
-    }
-
-
-}
-
-
-
-
-// ==================================
-// TUTUP MODAL
-// ==================================
-
-function tutupModal(){
-
-    document.getElementById("modalNominal")
-    .style.display="none";
-
-
-    editIndex=-1;
-
-}
-
-
-
-// ==================================
-// SIMPAN NOMINAL
-// ==================================
-
-function simpanNominal(){
-
-
-    let game =
-    document.getElementById("game").value;
-
-
-    let produk =
-    document.getElementById("produk").value;
-
-
-    let supplier =
-    Number(document.getElementById("supplier").value);
-
-
-    let profit =
-    Number(document.getElementById("profit").value);
-
-
-
-    if(game=="" || produk==""){
-
-        alert("Game dan produk wajib diisi!");
-
-        return;
-
-    }
-
-
-
-    let data = {
-
-
-        game:game,
-
-        produk:produk,
-
-        supplier:supplier,
-
-        profit:profit
-
-
-    };
-
-
-
-
-    // tambah
-
-    if(editIndex == -1){
-
-
-        dataNominal.push(data);
-
-
-    }
-
-    // edit
-
-    else{
-
-
-        dataNominal[editIndex]=data;
-
-
-    }
-
-
-
-
-
-    localStorage.setItem(
-        "nominal",
-        JSON.stringify(dataNominal)
-    );
-
-
-
-    tampilkan();
-
-
-    tutupModal();
-
-
-
-}
-
-
-
-
-// ==================================
-// TAMPILKAN DATA
-// ==================================
-
-function tampilkan(data=dataNominal){
-
-
-
-    let area =
-    document.getElementById("tableNominal");
-
-
+    let area = document.getElementById("tableNominal");
 
     if(!area) return;
 
+    area.innerHTML = "";
 
+    dataNominal.forEach((item,index)=>{
 
+        area.innerHTML += `
 
-    if(data.length==0){
+        <div class="nominal-card">
 
+        <b>${item.game}</b><br>
 
-        area.innerHTML =
-        "<p>Belum ada nominal.</p>";
+        ${item.produk}<br>
 
+        Supplier : Rp ${rupiah(item.supplier)}<br>
 
-        return;
+        Profit : Rp ${rupiah(item.profit)}<br>
 
+        Harga Jual :
+        <b>Rp ${rupiah(Number(item.supplier)+Number(item.profit))}</b>
 
-    }
+        <br><br>
 
+        <button onclick="editNominal(${index})">
+        ✏️ Edit
+        </button>
 
+        <button onclick="hapusNominal(${index})">
+        🗑 Hapus
+        </button>
 
+        </div>
 
+        `;
 
-    let html = `
+    });
 
+}
 
-<table>
 
+// buka modal
+function bukaModal(){
 
-<tr>
+    document.getElementById("modalNominal").style.display="block";
 
-<th>Game</th>
+    editIndex=-1;
 
-<th>Produk</th>
+    document.getElementById("judulModal").innerHTML=
+    "Tambah Nominal";
 
-<th>Supplier</th>
 
-<th>Profit</th>
+    document.getElementById("game").value="";
+    document.getElementById("produk").value="";
+    document.getElementById("supplier").value="";
+    document.getElementById("profit").value="";
 
-<th>Harga Jual</th>
+}
 
-<th>Aksi</th>
 
 
-</tr>
+// tutup modal
+function tutupModal(){
 
+document.getElementById("modalNominal").style.display="none";
 
-`;
+}
 
 
 
+// simpan data
+function simpanNominal(){
 
 
-    data.forEach((item,index)=>{
+let data={
 
+game:document.getElementById("game").value,
 
-        let harga =
-        Number(item.supplier)
-        +
-        Number(item.profit);
+produk:document.getElementById("produk").value,
 
+supplier:document.getElementById("supplier").value,
 
+profit:document.getElementById("profit").value
 
+};
 
 
-        html += `
 
+if(editIndex==-1){
 
-<tr>
+dataNominal.push(data);
 
+}else{
 
-<td>${item.game}</td>
+dataNominal[editIndex]=data;
 
+}
 
-<td>${item.produk}</td>
 
+localStorage.setItem(
+"nominal",
+JSON.stringify(dataNominal)
+);
 
-<td>${rupiah(item.supplier)}</td>
 
+tutupModal();
 
-<td>${rupiah(item.profit)}</td>
-
-
-<td>
-
-<b>${rupiah(harga)}</b>
-
-</td>
-
-
-
-<td>
-
-
-<button
-class="btn-edit"
-onclick="bukaModal(${index})">
-
-✏ Edit
-
-</button>
-
-
-
-<button
-class="btn-delete"
-onclick="hapusNominal(${index})">
-
-🗑 Hapus
-
-</button>
-
-
-
-</td>
-
-
-</tr>
-
-
-`;
-
-
-
-});
-
-
-
-html += "</table>";
-
-
-
-area.innerHTML = html;
-
+tampilkan();
 
 
 }
 
 
 
+// edit
+function editNominal(index){
 
-// ==================================
-// HAPUS
-// ==================================
+editIndex=index;
 
+
+let d=dataNominal[index];
+
+
+document.getElementById("game").value=d.game;
+
+document.getElementById("produk").value=d.produk;
+
+document.getElementById("supplier").value=d.supplier;
+
+document.getElementById("profit").value=d.profit;
+
+
+document.getElementById("judulModal").innerHTML=
+"Edit Nominal";
+
+
+document.getElementById("modalNominal").style.display="block";
+
+
+}
+
+
+
+// hapus
 function hapusNominal(index){
-
 
 
 if(confirm("Hapus produk ini?")){
 
 
-    dataNominal.splice(index,1);
+dataNominal.splice(index,1);
 
 
-    localStorage.setItem(
-        "nominal",
-        JSON.stringify(dataNominal)
-    );
+localStorage.setItem(
+"nominal",
+JSON.stringify(dataNominal)
+);
 
 
-    tampilkan();
+tampilkan();
+
+
+}
 
 
 }
 
 
 
+// format rupiah
+function rupiah(angka){
+
+return Number(angka)
+.toLocaleString("id-ID");
+
 }
 
 
 
-
-
-// ==================================
-// CARI PRODUK
-// ==================================
-
+// pencarian
 function cariProduk(){
 
-
-let keyword =
-document.getElementById("search")
-.value
-.toLowerCase();
+let key=document.getElementById("search").value.toLowerCase();
 
 
-
-let hasil =
-dataNominal.filter(item=>{
+let card=document.querySelectorAll(".nominal-card");
 
 
-return (
+card.forEach(c=>{
 
-item.game.toLowerCase()
-.includes(keyword)
-
-
-||
-
-item.produk.toLowerCase()
-.includes(keyword)
-
-
-);
+c.style.display=
+c.innerText.toLowerCase().includes(key)
+?"block":"none";
 
 
 });
 
-
-
-tampilkan(hasil);
-
-
-
 }
 
 
 
-
-
-// ==================================
-// FILTER GAME
-// ==================================
-
+// filter game
 function filterGame(){
 
+let game=document.getElementById("filterGame").value;
 
 
-let game =
-document.getElementById("filterGame")
-.value;
+let card=document.querySelectorAll(".nominal-card");
 
+
+card.forEach(c=>{
 
 
 if(game=="Semua"){
 
+c.style.display="block";
 
-    tampilkan();
+}else{
 
 
-    return;
+c.style.display=
+c.innerText.includes(game)
+?"block":"none";
+
 
 }
-
-
-
-let hasil =
-dataNominal.filter(item=>{
-
-
-return item.game == game;
 
 
 });
 
 
-
-tampilkan(hasil);
-
-
-
 }
 
 
 
-
-
-// ==================================
-// LOAD AWAL
-// ==================================
-
+// jalankan saat halaman buka
 tampilkan();
