@@ -112,3 +112,4 @@ Batal
 
 </body>
 </html>
+tampilkan();
