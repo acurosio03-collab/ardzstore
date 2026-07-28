@@ -42,24 +42,35 @@ function tampilHarga() {
             Number(item.supplier) +
             Number(item.profit);
 
-        area.innerHTML += `
+       area.innerHTML += `
 
-        <div class="produk">
+<div class="produk">
 
-            <h3>${item.produk}</h3>
+<img src="img/ff-diamond.png" class="produk-img">
 
-            <p>
-            Harga :
-            <b>Rp ${harga.toLocaleString("id-ID")}</b>
-            </p>
 
-            <button onclick="pilihProduk('${item.produk}',${harga})">
+<h3>${item.produk}</h3>
 
-            Pilih
+<p>
+💎 Diamond Free Fire
+</p>
 
-            </button>
+<b>
+Rp ${harga.toLocaleString("id-ID")}
+</b>
 
-        </div>
+
+<br><br>
+
+
+<button onclick="checkout('${item.produk}', '${harga}')">
+Top Up
+</button>
+
+
+</div>
+
+`;
 
         `;
 
