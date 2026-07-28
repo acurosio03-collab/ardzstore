@@ -56,7 +56,9 @@ onkeyup="cariProduk()">
 <option>Roblox</option>
 
 </select>
+<div id="listNominal"></div>
 
+  </div>
 <button onclick="bukaModal()">
 
 ➕ Tambah Produk
