@@ -1,125 +1,78 @@
-let produk = "";
-let harga = 0;
+let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 
-function pilihProduk(nama,total){
+let area = document.getElementById("listHarga");
 
-    produk = nama;
-    harga = total;
 
-    document.getElementById("produk").innerHTML = nama;
-    document.getElementById("total").innerHTML =
-        "Rp " + total.toLocaleString("id-ID");
-}
+function tampilHarga(){
 
-function loadff(){
+if(!area) return;
 
-    let data = JSON.parse(localStorage.getItem("nominal")) || [];
 
-    console.log("Data nominal:", data);
+area.innerHTML="";
 
-    let html = "";
 
-    data.forEach(item=>{
+dataNominal.forEach(item=>{
 
-        console.log("Item:", item);
 
-        if(item.game && item.game.toLowerCase().includes("mobile")){
+if(item.game.toLowerCase()=="free fire"){
 
-            let jual = Number(item.supplier) + Number(item.profit);
 
-            html += `
-            <div class="card" onclick="pilihProduk('${item.produk}', ${jual})">
-                <h3>${item.produk}</h3>
-                <p>Rp ${jual.toLocaleString("id-ID")}</p>
-            </div>
-            `;
-        }
+let harga =
+Number(item.supplier)+Number(item.profit);
 
-    });
 
-    document.getElementById("ff-products").innerHTML = html;
 
-    console.log("HTML:", html);
+area.innerHTML += `
 
-}
+<div class="produk">
 
-loadff();
 
-function checkoutff(){
+<h3>${item.produk}</h3>
 
-    let userid =
-        document.getElementById("userid").value;
 
-    let zoneid =
-        document.getElementById("zoneid").value;
+<p>
+Rp ${harga.toLocaleString("id-ID")}
+</p>
 
-    let payment =
-        document.getElementById("payment").value;
 
-    let wa =
-        document.getElementById("nomorwa").value;
+<button onclick="checkout('${item.produk}', '${harga}')">
 
-    if(userid==""){
-        alert("Masukkan User ID");
-        return;
-    }
+Top Up
 
-    if(zoneid==""){
-        alert("Masukkan Zone ID");
-        return;
-    }
+</button>
 
-    if(produk==""){
-        alert("Pilih Diamond");
-        return;
-    }
 
-    let orders =
-        JSON.parse(localStorage.getItem("orders")) || [];
+</div>
 
-    orders.push({
 
-        game:"free fire",
+`;
 
-        userid:userid,
-
-        zoneid:zoneid,
-
-        produk:produk,
-
-        total:harga,
-
-        payment:payment,
-
-        wa:wa,
-
-        status:"Menunggu",
-
-        waktu:new Date().toLocaleString("id-ID")
-
-    });
-
-    localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
-    );
-
-    let admin="6282295071107";
-
-    let pesan=`Halo Admin
-
-Game : free fire
-User ID : ${userid}
-Zone ID : ${zoneid}
-Produk : ${produk}
-Total : Rp ${harga.toLocaleString("id-ID")}
-Pembayaran : ${payment}
-WA : ${wa}`;
-
-    window.open(
-        "https://wa.me/"+admin+
-        "?text="+encodeURIComponent(pesan),
-        "_blank"
-    );
 
 }
+
+
+});
+
+
+}
+
+
+function checkout(produk,harga){
+
+
+let pesan =
+`Halo ARDZ STORE%0A
+Saya ingin Top Up:%0A
+Produk : ${produk}%0A
+Harga : Rp ${harga}`;
+
+
+window.open(
+"https://wa.me/6282295071107?text="+pesan
+);
+
+
+}
+
+
+tampilHarga();
