@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ARDZ STORE ADMIN</title>
+<title>Dashboard Admin - ARDZ STORE</title>
 
 <link rel="stylesheet" href="admin.css">
 
@@ -18,183 +18,206 @@
 <div class="sidebar">
 
 <div class="logo">
-
-ARDZ STORE
-
+🎮 ARDZ STORE
 </div>
 
-<a href="dashboard.html">
-🏠 <span class="text">Dashboard</span>
+<a class="active" href="dashboard.html">
+🏠 Dashboard
 </a>
 
 <a href="nominal.html">
-💎 <span class="text">Kelola Nominal</span>
+💎 Kelola Nominal
 </a>
 
 <a href="orders.html">
-🛒 <span class="text">Pesanan</span>
+🛒 Pesanan
 </a>
 
-<a href="#">
-🖼 <span class="text">Banner</span>
-</a>
-
-<a href="#">
-💳 <span class="text">Pembayaran</span>
-</a>
-
-<a href="#">
-⚙ <span class="text">Pengaturan</span>
+<a href="settings.html">
+⚙ Pengaturan
 </a>
 
 <a href="../index.html">
-🌍 <span class="text">Lihat Website</span>
+🌍 Website
 </a>
 
 </div>
 
-<!-- CONTENT -->
+<!-- MAIN -->
 
 <div class="main">
 
-<h1 class="title">
+<h1>Dashboard Admin</h1>
 
-Dashboard Admin
+<br>
 
-</h1>
-
-<!-- STATISTIK -->
+<!-- KARTU -->
 
 <div class="cards">
 
 <div class="card">
 
-<h2 id="totalProduk">0</h2>
+<h3>Total Produk</h3>
 
-<p>Total Produk</p>
+<h1 id="totalProduk">
+0
+</h1>
 
-</div>
-
-<div class="card">
-
-<h2 id="totalGame">0</h2>
-
-<p>Total Game</p>
+<p>Produk aktif</p>
 
 </div>
 
 <div class="card">
 
-<h2 id="totalOrder">0</h2>
+<h3>Total Pesanan</h3>
 
-<p>Total Pesanan</p>
+<h1 id="totalPesanan">
+0
+</h1>
+
+<p>Pesanan masuk</p>
 
 </div>
 
 <div class="card">
 
-<h2 id="pendingOrder">0</h2>
+<h3>Total Game</h3>
 
-<p>Pesanan Menunggu</p>
+<h1>
+6
+</h1>
+
+<p>Game tersedia</p>
 
 </div>
 
+<div class="card">
+
+<h3>Status Website</h3>
+
+<h1 style="color:#22c55e;">
+ONLINE
+</h1>
+
+<p>GitHub Pages</p>
+
 </div>
-
-<!-- INFO -->
-
-<div class="box">
-
-<h3>Selamat Datang 👋</h3>
-
-<p>
-
-Selamat datang di Dashboard Admin
-ARDZ STORE.
-
-Semua produk, harga, pesanan,
-dan pengaturan website bisa
-dikelola dari sini.
-
-</p>
 
 </div>
 
 <!-- MENU CEPAT -->
 
-<div class="cards">
+<div class="box">
 
-<div class="card">
-
-<h2>💎</h2>
-
-<p>Kelola Nominal Game</p>
+<h2>⚡ Menu Cepat</h2>
 
 <br>
 
-<a href="nominal.html">
+<button onclick="location.href='nominal.html'">
 
-<button>
-
-Buka
+💎 Kelola Nominal
 
 </button>
 
-</a>
+<button onclick="location.href='orders.html'">
 
-</div>
-
-<div class="card">
-
-<h2>🛒</h2>
-
-<p>Kelola Pesanan</p>
-
-<br>
-
-<a href="orders.html">
-
-<button>
-
-Buka
+🛒 Kelola Pesanan
 
 </button>
 
-</a>
+<button onclick="location.href='settings.html'">
 
-</div>
-
-<div class="card">
-
-<h2>🖼</h2>
-
-<p>Banner Website</p>
-
-<br>
-
-<button>
-
-Segera Hadir
+⚙ Pengaturan
 
 </button>
 
 </div>
 
-<div class="card">
+<br>
 
-<h2>⚙</h2>
+<!-- ORDER TERBARU -->
 
-<p>Pengaturan Website</p>
+<div class="box">
+
+<h2>🛒 Pesanan Terbaru</h2>
 
 <br>
 
-<button>
+<table>
 
-Segera Hadir
+<thead>
 
-</button>
+<tr>
+
+<th>Game</th>
+
+<th>Produk</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="lastOrders">
+
+<tr>
+
+<td colspan="3">
+
+Belum ada pesanan
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 </div>
+
+<br>
+
+<!-- PRODUK -->
+
+<div class="box">
+
+<h2>💎 Produk Terbaru</h2>
+
+<br>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Game</th>
+
+<th>Produk</th>
+
+<th>Harga</th>
+
+</tr>
+
+</thead>
+
+<tbody id="lastProducts">
+
+<tr>
+
+<td colspan="3">
+
+Belum ada produk
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 </div>
 
