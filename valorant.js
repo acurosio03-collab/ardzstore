@@ -1,125 +1,134 @@
-let produk = "";
-let harga = 0;
+// ===============================
+// ARDZ STORE - VALORANT
+// ===============================
 
-function pilihProduk(nama,total){
+// Ambil data dari panel admin
+let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 
-    produk = nama;
-    harga = total;
+let area = document.getElementById("valorant-products");
 
-    document.getElementById("produk").innerHTML = nama;
-    document.getElementById("total").innerHTML =
-        "Rp " + total.toLocaleString("id-ID");
-}
+let produkDipilih = "";
+let hargaDipilih = 0;
 
-function loadvalorant(){
+// ===============================
+// TAMPILKAN PRODUK
+// ===============================
+function tampilHarga() {
 
-    let data = JSON.parse(localStorage.getItem("nominal")) || [];
+    if (!area) return;
 
-    console.log("Data nominal:", data);
+    area.innerHTML = "";
 
-    let html = "";
+    let dataFF = dataNominal.filter(item =>
+        item.game &&
+        item.game.toLowerCase().trim() === "valorant"
+    );
 
-    data.forEach(item=>{
+    if (dataFF.length === 0) {
 
-        console.log("Item:", item);
+        area.innerHTML = `
+        <div class="produk">
+            <h3>Belum ada produk valorant</h3>
+            <p>Silakan tambahkan dari Panel Admin.</p>
+        </div>
+        `;
 
-        if(item.game && item.game.toLowerCase().includes("mobile")){
+        return;
+    }
 
-            let jual = Number(item.supplier) + Number(item.profit);
+    dataFF.forEach((item) => {
 
-            html += `
-            <div class="card" onclick="pilihProduk('${item.produk}', ${jual})">
-                <h3>${item.produk}</h3>
-                <p>Rp ${jual.toLocaleString("id-ID")}</p>
-            </div>
-            `;
-        }
+        let harga =
+            Number(item.supplier) +
+            Number(item.profit);
+
+        area.innerHTML += `
+
+        <div class="produk">
+
+            <h3>${item.produk}</h3>
+
+            <p>
+            Harga :
+            <b>Rp ${harga.toLocaleString("id-ID")}</b>
+            </p>
+
+            <button onclick="pilihProduk('${item.produk}',${harga})">
+
+            Pilih
+
+            </button>
+
+        </div>
+
+        `;
 
     });
 
-    document.getElementById("valorant-products").innerHTML = html;
+}
 
-    console.log("HTML:", html);
+// ===============================
+// PILIH PRODUK
+// ===============================
+function pilihProduk(produk, harga) {
+
+    produkDipilih = produk;
+    hargaDipilih = harga;
+
+    document.getElementById("produk").innerHTML = produk;
+
+    document.getElementById("total").innerHTML =
+        "Rp " + harga.toLocaleString("id-ID");
 
 }
 
-loadvalorant();
-
-function checkoutpubg(){
+// ===============================
+// CHECKOUT
+// ===============================
+function checkoutFFvalorant() {
 
     let userid =
         document.getElementById("userid").value;
 
-    let zoneid =
-        document.getElementById("zoneid").value;
-
     let payment =
         document.getElementById("payment").value;
 
-    let wa =
+    let nomor =
         document.getElementById("nomorwa").value;
 
-    if(userid==""){
-        alert("Masukkan User ID");
+    if (userid == "") {
+        alert("Masukkan Player ID");
         return;
     }
 
-    if(zoneid==""){
-        alert("Masukkan Zone ID");
+    if (produkDipilih == "") {
+        alert("Pilih Diamond terlebih dahulu");
         return;
     }
 
-    if(produk==""){
-        alert("Pilih Diamond");
-        return;
-    }
+    let pesan =
+`Halo Admin ARDZ STORE
 
-    let orders =
-        JSON.parse(localStorage.getItem("orders")) || [];
+Saya ingin Top Up VALORANT
 
-    orders.push({
+Player ID : ${userid}
 
-        game:"valorant",
+Produk : ${produkDipilih}
 
-        userid:userid,
+Harga : Rp ${hargaDipilih.toLocaleString("id-ID")}
 
-        zoneid:zoneid,
-
-        produk:produk,
-
-        total:harga,
-
-        payment:payment,
-
-        wa:wa,
-
-        status:"Menunggu",
-
-        waktu:new Date().toLocaleString("id-ID")
-
-    });
-
-    localStorage.setItem(
-        "orders",
-        JSON.stringify(orders)
-    );
-
-    let admin="6282295071107";
-
-    let pesan=`Halo Admin
-
-Game : valorant
-User ID : ${userid}
-Zone ID : ${zoneid}
-Produk : ${produk}
-Total : Rp ${harga.toLocaleString("id-ID")}
 Pembayaran : ${payment}
-WA : ${wa}`;
+
+Nomor WA : ${nomor}`;
 
     window.open(
-        "https://wa.me/"+admin+
-        "?text="+encodeURIComponent(pesan),
-        "_blank"
+        "https://wa.me/6282295071107?text=" +
+        encodeURIComponent(pesan)
     );
 
 }
+
+// ===============================
+// MULAI
+// ===============================
+tampilHarga();
