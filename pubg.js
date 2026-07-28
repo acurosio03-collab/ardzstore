@@ -5,7 +5,7 @@
 // Ambil data dari panel admin
 let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 
-let area = document.getElementById("ff-products");
+let area = document.getElementById("hok-products");
 
 let produkDipilih = "";
 let hargaDipilih = 0;
