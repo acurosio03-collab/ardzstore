@@ -1,115 +1,482 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
+// ==================================
+// ARDZ STORE - NOMINAL ADMIN JS
+// ==================================
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Kelola Nominal</title>
+let dataNominal =
+JSON.parse(localStorage.getItem("nominal")) || [];
 
-<link rel="stylesheet" href="admin.css">
 
-</head>
+let editIndex = -1;
 
-<body>
 
-<div class="sidebar">
+// ==================================
+// FORMAT RUPIAH
+// ==================================
 
-<div class="logo">
-🎮 ARDZ STORE
-</div>
+function rupiah(angka){
 
-<a href="dashboard.html">🏠 Dashboard</a>
-<a class="active" href="nominal.html">💎 Nominal</a>
-<a href="orders.html">🛒 Pesanan</a>
+    return "Rp " + Number(angka)
+    .toLocaleString("id-ID");
 
-</div>
+}
 
-<div class="main">
 
-<h1>Kelola Nominal</h1>
 
-<div class="box">
+// ==================================
+// BUKA MODAL
+// ==================================
 
-<input
-type="text"
-id="search"
-placeholder="Cari produk..."
-onkeyup="cariProduk()">
+function bukaModal(index = -1){
 
-<br><br>
 
-<select id="filterGame" onchange="filterGame()">
+    document.getElementById("modalNominal")
+    .style.display = "flex";
 
-<option value="Semua">Semua Game</option>
 
-<option>Mobile Legends</option>
+    editIndex = index;
 
-<option>Free Fire</option>
 
-<option>PUBG Mobile</option>
 
-<option>Valorant</option>
+    if(index >= 0){
 
-<option>Honor Of Kings</option>
 
-<option>Roblox</option>
+        let item = dataNominal[index];
 
-</select>
-<div id="listNominal"></div>
 
-  </div>
-<button onclick="bukaModal()">
+        document.getElementById("judulModal")
+        .innerHTML = "Edit Nominal";
 
-➕ Tambah Produk
+
+        document.getElementById("game").value =
+        item.game;
+
+
+        document.getElementById("produk").value =
+        item.produk;
+
+
+        document.getElementById("supplier").value =
+        item.supplier;
+
+
+        document.getElementById("profit").value =
+        item.profit;
+
+
+
+    }else{
+
+
+        document.getElementById("judulModal")
+        .innerHTML = "Tambah Nominal";
+
+
+        document.getElementById("game").value="";
+        document.getElementById("produk").value="";
+        document.getElementById("supplier").value="";
+        document.getElementById("profit").value="";
+
+
+    }
+
+
+}
+
+
+
+
+// ==================================
+// TUTUP MODAL
+// ==================================
+
+function tutupModal(){
+
+    document.getElementById("modalNominal")
+    .style.display="none";
+
+
+    editIndex=-1;
+
+}
+
+
+
+// ==================================
+// SIMPAN NOMINAL
+// ==================================
+
+function simpanNominal(){
+
+
+    let game =
+    document.getElementById("game").value;
+
+
+    let produk =
+    document.getElementById("produk").value;
+
+
+    let supplier =
+    Number(document.getElementById("supplier").value);
+
+
+    let profit =
+    Number(document.getElementById("profit").value);
+
+
+
+    if(game=="" || produk==""){
+
+        alert("Game dan produk wajib diisi!");
+
+        return;
+
+    }
+
+
+
+    let data = {
+
+
+        game:game,
+
+        produk:produk,
+
+        supplier:supplier,
+
+        profit:profit
+
+
+    };
+
+
+
+
+    // tambah
+
+    if(editIndex == -1){
+
+
+        dataNominal.push(data);
+
+
+    }
+
+    // edit
+
+    else{
+
+
+        dataNominal[editIndex]=data;
+
+
+    }
+
+
+
+
+
+    localStorage.setItem(
+        "nominal",
+        JSON.stringify(dataNominal)
+    );
+
+
+
+    tampilkan();
+
+
+    tutupModal();
+
+
+
+}
+
+
+
+
+// ==================================
+// TAMPILKAN DATA
+// ==================================
+
+function tampilkan(data=dataNominal){
+
+
+
+    let area =
+    document.getElementById("tableNominal");
+
+
+
+    if(!area) return;
+
+
+
+
+    if(data.length==0){
+
+
+        area.innerHTML =
+        "<p>Belum ada nominal.</p>";
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    let html = `
+
+
+<table>
+
+
+<tr>
+
+<th>Game</th>
+
+<th>Produk</th>
+
+<th>Supplier</th>
+
+<th>Profit</th>
+
+<th>Harga Jual</th>
+
+<th>Aksi</th>
+
+
+</tr>
+
+
+`;
+
+
+
+
+
+    data.forEach((item,index)=>{
+
+
+        let harga =
+        Number(item.supplier)
+        +
+        Number(item.profit);
+
+
+
+
+
+        html += `
+
+
+<tr>
+
+
+<td>${item.game}</td>
+
+
+<td>${item.produk}</td>
+
+
+<td>${rupiah(item.supplier)}</td>
+
+
+<td>${rupiah(item.profit)}</td>
+
+
+<td>
+
+<b>${rupiah(harga)}</b>
+
+</td>
+
+
+
+<td>
+
+
+<button
+class="btn-edit"
+onclick="bukaModal(${index})">
+
+✏ Edit
 
 </button>
 
-</div>
 
-<div id="tableNominal">
 
-</div>
+<button
+class="btn-delete"
+onclick="hapusNominal(${index})">
 
-</div>
-
-<!-- MODAL -->
-<div id="modalNominal" class="modal">
-
-<div class="modal-content">
-
-<h2 id="judulModal">
-
-Tambah Nominal
-
-</h2>
-
-<input id="game" placeholder="Game">
-
-<input id="produk" placeholder="Nama Produk">
-
-<input id="supplier" type="number" placeholder="Harga Supplier">
-
-<input id="profit" type="number" placeholder="Profit">
-
-<button onclick="simpanNominal()">
-
-💾 Simpan
+🗑 Hapus
 
 </button>
 
-<button onclick="tutupModal()">
 
-Batal
 
-</button>
+</td>
 
-</div>
 
-</div>
+</tr>
 
-<script src="nominal.js"></script>
 
-</body>
-</html>
+`;
+
+
+
+});
+
+
+
+html += "</table>";
+
+
+
+area.innerHTML = html;
+
+
+
+}
+
+
+
+
+// ==================================
+// HAPUS
+// ==================================
+
+function hapusNominal(index){
+
+
+
+if(confirm("Hapus produk ini?")){
+
+
+    dataNominal.splice(index,1);
+
+
+    localStorage.setItem(
+        "nominal",
+        JSON.stringify(dataNominal)
+    );
+
+
+    tampilkan();
+
+
+}
+
+
+
+}
+
+
+
+
+
+// ==================================
+// CARI PRODUK
+// ==================================
+
+function cariProduk(){
+
+
+let keyword =
+document.getElementById("search")
+.value
+.toLowerCase();
+
+
+
+let hasil =
+dataNominal.filter(item=>{
+
+
+return (
+
+item.game.toLowerCase()
+.includes(keyword)
+
+
+||
+
+item.produk.toLowerCase()
+.includes(keyword)
+
+
+);
+
+
+});
+
+
+
+tampilkan(hasil);
+
+
+
+}
+
+
+
+
+
+// ==================================
+// FILTER GAME
+// ==================================
+
+function filterGame(){
+
+
+
+let game =
+document.getElementById("filterGame")
+.value;
+
+
+
+if(game=="Semua"){
+
+
+    tampilkan();
+
+
+    return;
+
+}
+
+
+
+let hasil =
+dataNominal.filter(item=>{
+
+
+return item.game == game;
+
+
+});
+
+
+
+tampilkan(hasil);
+
+
+
+}
+
+
+
+
+
+// ==================================
+// LOAD AWAL
+// ==================================
+
 tampilkan();
