@@ -1,135 +1,112 @@
-// ===============================
-// ARDZ STORE - NOMINAL.JS
-// ===============================
+<!DOCTYPE html>
+<html lang="id">
+<head>
 
-// Ambil data
-let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-// Format Rupiah
-function formatRupiah(angka){
-    return "Rp " + Number(angka).toLocaleString("id-ID");
-}
+<title>Kelola Nominal</title>
 
-// ===============================
-// TAMBAH NOMINAL
-// ===============================
+<link rel="stylesheet" href="admin.css">
 
-const form = document.getElementById("nominalForm");
+</head>
 
-if(form){
+<body>
 
-    form.addEventListener("submit",function(e){
+<div class="sidebar">
 
-        e.preventDefault();
-
-        const game = document.getElementById("game").value;
-        const produk = document.getElementById("produk").value;
-        const supplier = Number(document.getElementById("supplier").value);
-        const profit = Number(document.getElementById("profit").value);
-
-        dataNominal.push({
-            game,
-            produk,
-            supplier,
-            profit
-        });
-
-        localStorage.setItem("nominal",JSON.stringify(dataNominal));
-
-        alert("Nominal berhasil ditambahkan!");
-
-        form.reset();
-
-    });
-
-}
-
-// ===============================
-// TAMPILKAN DATA
-// ===============================
-
-function tampilkan(){
-
-    const list = document.getElementById("listNominal");
-
-    if(!list) return;
-
-    dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
-
-    list.innerHTML = "";
-
-    if(dataNominal.length==0){
-
-        list.innerHTML="<p>Belum ada nominal.</p>";
-
-        return;
-
-    }
-
-    dataNominal.forEach((item,index)=>{
-
-        const hargaJual =
-        Number(item.supplier)+Number(item.profit);
-
-        list.innerHTML += `
-
-<div class="card">
-
-<h3>${item.game}</h3>
-
-<p><b>${item.produk}</b></p>
-
-<p>Harga Supplier : ${formatRupiah(item.supplier)}</p>
-
-<p>Profit : ${formatRupiah(item.profit)}</p>
-
-<h2>${formatRupiah(hargaJual)}</h2>
-
-<button onclick="editNominal(${index})">
-✏️ Edit
-</button>
-
-<button onclick="hapusSemuaNominal()">
-    🗑️ Hapus Semua Nominal
-</button>
+<div class="logo">
+🎮 ARDZ STORE
 </div>
 
-`;
+<a href="dashboard.html">🏠 Dashboard</a>
+<a class="active" href="nominal.html">💎 Nominal</a>
+<a href="orders.html">🛒 Pesanan</a>
 
-    });
+</div>
 
-}
+<div class="main">
 
-// ===============================
-// EDIT NOMINAL
-// ===============================
+<h1>Kelola Nominal</h1>
 
-function editNominal(index){
+<div class="box">
 
-    let item = dataNominal[index];
+<input
+type="text"
+id="search"
+placeholder="Cari produk..."
+onkeyup="cariProduk()">
 
-    let game = prompt("Game", item.game);
-    if(game === null) return;
+<br><br>
 
-    let produk = prompt("Nama Produk", item.produk);
-    if(produk === null) return;
+<select id="filterGame" onchange="filterGame()">
 
-    let supplier = prompt("Harga Supplier", item.supplier);
-    if(supplier === null) return;
+<option value="Semua">Semua Game</option>
 
-    let profit = prompt("Profit", item.profit);
-    if(profit === null) return;
+<option>Mobile Legends</option>
 
-    dataNominal[index] = {
-        game: game,
-        produk: produk,
-        supplier: Number(supplier),
-        profit: Number(profit)
-    };
+<option>Free Fire</option>
 
-    localStorage.setItem("nominal", JSON.stringify(dataNominal));
+<option>PUBG Mobile</option>
 
-    tampilkan();
+<option>Valorant</option>
 
-    alert("Nominal berhasil diubah!");
-}
+<option>Honor Of Kings</option>
+
+<option>Roblox</option>
+
+</select>
+
+<button onclick="bukaModal()">
+
+➕ Tambah Produk
+
+</button>
+
+</div>
+
+<div id="tableNominal">
+
+</div>
+
+</div>
+
+<!-- MODAL -->
+<div id="modalNominal" class="modal">
+
+<div class="modal-content">
+
+<h2 id="judulModal">
+
+Tambah Nominal
+
+</h2>
+
+<input id="game" placeholder="Game">
+
+<input id="produk" placeholder="Nama Produk">
+
+<input id="supplier" type="number" placeholder="Harga Supplier">
+
+<input id="profit" type="number" placeholder="Profit">
+
+<button onclick="simpanNominal()">
+
+💾 Simpan
+
+</button>
+
+<button onclick="tutupModal()">
+
+Batal
+
+</button>
+
+</div>
+
+</div>
+
+<script src="nominal.js"></script>
+
+</body>
+</html>
