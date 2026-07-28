@@ -1,3 +1,4 @@
+console.log("NOMINAL JS AKTIF");
 // ===============================
 // ARDZ STORE - NOMINAL JS
 // ===============================
