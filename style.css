@@ -238,3 +238,44 @@ border-radius:8px;
 cursor:pointer;
 
 }
+.produk-card{
+
+background:#18233d;
+
+padding:20px;
+
+border-radius:15px;
+
+margin:15px;
+
+text-align:center;
+
+color:white;
+
+box-shadow:0 0 15px #00d9ff;
+
+}
+
+
+.icon-diamond{
+
+width:60px;
+
+}
+
+
+.produk-card button{
+
+background:#00c8ff;
+
+border:none;
+
+padding:10px 40px;
+
+border-radius:10px;
+
+color:white;
+
+font-weight:bold;
+
+}
