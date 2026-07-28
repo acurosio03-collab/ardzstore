@@ -3,7 +3,7 @@ let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 let list = document.getElementById("hok-products");
 
 
-function loadFF(){
+function loadhok(){
 
 if(!list) return;
 
@@ -135,4 +135,4 @@ encodeURIComponent(pesan)
 
 
 
-loadFF();
+loadhok();
