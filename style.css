@@ -201,3 +201,40 @@ padding:20px;
 }
 
 }
+.produk{
+background:#151f3a;
+padding:20px;
+border-radius:15px;
+margin:15px 0;
+text-align:center;
+box-shadow:0 0 15px #00c3ff;
+}
+
+
+.produk-img{
+
+width:120px;
+height:120px;
+object-fit:contain;
+margin-bottom:10px;
+
+}
+
+
+.produk h3{
+
+color:#00d9ff;
+
+}
+
+
+.produk button{
+
+background:linear-gradient(90deg,#7b2cff,#00d9ff);
+color:white;
+border:none;
+padding:12px 40px;
+border-radius:8px;
+cursor:pointer;
+
+}
