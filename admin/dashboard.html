@@ -1,76 +1,206 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dashboard Admin - ARDZ STORE</title>
+<title>ARDZ STORE ADMIN</title>
 
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="theme.css">
+<link rel="stylesheet" href="admin.css">
 
 </head>
 
 <body>
 
-<div class="admin-layout">
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
-<h2>ARDZ STORE</h2>
+<div class="logo">
 
-<a href="dashboard.html">🏠 Dashboard</a>
-  <a href="orders.html" class="menu-card">
-📦 Kelola Pesanan
-</a>
-<a href="add-nominal.html">➕ Tambah Nominal</a>
-<a href="list-nominal.html">📋 Daftar Nominal</a>
-<a href="products.html">🎮 Produk</a>
-<a href="add-product.html">➕ Tambah Produk</a>
-<a href="../index.html">🌐 Website</a>
-<a href="login.html">🚪 Logout</a>
+ARDZ STORE
 
 </div>
 
-<div class="content">
+<a href="dashboard.html">
+🏠 <span class="text">Dashboard</span>
+</a>
 
-<h1>Dashboard Admin</h1>
+<a href="nominal.html">
+💎 <span class="text">Kelola Nominal</span>
+</a>
+
+<a href="orders.html">
+🛒 <span class="text">Pesanan</span>
+</a>
+
+<a href="#">
+🖼 <span class="text">Banner</span>
+</a>
+
+<a href="#">
+💳 <span class="text">Pembayaran</span>
+</a>
+
+<a href="#">
+⚙ <span class="text">Pengaturan</span>
+</a>
+
+<a href="../index.html">
+🌍 <span class="text">Lihat Website</span>
+</a>
+
+</div>
+
+<!-- CONTENT -->
+
+<div class="main">
+
+<h1 class="title">
+
+Dashboard Admin
+
+</h1>
+
+<!-- STATISTIK -->
 
 <div class="cards">
 
-<div class="card-admin">
+<div class="card">
+
 <h2 id="totalProduk">0</h2>
+
 <p>Total Produk</p>
-</div>
-
-<div class="card-admin">
-<h2>0</h2>
-<p>Pesanan Hari Ini</p>
-</div>
-
-<div class="card-admin">
-<h2>Rp0</h2>
-<p>Pendapatan</p>
-</div>
-
-<div class="card-admin">
-<h2>Aktif</h2>
-<p>Status Website</p>
-</div>
 
 </div>
 
+<div class="card">
+
+<h2 id="totalGame">0</h2>
+
+<p>Total Game</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="totalOrder">0</h2>
+
+<p>Total Pesanan</p>
+
+</div>
+
+<div class="card">
+
+<h2 id="pendingOrder">0</h2>
+
+<p>Pesanan Menunggu</p>
+
 </div>
 
 </div>
 
-<script>
+<!-- INFO -->
 
-const produk=JSON.parse(localStorage.getItem("products"))||[];
+<div class="box">
 
-document.getElementById("totalProduk").innerText=produk.length;
+<h3>Selamat Datang 👋</h3>
 
-</script>
+<p>
+
+Selamat datang di Dashboard Admin
+ARDZ STORE.
+
+Semua produk, harga, pesanan,
+dan pengaturan website bisa
+dikelola dari sini.
+
+</p>
+
+</div>
+
+<!-- MENU CEPAT -->
+
+<div class="cards">
+
+<div class="card">
+
+<h2>💎</h2>
+
+<p>Kelola Nominal Game</p>
+
+<br>
+
+<a href="nominal.html">
+
+<button>
+
+Buka
+
+</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🛒</h2>
+
+<p>Kelola Pesanan</p>
+
+<br>
+
+<a href="orders.html">
+
+<button>
+
+Buka
+
+</button>
+
+</a>
+
+</div>
+
+<div class="card">
+
+<h2>🖼</h2>
+
+<p>Banner Website</p>
+
+<br>
+
+<button>
+
+Segera Hadir
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>⚙</h2>
+
+<p>Pengaturan Website</p>
+
+<br>
+
+<button>
+
+Segera Hadir
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="dashboard.js"></script>
 
 </body>
 </html>
