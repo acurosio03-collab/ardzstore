@@ -3,7 +3,7 @@ let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 let list = document.getElementById("roblox-products");
 
 
-function loadFF(){
+function loadroblox(){
 
 if(!list) return;
 
@@ -135,4 +135,4 @@ encodeURIComponent(pesan)
 
 
 
-loadFF();
+loadroblox();
