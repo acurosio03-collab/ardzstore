@@ -92,7 +92,7 @@ document.getElementById("total").innerHTML=
 
 
 
-function checkoutFF(){
+function checkoutml(){
 
 
 let produk=
