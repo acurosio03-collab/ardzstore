@@ -3,7 +3,7 @@ let dataNominal = JSON.parse(localStorage.getItem("nominal")) || [];
 let list = document.getElementById("valorant-products");
 
 
-function loadFF(){
+function loadvalorant(){
 
 if(!list) return;
 
@@ -135,4 +135,4 @@ encodeURIComponent(pesan)
 
 
 
-loadFF();
+loadvalorant();
