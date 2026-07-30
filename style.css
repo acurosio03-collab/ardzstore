@@ -1,281 +1,398 @@
+/* =====================================
+   ARDZ STORE PREMIUM
+   STYLE.CSS
+===================================== */
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-background:#0f172a;
-color:white;
+
+background:#0b1220;
+color:#fff;
+
 }
 
-/* HEADER */
+
+/* =====================
+NAVBAR
+===================== */
 
 header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 60px;
-background:#111827;
-position:sticky;
+
+width:100%;
+position:fixed;
 top:0;
+left:0;
 z-index:999;
+
+background:#111827;
+
+box-shadow:0 5px 20px rgba(0,0,0,.3);
+
 }
+
+
+.navbar{
+
+max-width:1300px;
+
+margin:auto;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 30px;
+
+}
+
 
 .logo{
-font-size:30px;
+
+font-size:28px;
+
 font-weight:bold;
-color:#00d4ff;
+
+color:#00d9ff;
+
+letter-spacing:1px;
+
 }
 
-nav a{
-text-decoration:none;
-color:white;
-margin-left:30px;
-transition:.3s;
-}
-
-nav a:hover{
-color:#00d4ff;
-}
-
-/* HERO */
-
-.hero{
-height:420px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-background:linear-gradient(135deg,#0f172a,#1e293b);
-}
-
-.hero h1{
-font-size:50px;
-margin-bottom:20px;
-}
-
-.hero p{
-font-size:20px;
-margin-bottom:30px;
-color:#ddd;
-}
-
-.hero-btn{
-background:#00d4ff;
-padding:15px 35px;
-border-radius:30px;
-text-decoration:none;
-color:#fff;
-font-weight:bold;
-transition:.3s;
-}
-
-.hero-btn:hover{
-background:#0099cc;
-}
-
-/* GAME */
-
-section{
-padding:50px;
-}
-
-section h2{
-margin-bottom:30px;
-text-align:center;
-font-size:35px;
-color:#00d4ff;
-}
-
-.game-list{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-}
-
-/* CARD */
-
-.card{
-background:#1e293b;
-border-radius:20px;
-overflow:hidden;
-text-align:center;
-box-shadow:0 10px 20px rgba(0,0,0,.3);
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-10px);
-}
-
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-.card h3{
-margin:15px 0;
-}
-
-.card p{
-margin-bottom:15px;
-color:#ddd;
-}
-
-.card a{
-display:inline-block;
-margin-bottom:20px;
-padding:10px 25px;
-background:#00d4ff;
-border-radius:30px;
-text-decoration:none;
-color:white;
-font-weight:bold;
-}
-
-.card a:hover{
-background:#0099cc;
-}
-
-/* PRODUK DARI ADMIN */
-
-#shop-products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-margin-top:30px;
-}
-
-.buy-btn{
-display:inline-block;
-margin-bottom:20px;
-padding:10px 25px;
-background:#16a34a;
-border-radius:30px;
-text-decoration:none;
-color:white;
-font-weight:bold;
-}
-
-/* FOOTER */
-
-footer{
-margin-top:60px;
-background:#111827;
-padding:30px;
-text-align:center;
-color:#ccc;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:768px){
-
-header{
-flex-direction:column;
-}
 
 nav{
-margin-top:20px;
+
+display:flex;
+
+gap:25px;
+
 }
+
 
 nav a{
-margin:10px;
-display:inline-block;
-}
 
-.hero h1{
-font-size:34px;
-}
+text-decoration:none;
 
-.hero p{
-font-size:16px;
-}
+color:white;
 
-section{
-padding:20px;
-}
+font-weight:500;
 
-}
-.produk{
-background:#151f3a;
-padding:20px;
-border-radius:15px;
-margin:15px 0;
-text-align:center;
-box-shadow:0 0 15px #00c3ff;
-}
-
-
-.produk-img{
-
-width:120px;
-height:120px;
-object-fit:contain;
-margin-bottom:10px;
+transition:.3s;
 
 }
 
 
-.produk h3{
+nav a:hover{
 
 color:#00d9ff;
 
 }
 
 
-.produk button{
+/* =====================
+HERO
+===================== */
 
-background:linear-gradient(90deg,#7b2cff,#00d9ff);
-color:white;
-border:none;
-padding:12px 40px;
-border-radius:8px;
-cursor:pointer;
+.hero{
 
-}
-.produk-card{
+margin-top:80px;
 
-background:#18233d;
+height:500px;
 
-padding:20px;
+background:linear-gradient(135deg,#131d33,#1b2b4f);
 
-border-radius:15px;
+display:flex;
 
-margin:15px;
+justify-content:center;
+
+align-items:center;
 
 text-align:center;
 
-color:white;
-
-box-shadow:0 0 15px #00d9ff;
+padding:20px;
 
 }
 
 
-.icon-diamond{
+.hero-content h1{
 
-width:60px;
+font-size:50px;
+
+margin-bottom:15px;
 
 }
 
 
-.produk-card button{
+.hero-content p{
 
-background:#00c8ff;
+font-size:18px;
+
+color:#d7d7d7;
+
+margin-bottom:30px;
+
+}
+
+
+.hero button{
+
+padding:15px 40px;
+
+font-size:18px;
 
 border:none;
 
-padding:10px 40px;
+border-radius:12px;
 
-border-radius:10px;
+background:#00d9ff;
+
+color:#111;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+
+.hero button:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 0 20px #00d9ff;
+
+}
+
+
+/* =====================
+TITLE
+===================== */
+
+.title{
+
+text-align:center;
+
+font-size:35px;
+
+margin:60px 0 30px;
+
+}
+
+
+/* =====================
+GAME GRID
+===================== */
+
+.game-grid{
+
+max-width:1200px;
+
+margin:auto;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:25px;
+
+padding:20px;
+
+}
+
+
+.card{
+
+background:#16213a;
+
+border-radius:20px;
+
+padding:25px;
+
+text-align:center;
+
+text-decoration:none;
 
 color:white;
 
-font-weight:bold;
+transition:.3s;
+
+border:1px solid transparent;
+
+}
+
+
+.card:hover{
+
+transform:translateY(-8px);
+
+border:1px solid #00d9ff;
+
+box-shadow:0 0 25px rgba(0,217,255,.4);
+
+}
+
+
+.card img{
+
+width:90px;
+
+height:90px;
+
+object-fit:contain;
+
+margin-bottom:15px;
+
+}
+
+
+.card h3{
+
+font-size:20px;
+
+}
+
+
+/* =====================
+PAYMENT
+===================== */
+
+.payment{
+
+padding:60px 20px;
+
+}
+
+
+.payment-grid{
+
+max-width:1000px;
+
+margin:auto;
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:20px;
+
+}
+
+
+.payment-grid img{
+
+width:90px;
+
+background:white;
+
+padding:10px;
+
+border-radius:12px;
+
+transition:.3s;
+
+}
+
+
+.payment-grid img:hover{
+
+transform:scale(1.08);
+
+}
+
+
+/* =====================
+FOOTER
+===================== */
+
+footer{
+
+margin-top:60px;
+
+background:#111827;
+
+padding:40px;
+
+text-align:center;
+
+}
+
+
+footer h2{
+
+margin-bottom:15px;
+
+color:#00d9ff;
+
+}
+
+
+footer p{
+
+margin:8px 0;
+
+color:#ccc;
+
+}
+
+
+/* =====================
+RESPONSIVE
+===================== */
+
+@media(max-width:768px){
+
+.navbar{
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+nav{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.hero{
+
+height:420px;
+
+}
+
+.hero-content h1{
+
+font-size:35px;
+
+}
+
+.title{
+
+font-size:28px;
+
+}
+
+.card img{
+
+width:70px;
+
+height:70px;
+
+}
 
 }
