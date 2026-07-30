@@ -292,3 +292,140 @@ function updateTotal(){
         rupiah(totalBayar);
 
     }
+/* ==========================================
+   BAGIAN 5
+   METODE PEMBAYARAN
+========================================== */
+
+function initPayment(){
+
+    const paymentCards = document.querySelectorAll(".payment-card");
+
+    if(paymentCards.length === 0){
+
+        console.warn("Payment card tidak ditemukan.");
+
+        return;
+
+    }
+
+    paymentCards.forEach(card=>{
+
+        card.addEventListener("click",function(){
+
+            // Hapus status aktif
+            paymentCards.forEach(item=>{
+
+                item.classList.remove("active");
+
+            });
+
+            // Aktifkan card yang dipilih
+            this.classList.add("active");
+
+            // Ambil nama payment
+            selectedPayment = this.dataset.payment;
+
+            // Update Ringkasan
+            const summaryPayment =
+            document.getElementById("summaryPayment");
+
+            if(summaryPayment){
+
+                summaryPayment.textContent =
+                selectedPayment;
+
+            }
+
+        });
+
+    });
+
+}
+/* ==========================================
+   BAGIAN 6
+   CHECKOUT WHATSAPP
+========================================== */
+
+function checkoutOrder(){
+
+    // Produk harus dipilih
+    if(selectedProduct === null){
+
+        alert("Silakan pilih produk terlebih dahulu.");
+        return;
+
+    }
+
+    // Character ID
+    const userId =
+    document.getElementById("userId")?.value.trim() || "";
+
+    // Nickname
+    const nickname =
+    document.getElementById("nickname")?.value.trim() || "-";
+
+    if(userId === ""){
+
+        alert("Masukkan Character ID PUBG terlebih dahulu.");
+        return;
+
+    }
+
+    // Hitung total
+    const totalBayar =
+    selectedProduct.harga - discount;
+
+    // Pesan WhatsApp
+    const pesan = `🎮 *ARDZ STORE*
+
+Halo Admin,
+
+Saya ingin melakukan Top Up PUBG Mobile.
+
+━━━━━━━━━━━━━━━━━━
+
+🎮 Game : PUBG Mobile
+
+🆔 Character ID : ${userId}
+
+👤 Nickname : ${nickname}
+
+💎 Produk : ${selectedProduct.nama}
+
+💰 Harga : ${rupiah(selectedProduct.harga)}
+
+🎁 Diskon : ${rupiah(discount)}
+
+💵 Total Bayar : ${rupiah(totalBayar)}
+
+💳 Pembayaran : ${selectedPayment}
+
+━━━━━━━━━━━━━━━━━━
+
+Terima kasih 🙏`;
+
+    // Buka WhatsApp
+    window.open(
+        `https://wa.me/${083185954674}?text=${encodeURIComponent(pesan)}`,
+        "_blank"
+    );
+
+}
+
+/* ==========================================
+   PASANG EVENT CHECKOUT
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const checkoutBtn =
+    document.getElementById("checkoutBtn");
+
+    if(checkoutBtn){
+
+        checkoutBtn.addEventListener("click",checkoutOrder);
+
+    }
+
+});
