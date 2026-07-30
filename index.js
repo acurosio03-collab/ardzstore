@@ -453,3 +453,99 @@ element.style.transition=
 fadeObserver.observe(element);
 
 });
+/* =====================================
+Slider Testimoni
+===================================== */
+
+const testimonialGrid = document.querySelector(".testimonial-grid");
+const testimonialCards = document.querySelectorAll(".testimonial-card");
+
+let testimonialIndex = 0;
+
+if(testimonialGrid && testimonialCards.length > 0){
+
+    function updateTestimonial(){
+
+        testimonialCards.forEach((card,index)=>{
+
+            if(index===testimonialIndex){
+
+                card.style.display="block";
+
+                card.style.opacity="0";
+
+                card.style.transform="translateX(40px)";
+
+                setTimeout(()=>{
+
+                    card.style.transition="all .5s ease";
+
+                    card.style.opacity="1";
+
+                    card.style.transform="translateX(0)";
+
+                },50);
+
+            }else{
+
+                card.style.display="none";
+
+            }
+
+        });
+
+    }
+
+    function nextTestimonial(){
+
+        testimonialIndex++;
+
+        if(testimonialIndex>=testimonialCards.length){
+
+            testimonialIndex=0;
+
+        }
+
+        updateTestimonial();
+
+    }
+
+    function prevTestimonial(){
+
+        testimonialIndex--;
+
+        if(testimonialIndex<0){
+
+            testimonialIndex=testimonialCards.length-1;
+
+        }
+
+        updateTestimonial();
+
+    }
+
+    updateTestimonial();
+
+    setInterval(nextTestimonial,5000);
+
+    /* Tombol Next */
+
+    const nextBtn=document.querySelector(".testimonial-next");
+
+    if(nextBtn){
+
+        nextBtn.addEventListener("click",nextTestimonial);
+
+    }
+
+    /* Tombol Previous */
+
+    const prevBtn=document.querySelector(".testimonial-prev");
+
+    if(prevBtn){
+
+        prevBtn.addEventListener("click",prevTestimonial);
+
+    }
+
+}
