@@ -215,3 +215,160 @@ document.addEventListener("DOMContentLoaded",function(){
     loadProducts();
 
 });
+/* ==========================================
+   BAGIAN 3
+   PILIH PRODUK
+========================================== */
+
+function selectProduct(index){
+
+    selectedProduct = products[index];
+
+    // Reset semua card
+    document.querySelectorAll(".product-card").forEach(card=>{
+
+        card.classList.remove("active");
+
+    });
+
+    // Aktifkan card yang dipilih
+    document.querySelectorAll(".product-card")[index]
+        .classList.add("active");
+
+    // Detail Pesanan
+    const produk = document.getElementById("produk");
+    const total = document.getElementById("total");
+
+    if(produk){
+
+        produk.textContent = selectedProduct.nama;
+
+    }
+
+    if(total){
+
+        total.textContent =
+        rupiah(selectedProduct.harga-discount);
+
+    }
+
+    // Ringkasan Checkout
+    const summaryProduk =
+    document.getElementById("summaryProduk");
+
+    const summaryTotal =
+    document.getElementById("summaryTotal");
+
+    if(summaryProduk){
+
+        summaryProduk.textContent =
+        selectedProduct.nama;
+
+    }
+
+    if(summaryTotal){
+
+        summaryTotal.textContent =
+        rupiah(selectedProduct.harga-discount);
+
+    }
+
+}
+/* ==========================================
+   BAGIAN 4
+   SISTEM VOUCHER
+========================================== */
+
+// Daftar Voucher
+const vouchers = {
+
+    "ARDZ10":10,
+    "PUBG5":5,
+    "HEMAT20":20
+
+};
+
+// Tombol Voucher
+const voucherButton = document.getElementById("applyVoucher");
+
+if(voucherButton){
+
+    voucherButton.addEventListener("click",applyVoucher);
+
+}
+
+function applyVoucher(){
+
+    if(!selectedProduct){
+
+        alert("Pilih produk terlebih dahulu!");
+
+        return;
+
+    }
+
+    const input = document.getElementById("voucher");
+
+    const info = document.getElementById("voucherInfo");
+
+    if(!input) return;
+
+    const code = input.value.trim().toUpperCase();
+
+    if(code===""){
+
+        alert("Masukkan kode voucher.");
+
+        return;
+
+    }
+
+    if(vouchers[code]){
+
+        const persen = vouchers[code];
+
+        discount = Math.floor(selectedProduct.harga * persen / 100);
+
+        const total = selectedProduct.harga - discount;
+
+        document.getElementById("total").textContent =
+        rupiah(total);
+
+        const summaryTotal =
+        document.getElementById("summaryTotal");
+
+        if(summaryTotal){
+
+            summaryTotal.textContent =
+            rupiah(total);
+
+        }
+
+        if(info){
+
+            info.innerHTML =
+            "✅ Voucher berhasil digunakan ("+
+            persen+"% OFF)";
+
+            info.style.color="#22c55e";
+
+        }
+
+    }else{
+
+        discount = 0;
+
+        if(info){
+
+            info.innerHTML =
+            "❌ Voucher tidak valid.";
+
+            info.style.color="#ef4444";
+
+        }
+
+        alert("Kode voucher tidak ditemukan.");
+
+    }
+
+}
