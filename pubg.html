@@ -3,934 +3,227 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-<title>ARDZ STORE | Top Up PUBG Mobile</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Top Up PUBG Mobile UC Murah, Cepat, Aman dan Terpercaya hanya di ARDZ STORE.">
+    <title>ARDZ STORE | PUBG Mobile</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
 
-<link rel="stylesheet" href="style.css">
-
-<link rel="icon" href="assets/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
 
 </head>
 
 <body>
 
-<!-- ===========================
+<!-- ==========================================
 HEADER
-=========================== -->
+========================================== -->
 
 <header class="header">
 
-<div class="container">
+    <div class="container navbar">
 
-<a href="index.html" class="logo">
+        <a href="index.html" class="logo">
 
-🎮 <span>ARDZ STORE</span>
+            🎮 <span>ARDZ STORE</span>
 
-</a>
+        </a>
 
-<button class="menu-toggle">
+        <nav class="nav-menu">
 
-☰
+            <a href="index.html">Home</a>
 
-</button>
+            <a href="ml.html">Mobile Legends</a>
 
-<nav class="navbar">
+            <a href="ff.html">Free Fire</a>
 
-<a href="index.html">Home</a>
+            <a href="pubg.html" class="active">PUBG</a>
 
-<a href="ml.html">Mobile Legends</a>
+            <a href="hok.html">Honor Of Kings</a>
 
-<a href="ff.html">Free Fire</a>
+            <a href="roblox.html">Roblox</a>
 
-<a class="active" href="pubg.html">PUBG Mobile</a>
+            <a href="valorant.html">Valorant</a>
 
-<a href="hok.html">Honor Of Kings</a>
+        </nav>
 
-<a href="roblox.html">Roblox</a>
-
-<a href="valorant.html">Valorant</a>
-
-</nav>
-
-</div>
+    </div>
 
 </header>
 
-<!-- ===========================
-HERO
-=========================== -->
+<!-- ==========================================
+HERO PUBG
+========================================== -->
 
 <section class="hero hero-pubg">
 
-<div class="overlay">
+    <div class="hero-overlay">
 
-<h1>
+        <div class="container">
 
-PUBG Mobile
+            <h1>
 
-</h1>
+                PUBG MOBILE UC
 
-<p>
+            </h1>
 
-Top Up UC PUBG Mobile Murah, Cepat, Aman & Terpercaya.
+            <p>
 
-</p>
+                Top Up UC PUBG Mobile Murah,
+                Aman, Cepat dan 24 Jam.
 
-<div class="hero-btn">
+            </p>
 
-<a href="#topup" class="btn-primary">
+            <div class="hero-info">
 
-Top Up Sekarang
+                <div>
 
-</a>
+                    ⚡ Proses 1-5 Menit
 
-<a href="#informasi" class="btn-secondary">
+                </div>
 
-Pelajari
+                <div>
 
-</a>
+                    🔒 100% Aman
 
-</div>
+                </div>
 
-</div>
+                <div>
+
+                    💬 Support 24 Jam
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
-<!-- ===========================
-TOP UP
-=========================== -->
+<!-- ==========================================
+CONTENT
+========================================== -->
 
-<section class="games" id="topup">
+<main class="container">
+  <!-- ==========================================
+INPUT DATA PLAYER
+========================================== -->
 
-<div class="container">
+<section class="player-section">
 
-<div class="section-title">
+    <div class="box">
 
-<h2>
+        <h2>
+            🆔 Data Player
+        </h2>
 
-Top Up PUBG Mobile
+        <p class="subtitle">
+            Masukkan Character ID PUBG Mobile dengan benar.
+        </p>
 
-</h2>
+        <div class="form-grid">
 
-<p>
+            <!-- Character ID -->
 
-Masukkan Character ID PUBG Mobile kamu terlebih dahulu.
+            <div class="input-group">
 
-</p>
+                <label>Character ID</label>
 
-</div>
+                <input
+                    type="text"
+                    id="userId"
+                    placeholder="Contoh : 5123456789">
 
-<!-- DATA AKUN -->
+            </div>
 
-<div class="box">
+            <!-- Nickname -->
 
-<h2>
+            <div class="input-group">
 
-🎮 Data Akun
+                <label>Nickname</label>
 
-</h2>
+                <input
+                    type="text"
+                    id="nickname"
+                    placeholder="Nickname PUBG (Opsional)">
 
-<div class="form-group">
+            </div>
 
-<label>
+            <!-- Region -->
 
-Character ID
+            <div class="input-group">
 
-</label>
+                <label>Region</label>
 
-<input
+                <select id="region">
 
-type="text"
+                    <option value="Indonesia">
+                        Indonesia
+                    </option>
 
-id="userId"
+                    <option value="Asia">
+                        Asia
+                    </option>
 
-placeholder="Contoh : 5123456789"
+                    <option value="Global">
+                        Global
+                    </option>
 
-autocomplete="off">
+                </select>
 
-</div>
+            </div>
 
-<div class="form-group">
+        </div>
 
-<label>
+        <div class="player-note">
 
-Nickname (Opsional)
+            <span>✔ Pastikan Character ID sudah benar.</span>
 
-</label>
+            <span>✔ Kami tidak meminta password akun.</span>
 
-<input
+            <span>✔ Proses otomatis setelah pembayaran berhasil.</span>
 
-type="text"
+        </div>
 
-id="nickname"
-
-placeholder="Masukkan Nickname"
-
-autocomplete="off">
-
-</div>
-
-</div>
-
-<!-- PILIH NOMINAL -->
-
-<div class="box">
-
-<h2>
-
-💎 Pilih Nominal UC
-
-</h2>
-
-<div
-
-id="productList"
-
-class="product-grid">
-
-<!-- Diisi otomatis oleh pubg.js -->
-
-</div>
-
-</div>
-<!-- ===========================
-PRODUK SPESIAL
-=========================== -->
-
-<div class="box">
-
-<h2>
-
-⭐ Produk Spesial PUBG
-
-</h2>
-
-<div class="special-grid">
-
-<div class="special-card">
-
-<img src="assets/products/royalepass.png" alt="Royale Pass">
-
-<h3>Royale Pass</h3>
-
-<p>
-
-Unlock hadiah eksklusif setiap season PUBG Mobile.
-
-</p>
-
-</div>
-
-<div class="special-card">
-
-<img src="assets/products/prime.png" alt="Prime Membership">
-
-<h3>Prime Membership</h3>
-
-<p>
-
-Bonus UC, hadiah harian dan berbagai keuntungan lainnya.
-
-</p>
-
-</div>
-
-<div class="special-card">
-
-<img src="assets/products/growthpack.png" alt="Growth Pack">
-
-<h3>Growth Pack</h3>
-
-<p>
-
-Paket hemat UC dengan bonus item menarik.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ===========================
-VOUCHER
-=========================== -->
-
-<div class="box">
-
-<h2>
-
-🎁 Voucher Promo
-
-</h2>
-
-<div class="voucher-box">
-
-
-<input
-id="voucher"
-type="text"
-placeholder="Masukkan kode voucher">
-
-<button
-id="applyVoucher">
-Gunakan
-</button>
-
-<small id="voucherInfo"></small>
-</div>
-
-<!-- ===========================
-METODE PEMBAYARAN
-=========================== -->
-
-<div class="box">
-
-<h2>
-
-💳 Pilih Metode Pembayaran
-
-</h2>
-
-<div class="payment-grid">
-
-<div class="payment-card active">
-
-<img src="assets/payment/qris.png" alt="QRIS">
-
-<h3>QRIS</h3>
-
-</div>
-
-<div class="payment-card">
-
-<img src="assets/payment/dana.png" alt="DANA">
-
-<h3>DANA</h3>
-
-</div>
-
-<div class="payment-card">
-
-<img src="assets/payment/gopay.png" alt="GoPay">
-
-<h3>GoPay</h3>
-
-</div>
-
-<div class="payment-card">
-
-<img src="assets/payment/ovo.png" alt="OVO">
-
-<h3>OVO</h3>
-
-</div>
-
-<div class="payment-card">
-
-<img src="assets/payment/shopeepay.png" alt="ShopeePay">
-
-<h3>ShopeePay</h3>
-
-</div>
-
-<div class="payment-card">
-
-<img src="assets/payment/bca.png" alt="BCA">
-
-<h3>BCA</h3>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ===========================
-DETAIL PESANAN
-=========================== -->
-
-<div class="box">
-
-<h2>
-
-📋 Detail Pesanan
-
-</h2>
-
-<div class="invoice">
-
-<div class="invoice-row">
-
-<span>Game</span>
-
-<b>PUBG Mobile</b>
-
-</div>
-
-<div class="invoice-row">
-
-<span>Produk</span>
-
-<b id="produk">
-
-Belum Dipilih
-
-</b>
-
-</div>
-
-<div class="invoice-row">
-
-<span>Total</span>
-
-<b id="total">
-
-Rp 0
-
-</b>
-
-</div>
-
-<div class="invoice-row">
-
-<span>Status</span>
-
-<b style="color:#22c55e;">
-
-Menunggu Pembayaran
-
-</b>
-
-</div>
-
-</div>
-
-</div>
-<!-- ===========================
-RINGKASAN CHECKOUT
-=========================== -->
-
-<div class="box">
-
-<h2>
-
-🛒 Ringkasan Pesanan
-
-</h2>
-
-<div class="checkout-summary">
-
-<div class="summary-row">
-
-<span>Nickname</span>
-
-<b id="summaryNickname">
-
--
-
-</b>
-
-</div>
-
-<div class="summary-row">
-
-<span>Character ID</span>
-
-<b id="summaryUserId">
-
--
-
-</b>
-
-</div>
-
-<div class="summary-row">
-
-<span>Produk</span>
-
-<b id="summaryProduk">
-
-Belum Dipilih
-
-</b>
-
-</div>
-
-<div class="summary-row">
-
-<span>Pembayaran</span>
-
-<b id="summaryPayment">
-
-QRIS
-
-</b>
-
-</div>
-
-<div class="summary-row total">
-
-<span>Total Bayar</span>
-
-<b id="summaryTotal">
-
-Rp 0
-
-</b>
-
-</div>
-
-</div>
-
-<div class="checkout-action">
-
-<button id="checkoutBtn" class="btn-primary">
-
-💬 Checkout via WhatsApp
-
-</button>
-
-</div>
-
-</div>
-
-<!-- ===========================
-PRODUK TERLARIS
-=========================== -->
-
-<section class="best-products">
-
-<div class="section-title">
-
-<h2>
-
-🔥 Produk PUBG Mobile Terlaris
-
-</h2>
-
-<p>
-
-Pilihan favorit pelanggan ARDZ STORE.
-
-</p>
-
-</div>
-
-<div class="best-grid">
-
-<div class="best-card">
-
-<img src="assets/products/60uc.png" alt="60 UC">
-
-<h3>60 UC</h3>
-
-<p>
-
-Cocok untuk membeli item dan skin PUBG Mobile.
-
-</p>
-
-</div>
-
-<div class="best-card">
-
-<img src="assets/products/325uc.png" alt="325 UC">
-
-<h3>325 UC</h3>
-
-<p>
-
-Nominal paling banyak dipilih oleh pemain.
-
-</p>
-
-</div>
-
-<div class="best-card">
-
-<img src="assets/products/660uc.png" alt="660 UC">
-
-<h3>660 UC</h3>
-
-<p>
-
-Lebih hemat dengan bonus UC tambahan.
-
-</p>
-
-</div>
-
-<div class="best-card">
-
-<img src="assets/products/1800uc.png" alt="1800 UC">
-
-<h3>1800 UC</h3>
-
-<p>
-
-Paket premium untuk kebutuhan UC dalam jumlah besar.
-
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
+<!-- ==========================================
+PILIH NOMINAL UC
+========================================== -->
 
-<!-- ===========================
-KEUNGGULAN
-=========================== -->
+<section class="product-section">
 
-<section class="why-us">
+    <div class="box">
 
-<div class="section-title">
+        <h2>
+            💎 Pilih Nominal UC
+        </h2>
 
-<h2>
+        <p class="subtitle">
+            Pilih nominal UC PUBG Mobile yang ingin dibeli.
+        </p>
 
-Kenapa Memilih ARDZ STORE?
+        <!-- Daftar Produk dari pubg.js -->
+        <div id="productList" class="product-grid">
 
-</h2>
+            <!-- Produk akan dibuat otomatis oleh pubg.js -->
 
-</div>
+        </div>
 
-<div class="why-grid">
-
-<div class="why-card">
-
-<h3>
-
-⚡ Proses Cepat
-
-</h3>
-
-<p>
-
-Pesanan diproses dalam hitungan menit setelah pembayaran berhasil.
-
-</p>
-
-</div>
-
-<div class="why-card">
-
-<h3>
-
-🔒 Aman
-
-</h3>
-
-<p>
-
-Top up resmi tanpa meminta password akun PUBG Mobile.
-
-</p>
-
-</div>
-
-<div class="why-card">
-
-<h3>
-
-💰 Harga Murah
-
-</h3>
-
-<p>
-
-Harga bersaing dengan promo menarik setiap hari.
-
-</p>
-
-</div>
-
-<div class="why-card">
-
-<h3>
-
-📞 Support 24 Jam
-
-</h3>
-
-<p>
-
-Admin siap membantu kapan saja melalui WhatsApp.
-
-</p>
-
-</div>
-
-</div>
+    </div>
 
 </section>
-
-</div>
-
-</section>
-<!-- ===========================
-INFORMASI
-=========================== -->
-
-<section class="info" id="informasi">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>📢 Informasi Top Up</h2>
-
-<p>Silakan baca informasi berikut sebelum melakukan pembelian.</p>
-
-</div>
-
-<div class="box">
-
-<ul class="info-list">
-
-<li>✅ Pastikan Character ID PUBG Mobile yang dimasukkan sudah benar.</li>
-
-<li>✅ UC akan dikirim setelah pembayaran berhasil.</li>
-
-<li>✅ Estimasi proses 1–5 menit.</li>
-
-<li>✅ Jangan memberikan password akun kepada siapa pun.</li>
-
-<li>✅ Hubungi Admin jika pesanan belum masuk lebih dari 10 menit.</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ===========================
-FAQ
-=========================== -->
-
-<section class="faq">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>❓ Pertanyaan Umum</h2>
-
-</div>
-
-<div class="box">
-
-<h3>Berapa lama proses top up?</h3>
-
-<p>Biasanya hanya membutuhkan waktu sekitar 1–5 menit.</p>
-
-<hr>
-
-<h3>Apakah top up aman?</h3>
-
-<p>Ya. Kami menggunakan metode resmi dan tidak pernah meminta password akun.</p>
-
-<hr>
-
-<h3>Bagaimana jika UC belum masuk?</h3>
-
-<p>Silakan hubungi WhatsApp Admin dengan menyertakan bukti pembayaran.</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ===========================
-TESTIMONI
-=========================== -->
-
-<section class="testimonial-section">
-
-<div class="container">
-
-<div class="section-title">
-
-<h2>⭐ Testimoni Pelanggan</h2>
-
-</div>
-
-<div class="testimonial-grid">
-
-<div class="testimonial-card">
-
-<h3>⭐⭐⭐⭐⭐</h3>
-
-<p>"Top up sangat cepat, kurang dari 2 menit UC langsung masuk."</p>
-
-<strong>- Rizky</strong>
-
-</div>
-
-<div class="testimonial-card">
-
-<h3>⭐⭐⭐⭐⭐</h3>
-
-<p>"Harga murah dan admin ramah. Recommended!"</p>
-
-<strong>- Andi</strong>
-
-</div>
-
-<div class="testimonial-card">
-
-<h3>⭐⭐⭐⭐⭐</h3>
-
-<p>"Sudah langganan top up PUBG di ARDZ STORE."</p>
-
-<strong>- Putri</strong>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ===========================
-FOOTER
-=========================== -->
-
-<footer class="footer">
-
-<div class="container">
-
-<div class="footer-grid">
-
-<div>
-
-<h2>🎮 ARDZ STORE</h2>
-
-<p>
-
-Top Up Game Murah, Aman, Cepat dan Terpercaya.
-
-</p>
-
-</div>
-
-<div>
-
-<h3>Hubungi Kami</h3>
-
-<p>📱 WhatsApp : 082295071107</p>
-
-<p>📧 Email : ardzstore@gmail.com</p>
-
-</div>
-
-<div>
-
-<h3>Jam Operasional</h3>
-
-<p>24 Jam Non Stop</p>
-
-</div>
-
-</div>
-
-<div class="copyright">
-
-© 2026 ARDZ STORE. All Rights Reserved.
-
-</div>
-
-</div>
-
-</footer>
-
-<!-- Back To Top -->
-
-<button id="backTop" class="back-top" onclick="scrollToTop()">
-
-↑
-
-</button>
-
-<!-- WhatsApp -->
-
-<a href="https://wa.me/6282295071107"
-
-class="wa-float"
-
-target="_blank">
-
-💬
-
-</a>
-
-<!-- Popup Promo -->
-
-<div class="promo-popup">
-
-<div class="promo-content">
-
-<button class="promo-close">&times;</button>
-
-<h2>🎉 Promo Hari Ini</h2>
-
-<p>
-
-Diskon hingga <strong>20%</strong> untuk beberapa produk PUBG Mobile.
-
-</p>
-
-<a href="#topup" class="btn-primary">
-
-Top Up Sekarang
-
-</a>
-
-</div>
-
-</div>
-
-<!-- Live Order -->
-
-<div class="live-order">
-
-<div class="live-order-icon">
-
-🟢
-
-</div>
-
-<div class="live-order-info">
-
-<h4>Pesanan Baru</h4>
-
-<p class="live-order-text"></p>
-
-</div>
-
-</div>
-
-<!-- JAVASCRIPT -->
-
-<script src="index.js"></script>
-
-<script src="pubg.js"></script>
-
-</body>
-
-  </html>
