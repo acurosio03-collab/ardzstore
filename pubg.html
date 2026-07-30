@@ -4,204 +4,393 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ARDZ STORE - PUBG Mobile</title>
+<title>ARDZ STORE | Top Up PUBG Mobile</title>
 
 <link rel="stylesheet" href="style.css">
 
-</head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
 
 <body>
 
+<!-- ==========================
+HEADER
+========================== -->
 
 <header>
 
-<div class="logo">
-ARDZ STORE
-</div>
+<div class="navbar">
 
+<div class="logo">
+
+🎮 ARDZ STORE
+
+</div>
 
 <nav>
 
 <a href="index.html">Home</a>
-<a href="ml.html">ML</a>
-<a href="ff.html">FF</a>
-<a href="pubg.html">PUBG</a>
-<a href="hok.html">HOK</a>
+
+<a href="ml.html">Mobile Legends</a>
+
+<a href="ff.html">Free Fire</a>
+
+<a class="active" href="pubg.html">PUBG Mobile</a>
+
+<a href="hok.html">Honor Of Kings</a>
+
 <a href="roblox.html">Roblox</a>
+
+<a href="valorant.html">Valorant</a>
 
 </nav>
 
+</div>
+
 </header>
 
+<!-- ==========================
+BANNER
+========================== -->
 
+<section class="hero hero-pubg">
 
-<section class="hero">
-
-<div class="hero-text">
+<div class="hero-overlay">
 
 <h1>
-TOP UP PUBG MOBILE
-</h1>
+  <!-- ==========================
+DETAIL PESANAN
+========================== -->
 
-<p>
-UC PUBG Murah • Cepat • Aman
-</p>
-
-</div>
-
-</section>
-
-
-
-<section>
-
-
-<div class="topup-container">
-
+<div class="box">
 
 <h2>
-Masukkan PUBG ID
+
+📋 Detail Pesanan
+
 </h2>
-
-
-<input 
-type="text"
-id="userid"
-placeholder="Masukkan Player ID PUBG">
-
-
-
-<h2>
-Pilih UC PUBG
-</h2>
-
-
-
-<div class="game-list">
-
-
-
-</div>
-
-
-<h2>
-Metode Pembayaran
-</h2>
-
-
-<select id="payment">
-
-<option>DANA</option>
-<option>OVO</option>
-<option>GoPay</option>
-<option>QRIS</option>
-<option>Bank Transfer</option>
-
-</select>
-
-
-
-
-<div class="pay">
-
-<img src="dana.png">
-
-<img src="ovo.png">
-
-<img src="gopay.png">
-
-<img src="qris.png">
-
-</div>
-
-
-
-
-
-<h2>
-Nomor WhatsApp
-</h2>
-
-
-<input
-type="text"
-id="nomorwa"
-placeholder="08xxxxxxxxxx">
-
-
-
-
 
 <div class="invoice">
 
+<div class="invoice-row">
 
-<h3>
-Detail Pesanan
-</h3>
+<span>Game</span>
 
-
-<p>
-<b>Game :</b> PUBG Mobile
-</p>
-
-
-<p>
-<b>Produk :</b>
-<span id="produk">
-Belum Dipilih
-</span>
-</p>
-
-
-<p>
-<b>Total :</b>
-<span id="total">
-Rp0
-</span>
-</p>
-
-
+<b>PUBG Mobile</b>
 
 </div>
 
+<div class="invoice-row">
 
+<span>Produk</span>
 
+<b id="produk">
 
+Belum Dipilih
 
-<button onclick="checkoutPUBG()">
+</b>
 
-CHECKOUT SEKARANG
+</div>
+
+<div class="invoice-row">
+
+<span>Total</span>
+
+<b id="total">
+
+Rp 0
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Status</span>
+
+<b style="color:#00ff88">
+
+Menunggu Pembayaran
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+VOUCHER
+========================== -->
+
+<div class="box">
+
+<h2>
+
+🎁 Voucher Promo
+
+</h2>
+
+<div class="voucher">
+
+<input
+type="text"
+id="voucher"
+placeholder="Masukkan Kode Voucher">
+
+<button>
+
+Gunakan
 
 </button>
 
-
-
+</div>
 
 </div>
 
+<!-- ==========================
+PRODUK SPESIAL
+========================== -->
+
+<div class="box">
+
+<h2>
+
+⭐ Produk Spesial PUBG
+
+</h2>
+
+<div class="special-list">
+
+<div class="special-item">
+
+<img src="assets/products/royalepass.png"
+class="icon-diamond">
+
+<div>
+
+<h3>Royale Pass</h3>
+
+<p>Unlock hadiah eksklusif season.</p>
+
+</div>
+
+</div>
+
+<div class="special-item">
+
+<img src="assets/products/prime.png"
+class="icon-diamond">
+
+<div>
+
+<h3>Prime Membership</h3>
+
+<p>Bonus UC & hadiah harian.</p>
+<!-- ==========================
+PRODUK TERLARIS
+========================== -->
+
+<section class="best-product">
+
+<h2 class="title">
+
+🔥 Produk PUBG Mobile Terlaris
+
+</h2>
+
+<div class="best-grid">
+
+<div class="best-card">
+
+<img src="assets/products/uc.png" alt="60 UC">
+
+<h3>60 UC</h3>
+
+<p>Paket favorit pemain PUBG Mobile.</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/royalepass.png" alt="Royale Pass">
+
+<h3>Royale Pass</h3>
+
+<p>Hadiah eksklusif setiap season.</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/prime.png" alt="Prime">
+
+<h3>Prime Membership</h3>
+
+<p>Bonus UC dan keuntungan bulanan.</p>
+
+</div>
+
+</div>
 
 </section>
 
+<!-- ==========================
+INFORMASI
+========================== -->
 
+<section class="info">
 
+<h2 class="title">
+
+📢 Informasi Top Up
+
+</h2>
+
+<div class="box">
+
+<p>✔ Pastikan Character ID yang dimasukkan sudah benar.</p>
+
+<p>✔ UC akan masuk setelah pembayaran berhasil.</p>
+
+<p>✔ Kesalahan pengisian ID menjadi tanggung jawab pembeli.</p>
+
+<p>✔ Simpan bukti pembayaran sampai pesanan selesai.</p>
+
+<p>✔ Hubungi Admin jika UC belum masuk lebih dari 10 menit.</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+FAQ
+========================== -->
+
+<section class="faq">
+
+<h2 class="title">
+
+❓ Pertanyaan Umum
+
+</h2>
+
+<div class="box">
+
+<h3>Berapa lama proses top up?</h3>
+
+<p>Biasanya 1–5 menit setelah pembayaran dikonfirmasi.</p>
+
+<hr>
+
+<h3>Apakah aman?</h3>
+
+<p>Ya, top up menggunakan metode resmi tanpa meminta password akun.</p>
+
+<hr>
+
+<h3>Bagaimana jika UC belum masuk?</h3>
+
+<p>Silakan hubungi WhatsApp Admin dengan menyertakan bukti pembayaran.</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+FOOTER
+========================== -->
 
 <footer>
 
+<div class="footer-container">
+
+<div>
+
+<h2>
+
+🎮 ARDZ STORE
+
+</h2>
+
+<p>
+
+Top Up Game Murah • Aman • Terpercaya
+
+</p>
+
+</div>
+
+<div>
+
 <h3>
-ARDZ STORE
+
+Hubungi Kami
+
 </h3>
 
 <p>
-Top Up Game Murah • Aman • Terpercaya
+
+📱 WhatsApp : 082295071107
+
 </p>
+
+<p>
+
+📧 Email : ardzstore@gmail.com
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Jam Operasional
+
+</h3>
+
+<p>
+
+24 Jam Non Stop
+
+</p>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+© 2026 ARDZ STORE. All Rights Reserved.
+
+</div>
 
 </footer>
 
-<script src="pubg.js"></script>
+<!-- WhatsApp Floating -->
 
+<a
+
+href="https://wa.me/6282295071107"
+
+class="wa-float"
+
+target="_blank">
+
+💬
+
+</a>
+
+<script src="pubg.js"></script>
 
 </body>
 
