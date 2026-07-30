@@ -1768,6 +1768,67 @@ document.addEventListener("keydown",(e)=>{
     }
 
 });
+  /* =====================================
+Live Order Notification
+===================================== */
+
+const liveOrders = [
+
+"Rizky dari Jakarta baru saja Top Up 86 Diamonds MLBB",
+
+"Andi dari Bandung baru saja membeli 80 Robux",
+
+"Nadia dari Surabaya baru saja Top Up Free Fire",
+
+"Fajar dari Semarang baru saja membeli Valorant Points",
+
+"Putri dari Yogyakarta baru saja membeli PUBG UC",
+
+"Bagas dari Bekasi baru saja Top Up Honor of Kings",
+
+"Salsa dari Tangerang baru saja membeli Weekly Diamond Pass",
+
+"Ilham dari Medan baru saja membeli Starlight MLBB"
+
+];
+
+const orderPopup = document.querySelector(".live-order");
+
+const orderText = document.querySelector(".live-order-text");
+
+let orderIndex = 0;
+
+function showLiveOrder(){
+
+    if(!orderPopup || !orderText) return;
+
+    orderText.innerText = liveOrders[orderIndex];
+
+    orderPopup.classList.add("show");
+
+    setTimeout(()=>{
+
+        orderPopup.classList.remove("show");
+
+    },4500);
+
+    orderIndex++;
+
+    if(orderIndex >= liveOrders.length){
+
+        orderIndex = 0;
+
+    }
+
+}
+
+/* Muncul pertama */
+
+setTimeout(showLiveOrder,4000);
+
+/* Ulang setiap 10 detik */
+
+setInterval(showLiveOrder,10000);
 
 </body>
 
