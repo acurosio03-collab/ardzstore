@@ -3263,3 +3263,128 @@ box-shadow:0 10px 25px rgba(79,70,229,.35);
 transform:scale(1.1);
 
 }
+/* =========================================
+PROMO POPUP
+========================================= */
+
+.promo-popup{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.65);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s;
+
+    z-index:9999;
+
+}
+
+.promo-popup.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+.promo-content{
+
+    width:90%;
+
+    max-width:420px;
+
+    padding:35px;
+
+    border-radius:22px;
+
+    text-align:center;
+
+    background:linear-gradient(
+        180deg,
+        #1b2540,
+        #111827
+    );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    position:relative;
+
+    animation:popupScale .35s ease;
+
+}
+
+.promo-content h2{
+
+    margin-bottom:15px;
+
+    color:#fff;
+
+}
+
+.promo-content p{
+
+    color:#cbd5e1;
+
+    margin-bottom:25px;
+
+    line-height:1.7;
+
+}
+
+.promo-close{
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    font-size:22px;
+
+    color:#fff;
+
+    background:#ef4444;
+
+}
+
+@keyframes popupScale{
+
+    from{
+
+        transform:scale(.8);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+
+    }
+
+}
