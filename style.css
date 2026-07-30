@@ -3489,3 +3489,60 @@ max-width:none;
 }
 
 }
+/* =========================================
+LOADER
+========================================= */
+
+.loader{
+
+position:fixed;
+
+inset:0;
+
+background:#0b1020;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:99999;
+
+transition:.5s;
+
+}
+
+.loader.hide{
+
+opacity:0;
+
+visibility:hidden;
+
+}
+
+.loader-spinner{
+
+width:70px;
+
+height:70px;
+
+border:6px solid rgba(255,255,255,.15);
+
+border-top:6px solid #06b6d4;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+}
