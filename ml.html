@@ -1,125 +1,629 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARDZ STORE - Mobile Legends</title>
+
+<title>ARDZ STORE | Top Up Mobile Legends</title>
+
 <link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
+<!-- ==========================
+HEADER
+========================== -->
+
 <header>
 
-<div class="logo">ARDZ STORE</div>
+<div class="navbar">
+
+<div class="logo">
+
+🎮 ARDZ STORE
+
+</div>
 
 <nav>
+
 <a href="index.html">Home</a>
-<a href="ml.html">ML</a>
-<a href="ff.html">FF</a>
-<a href="pubg.html">PUBG</a>
-<a href="hok.html">HOK</a>
+
+<a class="active" href="ml.html">Mobile Legends</a>
+
+<a href="ff.html">Free Fire</a>
+
+<a href="pubg.html">PUBG Mobile</a>
+
+<a href="hok.html">Honor Of Kings</a>
+
 <a href="roblox.html">Roblox</a>
+
 <a href="valorant.html">Valorant</a>
+
 </nav>
+
+</div>
 
 </header>
 
-<section class="hero">
+<!-- ==========================
+BANNER
+========================== -->
 
-<div class="hero-text">
+<section class="hero hero-ml">
 
-<h1>TOP UP MOBILE LEGENDS</h1>
+<div class="hero-overlay">
 
-<p>Diamond ML Murah • Cepat • Aman 24 Jam</p>
+<h1>
+
+TOP UP MOBILE LEGENDS
+
+</h1>
+
+<p>
+
+Diamond Murah • Proses Cepat • Aman • 24 Jam
+
+</p>
 
 </div>
 
 </section>
 
-<section>
+<!-- ==========================
+TOP UP
+========================== -->
 
-<div class="topup-container">
+<section class="topup-container">
 
-<h2>Masukkan User ID</h2>
+<div class="left">
+
+<!-- DATA AKUN -->
+
+<div class="box">
+
+<h2>
+
+🎮 Masukkan Data Akun
+
+</h2>
 
 <input
 type="text"
 id="userid"
 placeholder="Masukkan User ID">
 
-<h2>Masukkan Zone ID</h2>
-
 <input
 type="text"
 id="zoneid"
 placeholder="Masukkan Zone ID">
 
-<h2>Pilih Diamond</h2>
-
-<div id="ml-products" class="game-list"></div>
-
-<h2>Metode Pembayaran</h2>
-
-<select id="payment">
-<option>DANA</option>
-<option>OVO</option>
-<option>GoPay</option>
-<option>QRIS</option>
-<option>Bank Transfer</option>
-</select>
-
-<div class="pay">
-
-<img src="dana.png" alt="DANA">
-<img src="ovo.png" alt="OVO">
-<img src="gopay.png" alt="GoPay">
-<img src="qris.png" alt="QRIS">
+<input
+type="text"
+id="nickname"
+placeholder="Nickname"
+readonly>
 
 </div>
 
-<h2>Nomor WhatsApp</h2>
+<!-- PRODUK -->
 
-<input
-type="text"
-id="nomorwa"
-placeholder="08xxxxxxxxxx">
+<div class="box">
+
+<h2>
+
+💎 Pilih Diamond
+
+</h2>
+
+<div
+id="ml-products"
+class="produk-grid">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<!-- PEMBAYARAN -->
+
+<div class="box">
+
+<h2>
+
+💳 Metode Pembayaran
+
+</h2>
+
+<select id="payment">
+
+<option>DANA</option>
+
+<option>OVO</option>
+
+<option>GoPay</option>
+
+<option>QRIS</option>
+
+<option>Bank BCA</option>
+
+<option>Bank BRI</option>
+
+<option>Bank BNI</option>
+
+</select>
+
+<div class="payment-list">
+
+<img src="assets/payment/dana.png" alt="DANA">
+
+<img src="assets/payment/ovo.png" alt="OVO">
+
+<img src="assets/payment/gopay.png" alt="GoPay">
+
+<img src="assets/payment/qris.png" alt="QRIS">
+
+<img src="assets/payment/bca.png" alt="BCA">
+
+<img src="assets/payment/bri.png" alt="BRI">
+
+<img src="assets/payment/bni.png" alt="BNI">
+
+</div>
+
+</div>
+<!-- ==========================
+DETAIL PESANAN
+========================== -->
+
+<div class="box">
+
+<h2>
+
+📋 Detail Pesanan
+
+</h2>
 
 <div class="invoice">
 
-<h3>Detail Pesanan</h3>
+<div class="invoice-row">
 
-<p><b>Game :</b> Mobile Legends</p>
+<span>Game</span>
 
-<p><b>Produk :</b>
-<span id="produk">Belum Dipilih</span>
-</p>
-
-<p><b>Total :</b>
-<span id="total">Rp0</span>
-</p>
+<b>Mobile Legends</b>
 
 </div>
 
-<button onclick="checkoutML()">
+<div class="invoice-row">
 
-CHECKOUT SEKARANG
+<span>Produk</span>
+
+<b id="produk">
+
+Belum Dipilih
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Total</span>
+
+<b id="total">
+
+Rp 0
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Status</span>
+
+<b style="color:#00ff88">
+
+Menunggu Pembayaran
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+VOUCHER
+========================== -->
+
+<div class="box">
+
+<h2>
+
+🎁 Voucher Promo
+
+</h2>
+
+<div class="voucher">
+
+<input
+
+type="text"
+
+id="voucher"
+
+placeholder="Masukkan Kode Voucher">
+
+<button>
+
+Gunakan
 
 </button>
 
 </div>
 
+</div>
+
+<!-- ==========================
+PRODUK SPESIAL
+========================== -->
+
+<div class="box">
+
+<h2>
+
+⭐ Produk Spesial
+
+</h2>
+
+<div class="special-list">
+
+<div class="special-item">
+
+<img src="assets/products/weekpass.png" class="icon-diamond">
+
+<div>
+
+<h3>Weekly Diamond Pass</h3>
+
+<p>Top Up Diamond Harian</p>
+
+</div>
+
+</div>
+
+<div class="special-item">
+
+<img src="assets/products/starlight.png" class="icon-diamond">
+
+<div>
+
+<h3>Starlight Member</h3>
+
+<p>Skin & Reward Eksklusif</p>
+
+</div>
+
+</div>
+
+<div class="special-item">
+
+<img src="assets/products/starlightplus.png" class="icon-diamond">
+
+<div>
+
+<h3>Starlight Plus</h3>
+
+<p>Bonus Level Starlight</p>
+
+</div>
+
+</div>
+
+<div class="special-item">
+
+<img src="assets/products/twilight.png" class="icon-diamond">
+
+<div>
+
+<h3>Twilight Pass</h3>
+
+<p>Bonus Event MLBB</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+CATATAN
+========================== -->
+
+<div class="box">
+
+<h2>
+
+📝 Catatan
+
+</h2>
+
+<textarea
+
+id="catatan"
+
+rows="4"
+
+placeholder="Catatan untuk Admin (Opsional)">
+
+</textarea>
+
+</div>
+
+<!-- ==========================
+CHECKOUT
+========================== -->
+
+<button
+
+class="checkout-btn"
+
+onclick="checkoutML()">
+
+🛒 CHECKOUT SEKARANG
+
+</button>
+
+<!-- ==========================
+KEUNGGULAN
+========================== -->
+
+<div class="box">
+
+<h2>
+
+🔥 Kenapa Pilih ARDZ STORE?
+
+</h2>
+
+<ul class="fitur">
+
+<li>⚡ Proses 1-5 Menit</li>
+
+<li>🛡️ Aman 100%</li>
+
+<li>💎 Harga Termurah</li>
+
+<li>📱 Support WhatsApp</li>
+
+<li>🕒 Online 24 Jam</li>
+
+<li>🎁 Banyak Promo Menarik</li>
+
+</ul>
+
+</div>
+
+<!-- ==========================
+RATING
+========================== -->
+
+<div class="box">
+
+<h2>
+
+⭐ Rating Pelanggan
+
+</h2>
+
+<p>
+
+⭐⭐⭐⭐⭐ 4.9 / 5
+
+</p>
+
+<p>
+
+Lebih dari 25.000 transaksi berhasil.
+
+</p>
+
+</div>
+
+</div>
+
 </section>
+<!-- ==========================
+PRODUK TERLARIS
+========================== -->
+
+<section class="best-product">
+
+<h2 class="title">
+
+🔥 Produk Mobile Legends Terlaris
+
+</h2>
+
+<div class="best-grid">
+
+<div class="best-card">
+
+<img src="assets/products/diamond.png" alt="Diamond">
+
+<h3>86 Diamond</h3>
+
+<p>Produk favorit pemain Mobile Legends.</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/weekpass.png" alt="Weekly Pass">
+
+<h3>Weekly Diamond Pass</h3>
+
+<p>Diamond setiap hari dengan harga hemat.</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/starlight.png" alt="Starlight">
+
+<h3>Starlight Member</h3>
+
+<p>Skin eksklusif dan hadiah spesial.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+INFORMASI
+========================== -->
+
+<section class="info">
+
+<h2 class="title">
+
+📢 Informasi Top Up
+
+</h2>
+
+<div class="box">
+
+<p>✔ Pastikan User ID dan Zone ID sudah benar.</p>
+
+<p>✔ Diamond akan dikirim setelah pembayaran berhasil.</p>
+
+<p>✔ Kesalahan pengisian ID menjadi tanggung jawab pembeli.</p>
+
+<p>✔ Simpan bukti pembayaran sampai pesanan selesai.</p>
+
+<p>✔ Hubungi admin jika pesanan belum masuk lebih dari 10 menit.</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+FAQ
+========================== -->
+
+<section class="faq">
+
+<h2 class="title">
+
+❓ Pertanyaan Umum
+
+</h2>
+
+<div class="box">
+
+<h3>Berapa lama proses top up?</h3>
+
+<p>Biasanya 1-5 menit setelah pembayaran dikonfirmasi.</p>
+
+<hr>
+
+<h3>Apakah top up ini aman?</h3>
+
+<p>Ya, menggunakan metode resmi tanpa login akun.</p>
+
+<hr>
+
+<h3>Apakah bisa refund?</h3>
+
+<p>Refund hanya dapat dilakukan jika kesalahan berasal dari pihak ARDZ STORE.</p>
+
+<hr>
+
+<h3>Jika diamond belum masuk?</h3>
+
+<p>Silakan hubungi WhatsApp Admin dengan menyertakan bukti pembayaran.</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+FOOTER
+========================== -->
 
 <footer>
 
-<h3>ARDZ STORE</h3>
+<div class="footer-container">
+
+<div>
+
+<h2>🎮 ARDZ STORE</h2>
 
 <p>Top Up Game Murah • Aman • Terpercaya</p>
 
+</div>
+
+<div>
+
+<h3>Hubungi Kami</h3>
+
+<p>📱 WhatsApp : 082295071107</p>
+
+<p>📧 Email : ardzstore@gmail.com</p>
+
+</div>
+
+<div>
+
+<h3>Jam Operasional</h3>
+
+<p>24 Jam Non Stop</p>
+
+<p>Melayani setiap hari</p>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+© 2026 ARDZ STORE. All Rights Reserved.
+
+</div>
+
 </footer>
+
+<!-- Tombol WhatsApp -->
+
+<a
+href="https://wa.me/6282295071107"
+class="wa-float"
+target="_blank">
+
+💬
+
+</a>
 
 <script src="ml.js"></script>
 
 </body>
+
 </html>
