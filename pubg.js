@@ -119,9 +119,176 @@ function renderProducts(){
             </button>
 
         </div>
+/* ==========================================
+   BAGIAN 3
+   PILIH PRODUK
+========================================== */
 
+function selectProduct(index){
+
+    // Simpan produk yang dipilih
+    selectedProduct = products[index];
+
+    // Hapus status aktif semua card
+    document.querySelectorAll(".product-card").forEach(card=>{
+
+        card.classList.remove("active");
+
+    });
+
+    // Aktifkan card yang dipilih
+    const cards = document.querySelectorAll(".product-card");
+
+    if(cards[index]){
+
+        cards[index].classList.add("active");
+
+    }
+
+    // Update Detail Pesanan
+    const produk = document.getElementById("produk");
+
+    const total = document.getElementById("total");
+
+    if(produk){
+
+        produk.textContent = selectedProduct.nama;
+
+    }
+
+    if(total){
+
+        total.textContent = rupiah(selectedProduct.harga - discount);
+
+    }
+
+    // Update Ringkasan Checkout
+    const summaryProduk = document.getElementById("summaryProduk");
+
+    const summaryTotal = document.getElementById("summaryTotal");
+
+    if(summaryProduk){
+
+        summaryProduk.textContent = selectedProduct.nama;
+
+    }
+
+    if(summaryTotal){
+
+        summaryTotal.textContent = rupiah(selectedProduct.harga - discount);
+
+    }
+
+}
         `;
 
     });
 
 }
+/* ==========================================
+   BAGIAN 4
+   VOUCHER PROMO
+========================================== */
+
+function applyVoucher(){
+
+    // Harus pilih produk dulu
+    if(selectedProduct === null){
+
+        alert("Silakan pilih produk terlebih dahulu.");
+
+        return;
+
+    }
+
+    const voucherInput = document.getElementById("voucher");
+    const voucherInfo = document.getElementById("voucherInfo");
+
+    if(!voucherInput) return;
+
+    const kode = voucherInput.value.trim().toUpperCase();
+
+    // Reset diskon
+    discount = 0;
+
+    // Voucher kosong
+    if(kode === ""){
+
+        if(voucherInfo){
+
+            voucherInfo.textContent = "";
+
+        }
+
+        updateTotal();
+
+        return;
+
+    }
+
+    // Voucher ditemukan
+    if(vouchers[kode]){
+
+        const persen = vouchers[kode];
+
+        discount = Math.floor(
+            selectedProduct.harga * persen / 100
+        );
+
+        if(voucherInfo){
+
+            voucherInfo.textContent =
+            "✅ Voucher berhasil digunakan (" +
+            persen + "% OFF)";
+
+            voucherInfo.style.color = "#22c55e";
+
+        }
+
+    }else{
+
+        if(voucherInfo){
+
+            voucherInfo.textContent =
+            "❌ Voucher tidak valid";
+
+            voucherInfo.style.color = "#ef4444";
+
+        }
+
+    }
+
+    updateTotal();
+
+}
+
+/* ==========================================
+   UPDATE TOTAL
+========================================== */
+
+function updateTotal(){
+
+    if(selectedProduct === null) return;
+
+    const totalBayar =
+    selectedProduct.harga - discount;
+
+    const total =
+    document.getElementById("total");
+
+    if(total){
+
+        total.textContent =
+        rupiah(totalBayar);
+
+    }
+
+    const summaryTotal =
+    document.getElementById("summaryTotal");
+
+    if(summaryTotal){
+
+        summaryTotal.textContent =
+        rupiah(totalBayar);
+
+    }
