@@ -4,65 +4,136 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ARDZ STORE | Top Up Game Murah</title>
+<title>ARDZ STORE | Top Up Game Murah & Terpercaya</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
 <body>
 
-<!-- NAVBAR -->
+<!-- ==========================
+HEADER
+========================== -->
 
-<header>
+<header class="header">
 
-<div class="navbar">
+<div class="container">
 
 <div class="logo">
 
-🎮 ARDZ STORE
+🎮 <span>ARDZ STORE</span>
 
 </div>
 
-<nav>
+<nav class="navbar">
 
-<a href="index.html">Home</a>
+<a class="active" href="index.html">
 
-<a href="#">Promo</a>
+Home
 
-<a href="#">Cek Transaksi</a>
+</a>
 
-<a href="#">Hubungi Kami</a>
+<a href="#game">
+
+Game
+
+</a>
+
+<a href="#promo">
+
+Promo
+
+</a>
+
+<a href="#payment">
+
+Pembayaran
+
+</a>
+
+<a href="#footer">
+
+Kontak
+
+</a>
+
+<a href="admin/login.html"
+class="login-btn">
+
+Admin
+
+</a>
 
 </nav>
+
+<div class="menu-toggle">
+
+☰
+
+</div>
 
 </div>
 
 </header>
 
-<!-- HERO -->
+<!-- ==========================
+HERO SLIDER
+========================== -->
 
 <section class="hero">
 
-<div class="slider">
+<div class="hero-slider">
 
 <div class="slide active">
 
 <img src="assets/banner/banner1.jpg">
 
-<div class="caption">
+<div class="overlay">
 
-<h1>TOP UP GAME TERMURAH</h1>
+<h1>
 
-<p>Proses Cepat • Aman • Terpercaya</p>
+TOP UP GAME
 
-<a href="#games">
-<button>TOP UP SEKARANG</button>
+<span>TERMURAH</span>
+
+</h1>
+
+<p>
+
+Cepat • Aman • Murah • 24 Jam
+
+</p>
+
+<div class="hero-btn">
+
+<a
+href="#game"
+class="btn-primary">
+
+Top Up Sekarang
+
 </a>
+
+<a
+href="#promo"
+class="btn-secondary">
+
+Lihat Promo
+
+</a>
+
+</div>
 
 </div>
 
@@ -72,11 +143,21 @@
 
 <img src="assets/banner/banner2.jpg">
 
-<div class="caption">
+<div class="overlay">
 
-<h1>PROMO FREE FIRE</h1>
+<h1>
 
-<p>Diamond Murah Setiap Hari</p>
+PROMO
+
+<span>SETIAP HARI</span>
+
+</h1>
+
+<p>
+
+Diskon Diamond, Robux, VP dan lainnya.
+
+</p>
 
 </div>
 
@@ -84,58 +165,149 @@
 
 <div class="slide">
 
-<img src="banner.jpeg">
+<img src="assets/banner/banner3.jpg">
 
-<div class="caption">
+<div class="overlay">
 
-<h1>MOBILE LEGENDS</h1>
+<h1>
 
-<p>Weekly Pass & Diamond Lengkap</p>
+LAYANAN
+
+<span>24 JAM</span>
+
+</h1>
+
+<p>
+
+Customer Service siap membantu kapan saja.
+
+</p>
 
 </div>
 
 </div>
+
+</div>
+
+<div class="slider-dot">
+
+<span class="dot active"></span>
+
+<span class="dot"></span>
+
+<span class="dot"></span>
 
 </div>
 
 </section>
-<p>
+<!-- ==========================
+GAME POPULER
+========================== -->
 
-Top Up Diamond, UC, Robux,
+<section id="game" class="games">
 
-VP dan Token dengan harga terbaik.
+<div class="container">
 
-</p>
+<div class="section-title">
 
-<a href="#games">
+<h2>🎮 Game Populer</h2>
 
-<button>
+<p>Pilih game yang ingin kamu top up</p>
 
-TOP UP SEKARANG
+</div>
 
-</button>
+<div class="game-grid">
+
+<a href="ml.html" class="game-card">
+
+<img src="assets/game/ml.png" alt="Mobile Legends">
+
+<h3>Mobile Legends</h3>
+
+<p>Diamond & Weekly Pass</p>
+
+</a>
+
+<a href="ff.html" class="game-card">
+
+<img src="assets/game/ff.png" alt="Free Fire">
+
+<h3>Free Fire</h3>
+
+<p>Diamond & Membership</p>
+
+</a>
+
+<a href="pubg.html" class="game-card">
+
+<img src="assets/game/pubg.png" alt="PUBG Mobile">
+
+<h3>PUBG Mobile</h3>
+
+<p>UC Murah</p>
+
+</a>
+
+<a href="hok.html" class="game-card">
+
+<img src="assets/game/hok.png" alt="Honor Of Kings">
+
+<h3>Honor Of Kings</h3>
+
+<p>Tokens Murah</p>
+
+</a>
+
+<a href="roblox.html" class="game-card">
+
+<img src="assets/game/roblox.png" alt="Roblox">
+
+<h3>Roblox</h3>
+
+<p>Robux & Premium</p>
+
+</a>
+
+<a href="valorant.html" class="game-card">
+
+<img src="assets/game/valorant.png" alt="Valorant">
+
+<h3>Valorant</h3>
+
+<p>Valorant Points</p>
 
 </a>
 
 </div>
 
+</div>
+
 </section>
+<!-- ==========================
+PROMO
+========================== -->
 
-<!-- GAME -->
+<section id="promo" class="promo-section">
 
-<section id="games">
+<div class="container">
 
-<h2 class="title">
+<div class="section-title">
 
-PILIH GAME
+<h2>🔥 Promo Hari Ini</h2>
 
-</h2>
+<p>Jangan lewatkan promo terbaik dari ARDZ STORE</p>
 
-<div class="game-grid">
+</div>
 
-<a href="ml.html" class="card">
+<div class="promo-grid">
 
-<img src="ml.jpeg">
+<div class="promo-card hot">
+
+<div class="promo-badge">
+
+🔥 FLASH SALE
+
+</div>
 
 <h3>
 
@@ -143,11 +315,29 @@ Mobile Legends
 
 </h3>
 
+<p>
+
+Diskon hingga <b>15%</b>
+
+untuk Diamond & Weekly Pass.
+
+</p>
+
+<a href="ml.html">
+
+Top Up Sekarang →
+
 </a>
 
-<a href="ff.html" class="card">
+</div>
 
-<img src="ff.jpeg">
+<div class="promo-card">
+
+<div class="promo-badge blue">
+
+💎 BONUS
+
+</div>
 
 <h3>
 
@@ -155,35 +345,27 @@ Free Fire
 
 </h3>
 
-</a>
+<p>
 
-<a href="pubg.html" class="card">
+Bonus Diamond setiap pembelian tertentu.
 
-<img src="pubg.jpeg">
+</p>
 
-<h3>
+<a href="ff.html">
 
-PUBG Mobile
-
-</h3>
+Top Up Sekarang →
 
 </a>
 
-<a href="hok.html" class="card">
+</div>
 
-<img src="hok.jpeg">
+<div class="promo-card">
 
-<h3>
+<div class="promo-badge orange">
 
-Honor Of Kings
+🎮 ROBUX
 
-</h3>
-
-</a>
-
-<a href="roblox.html" class="card">
-
-<img src="roblox.jpeg">
+</div>
 
 <h3>
 
@@ -191,11 +373,27 @@ Roblox
 
 </h3>
 
+<p>
+
+Harga Robux lebih hemat setiap hari.
+
+</p>
+
+<a href="roblox.html">
+
+Top Up Sekarang →
+
 </a>
 
-<a href="valorant.html" class="card">
+</div>
 
-<img src="valorant.jpeg">
+<div class="promo-card">
+
+<div class="promo-badge red">
+
+⚡ LIMITED
+
+</div>
 
 <h3>
 
@@ -203,166 +401,1406 @@ Valorant
 
 </h3>
 
+<p>
+
+Promo Valorant Points dengan harga spesial.
+
+</p>
+
+<a href="valorant.html">
+
+Top Up Sekarang →
+
 </a>
 
 </div>
 
-<section class="best-product">
-
-<h2 class="title">
-🔥 Produk Terlaris
-</h2>
-  <section class="promo">
-
-<h2 class="title">
-🎁 Promo Hari Ini
-</h2>
-
-<div class="game-grid">
-
-<div class="card">
-
-<h3>FREE FIRE</h3>
-
-<p>
-
-Bonus Diamond setiap pembelian tertentu.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>MLBB</h3>
-
-<p>
-
-Diskon Weekly Diamond Pass.
-
-</p>
-
-</div>
-
-<div class="card">
-
-<h3>PUBG</h3>
-
-<p>
-
-Cashback UC pilihan.
-
-</p>
-
 </div>
 
 </div>
 
 </section>
 
-<div class="game-grid">
+<!-- ==========================
+RUNNING TEXT
+========================== -->
 
-<div class="card">
-<img src="diamond.jpeg">
-<h3>140 Diamond FF</h3>
-<p>Rp20.000</p>
-<button>Top Up</button>
+<section class="running-promo">
+
+<div class="marquee">
+
+<span>
+
+🔥 Selamat datang di ARDZ STORE • Top Up Game Murah • Proses Cepat • Pembayaran Lengkap • Customer Service 24 Jam • Promo Baru Setiap Hari • Terima kasih telah mempercayai ARDZ STORE 🔥
+
+</span>
+
 </div>
 
-<div class="card">
-<img src="diamond.jpeg">
-<h3>Weekly Pass ML</h3>
-<p>Rp28.000</p>
-<button>Top Up</button>
+</section>
+<!-- ==========================
+PRODUK TERLARIS
+========================== -->
+
+<section class="best-products">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>🏆 Produk Terlaris</h2>
+
+<p>Produk favorit pelanggan ARDZ STORE</p>
+
 </div>
 
-<div class="card">
-<img src="uc.jpeg">
-<h3>325 UC PUBG</h3>
-<p>Rp68.000</p>
-<button>Top Up</button>
+<div class="best-grid">
+
+<!-- ML -->
+
+<div class="best-card">
+
+<span class="best-badge">
+
+🔥 BEST SELLER
+
+</span>
+
+<img
+src="assets/products/ml-diamond.png"
+alt="ML">
+
+<h3>
+
+86 Diamond ML
+
+</h3>
+
+<p>
+
+Top up tercepat untuk Mobile Legends
+
+</p>
+
+<a href="ml.html">
+
+Top Up →
+
+</a>
+
 </div>
 
-<div class="card">
-<img src="robux.jpeg">
-<h3>80 Robux</h3>
-<p>Rp15.000</p>
-<button>Top Up</button>
+<!-- FF -->
+
+<div class="best-card">
+
+<span class="best-badge blue">
+
+💎 POPULER
+
+</span>
+
+<img
+src="assets/products/ff-member.png"
+alt="FF">
+
+<h3>
+
+Weekly Membership
+
+</h3>
+
+<p>
+
+Membership Free Fire
+
+</p>
+
+<a href="ff.html">
+
+Top Up →
+
+</a>
+
+</div>
+
+<!-- PUBG -->
+
+<div class="best-card">
+
+<span class="best-badge orange">
+
+⚡ HOT
+
+</span>
+
+<img
+src="assets/products/pubg-uc.png"
+alt="PUBG">
+
+<h3>
+
+325 UC PUBG
+
+</h3>
+
+<p>
+
+UC resmi PUBG Mobile
+
+</p>
+
+<a href="pubg.html">
+
+Top Up →
+
+</a>
+
+</div>
+
+<!-- HOK -->
+
+<div class="best-card">
+
+<span class="best-badge">
+
+👑 FAVORIT
+
+</span>
+
+<img
+src="assets/products/hok-token.png"
+alt="HOK">
+
+<h3>
+
+250 Tokens
+
+</h3>
+
+<p>
+
+Honor Of Kings
+
+</p>
+
+<a href="hok.html">
+
+Top Up →
+
+</a>
+
+</div>
+
+<!-- ROBLOX -->
+
+<div class="best-card">
+
+<span class="best-badge red">
+
+🎮 TERLARIS
+
+</span>
+
+<img
+src="assets/products/robux.png"
+alt="Roblox">
+
+<h3>
+
+400 Robux
+
+</h3>
+
+<p>
+
+Robux Murah
+
+</p>
+
+<a href="roblox.html">
+
+Top Up →
+
+</a>
+
+</div>
+
+<!-- VALORANT -->
+
+<div class="best-card">
+
+<span class="best-badge">
+
+⭐ FAVORIT
+
+</span>
+
+<img
+src="assets/products/vpcard.png"
+alt="Valorant">
+
+<h3>
+
+1375 VP
+
+</h3>
+
+<p>
+
+Valorant Points
+
+</p>
+
+<a href="valorant.html">
+
+Top Up →
+
+</a>
+
+</div>
+
 </div>
 
 </div>
 
 </section>
-<!-- PAYMENT -->
+<!-- ==========================
+KENAPA PILIH ARDZ STORE
+========================== -->
 
-<section class="payment">
+<section class="why-us">
 
-<h2 class="title">
+<div class="container">
 
-METODE PEMBAYARAN
-
-</h2>
-
-<div class="payment-grid">
-
-<img src="dana.jpeg">
-
-<img src="ovo.jpeg">
-
-<img src="gopay.jpeg">
-
-<img src="qris.jpeg">
-
-<img src="bca.jpeg">
-
-<img src="bri.jpeg">
-
-<img src="bni.jpeg">
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-
-<footer>
+<div class="section-title">
 
 <h2>
 
-ARDZ STORE
+⭐ Kenapa Pilih ARDZ STORE?
 
 </h2>
 
 <p>
 
-Top Up Game Murah
+Alasan ribuan pelanggan mempercayai layanan kami.
 
-Cepat
+</p>
 
-Aman
+</div>
 
-Terpercaya
+<div class="why-grid">
+
+<div class="why-card">
+
+<div class="why-icon">
+
+⚡
+
+</div>
+
+<h3>
+
+Proses Cepat
+
+</h3>
+
+<p>
+
+Pesanan diproses dalam waktu 1–5 menit setelah pembayaran berhasil.
+
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="why-icon">
+
+🛡️
+
+</div>
+
+<h3>
+
+Aman & Terpercaya
+
+</h3>
+
+<p>
+
+Transaksi aman tanpa meminta password akun game.
+
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="why-icon">
+
+💰
+
+</div>
+
+<h3>
+
+Harga Terjangkau
+
+</h3>
+
+<p>
+
+Harga bersaing dengan promo menarik setiap hari.
+
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="why-icon">
+
+💳
+
+</div>
+
+<h3>
+
+Pembayaran Lengkap
+
+</h3>
+
+<p>
+
+Mendukung QRIS, DANA, OVO, GoPay, Transfer Bank, dan lainnya.
+
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="why-icon">
+
+📞
+
+</div>
+
+<h3>
+
+Customer Service
+
+</h3>
+
+<p>
+
+Admin siap membantu selama 24 jam melalui WhatsApp.
+
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="why-icon">
+
+🎁
+
+</div>
+
+<h3>
+
+Promo Setiap Hari
+
+</h3>
+
+<p>
+
+Nikmati diskon dan cashback menarik setiap hari.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+LANGKAH PEMBELIAN
+========================== -->
+
+<section class="how-to-buy">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+
+🛒 Cara Top Up di ARDZ STORE
+
+</h2>
+
+<p>
+
+Hanya 4 langkah mudah.
+
+</p>
+
+</div>
+
+<div class="step-grid">
+
+<div class="step-card">
+
+<div class="step-number">
+
+1
+
+</div>
+
+<h3>
+
+Pilih Game
+
+</h3>
+
+<p>
+
+Pilih game yang ingin kamu top up.
+
+</p>
+
+</div>
+
+<div class="step-card">
+
+<div class="step-number">
+
+2
+
+</div>
+
+<h3>
+
+Pilih Nominal
+
+</h3>
+
+<p>
+
+Tentukan nominal top up yang diinginkan.
+
+</p>
+
+</div>
+
+<div class="step-card">
+
+<div class="step-number">
+
+3
+
+</div>
+
+<h3>
+
+Pilih Pembayaran
+
+</h3>
+
+<p>
+
+Gunakan metode pembayaran favoritmu.
+
+</p>
+
+</div>
+
+<div class="step-card">
+
+<div class="step-number">
+
+4
+
+</div>
+
+<h3>
+
+Selesai
+
+</h3>
+
+<p>
+
+Pesanan diproses dan masuk ke akun game kamu.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ==========================
+STATISTIK
+========================== -->
+
+<section class="statistics">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+
+📊 ARDZ STORE Dalam Angka
+
+</h2>
+
+<p>
+
+Kepercayaan pelanggan adalah prioritas kami.
+
+</p>
+
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+👥
+
+</div>
+
+<h2 class="counter">
+
+10.000+
+
+</h2>
+
+<p>
+
+Pelanggan
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+✅
+
+</div>
+
+<h2 class="counter">
+
+50.000+
+
+</h2>
+
+<p>
+
+Transaksi Berhasil
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+🎮
+
+</div>
+
+<h2 class="counter">
+
+6+
+
+</h2>
+
+<p>
+
+Game Tersedia
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+⭐
+
+</div>
+
+<h2 class="counter">
+
+4.9/5
+
+</h2>
+
+<p>
+
+Rating Pelanggan
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+🕒
+
+</div>
+
+<h2 class="counter">
+
+24 Jam
+
+</h2>
+
+<p>
+
+Customer Service
+
+</p>
+
+</div>
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+🛡️
+
+</div>
+
+<h2 class="counter">
+
+99.9%
+
+</h2>
+
+<p>
+
+Keberhasilan Transaksi
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+PARTNER
+========================== -->
+
+<section class="partner">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+
+🤝 Partner & Dukungan
+
+</h2>
+
+<p>
+
+ARDZ STORE mendukung berbagai publisher game dan metode pembayaran.
+
+</p>
+
+</div>
+
+<div class="partner-grid">
+
+<div class="partner-card">
+
+<img src="assets/logo/moonton.png" alt="Moonton">
+
+</div>
+
+<div class="partner-card">
+
+<img src="assets/logo/garena.png" alt="Garena">
+
+</div>
+
+<div class="partner-card">
+
+<img src="assets/logo/tencent.png" alt="Tencent">
+
+</div>
+
+<div class="partner-card">
+
+<img src="assets/logo/riot.png" alt="Riot Games">
+
+</div>
+
+<div class="partner-card">
+
+<img src="assets/logo/roblox.png" alt="Roblox">
+
+</div>
+
+<div class="partner-card">
+
+<img src="assets/logo/timi.png" alt="TiMi">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ==========================
+TESTIMONI PELANGGAN
+========================== -->
+
+<section class="testimonial-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+
+💬 Testimoni Pelanggan
+
+</h2>
+
+<p>
+
+Apa kata pelanggan tentang ARDZ STORE
+
+</p>
+
+</div>
+
+<div class="testimonial-grid">
+
+<!-- TESTI 1 -->
+
+<div class="testimonial-card">
+
+<div class="verified">
+
+✅ Pelanggan Terverifikasi
+
+</div>
+
+<div class="stars">
+
+⭐⭐⭐⭐⭐
+
+</div>
+
+<p>
+
+"Top up Mobile Legends cuma sekitar 2 menit langsung masuk. Recommended banget!"
+
+</p>
+
+<div class="customer">
+
+<img src="assets/avatar/avatar1.png">
+
+<div>
+
+<h4>
+
+Rizky A.
+
+</h4>
+
+<span>
+
+Mobile Legends
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TESTI 2 -->
+
+<div class="testimonial-card">
+
+<div class="verified">
+
+✅ Pelanggan Terverifikasi
+
+</div>
+
+<div class="stars">
+
+⭐⭐⭐⭐⭐
+
+</div>
+
+<p>
+
+"Harga Robux lebih murah dibanding tempat lain. Admin juga ramah."
+
+</p>
+
+<div class="customer">
+
+<img src="assets/avatar/avatar2.png">
+
+<div>
+
+<h4>
+
+Nadia P.
+
+</h4>
+
+<span>
+
+Roblox
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TESTI 3 -->
+
+<div class="testimonial-card">
+
+<div class="verified">
+
+✅ Pelanggan Terverifikasi
+
+</div>
+
+<div class="stars">
+
+⭐⭐⭐⭐⭐
+
+</div>
+
+<p>
+
+"Top up Valorant cepat, pembayaran gampang pakai QRIS."
+
+</p>
+
+<div class="customer">
+
+<img src="assets/avatar/avatar3.png">
+
+<div>
+
+<h4>
+
+Fajar D.
+
+</h4>
+
+<span>
+
+Valorant
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TESTI 4 -->
+
+<div class="testimonial-card">
+
+<div class="verified">
+
+✅ Pelanggan Terverifikasi
+
+</div>
+
+<div class="stars">
+
+⭐⭐⭐⭐⭐
+
+</div>
+
+<p>
+
+"Sudah langganan di ARDZ STORE. Selalu cepat dan aman."
+
+</p>
+
+<div class="customer">
+
+<img src="assets/avatar/avatar4.png">
+
+<div>
+
+<h4>
+
+Andi S.
+
+</h4>
+
+<span>
+
+Free Fire
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+CALL TO ACTION
+========================== -->
+
+<section class="cta-section">
+
+<div class="container">
+
+<div class="cta-box">
+
+<h2>
+
+🎮 Siap Top Up Sekarang?
+
+</h2>
+
+<p>
+
+Nikmati proses cepat, harga bersaing, dan pelayanan terbaik hanya di ARDZ STORE.
+
+</p>
+
+<div class="cta-button">
+
+<a href="#game" class="btn-primary">
+
+Top Up Sekarang
+
+</a>
+
+<a href="https://wa.me/6282295071107"
+
+class="btn-secondary"
+
+target="_blank">
+
+Hubungi Admin
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ==========================
+METODE PEMBAYARAN
+========================== -->
+
+<section id="payment" class="payment-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<h2>
+
+💳 Metode Pembayaran
+
+</h2>
+
+<p>
+
+Pilih metode pembayaran yang paling mudah untukmu.
+
+</p>
+
+</div>
+
+<div class="payment-grid">
+
+<div class="payment-card">
+
+<img src="assets/payment/qris.png" alt="QRIS">
+
+<h3>QRIS</h3>
+
+<p>Semua E-Wallet</p>
+
+</div>
+
+<div class="payment-card">
+
+<img src="assets/payment/dana.png" alt="DANA">
+
+<h3>DANA</h3>
+
+<p>Pembayaran Instan</p>
+
+</div>
+
+<div class="payment-card">
+
+<img src="assets/payment/ovo.png" alt="OVO">
+
+<h3>OVO</h3>
+
+<p>Praktis & Cepat</p>
+
+</div>
+
+<div class="payment-card">
+
+<img src="assets/payment/gopay.png" alt="GoPay">
+
+<h3>GoPay</h3>
+
+<p>Aman Digunakan</p>
+
+</div>
+
+<div class="payment-card">
+
+<img src="assets/payment/shopeepay.png" alt="ShopeePay">
+
+<h3>ShopeePay</h3>
+
+<p>Pembayaran Digital</p>
+
+</div>
+
+<div class="payment-card">
+
+<img src="assets/payment/bca.png" alt="BCA">
+
+<h3>BCA</h3>
+
+<p>Transfer Bank</p>
+
+</div>
+
+<div class="payment-card">
+
+<img src="assets/payment/bri.png" alt="BRI">
+
+<h3>BRI</h3>
+
+<p>Transfer Bank</p>
+
+</div>
+
+<div class="payment-card">
+
+<img src="assets/payment/bni.png" alt="BNI">
+
+<h3>BNI</h3>
+
+<p>Transfer Bank</p>
+
+</div>
+
+<div class="payment-card">
+
+<img src="assets/payment/mandiri.png" alt="Mandiri">
+
+<h3>Mandiri</h3>
+
+<p>Transfer Bank</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+JAM OPERASIONAL
+========================== -->
+
+<section class="service-info">
+
+<div class="container">
+
+<div class="service-grid">
+
+<div class="service-card">
+
+<h3>
+
+🕒 Jam Operasional
+
+</h3>
+
+<p>
+
+24 Jam Non Stop
+
+</p>
+
+</div>
+
+<div class="service-card">
+
+<h3>
+
+⚡ Estimasi Proses
+
+</h3>
+
+<p>
+
+1–5 Menit
+
+</p>
+
+</div>
+
+<div class="service-card">
+
+<h3>
+
+🎧 Customer Service
+
+</h3>
+
+<p>
+
+Siap Membantu 24/7
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- ==========================
+FOOTER PREMIUM
+========================== -->
+
+<footer id="footer" class="footer">
+
+<div class="container">
+
+<div class="footer-grid">
+
+<!-- LOGO -->
+
+<div class="footer-item">
+
+<h2>
+
+🎮 ARDZ STORE
+
+</h2>
+
+<p>
+
+Website Top Up Game Murah, Cepat, Aman, dan Terpercaya.
+
+Kami siap melayani 24 Jam setiap hari.
+
+</p>
+
+</div>
+
+<!-- MENU -->
+
+<div class="footer-item">
+
+<h3>
+
+Menu
+
+</h3>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="#game">Game</a></li>
+
+<li><a href="#promo">Promo</a></li>
+
+<li><a href="#payment">Pembayaran</a></li>
+
+</ul>
+
+</div>
+
+<!-- GAME -->
+
+<div class="footer-item">
+
+<h3>
+
+Top Up Game
+
+</h3>
+
+<ul>
+
+<li><a href="ml.html">Mobile Legends</a></li>
+
+<li><a href="ff.html">Free Fire</a></li>
+
+<li><a href="pubg.html">PUBG Mobile</a></li>
+
+<li><a href="hok.html">Honor Of Kings</a></li>
+
+<li><a href="roblox.html">Roblox</a></li>
+
+<li><a href="valorant.html">Valorant</a></li>
+
+</ul>
+
+</div>
+
+<!-- KONTAK -->
+
+<div class="footer-item">
+
+<h3>
+
+Hubungi Kami
+
+</h3>
+
+<p>
+
+📱 WhatsApp
+
+<br>
+
+0822-9507-1107
 
 </p>
 
 <p>
 
-WhatsApp
+📧 Email
 
-082295071107
+<br>
+
+ardzstore@gmail.com
 
 </p>
 
+<p>
+
+🕒 Buka 24 Jam
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="footer-bottom">
+
+<p>
+
+© 2026 ARDZ STORE. All Rights Reserved.
+
+</p>
+
+</div>
+
+</div>
+
 </footer>
-  <a
+
+<!-- ==========================
+WHATSAPP FLOAT
+========================== -->
+
+<a
+
 href="https://wa.me/6282295071107"
-class="wa"
-target="_blank">
+
+class="wa-float"
+
+target="_blank"
+
+title="Chat WhatsApp">
 
 💬
 
 </a>
+
+<!-- ==========================
+BACK TO TOP
+========================== -->
+
+<button
+
+id="backTop"
+
+class="back-top"
+
+onclick="scrollToTop()">
+
+⬆
+
+</button>
+
 <script src="index.js"></script>
+
 </body>
 
 </html>
