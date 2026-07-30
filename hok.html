@@ -5,19 +5,22 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>ARDZ STORE | Top Up Honor Of Kings</title>
+<title>ARDZ STORE | Top Up Honor of Kings</title>
 
 <link rel="stylesheet" href="style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
+
+<!-- =====================================
+HEADER
+===================================== -->
 
 <header>
 
@@ -39,7 +42,7 @@
 
 <a href="pubg.html">PUBG Mobile</a>
 
-<a class="active" href="hok.html">Honor Of Kings</a>
+<a class="active" href="hok.html">Honor of Kings</a>
 
 <a href="roblox.html">Roblox</a>
 
@@ -51,19 +54,23 @@
 
 </header>
 
+<!-- =====================================
+HERO HOK
+===================================== -->
+
 <section class="hero hero-hok">
 
 <div class="hero-overlay">
 
 <h1>
 
-TOP UP HONOR OF KINGS
+Top Up Honor of Kings
 
 </h1>
 
 <p>
 
-Tokens Murah • Proses Cepat • Aman • 24 Jam
+Token Honor of Kings Murah • Cepat • Aman
 
 </p>
 
@@ -71,101 +78,68 @@ Tokens Murah • Proses Cepat • Aman • 24 Jam
 
 </section>
 
-<section class="topup-container">
+<!-- =====================================
+DATA PLAYER
+===================================== -->
 
-<div class="left">
+<section class="player-box">
 
 <div class="box">
 
 <h2>
 
-👤 Masukkan Data Akun
+👑 Data Akun Honor of Kings
 
 </h2>
 
+<div class="input-group">
+
+<label>Player ID</label>
+
 <input
-type="text"
-id="userid"
+type="number"
+id="userId"
 placeholder="Masukkan Player ID">
+
+<label>Nickname</label>
 
 <input
 type="text"
 id="nickname"
-placeholder="Nickname"
-readonly>
+placeholder="Masukkan Nickname">
 
 </div>
 
-<div class="box">
+</div>
 
-<h2>
+</section>
 
-💎 Pilih Token
+<!-- =====================================
+LIST PRODUK
+===================================== -->
+
+<section class="products">
+
+<h2 class="title">
+
+💎 Pilih Token Honor of Kings
 
 </h2>
 
 <div
+id="productList"
+class="product-grid">
 
-id="hok-products"
-
-class="produk-grid">
-
-</div>
+<!-- Diisi otomatis oleh hok.js -->
 
 </div>
 
-</div>
-
-<div class="right">
-
-<div class="box">
-
-<h2>
-
-💳 Metode Pembayaran
-
-</h2>
-
-<select id="payment">
-
-<option>DANA</option>
-
-<option>OVO</option>
-
-<option>GoPay</option>
-
-<option>QRIS</option>
-
-<option>Bank BCA</option>
-
-<option>Bank BRI</option>
-
-<option>Bank BNI</option>
-
-</select>
-
-<div class="payment-list">
-
-<img src="dana.jpeg">
-
-<img src="ovo.jpeg">
-
-<img src="gopay.jpeg">
-
-<img src="qris.jpeg">
-
-<img src="bca.jpeg">
-
-<img src="bri.jpeg">
-
-<img src="bni.jpeg">
-
-</div>
-
-</div>
-<!-- ==========================
+</section>
+  <!-- =====================================
 DETAIL PESANAN
-========================== -->
+===================================== -->
+
+<section class="order-detail">
 
 <div class="box">
 
@@ -181,7 +155,11 @@ DETAIL PESANAN
 
 <span>Game</span>
 
-<b>Honor Of Kings</b>
+<b>
+
+Honor of Kings
+
+</b>
 
 </div>
 
@@ -213,7 +191,7 @@ Rp 0
 
 <span>Status</span>
 
-<b style="color:#00ff88">
+<b style="color:#22c55e">
 
 Menunggu Pembayaran
 
@@ -225,9 +203,13 @@ Menunggu Pembayaran
 
 </div>
 
-<!-- ==========================
-VOUCHER
-========================== -->
+</section>
+
+<!-- =====================================
+VOUCHER PROMO
+===================================== -->
+
+<section class="voucher-section">
 
 <div class="box">
 
@@ -237,17 +219,16 @@ VOUCHER
 
 </h2>
 
-<div class="voucher">
+<div class="voucher-box">
 
 <input
-
 type="text"
-
 id="voucher"
+placeholder="Masukkan kode voucher">
 
-placeholder="Masukkan Kode Voucher">
-
-<button>
+<button
+id="applyVoucher"
+class="btn-primary">
 
 Gunakan
 
@@ -255,29 +236,65 @@ Gunakan
 
 </div>
 
+<p id="voucherInfo"></p>
+
 </div>
 
-<!-- ==========================
-PRODUK SPESIAL
-========================== -->
+</section>
 
-<div class="box">
+<!-- =====================================
+PRODUK TERLARIS
+===================================== -->
 
-<h2>
+<section class="best-product">
 
-⭐ Produk Spesial
+<h2 class="title">
+
+🔥 Token Honor of Kings Terlaris
 
 </h2>
 
-<div class="special-list">
+<div class="best-grid">
 
-<div class="special-item">
+<div class="best-card">
 
-<img
-src="assets/products/weeklycard.png"
-class="icon-diamond">
+<img src="token.jpeg">
 
-<div>
+<h3>
+
+80 Token
+
+</h3>
+
+<p>
+
+Paket favorit pemain HOK
+
+</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="token.jpeg">
+
+<h3>
+
+240 Token
+
+</h3>
+
+<p>
+
+Paling sering dibeli
+
+</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="token.jpeg">
 
 <h3>
 
@@ -287,7 +304,7 @@ Weekly Card
 
 <p>
 
-Bonus Token Harian
+Hemat untuk pemain aktif
 
 </p>
 
@@ -295,244 +312,196 @@ Bonus Token Harian
 
 </div>
 
-<div class="special-item">
+</section>
+  <!-- =====================================
+METODE PEMBAYARAN
+===================================== -->
 
-<img
-src="assets/products/monthlycard.png"
-class="icon-diamond">
-
-<div>
-
-<h3>
-
-Monthly Card
-
-</h3>
-
-<p>
-
-Token dan Benefit Bulanan
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ==========================
-CATATAN
-========================== -->
+<section class="payment-section">
 
 <div class="box">
 
 <h2>
 
-📝 Catatan
+💳 Pilih Metode Pembayaran
 
 </h2>
 
-<textarea
+<div class="payment-grid">
 
-id="catatan"
+<div class="payment-card active" data-payment="QRIS">
 
-rows="4"
+<img src="qris.jpeg">
 
-placeholder="Catatan untuk Admin (Opsional)">
+<h3>QRIS</h3>
 
-</textarea>
+<p>Semua E-Wallet</p>
 
 </div>
 
-<!-- ==========================
-CHECKOUT
-========================== -->
+<div class="payment-card" data-payment="DANA">
+
+<img src="dana.jpeg">
+
+<h3>DANA</h3>
+
+<p>Pembayaran Cepat</p>
+
+</div>
+
+<div class="payment-card" data-payment="OVO">
+
+<img src="ovo.jpeg">
+
+<h3>OVO</h3>
+
+<p>Saldo OVO</p>
+
+</div>
+
+<div class="payment-card" data-payment="GoPay">
+
+<img src="gopay.jpeg">
+
+<h3>GoPay</h3>
+
+<p>GoPay Instan</p>
+
+</div>
+
+<div class="payment-card" data-payment="ShopeePay">
+
+<img src="shoppepay.jpeg">
+
+<h3>ShopeePay</h3>
+
+<p>Transfer Mudah</p>
+
+</div>
+
+<div class="payment-card" data-payment="BCA">
+
+<img src="bca.jpeg">
+
+<h3>BCA</h3>
+
+<p>Transfer Bank</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+RINGKASAN CHECKOUT
+===================================== -->
+
+<section class="checkout-summary">
+
+<div class="box">
+
+<h2>
+
+🧾 Ringkasan Pesanan
+
+</h2>
+
+<div class="invoice">
+
+<div class="invoice-row">
+
+<span>
+
+Produk
+
+</span>
+
+<b id="summaryProduk">
+
+Belum Dipilih
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>
+
+Total
+
+</span>
+
+<b id="summaryTotal">
+
+Rp 0
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>
+
+Pembayaran
+
+</span>
+
+<b id="summaryPayment">
+
+QRIS
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+  <!-- =====================================
+CHECKOUT WHATSAPP
+===================================== -->
+
+<section class="checkout-section">
+
+<div class="box">
+
+<h2>
+
+🚀 Checkout Honor of Kings
+
+</h2>
+
+<p>
+
+Periksa kembali Player ID, produk, dan pembayaran sebelum melakukan checkout.
+
+</p>
+
 
 <button
 
-class="checkout-btn"
+id="checkoutBtn"
 
-onclick="checkoutHOK()">
+class="btn-checkout">
 
-🛒 CHECKOUT SEKARANG
+💬 Checkout via WhatsApp
 
 </button>
 
-<!-- ==========================
-KEUNGGULAN
-========================== -->
-
-<div class="box">
-
-<h2>
-
-🔥 Kenapa Pilih ARDZ STORE?
-
-</h2>
-
-<ul class="fitur">
-
-<li>⚡ Proses 1-5 Menit</li>
-
-<li>🛡️ Aman & Terpercaya</li>
-
-<li>💎 Harga Token Murah</li>
-
-<li>📱 Support WhatsApp 24 Jam</li>
-
-<li>💳 Banyak Metode Pembayaran</li>
-
-<li>🎁 Promo Menarik Setiap Hari</li>
-
-</ul>
-
-</div>
-
-<!-- ==========================
-RATING
-========================== -->
-
-<div class="box">
-
-<h2>
-
-⭐ Rating Pelanggan
-
-</h2>
-
-<p>
-
-⭐⭐⭐⭐⭐ 4.9 / 5
-
-</p>
-
-<p>
-
-Ribuan transaksi Honor Of Kings berhasil diproses.
-
-</p>
-
-</div>
 
 </div>
 
 </section>
-<!-- ==========================
-PRODUK TERLARIS
-========================== -->
-
-<section class="best-product">
-
-<h2 class="title">
-
-🔥 Produk Honor Of Kings Terlaris
-
-</h2>
-
-<div class="best-grid">
-
-<div class="best-card">
-
-<img src="assets/products/token.png" alt="80 Token">
-
-<h3>80 Tokens</h3>
-
-<p>Paket favorit pemain Honor Of Kings.</p>
-
-</div>
-
-<div class="best-card">
-
-<img src="assets/products/weeklycard.png" alt="Weekly Card">
-
-<h3>Weekly Card</h3>
-
-<p>Bonus Token setiap hari.</p>
-
-</div>
-
-<div class="best-card">
-
-<img src="assets/products/monthlycard.png" alt="Monthly Card">
-
-<h3>Monthly Card</h3>
-
-<p>Benefit bulanan dengan hadiah menarik.</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================
-INFORMASI
-========================== -->
-
-<section class="info">
-
-<h2 class="title">
-
-📢 Informasi Top Up
-
-</h2>
-
-<div class="box">
-
-<p>✔ Pastikan Player ID yang dimasukkan sudah benar.</p>
-
-<p>✔ Token akan dikirim setelah pembayaran berhasil.</p>
-
-<p>✔ Kesalahan pengisian ID menjadi tanggung jawab pembeli.</p>
-
-<p>✔ Simpan bukti pembayaran hingga transaksi selesai.</p>
-
-<p>✔ Hubungi Admin jika Token belum masuk lebih dari 10 menit.</p>
-
-</div>
-
-</section>
-
-<!-- ==========================
-FAQ
-========================== -->
-
-<section class="faq">
-
-<h2 class="title">
-
-❓ Pertanyaan Umum
-
-</h2>
-
-<div class="box">
-
-<h3>Berapa lama proses top up?</h3>
-
-<p>Biasanya hanya membutuhkan waktu 1–5 menit.</p>
-
-<hr>
-
-<h3>Apakah aman?</h3>
-
-<p>Ya, top up menggunakan metode resmi tanpa meminta password akun.</p>
-
-<hr>
-
-<h3>Jika Token belum masuk?</h3>
-
-<p>Silakan hubungi Admin melalui WhatsApp dengan menyertakan bukti pembayaran.</p>
-
-</div>
-
-</section>
-
-<!-- ==========================
+  <!-- =====================================
 FOOTER
-========================== -->
+===================================== -->
 
 <footer>
 
@@ -547,12 +516,12 @@ FOOTER
 </h2>
 
 <p>
-
-Top Up Game Murah • Aman • Terpercaya
-
+Top Up Honor of Kings Murah,
+Cepat dan Aman.
 </p>
 
 </div>
+
 
 <div>
 
@@ -563,59 +532,161 @@ Hubungi Kami
 </h3>
 
 <p>
-
-📱 WhatsApp : 082295071107
-
+📱 WhatsApp : 083185954674
 </p>
 
 <p>
-
-📧 Email : ardzstore@gmail.com
-
+⏰ Layanan 24 Jam
 </p>
 
 </div>
+
 
 <div>
 
 <h3>
 
-Jam Operasional
+Menu
 
 </h3>
 
 <p>
+Top Up Game
+</p>
 
-24 Jam Non Stop
-
+<p>
+Voucher Promo
 </p>
 
 </div>
 
 </div>
 
+
 <div class="copyright">
 
-© 2026 ARDZ STORE. All Rights Reserved.
+© 2026 ARDZ STORE - Honor of Kings
 
 </div>
 
 </footer>
 
-<!-- ==========================
-WHATSAPP FLOAT
-========================== -->
+
+<!-- =====================================
+WHATSAPP FLOATING
+===================================== -->
 
 <a
-href="https://wa.me/6282295071107"
+
+href="https://wa.me/6283185954674"
+
 class="wa-float"
+
 target="_blank">
 
 💬
 
 </a>
 
+
+<!-- =====================================
+BACK TO TOP
+===================================== -->
+
+<button
+
+id="backTop"
+
+class="back-top">
+
+↑
+
+</button>
+
+
+<!-- =====================================
+LIVE ORDER
+===================================== -->
+
+<div
+
+id="liveOrder"
+
+class="live-order">
+
+</div>
+
+
+<!-- =====================================
+POPUP PROMO
+===================================== -->
+
+<div
+
+id="promoPopup"
+
+class="promo-popup">
+
+
+<div class="promo-content">
+
+
+<h2>
+
+🎉 Promo Honor of Kings
+
+</h2>
+
+
+<p>
+
+Gunakan kode voucher
+
+<b>
+
+ARDZ10
+
+</b>
+
+untuk diskon spesial.
+
+</p>
+
+
+<button
+
+id="promoButton"
+
+class="btn-primary">
+
+🎁 Gunakan Voucher
+
+</button>
+
+
+<button
+
+id="closePromo"
+
+class="btn-secondary">
+
+Tutup
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================
+SCRIPT HOK.JS
+===================================== -->
+
 <script src="hok.js"></script>
+
 
 </body>
 
