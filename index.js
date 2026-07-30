@@ -674,3 +674,117 @@ setTimeout(showLiveOrder,4000);
 /* Ulang setiap 10 detik */
 
 setInterval(showLiveOrder,10000);
+/* =====================================
+ARDZ STORE PREMIUM
+Optimasi & Inisialisasi
+===================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("🚀 ARDZ STORE Premium Loaded");
+
+    /* Hilangkan loading screen */
+
+    const loader = document.querySelector(".loader");
+
+    if(loader){
+
+        setTimeout(() => {
+
+            loader.classList.add("hide");
+
+            setTimeout(() => {
+
+                loader.remove();
+
+            },500);
+
+        },800);
+
+    }
+
+    /* Lazy Loading Gambar */
+
+    const images = document.querySelectorAll("img");
+
+    images.forEach(img => {
+
+        img.setAttribute("loading","lazy");
+
+        img.setAttribute("decoding","async");
+
+    });
+
+});
+
+/* =====================================
+Smooth Scroll Browser
+===================================== */
+
+document.documentElement.style.scrollBehavior = "smooth";
+
+/* =====================================
+Nonaktifkan Drag Gambar
+===================================== */
+
+document.querySelectorAll("img").forEach(img => {
+
+    img.addEventListener("dragstart", e => {
+
+        e.preventDefault();
+
+    });
+
+});
+
+/* =====================================
+Error Handler
+===================================== */
+
+window.addEventListener("error", function(e){
+
+    console.warn("JS Error:", e.message);
+
+});
+
+/* =====================================
+Resize Handler
+===================================== */
+
+let resizeTimer;
+
+window.addEventListener("resize",()=>{
+
+    clearTimeout(resizeTimer);
+
+    resizeTimer=setTimeout(()=>{
+
+        console.log("Window resized");
+
+    },200);
+
+});
+
+/* =====================================
+Visibility API
+===================================== */
+
+document.addEventListener("visibilitychange",()=>{
+
+    if(document.hidden){
+
+        console.log("Tab tidak aktif");
+
+    }else{
+
+        console.log("Tab aktif kembali");
+
+    }
+
+});
+
+/* =====================================
+SELESAI
+===================================== */
+
+console.log("✅ Semua fitur ARDZ STORE Premium aktif.");
