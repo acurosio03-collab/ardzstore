@@ -5,19 +5,24 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>ARDZ STORE | Top Up Valorant</title>
+<title>
+ARDZ STORE | Top Up Valorant
+</title>
 
 <link rel="stylesheet" href="style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
+
+<!-- =====================================
+HEADER
+===================================== -->
 
 <header>
 
@@ -33,13 +38,13 @@
 
 <a href="index.html">Home</a>
 
+<a href="pubg.html">PUBG</a>
+
 <a href="ml.html">Mobile Legends</a>
 
 <a href="ff.html">Free Fire</a>
 
-<a href="pubg.html">PUBG Mobile</a>
-
-<a href="hok.html">Honor Of Kings</a>
+<a href="hok.html">Honor of Kings</a>
 
 <a href="roblox.html">Roblox</a>
 
@@ -51,19 +56,23 @@
 
 </header>
 
+<!-- =====================================
+HERO VALORANT
+===================================== -->
+
 <section class="hero hero-valorant">
 
 <div class="hero-overlay">
 
 <h1>
 
-TOP UP VALORANT
+Top Up Valorant Points
 
 </h1>
 
 <p>
 
-Valorant Points Murah • Cepat • Aman • 24 Jam
+VP Murah • Cepat • Aman
 
 </p>
 
@@ -71,102 +80,81 @@ Valorant Points Murah • Cepat • Aman • 24 Jam
 
 </section>
 
-<section class="topup-container">
+<!-- =====================================
+DATA AKUN VALORANT
+===================================== -->
 
-<div class="left">
+<section class="player-box">
 
 <div class="box">
 
 <h2>
 
-👤 Masukkan Riot ID
+🎮 Data Akun Valorant
 
 </h2>
 
-<input
-type="text"
-id="userid"
-placeholder="Masukkan Riot ID">
+<div class="input-group">
+
+<label>Riot ID</label>
 
 <input
 type="text"
-id="tagline"
-placeholder="Tagline (Contoh: #ID1)">
+id="nickname"
+placeholder="Contoh: Player#ID">
+
+<label>Region</label>
+
+<select id="region">
+
+<option value="AP">Asia Pacific (AP)</option>
+
+<option value="EU">Europe (EU)</option>
+
+<option value="NA">North America (NA)</option>
+
+<option value="KR">Korea (KR)</option>
+
+</select>
 
 </div>
 
-<div class="box">
+</div>
 
-<h2>
+</section>
+
+<!-- =====================================
+LIST VALORANT POINT
+===================================== -->
+
+<section class="products">
+
+<h2 class="title">
 
 💎 Pilih Valorant Points
 
 </h2>
 
 <div
-id="valorant-products"
-class="produk-grid">
+id="productList"
+class="product-grid">
+
+<!-- Produk dari valorant.js -->
 
 </div>
 
-</div>
+</section>
+  <!-- =====================================
+DETAIL PESANAN VALORANT
+===================================== -->
 
-</div>
-
-<div class="right">
+<section class="order-detail">
 
 <div class="box">
 
 <h2>
 
-💳 Metode Pembayaran
-
-</h2>
-
-<select id="payment">
-
-<option>DANA</option>
-
-<option>OVO</option>
-
-<option>GoPay</option>
-
-<option>QRIS</option>
-
-<option>Bank BCA</option>
-
-<option>Bank BRI</option>
-
-<option>Bank BNI</option>
-
-</select>
-
-<div class="payment-list">
-
-<img src="dana.jpeg">
-
-<img src="ovo.jpeg">
-
-<img src="gopay.jpeg">
-
-<img src="qris.jpeg">
-
-<img src="bca.jpeg">
-
-<img src="bri.jpeg">
-
-<img src="bni.jpeg">
-
-</div>
-  <!-- ==========================
-DETAIL PESANAN
-========================== -->
-
-<div class="box">
-
-<h2>
-
-📋 Detail Pesanan
+📋 Detail Pesanan Valorant
 
 </h2>
 
@@ -208,7 +196,7 @@ Rp 0
 
 <span>Status</span>
 
-<b style="color:#00ff88">
+<b style="color:#22c55e">
 
 Menunggu Pembayaran
 
@@ -220,19 +208,25 @@ Menunggu Pembayaran
 
 </div>
 
-<!-- ==========================
+</section>
+
+
+
+<!-- =====================================
 VOUCHER
-========================== -->
+===================================== -->
+
+<section class="voucher-section">
 
 <div class="box">
 
 <h2>
 
-🎁 Voucher Promo
+🎁 Voucher Valorant
 
 </h2>
 
-<div class="voucher">
+<div class="voucher-box">
 
 <input
 
@@ -240,9 +234,13 @@ type="text"
 
 id="voucher"
 
-placeholder="Masukkan Kode Voucher">
+placeholder="Masukkan kode voucher">
 
-<button>
+<button
+
+id="applyVoucher"
+
+class="btn-primary">
 
 Gunakan
 
@@ -250,180 +248,23 @@ Gunakan
 
 </div>
 
-</div>
-
-<!-- ==========================
-PRODUK SPESIAL
-========================== -->
-
-<div class="box">
-
-<h2>
-
-⭐ Produk Spesial
-
-</h2>
-
-<div class="special-list">
-
-<div class="special-item">
-
-<img
-src="assets/products/vpcard.png"
-class="icon-diamond">
-
-<div>
-
-<h3>
-
-Valorant Points
-
-</h3>
-
-<p>
-
-Top Up VP Resmi Riot Games
-
-</p>
-
-</div>
-
-</div>
-
-<div class="special-item">
-
-<img
-src="assets/products/giftcard.png"
-class="icon-diamond">
-
-<div>
-
-<h3>
-
-Gift Card Valorant
-
-</h3>
-
-<p>
-
-Voucher Resmi Valorant
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ==========================
-CATATAN
-========================== -->
-
-<div class="box">
-
-<h2>
-
-📝 Catatan
-
-</h2>
-
-<textarea
-
-id="catatan"
-
-rows="4"
-
-placeholder="Catatan untuk Admin (Opsional)">
-
-</textarea>
-
-</div>
-
-<!-- ==========================
-CHECKOUT
-========================== -->
-
-<button
-
-class="checkout-btn"
-
-onclick="checkoutValorant()">
-
-🛒 CHECKOUT SEKARANG
-
-</button>
-
-<!-- ==========================
-KEUNGGULAN
-========================== -->
-
-<div class="box">
-
-<h2>
-
-🔥 Kenapa Pilih ARDZ STORE?
-
-</h2>
-
-<ul class="fitur">
-
-<li>⚡ Proses Cepat 1–5 Menit</li>
-
-<li>🛡️ Aman & Terpercaya</li>
-
-<li>💎 Harga VP Kompetitif</li>
-
-<li>📱 Customer Service 24 Jam</li>
-
-<li>💳 Banyak Metode Pembayaran</li>
-
-<li>🎁 Promo Menarik Setiap Hari</li>
-
-</ul>
-
-</div>
-
-<!-- ==========================
-RATING
-========================== -->
-
-<div class="box">
-
-<h2>
-
-⭐ Rating Pelanggan
-
-</h2>
-
-<p>
-
-⭐⭐⭐⭐⭐ 4.9 / 5
-
-</p>
-
-<p>
-
-Ribuan transaksi Valorant berhasil diproses.
-
-</p>
-
-</div>
+<p id="voucherInfo"></p>
 
 </div>
 
 </section>
-  <!-- ==========================
+
+
+
+<!-- =====================================
 PRODUK TERLARIS
-========================== -->
+===================================== -->
 
 <section class="best-product">
 
 <h2 class="title">
 
-🔥 Produk Valorant Terlaris
+🔥 Valorant Points Terlaris
 
 </h2>
 
@@ -431,161 +272,494 @@ PRODUK TERLARIS
 
 <div class="best-card">
 
-<img src="assets/products/vpcard.png" alt="420 VP">
+<img src="assets/products/vp.png">
 
-<h3>420 VP</h3>
+<h3>
 
-<p>Paket favorit pemain Valorant.</p>
+475 VP
 
-</div>
+</h3>
 
-<div class="best-card">
+<p>
 
-<img src="assets/products/vpcard.png" alt="1375 VP">
+Paket favorit pemain Valorant
 
-<h3>1375 VP</h3>
-
-<p>Paling banyak dipilih untuk membeli skin.</p>
+</p>
 
 </div>
 
 <div class="best-card">
 
-<img src="assets/products/giftcard.png" alt="Gift Card">
+<img src="assets/products/vp.png">
 
-<h3>Gift Card Valorant</h3>
+<h3>
 
-<p>Voucher resmi Riot Games.</p>
+1000 VP
+
+</h3>
+
+<p>
+
+Paling banyak dibeli
+
+</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/vp.png">
+
+<h3>
+
+2050 VP
+
+</h3>
+
+<p>
+
+Cocok untuk membeli Bundle & Battle Pass
+
+</p>
 
 </div>
 
 </div>
 
 </section>
+  <!-- =====================================
+METODE PEMBAYARAN
+===================================== -->
 
-<!-- ==========================
-INFORMASI
-========================== -->
-
-<section class="info">
-
-<h2 class="title">
-
-📢 Informasi Top Up
-
-</h2>
+<section class="payment-section">
 
 <div class="box">
 
-<p>✔ Pastikan Riot ID dan Tagline yang dimasukkan sudah benar.</p>
+<h2>
 
-<p>✔ Valorant Points akan diproses setelah pembayaran berhasil.</p>
-
-<p>✔ Kesalahan penulisan Riot ID menjadi tanggung jawab pembeli.</p>
-
-<p>✔ Simpan bukti pembayaran hingga transaksi selesai.</p>
-
-<p>✔ Hubungi Admin jika pesanan belum diproses lebih dari 10 menit.</p>
-
-</div>
-
-</section>
-
-<!-- ==========================
-FAQ
-========================== -->
-
-<section class="faq">
-
-<h2 class="title">
-
-❓ Pertanyaan Umum
+💳 Pilih Metode Pembayaran
 
 </h2>
 
-<div class="box">
+<div class="payment-grid">
 
-<h3>Berapa lama proses top up?</h3>
+<div class="payment-card active" data-payment="QRIS">
 
-<p>Normalnya 1–5 menit setelah pembayaran dikonfirmasi.</p>
+<img src="qris.jpeg">
 
-<hr>
+<h3>QRIS</h3>
 
-<h3>Apakah aman?</h3>
+<p>Semua E-Wallet</p>
 
-<p>Ya, top up menggunakan metode resmi tanpa meminta password akun.</p>
+</div>
 
-<hr>
+<div class="payment-card" data-payment="DANA">
 
-<h3>Bagaimana jika VP belum masuk?</h3>
+<img src="dana.jpeg">
 
-<p>Silakan hubungi Admin melalui WhatsApp dengan bukti pembayaran.</p>
+<h3>DANA</h3>
+
+<p>Pembayaran Cepat</p>
+
+</div>
+
+<div class="payment-card" data-payment="OVO">
+
+<img src="ovo.jpeg">
+
+<h3>OVO</h3>
+
+<p>Saldo OVO</p>
+
+</div>
+
+<div class="payment-card" data-payment="GoPay">
+
+<img src="gopay.jpeg">
+
+<h3>GoPay</h3>
+
+<p>Pembayaran Instan</p>
+
+</div>
+
+<div class="payment-card" data-payment="ShopeePay">
+
+<img src="shoppepay.jpeg">
+
+<h3>ShopeePay</h3>
+
+<p>Transfer Mudah</p>
+
+</div>
+
+<div class="payment-card" data-payment="BCA">
+
+<img src="bca.jpeg">
+
+<h3>BCA</h3>
+
+<p>Transfer Bank</p>
+
+</div>
+
+</div>
 
 </div>
 
 </section>
 
-<!-- ==========================
+
+
+<!-- =====================================
+RINGKASAN CHECKOUT
+===================================== -->
+
+<section class="checkout-summary">
+
+<div class="box">
+
+<h2>
+
+🧾 Ringkasan Pesanan
+
+</h2>
+
+<div class="invoice">
+
+<div class="invoice-row">
+
+<span>
+
+Produk
+
+</span>
+
+<b id="summaryProduk">
+
+Belum Dipilih
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>
+
+Total
+
+</span>
+
+<b id="summaryTotal">
+
+Rp 0
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>
+
+Pembayaran
+
+</span>
+
+<b id="summaryPayment">
+
+QRIS
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>
+
+Region
+
+</span>
+
+<b id="summaryRegion">
+
+AP
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+  <!-- =====================================
+CHECKOUT WHATSAPP
+===================================== -->
+
+<section class="checkout-section">
+
+<div class="box">
+
+<h2>
+
+🚀 Checkout Valorant
+
+</h2>
+
+
+<p>
+
+Pastikan Riot ID, Region, produk VP,
+dan metode pembayaran sudah benar
+sebelum melakukan checkout.
+
+</p>
+
+
+
+<button
+
+id="checkoutBtn"
+
+class="btn-checkout">
+
+💬 Checkout via WhatsApp
+
+</button>
+
+
+</div>
+
+</section>
+  <!-- =====================================
 FOOTER
-========================== -->
+===================================== -->
 
 <footer>
 
 <div class="footer-container">
 
-<div>
-
-<h2>🎮 ARDZ STORE</h2>
-
-<p>Top Up Game Murah • Aman • Terpercaya</p>
-
-</div>
 
 <div>
 
-<h3>Hubungi Kami</h3>
+<h2>
 
-<p>📱 WhatsApp : 082295071107</p>
+🎮 ARDZ STORE
 
-<p>📧 Email : ardzstore@gmail.com</p>
+</h2>
+
+<p>
+
+Top Up Valorant Points Murah,
+Cepat dan Aman.
+
+</p>
 
 </div>
+
+
 
 <div>
 
-<h3>Jam Operasional</h3>
+<h3>
 
-<p>24 Jam Non Stop</p>
+Hubungi Kami
+
+</h3>
+
+<p>
+
+📱 WhatsApp : 083185954674
+
+</p>
+
+<p>
+
+⏰ Layanan 24 Jam
+
+</p>
 
 </div>
 
+
+
+<div>
+
+<h3>
+
+Menu
+
+</h3>
+
+<p>
+Top Up Valorant
+</p>
+
+<p>
+Voucher Promo
+</p>
+
 </div>
+
+
+
+</div>
+
+
 
 <div class="copyright">
 
-© 2026 ARDZ STORE. All Rights Reserved.
+© 2026 ARDZ STORE - Valorant
 
 </div>
 
+
 </footer>
 
-<!-- ==========================
-WHATSAPP FLOAT
-========================== -->
+
+
+
+<!-- =====================================
+WHATSAPP FLOATING
+===================================== -->
+
 
 <a
-href="https://wa.me/6282295071107"
+
+href="https://wa.me/6283185954674"
+
 class="wa-float"
+
 target="_blank">
 
 💬
 
 </a>
 
+
+
+
+<!-- =====================================
+BACK TO TOP
+===================================== -->
+
+
+<button
+
+id="backTop"
+
+class="back-top">
+
+↑
+
+</button>
+
+
+
+
+
+<!-- =====================================
+LIVE ORDER
+===================================== -->
+
+
+<div
+
+id="liveOrder"
+
+class="live-order">
+
+</div>
+
+
+
+
+
+<!-- =====================================
+POPUP PROMO
+===================================== -->
+
+
+<div
+
+id="promoPopup"
+
+class="promo-popup">
+
+
+<div class="promo-content">
+
+
+<h2>
+
+🎉 Promo Valorant
+
+</h2>
+
+
+
+<p>
+
+Gunakan kode voucher
+
+<b>
+
+ARDZ10
+
+</b>
+
+untuk mendapatkan diskon.
+
+</p>
+
+
+
+<button
+
+id="promoButton"
+
+class="btn-primary">
+
+🎁 Gunakan Voucher
+
+</button>
+
+
+
+
+<button
+
+id="closePromo"
+
+class="btn-secondary">
+
+Tutup
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- =====================================
+SCRIPT VALORANT.JS
+===================================== -->
+
+
 <script src="valorant.js"></script>
+
 
 </body>
 
 </html>
-
-</div>
