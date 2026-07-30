@@ -462,3 +462,115 @@ Mohon diproses ya 🙏`;
     }
 
 }
+/* ==========================================
+   BAGIAN 7
+   VALIDASI & OPTIMASI
+========================================== */
+
+// Simpan data terakhir
+function saveLastOrder(){
+
+    const data = {
+
+        userId: document.getElementById("userId")?.value || "",
+
+        nickname: document.getElementById("nickname")?.value || "",
+
+        payment: selectedPayment,
+
+        product: selectedProduct ? selectedProduct.nama : "",
+
+        discount: discount
+
+    };
+
+    localStorage.setItem("pubg_last_order", JSON.stringify(data));
+
+}
+
+// Muat data terakhir
+function loadLastOrder(){
+
+    const data = JSON.parse(
+
+        localStorage.getItem("pubg_last_order")
+
+    );
+
+    if(!data) return;
+
+    // Character ID
+    if(document.getElementById("userId")){
+
+        document.getElementById("userId").value = data.userId;
+
+    }
+
+    // Nickname
+    if(document.getElementById("nickname")){
+
+        document.getElementById("nickname").value = data.nickname;
+
+    }
+
+    // Payment
+    if(data.payment){
+
+        selectedPayment = data.payment;
+
+        const summaryPayment =
+        document.getElementById("summaryPayment");
+
+        if(summaryPayment){
+
+            summaryPayment.textContent = selectedPayment;
+
+        }
+
+    }
+
+    // Produk
+    if(data.product){
+
+        const index = products.findIndex(
+
+            item => item.nama === data.product
+
+        );
+
+        if(index !== -1){
+
+            selectProduct(index);
+
+        }
+
+    }
+
+}
+
+// Simpan otomatis saat input berubah
+const userIdInput = document.getElementById("userId");
+
+const nicknameInput = document.getElementById("nickname");
+
+if(userIdInput){
+
+    userIdInput.addEventListener("input", saveLastOrder);
+
+}
+
+if(nicknameInput){
+
+    nicknameInput.addEventListener("input", saveLastOrder);
+
+}
+
+// Simpan saat halaman ditutup
+window.addEventListener("beforeunload", saveLastOrder);
+
+// Muat saat halaman dibuka
+document.addEventListener("DOMContentLoaded", function(){
+
+    loadLastOrder();
+
+});
