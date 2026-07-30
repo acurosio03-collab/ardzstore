@@ -227,3 +227,183 @@ PILIH NOMINAL UC
     </div>
 
 </section>
+<!-- ==========================================
+VOUCHER & METODE PEMBAYARAN
+========================================== -->
+
+<section class="payment-section">
+
+    <!-- Voucher -->
+    <div class="box">
+
+        <h2>
+            🎁 Voucher Promo
+        </h2>
+
+        <p class="subtitle">
+            Gunakan voucher untuk mendapatkan potongan harga.
+        </p>
+
+        <div class="voucher-box">
+
+            <input
+                type="text"
+                id="voucher"
+                placeholder="Masukkan Kode Voucher">
+
+            <button
+                id="applyVoucher"
+                class="btn-primary">
+
+                Gunakan
+
+            </button>
+
+        </div>
+
+        <small id="voucherInfo"></small>
+
+    </div>
+
+    <!-- Metode Pembayaran -->
+    <div class="box">
+
+        <h2>
+            💳 Pilih Metode Pembayaran
+        </h2>
+
+        <p class="subtitle">
+            Pilih metode pembayaran yang tersedia.
+        </p>
+
+        <div class="payment-grid">
+
+            <div class="payment-card active" data-payment="QRIS">
+                <img src="assets/payment/qris.png" alt="QRIS">
+                <h3>QRIS</h3>
+            </div>
+
+            <div class="payment-card" data-payment="DANA">
+                <img src="assets/payment/dana.png" alt="DANA">
+                <h3>DANA</h3>
+            </div>
+
+            <div class="payment-card" data-payment="OVO">
+                <img src="assets/payment/ovo.png" alt="OVO">
+                <h3>OVO</h3>
+            </div>
+
+            <div class="payment-card" data-payment="GoPay">
+                <img src="assets/payment/gopay.png" alt="GoPay">
+                <h3>GoPay</h3>
+            </div>
+
+            <div class="payment-card" data-payment="ShopeePay">
+                <img src="assets/payment/shopeepay.png" alt="ShopeePay">
+                <h3>ShopeePay</h3>
+            </div>
+
+            <div class="payment-card" data-payment="BCA">
+                <img src="assets/payment/bca.png" alt="BCA">
+                <h3>BCA</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ==========================================
+DETAIL PESANAN & CHECKOUT
+========================================== -->
+
+<section class="checkout-section">
+
+    <!-- Detail Pesanan -->
+    <div class="box">
+
+        <h2>📋 Detail Pesanan</h2>
+
+        <div class="invoice">
+
+            <div class="invoice-row">
+                <span>Game</span>
+                <strong>PUBG Mobile</strong>
+            </div>
+
+            <div class="invoice-row">
+                <span>Produk</span>
+                <strong id="produk">Belum Dipilih</strong>
+            </div>
+
+            <div class="invoice-row">
+                <span>Pembayaran</span>
+                <strong id="summaryPayment">QRIS</strong>
+            </div>
+
+            <div class="invoice-row">
+                <span>Total</span>
+                <strong id="total">Rp 0</strong>
+            </div>
+
+            <div class="invoice-row">
+                <span>Status</span>
+                <strong class="status-waiting">
+                    Menunggu Pembayaran
+                </strong>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Ringkasan Checkout -->
+    <div class="box">
+
+        <h2>🛒 Ringkasan Checkout</h2>
+
+        <div class="summary-box">
+
+            <div class="summary-row">
+
+                <span>Produk</span>
+
+                <strong id="summaryProduk">
+                    Belum Dipilih
+                </strong>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Metode</span>
+
+                <strong id="summaryPayment2">
+                    QRIS
+                </strong>
+
+            </div>
+
+            <div class="summary-row total-row">
+
+                <span>Total Bayar</span>
+
+                <strong id="summaryTotal">
+                    Rp 0
+                </strong>
+
+            </div>
+
+        </div>
+
+        <button
+            id="checkoutBtn"
+            class="btn-checkout">
+
+            🚀 Checkout via WhatsApp
+
+        </button>
+
+    </div>
+
+</section>
