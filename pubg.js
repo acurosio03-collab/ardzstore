@@ -12,7 +12,7 @@
 ========================================== */
 
 // Nomor WhatsApp Admin
-const ADMIN_WA = "6282295071107";
+const ADMIN_WA = "6283185954674";
 
 // Produk PUBG
 const products = [
@@ -427,5 +427,142 @@ document.addEventListener("DOMContentLoaded",()=>{
         checkoutBtn.addEventListener("click",checkoutOrder);
 
     }
+
+});
+/* ==========================================
+   BAGIAN 7
+   INISIALISASI & LOCALSTORAGE
+========================================== */
+
+// Simpan data terakhir
+function saveData(){
+
+    const data = {
+
+        userId:
+        document.getElementById("userId")?.value || "",
+
+        nickname:
+        document.getElementById("nickname")?.value || "",
+
+        payment:
+        selectedPayment,
+
+        product:
+        selectedProduct ? selectedProduct.id : null,
+
+        discount:
+        discount
+
+    };
+
+    localStorage.setItem(
+        "pubg_data",
+        JSON.stringify(data)
+    );
+
+}
+
+// Load data terakhir
+function loadData(){
+
+    const data =
+    JSON.parse(localStorage.getItem("pubg_data"));
+
+    if(!data) return;
+
+    // Character ID
+    if(document.getElementById("userId")){
+
+        document.getElementById("userId").value =
+        data.userId || "";
+
+    }
+
+    // Nickname
+    if(document.getElementById("nickname")){
+
+        document.getElementById("nickname").value =
+        data.nickname || "";
+
+    }
+
+    // Payment
+    if(data.payment){
+
+        selectedPayment = data.payment;
+
+        document
+        .querySelectorAll(".payment-card")
+        .forEach(card=>{
+
+            card.classList.remove("active");
+
+            if(card.dataset.payment===selectedPayment){
+
+                card.classList.add("active");
+
+            }
+
+        });
+
+        const summaryPayment =
+        document.getElementById("summaryPayment");
+
+        if(summaryPayment){
+
+            summaryPayment.textContent =
+            selectedPayment;
+
+        }
+
+    }
+
+    // Produk
+    if(data.product){
+
+        const index =
+        products.findIndex(item=>item.id===data.product);
+
+        if(index!==-1){
+
+            selectProduct(index);
+
+        }
+
+    }
+
+}
+
+// Simpan otomatis saat mengetik
+["userId","nickname"].forEach(id=>{
+
+    const el=document.getElementById(id);
+
+    if(el){
+
+        el.addEventListener("input",saveData);
+
+    }
+
+});
+
+// Simpan sebelum keluar halaman
+window.addEventListener("beforeunload",saveData);
+
+// ==========================================
+// JALANKAN SEMUA
+// ==========================================
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    // Tampilkan Produk
+    renderProducts();
+
+    // Aktifkan Payment
+    initPayment();
+
+    // Load Data
+    loadData();
 
 });
