@@ -826,10 +826,9 @@ function initPromoPopup(){
             }
 
         });
+    } // tutup if(promoBtn)
 
-    }
-
-} // ← TAMBAHKAN INI
+} // TUTUP FUNCTION initPromoPopup
 
 /* ==========================================
    BAGIAN 12
