@@ -121,6 +121,8 @@ function $(id){
 ========================================== */
 
 function renderProducts(){
+console.log("RENDER PUBG JALAN");
+console.log(products);
 
     const productList = $("productList");
 
@@ -858,6 +860,3 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 });
 }
-function renderProducts(){
-   console.log("RENDER PUBG JALAN");
-console.log(products);
