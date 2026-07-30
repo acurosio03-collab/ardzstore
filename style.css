@@ -3861,3 +3861,118 @@ PRODUCT SECTION
     transform:scale(1.05);
 
 }
+/* ==========================================
+PAYMENT SECTION
+========================================== */
+
+.payment-section{
+
+    margin:40px 0;
+
+}
+
+.voucher-box{
+
+    display:flex;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-top:15px;
+
+}
+
+.voucher-box input{
+
+    flex:1;
+
+    min-width:220px;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(255,255,255,.15);
+
+    background:#18233b;
+
+    color:#fff;
+
+}
+
+#voucherInfo{
+
+    display:block;
+
+    margin-top:12px;
+
+    font-weight:600;
+
+}
+
+.payment-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(130px,1fr));
+
+    gap:18px;
+
+    margin-top:20px;
+
+}
+
+.payment-card{
+
+    background:#1c2844;
+
+    border:2px solid transparent;
+
+    border-radius:16px;
+
+    padding:18px;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.payment-card img{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:contain;
+
+    margin-bottom:10px;
+
+}
+
+.payment-card h3{
+
+    color:#fff;
+
+    font-size:15px;
+
+}
+
+.payment-card:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#00d9ff;
+
+}
+
+.payment-card.active{
+
+    border-color:#00d9ff;
+
+    box-shadow:0 0 18px rgba(0,217,255,.4);
+
+}
