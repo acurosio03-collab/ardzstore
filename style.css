@@ -3214,3 +3214,52 @@ overflow-x:auto;
 display:block;
 
 }
+/* =========================================
+TESTIMONIAL CONTROL
+========================================= */
+
+.testimonial-control{
+
+display:flex;
+
+justify-content:center;
+
+gap:15px;
+
+margin-top:30px;
+
+}
+
+.testimonial-control button{
+
+width:50px;
+
+height:50px;
+
+border:none;
+
+border-radius:50%;
+
+cursor:pointer;
+
+font-size:20px;
+
+color:#fff;
+
+background:linear-gradient(
+135deg,
+#4f46e5,
+#06b6d4
+);
+
+transition:.3s;
+
+box-shadow:0 10px 25px rgba(79,70,229,.35);
+
+}
+
+.testimonial-control button:hover{
+
+transform:scale(1.1);
+
+}
