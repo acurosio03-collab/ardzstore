@@ -2791,6 +2791,19 @@ ANIMATION
 .fade-in{
 
     animation:fadeIn .8s ease forwards;
+    .fade-up{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+
+    opacity .7s ease,
+
+    transform .7s ease;
+
+}
 
 }
 /* =========================================
