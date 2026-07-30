@@ -549,3 +549,67 @@ if(testimonialGrid && testimonialCards.length > 0){
     }
 
 }
+/* =====================================
+Popup Promo Premium
+===================================== */
+
+const promoPopup = document.querySelector(".promo-popup");
+const promoClose = document.querySelector(".promo-close");
+
+/* Tampilkan Popup */
+
+window.addEventListener("load",()=>{
+
+    if(!promoPopup) return;
+
+    if(sessionStorage.getItem("promoShown")) return;
+
+    setTimeout(()=>{
+
+        promoPopup.classList.add("show");
+
+        sessionStorage.setItem("promoShown","true");
+
+    },2000);
+
+});
+
+/* Tombol Tutup */
+
+if(promoClose){
+
+    promoClose.addEventListener("click",()=>{
+
+        promoPopup.classList.remove("show");
+
+    });
+
+}
+
+/* Tutup Saat Klik Background */
+
+if(promoPopup){
+
+    promoPopup.addEventListener("click",(e)=>{
+
+        if(e.target===promoPopup){
+
+            promoPopup.classList.remove("show");
+
+        }
+
+    });
+
+}
+
+/* Tombol ESC */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Escape" && promoPopup){
+
+        promoPopup.classList.remove("show");
+
+    }
+
+});
