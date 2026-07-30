@@ -1,403 +1,1778 @@
-// ==========================================
-// ARDZ STORE
-// VALORANT
-// valorant.js
-// ==========================================
+/* ==========================================
+   ARDZ STORE
+   VALORANT
+   valorant.js V1
+========================================== */
 
-// ==============================
-// DATA DARI PANEL ADMIN
-// ==============================
+"use strict";
 
-let dataNominal =
-JSON.parse(localStorage.getItem("nominal")) || [];
 
-// ==============================
-// PRODUK BAWAAN VALORANT
-// ==============================
+/* ==========================================
+   KONFIGURASI
+========================================== */
 
-const defaultProduk=[
+const ADMIN_WA = "6283185954674";
 
-{game:"Valorant",produk:"125 VP",harga:15000,badge:"HOT"},
-{game:"Valorant",produk:"420 VP",harga:48000,badge:"BEST"},
-{game:"Valorant",produk:"700 VP",harga:76000,badge:""},
-{game:"Valorant",produk:"1375 VP",harga:145000,badge:"TERLARIS"},
-{game:"Valorant",produk:"2400 VP",harga:245000,badge:""},
-{game:"Valorant",produk:"4000 VP",harga:395000,badge:"BEST"},
-{game:"Valorant",produk:"8150 VP",harga:790000,badge:"HOT"},
 
-{game:"Valorant",produk:"Gift Card Valorant",harga:50000,badge:"POPULER"}
+
+/* ==========================================
+   DATA PRODUK VALORANT POINT
+========================================== */
+
+
+const products = [
+
+    {id:1, nama:"475 VP", harga:55000},
+
+    {id:2, nama:"1000 VP", harga:105000},
+
+    {id:3, nama:"2050 VP", harga:210000},
+
+    {id:4, nama:"3650 VP", harga:365000},
+
+    {id:5, nama:"5350 VP", harga:520000},
+
+    {id:6, nama:"11000 VP", harga:1000000},
+
+
+    {id:7, nama:"Battle Pass", harga:150000},
+
+    {id:8, nama:"Valorant Bundle", harga:300000}
 
 ];
 
-// ==============================
-// AMBIL DATA DARI PANEL ADMIN
-// ==============================
 
-let produkValorant=[];
 
-if(dataNominal.length>0){
+/* ==========================================
+   DATA PESANAN
+========================================== */
 
-dataNominal.forEach(item=>{
 
-let game=item.game.toLowerCase().trim();
+let selectedProduct = null;
 
-if(game=="valorant"){
 
-produkValorant.push({
+let selectedPayment = "QRIS";
 
-produk:item.produk,
 
-harga:Number(item.supplier)+
-Number(item.profit),
+let discount = 0;
 
-badge:"ADMIN"
+
+let voucherUsed = "";
+/* ==========================================
+   VALORANT.JS V1
+   BAGIAN 2
+   HELPER FUNCTION
+========================================== */
+
+
+/* ==========================================
+   FORMAT RUPIAH
+========================================== */
+
+function rupiah(angka){
+
+    return "Rp " +
+    Number(angka).toLocaleString("id-ID");
+
+}
+
+
+
+/* ==========================================
+   GAMBAR PRODUK
+========================================== */
+
+function getProductImage(nama){
+
+    nama = nama.toLowerCase();
+
+
+    // Battle Pass
+    if(nama.includes("battle")){
+
+        return "assets/products/battlepass.png";
+
+    }
+
+
+    // Bundle
+    if(nama.includes("bundle")){
+
+        return "assets/products/bundle.png";
+
+    }
+
+
+    // Valorant Point
+    return "assets/products/vp.png";
+
+}
+
+
+
+/* ==========================================
+   HITUNG TOTAL HARGA
+========================================== */
+
+function getTotalHarga(){
+
+    if(selectedProduct === null){
+
+        return 0;
+
+    }
+
+
+    return selectedProduct.harga - discount;
+
+}
+
+
+
+
+/* ==========================================
+   AMBIL ELEMENT HTML
+========================================== */
+
+function $(id){
+
+    return document.getElementById(id);
+
+}
+/* ==========================================
+   VALORANT.JS V1
+   BAGIAN 3
+   RENDER PRODUK
+========================================== */
+
+
+function renderProducts(){
+
+
+    const productList = $("productList");
+
+
+
+    if(!productList){
+
+
+        console.error(
+            "Element #productList tidak ditemukan."
+        );
+
+
+        return;
+
+    }
+
+
+
+
+    productList.innerHTML = "";
+
+
+
+
+    products.forEach((item,index)=>{
+
+
+        productList.innerHTML += `
+
+
+        <div class="product-card"
+             onclick="selectProduct(${index})">
+
+
+
+            <img
+
+            src="${getProductImage(item.nama)}"
+
+            alt="${item.nama}">
+
+
+
+
+
+            <h3>
+
+            ${item.nama}
+
+            </h3>
+
+
+
+
+
+            <div class="product-price">
+
+            ${rupiah(item.harga)}
+
+            </div>
+
+
+
+
+
+            <button
+
+            type="button"
+
+            class="btn-primary">
+
+
+            Pilih
+
+
+            </button>
+
+
+
+        </div>
+
+
+        `;
+
+
+    });
+
+
+}
+/* ==========================================
+   VALORANT.JS V1
+   BAGIAN 4
+   PILIH PRODUK
+========================================== */
+
+
+function selectProduct(index){
+
+
+    // Simpan produk yang dipilih
+
+    selectedProduct = products[index];
+
+
+
+
+    // Reset semua card
+
+    document
+    .querySelectorAll(".product-card")
+    .forEach(card=>{
+
+
+        card.classList.remove(
+            "active"
+        );
+
+
+    });
+
+
+
+
+    // Aktifkan card pilihan
+
+    const cards =
+    document.querySelectorAll(
+        ".product-card"
+    );
+
+
+
+    if(cards[index]){
+
+
+        cards[index]
+        .classList.add(
+            "active"
+        );
+
+
+    }
+
+
+
+
+
+    // Update Detail Pesanan
+
+    if($("produk")){
+
+
+        $("produk")
+        .textContent =
+        selectedProduct.nama;
+
+
+    }
+
+
+
+
+    if($("total")){
+
+
+        $("total")
+        .textContent =
+        rupiah(
+            getTotalHarga()
+        );
+
+
+    }
+
+
+
+
+
+
+    // Update Ringkasan Checkout
+
+    if($("summaryProduk")){
+
+
+        $("summaryProduk")
+        .textContent =
+        selectedProduct.nama;
+
+
+    }
+
+
+
+
+
+    if($("summaryTotal")){
+
+
+        $("summaryTotal")
+        .textContent =
+        rupiah(
+            getTotalHarga()
+        );
+
+
+    }
+
+
+
+
+
+    if($("summaryPayment")){
+
+
+        $("summaryPayment")
+        .textContent =
+        selectedPayment;
+
+
+    }
+
+
+
+
+
+    // Simpan jika fungsi tersedia
+
+    if(typeof saveOrder === "function"){
+
+
+        saveOrder();
+
+
+    }
+
+
+}
+/* ==========================================
+   VALORANT.JS V1
+   BAGIAN 5
+   SISTEM VOUCHER
+========================================== */
+
+
+/* ==========================================
+   DAFTAR VOUCHER
+========================================== */
+
+const vouchers = {
+
+    "ARDZ10": 10,
+
+    "VALO5": 5,
+
+    "HEMAT20": 20
+
+};
+
+
+
+
+/* ==========================================
+   TERAPKAN VOUCHER
+========================================== */
+
+function applyVoucher(){
+
+
+    if(selectedProduct === null){
+
+
+        alert(
+            "Silakan pilih produk terlebih dahulu."
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+    const input = $("voucher");
+
+    const info = $("voucherInfo");
+
+
+
+    if(!input) return;
+
+
+
+
+    const code = 
+    input.value
+    .trim()
+    .toUpperCase();
+
+
+
+
+
+    if(code === ""){
+
+
+        alert(
+            "Masukkan kode voucher."
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    if(vouchers.hasOwnProperty(code)){
+
+
+        voucherUsed = code;
+
+
+
+        const persen =
+        vouchers[code];
+
+
+
+        discount = Math.floor(
+
+            selectedProduct.harga *
+            persen /
+            100
+
+        );
+
+
+
+
+
+        // Update total detail
+
+        if($("total")){
+
+
+            $("total")
+            .textContent =
+            rupiah(
+                getTotalHarga()
+            );
+
+
+        }
+
+
+
+
+
+
+        // Update ringkasan
+
+        if($("summaryTotal")){
+
+
+            $("summaryTotal")
+            .textContent =
+            rupiah(
+                getTotalHarga()
+            );
+
+
+        }
+
+
+
+
+
+
+        if(info){
+
+
+            info.textContent =
+            "✅ Voucher berhasil digunakan ("+
+            persen+
+            "% OFF)";
+
+
+            info.style.color =
+            "#22c55e";
+
+
+        }
+
+
+
+
+
+        if(typeof saveOrder === "function"){
+
+
+            saveOrder();
+
+
+        }
+
+
+
+    }else{
+
+
+
+        voucherUsed = "";
+
+        discount = 0;
+
+
+
+
+        if(info){
+
+
+            info.textContent =
+            "❌ Voucher tidak valid.";
+
+
+            info.style.color =
+            "#ef4444";
+
+
+        }
+
+
+
+
+
+        if($("total")){
+
+
+            $("total")
+            .textContent =
+            rupiah(
+                selectedProduct.harga
+            );
+
+
+        }
+
+
+
+
+        if($("summaryTotal")){
+
+
+            $("summaryTotal")
+            .textContent =
+            rupiah(
+                selectedProduct.harga
+            );
+
+
+        }
+
+
+    }
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   TOMBOL VOUCHER
+========================================== */
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    const btn =
+    $("applyVoucher");
+
+
+
+    if(btn){
+
+
+        btn.addEventListener(
+            "click",
+            applyVoucher
+        );
+
+
+    }
+
 
 });
+/* ==========================================
+   VALORANT.JS V1
+   BAGIAN 6
+   SISTEM PEMBAYARAN
+========================================== */
+
+
+/* ==========================================
+   INIT PAYMENT
+========================================== */
+
+function initPayment(){
+
+
+    const cards =
+    document.querySelectorAll(
+        ".payment-card"
+    );
+
+
+
+    if(cards.length === 0){
+
+
+        console.warn(
+            "Payment card tidak ditemukan."
+        );
+
+
+        return;
+
+
+    }
+
+
+
+
+    cards.forEach(card=>{
+
+
+        card.addEventListener(
+        "click",
+        function(){
+
+
+
+            // Hapus active sebelumnya
+
+            cards.forEach(item=>{
+
+
+                item.classList.remove(
+                    "active"
+                );
+
+
+            });
+
+
+
+
+
+
+            // Aktifkan pilihan
+
+            this.classList.add(
+                "active"
+            );
+
+
+
+
+
+
+            // Simpan pembayaran
+
+            selectedPayment =
+            this.dataset.payment;
+
+
+
+
+
+
+
+            // Update ringkasan
+
+            if($("summaryPayment")){
+
+
+                $("summaryPayment")
+                .textContent =
+                selectedPayment;
+
+
+            }
+
+
+
+
+
+
+
+
+            // Simpan data
+
+            if(typeof saveOrder === "function"){
+
+
+                saveOrder();
+
+
+            }
+
+
+
+        });
+
+
+    });
+
 
 }
 
-});
+
+
+
+/* ==========================================
+   DEFAULT PAYMENT
+========================================== */
+
+
+function setDefaultPayment(){
+
+
+    const first =
+    document.querySelector(
+        ".payment-card"
+    );
+
+
+
+    if(first){
+
+
+        first.classList.add(
+            "active"
+        );
+
+
+
+        selectedPayment =
+        first.dataset.payment ||
+        "QRIS";
+
+
+
+
+        if($("summaryPayment")){
+
+
+            $("summaryPayment")
+            .textContent =
+            selectedPayment;
+
+
+        }
+
+
+    }
+
 
 }
+/* ==========================================
+   VALORANT.JS V1
+   BAGIAN 7
+   CHECKOUT WHATSAPP
+========================================== */
 
-// Jika panel admin kosong
 
-if(produkValorant.length==0){
+/* ==========================================
+   CHECKOUT
+========================================== */
 
-produkValorant=defaultProduk;
+function checkoutWhatsApp(){
 
-}
 
-// ==============================
+    // Ambil Riot ID
 
-const list=
-document.getElementById("valorant-products");
-// ==============================
-// TAMPILKAN PRODUK VALORANT
-// ==============================
+    const nickname =
+    $("nickname")?.value.trim() || "";
 
-function loadValorant(){
 
-if(!list) return;
 
-list.innerHTML="";
+    if(nickname === ""){
 
-produkValorant.forEach((item,index)=>{
 
-let badge="";
+        alert(
+            "Masukkan Riot ID terlebih dahulu."
+        );
 
-switch(item.badge){
 
-case "HOT":
-badge='<div class="badge">🔥 HOT</div>';
-break;
+        $("nickname").focus();
 
-case "BEST":
-badge='<div class="badge">⭐ BEST SELLER</div>';
-break;
 
-case "TERLARIS":
-badge='<div class="badge">🏆 TERLARIS</div>';
-break;
+        return;
 
-case "POPULER":
-badge='<div class="badge">💎 POPULER</div>';
-break;
 
-case "ADMIN":
-badge='<div class="badge">⚙ ADMIN</div>';
-break;
+    }
 
-default:
-badge="";
 
-}
 
-// ==============================
-// GAMBAR PRODUK
-// ==============================
 
-let gambar="assets/products/vpcard.png";
 
-let nama=item.produk.toLowerCase();
+    // Ambil Region
 
-if(nama.includes("gift")){
+    const region =
+    $("region")?.value || "AP";
 
-gambar="assets/products/giftcard.png";
 
-}
 
-// ==============================
-// TAMPILKAN CARD
-// ==============================
 
-list.innerHTML += `
 
-<div class="produk-card">
 
-${badge}
+    // Cek Produk
 
-<img
-src="${gambar}"
-class="icon-diamond">
+    if(selectedProduct === null){
 
-<h3>
 
-${item.produk}
+        alert(
+            "Silakan pilih produk Valorant terlebih dahulu."
+        );
 
-</h3>
 
-<p>
+        return;
 
-Valorant Points
 
-</p>
+    }
 
-<h2>
 
-Rp ${Number(item.harga).toLocaleString("id-ID")}
 
-</h2>
 
-<button
-onclick="pilihProduk(${index})">
 
-PILIH
 
-</button>
 
-</div>
+    // Total pembayaran
 
-`;
+    const total =
+    getTotalHarga();
 
-});
 
-}
-// ==============================
-// PRODUK TERPILIH
-// ==============================
 
-let produkDipilih = null;
 
-// ==============================
-// PILIH PRODUK
-// ==============================
 
-function pilihProduk(index){
 
-produkDipilih = produkValorant[index];
+    // Pesan WhatsApp
 
-// Isi Detail Pesanan
-document.getElementById("produk").innerHTML =
-produkDipilih.produk;
-
-document.getElementById("total").innerHTML =
-"Rp " +
-Number(produkDipilih.harga)
-.toLocaleString("id-ID");
-
-// Hapus efek pilihan sebelumnya
-let semuaCard =
-document.querySelectorAll(".produk-card");
-
-semuaCard.forEach(card=>{
-
-card.style.border =
-"2px solid transparent";
-
-card.style.boxShadow =
-"none";
-
-card.style.transform =
-"scale(1)";
-
-});
-
-// Efek card yang dipilih
-let cardDipilih =
-semuaCard[index];
-
-if(cardDipilih){
-
-cardDipilih.style.border =
-"2px solid #ff4655";
-
-cardDipilih.style.boxShadow =
-"0 0 20px rgba(255,70,85,.8)";
-
-cardDipilih.style.transform =
-"scale(1.03)";
-
-}
-
-// Scroll ke Detail Pesanan
-let invoice =
-document.querySelector(".invoice");
-
-if(invoice){
-
-invoice.scrollIntoView({
-
-behavior:"smooth",
-
-block:"center"
-
-});
-
-}
-
-}
-
-// ==============================
-// RESET PILIHAN
-// ==============================
-
-function resetPilihan(){
-
-produkDipilih = null;
-
-document.getElementById("produk").innerHTML =
-"Belum Dipilih";
-
-document.getElementById("total").innerHTML =
-"Rp 0";
-
-let semuaCard =
-document.querySelectorAll(".produk-card");
-
-semuaCard.forEach(card=>{
-
-card.style.border =
-"2px solid transparent";
-
-card.style.boxShadow =
-"none";
-
-card.style.transform =
-"scale(1)";
-
-});
-
-}
-
-// ==============================
-// FORMAT RUPIAH
-// ==============================
-
-function formatRupiah(angka){
-
-return "Rp " +
-Number(angka).toLocaleString("id-ID");
-
-}
-// ==============================
-// CHECKOUT WHATSAPP
-// ==============================
-
-function checkoutValorant(){
-
-let userid =
-document.getElementById("userid").value.trim();
-
-let tagline =
-document.getElementById("tagline").value.trim();
-
-let payment =
-document.getElementById("payment").value;
-
-let catatan =
-document.getElementById("catatan").value.trim();
-
-// ==============================
-// VALIDASI RIOT ID
-// ==============================
-
-if(userid==""){
-
-alert("Masukkan Riot ID terlebih dahulu!");
-
-return;
-
-}
-
-if(tagline==""){
-
-alert("Masukkan Tagline terlebih dahulu! (Contoh: #ID1)");
-
-return;
-
-}
-
-// ==============================
-// VALIDASI PRODUK
-// ==============================
-
-if(produkDipilih==null){
-
-alert("Silakan pilih produk terlebih dahulu!");
-
-return;
-
-}
-
-// ==============================
-// DATA PRODUK
-// ==============================
-
-let produk = produkDipilih.produk;
-
-let harga = Number(produkDipilih.harga)
-.toLocaleString("id-ID");
-
-// ==============================
-// PESAN WHATSAPP
-// ==============================
-
-let pesan =
-`🎮 *ARDZ STORE*
+    const pesan = `🎮 *ARDZ STORE*
 
 Halo Admin,
 
 Saya ingin melakukan Top Up Valorant.
 
-━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━
 
 🎮 Game : Valorant
 
-👤 Riot ID : ${userid}
+👤 Riot ID : ${nickname}
 
-🏷️ Tagline : ${tagline}
+🌍 Region : ${region}
 
-💎 Produk : ${produk}
+💎 Produk : ${selectedProduct.nama}
 
-💰 Total : Rp ${harga}
+💰 Harga : ${rupiah(selectedProduct.harga)}
 
-💳 Pembayaran : ${payment}
+🎁 Voucher : ${voucherUsed || "-"}
 
-📝 Catatan : ${catatan=="" ? "-" : catatan}
+💸 Diskon : ${rupiah(discount)}
 
-━━━━━━━━━━━━━━━
+💵 Total Bayar : ${rupiah(total)}
 
-Mohon diproses ya.
+💳 Pembayaran : ${selectedPayment}
+
+━━━━━━━━━━━━━━━━━━
+
+Mohon diproses.
+
 Terima kasih 🙏`;
 
-window.open(
 
-"https://wa.me/6282295071107?text="+
-encodeURIComponent(pesan),
 
-"_blank"
 
-);
+
+
+    // Buka WhatsApp
+
+    window.open(
+
+        "https://wa.me/" +
+        ADMIN_WA +
+        "?text=" +
+        encodeURIComponent(pesan),
+
+        "_blank"
+
+    );
+
 
 }
 
-// ==============================
-// LOAD HALAMAN
-// ==============================
 
-document.addEventListener("DOMContentLoaded",function(){
 
-loadValorant();
+
+
+/* ==========================================
+   TOMBOL CHECKOUT
+========================================== */
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+    const btn =
+    $("checkoutBtn");
+
+
+
+    if(btn){
+
+
+        btn.addEventListener(
+
+            "click",
+
+            checkoutWhatsApp
+
+        );
+
+
+    }
+
+
+});
+/* ==========================================
+   VALORANT.JS V1
+   BAGIAN 8
+   LOCAL STORAGE
+========================================== */
+
+
+/* ==========================================
+   STORAGE KEY
+========================================== */
+
+const STORAGE_KEY = "valorant_last_order";
+
+
+
+/* ==========================================
+   SIMPAN PESANAN
+========================================== */
+
+function saveOrder(){
+
+
+    const data = {
+
+
+        nickname:
+        $("nickname")
+        ?
+        $("nickname").value
+        :
+        "",
+
+
+
+        region:
+        $("region")
+        ?
+        $("region").value
+        :
+        "AP",
+
+
+
+        payment:
+        selectedPayment,
+
+
+
+        voucher:
+        voucherUsed,
+
+
+
+        discount:
+        discount,
+
+
+
+        productId:
+        selectedProduct
+        ?
+        selectedProduct.id
+        :
+        null
+
+
+    };
+
+
+
+
+    localStorage.setItem(
+
+        STORAGE_KEY,
+
+        JSON.stringify(data)
+
+    );
+
+
+}
+
+
+
+
+
+
+/* ==========================================
+   LOAD PESANAN
+========================================== */
+
+function loadOrder(){
+
+
+    const data =
+    JSON.parse(
+
+        localStorage.getItem(
+            STORAGE_KEY
+        )
+
+    );
+
+
+
+    if(!data) return;
+
+
+
+
+
+    // Riot ID
+
+    if($("nickname")){
+
+
+        $("nickname").value =
+        data.nickname || "";
+
+
+    }
+
+
+
+
+
+
+    // Region
+
+    if($("region")){
+
+
+        $("region").value =
+        data.region || "AP";
+
+
+    }
+
+
+
+
+
+
+
+    // Pembayaran
+
+    if(data.payment){
+
+
+        selectedPayment =
+        data.payment;
+
+
+
+
+        document
+        .querySelectorAll(
+            ".payment-card"
+        )
+        .forEach(card=>{
+
+
+            card.classList.remove(
+                "active"
+            );
+
+
+
+            if(
+                card.dataset.payment
+                ===
+                selectedPayment
+            ){
+
+
+                card.classList.add(
+                    "active"
+                );
+
+
+            }
+
+
+        });
+
+
+
+
+
+        if($("summaryPayment")){
+
+
+            $("summaryPayment")
+            .textContent =
+            selectedPayment;
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+    // Voucher
+
+    voucherUsed =
+    data.voucher || "";
+
+
+
+    discount =
+    data.discount || 0;
+
+
+
+
+
+
+
+    // Produk terakhir
+
+    if(data.productId){
+
+
+        const index =
+        products.findIndex(
+
+            item =>
+            item.id === data.productId
+
+        );
+
+
+
+        if(index !== -1){
+
+
+            selectProduct(index);
+
+
+        }
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   AUTO SAVE INPUT
+========================================== */
+
+
+[
+    "nickname",
+    "region"
+]
+.forEach(id=>{
+
+
+    const el = $(id);
+
+
+
+    if(el){
+
+
+        el.addEventListener(
+            "input",
+            saveOrder
+        );
+
+
+        el.addEventListener(
+            "change",
+            saveOrder
+        );
+
+
+    }
+
+
+});
+
+
+
+
+
+
+
+/* ==========================================
+   SIMPAN SAAT KELUAR HALAMAN
+========================================== */
+
+window.addEventListener(
+
+    "beforeunload",
+
+    saveOrder
+
+);
+/* ==========================================
+   VALORANT.JS V1
+   BAGIAN 9
+   LIVE ORDER + POPUP + EFFECT
+========================================== */
+
+
+/* ==========================================
+   LIVE ORDER
+========================================== */
+
+const liveOrders = [
+
+    {
+        nama:"Budi",
+        kota:"Jakarta",
+        produk:"475 VP"
+    },
+
+    {
+        nama:"Andi",
+        kota:"Bandung",
+        produk:"1000 VP"
+    },
+
+    {
+        nama:"Rizky",
+        kota:"Surabaya",
+        produk:"2050 VP"
+    },
+
+    {
+        nama:"Fajar",
+        kota:"Medan",
+        produk:"Battle Pass"
+    },
+
+    {
+        nama:"Agus",
+        kota:"Semarang",
+        produk:"5350 VP"
+    },
+
+    {
+        nama:"Dimas",
+        kota:"Makassar",
+        produk:"3650 VP"
+    },
+
+    {
+        nama:"Rian",
+        kota:"Bekasi",
+        produk:"11000 VP"
+    }
+
+];
+
+
+
+function startLiveOrder(){
+
+
+    const box =
+    $("liveOrder");
+
+
+
+    if(!box) return;
+
+
+
+
+    function showOrder(){
+
+
+        const item =
+        liveOrders[
+            Math.floor(
+                Math.random()
+                *
+                liveOrders.length
+            )
+        ];
+
+
+
+        box.innerHTML = `
+
+        <strong>
+        🛒 Pesanan Baru
+        </strong>
+
+        <br>
+
+        ${item.nama}
+        dari
+        ${item.kota}
+
+        <br>
+
+        membeli
+        <b>
+        ${item.produk}
+        </b>
+
+        `;
+
+
+
+        box.classList.add(
+            "show"
+        );
+
+
+
+        setTimeout(()=>{
+
+
+            box.classList.remove(
+                "show"
+            );
+
+
+        },5000);
+
+
+    }
+
+
+
+
+    setTimeout(
+        showOrder,
+        3000
+    );
+
+
+
+    setInterval(
+        showOrder,
+        12000
+    );
+
+
+}
+
+
+
+
+
+/* ==========================================
+   POPUP PROMO
+========================================== */
+
+
+function initPromoPopup(){
+
+
+    const popup =
+    $("promoPopup");
+
+
+    const closeBtn =
+    $("closePromo");
+
+
+    const promoBtn =
+    $("promoButton");
+
+
+
+    if(!popup) return;
+
+
+
+
+
+    if(
+        localStorage.getItem(
+            "valorant_promo_seen"
+        )
+    ){
+
+
+        popup.style.display =
+        "none";
+
+
+        return;
+
+
+    }
+
+
+
+
+
+    setTimeout(()=>{
+
+
+        popup.classList.add(
+            "show"
+        );
+
+
+    },1000);
+
+
+
+
+
+
+    if(closeBtn){
+
+
+        closeBtn.addEventListener(
+        "click",
+        ()=>{
+
+
+            popup.classList.remove(
+                "show"
+            );
+
+
+            localStorage.setItem(
+                "valorant_promo_seen",
+                "true"
+            );
+
+
+        });
+
+
+    }
+
+
+
+
+
+
+    if(promoBtn){
+
+
+        promoBtn.addEventListener(
+        "click",
+        ()=>{
+
+
+            popup.classList.remove(
+                "show"
+            );
+
+
+            localStorage.setItem(
+                "valorant_promo_seen",
+                "true"
+            );
+
+
+
+            const voucher =
+            $("voucher");
+
+
+
+            if(voucher){
+
+
+                voucher.scrollIntoView({
+
+                    behavior:"smooth"
+
+                });
+
+
+            }
+
+
+        });
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   BACK TO TOP
+========================================== */
+
+
+function initBackToTop(){
+
+
+    const button =
+    $("backTop");
+
+
+
+    if(!button) return;
+
+
+
+
+    button.style.display =
+    "none";
+
+
+
+
+    window.addEventListener(
+    "scroll",
+    ()=>{
+
+
+        if(
+            window.scrollY > 300
+        ){
+
+
+            button.style.display =
+            "flex";
+
+
+        }else{
+
+
+            button.style.display =
+            "none";
+
+
+        }
+
+
+    });
+
+
+
+
+
+
+    button.addEventListener(
+    "click",
+    ()=>{
+
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+
+    });
+
+
+}
+
+
+
+
+
+
+
+/* ==========================================
+   EFEK CARD PRODUK
+========================================== */
+
+
+function initCardEffect(){
+
+
+    document
+    .querySelectorAll(
+        ".product-card"
+    )
+    .forEach(card=>{
+
+
+        card.addEventListener(
+        "mouseenter",
+        ()=>{
+
+
+            card.style.transform =
+            "translateY(-8px)";
+
+
+        });
+
+
+
+
+        card.addEventListener(
+        "mouseleave",
+        ()=>{
+
+
+            if(
+                !card.classList.contains(
+                    "active"
+                )
+            ){
+
+
+                card.style.transform =
+                "translateY(0)";
+
+
+            }
+
+
+        });
+
+
+    });
+
+
+          }
+/* ==========================================
+   VALORANT.JS V1
+   BAGIAN 10
+   INISIALISASI FINAL
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    console.log("🎮 Valorant.js V1 Loaded");
+
+    // Render daftar produk
+    renderProducts();
+
+    // Inisialisasi metode pembayaran
+    initPayment();
+
+    // Set pembayaran default
+    setDefaultPayment();
+
+    // Muat data pesanan terakhir
+    loadOrder();
+
+    // Live Order
+    startLiveOrder();
+
+    // Popup Promo
+    initPromoPopup();
+
+    // Tombol Back To Top
+    initBackToTop();
+
+    // Efek Card
+    initCardEffect();
+
+    console.log("✅ Valorant siap digunakan.");
 
 });
