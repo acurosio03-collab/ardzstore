@@ -1,95 +1,132 @@
 /* ==========================================
    ARDZ STORE
    PUBG MOBILE
-   PUBG.JS PREMIUM V4
+   pubg.js V5
 ========================================== */
 
 "use strict";
 
 /* ==========================================
-   BAGIAN 1
-   KONFIGURASI & DATA PRODUK
+   KONFIGURASI
 ========================================== */
 
-// Nomor WhatsApp Admin
 const ADMIN_WA = "6283185954674";
 
-// Produk PUBG
-const products = [
-    {id:1, nama:"30 UC", harga:7000},
-    {id:2, nama:"60 UC", harga:14000},
-    {id:3, nama:"120 UC", harga:28000},
-    {id:4, nama:"180 UC", harga:41000},
-    {id:5, nama:"325 UC", harga:70000},
-    {id:6, nama:"385 UC", harga:82000},
-    {id:7, nama:"445 UC", harga:95000},
-    {id:8, nama:"660 UC", harga:140000},
-    {id:9, nama:"720 UC", harga:152000},
-    {id:10, nama:"985 UC", harga:205000},
-    {id:11, nama:"1320 UC", harga:274000},
-    {id:12, nama:"1800 UC", harga:370000},
-    {id:13, nama:"2460 UC", harga:505000},
-    {id:14, nama:"3850 UC", harga:785000},
-    {id:15, nama:"5650 UC", harga:1145000},
-    {id:16, nama:"8100 UC", harga:1630000},
-    {id:17, nama:"Royale Pass", harga:170000},
-    {id:18, nama:"Elite Royale Pass", harga:340000},
-    {id:19, nama:"Prime Membership", harga:35000},
-    {id:20, nama:"Prime Plus", harga:90000}
-];
-
-// Voucher
-const vouchers = {
-    "ARDZ10":10,
-    "PUBG5":5,
-    "HEMAT20":20
-};
-
-// Variabel Global
-let selectedProduct = null;
-let selectedPayment = "QRIS";
-let discount = 0;
-
 /* ==========================================
-   FUNGSI BANTU
+   DATA PRODUK PUBG
 ========================================== */
 
-// Format Rupiah
-function rupiah(nominal){
-    return "Rp " + Number(nominal).toLocaleString("id-ID");
-}
+const products = [
 
-// Gambar Produk
-function getProductImage(nama){
+    {id:1,nama:"30 UC",harga:7000},
+    {id:2,nama:"60 UC",harga:14000},
+    {id:3,nama:"120 UC",harga:28000},
+    {id:4,nama:"180 UC",harga:41000},
+    {id:5,nama:"325 UC",harga:70000},
+    {id:6,nama:"385 UC",harga:82000},
+    {id:7,nama:"445 UC",harga:95000},
+    {id:8,nama:"660 UC",harga:140000},
+    {id:9,nama:"720 UC",harga:152000},
+    {id:10,nama:"985 UC",harga:205000},
+    {id:11,nama:"1320 UC",harga:274000},
+    {id:12,nama:"1800 UC",harga:370000},
+    {id:13,nama:"2460 UC",harga:505000},
+    {id:14,nama:"3850 UC",harga:785000},
+    {id:15,nama:"5650 UC",harga:1145000},
+    {id:16,nama:"8100 UC",harga:1630000},
 
-    const text = nama.toLowerCase();
+    {id:17,nama:"Royale Pass",harga:170000},
+    {id:18,nama:"Elite Royale Pass",harga:340000},
+    {id:19,nama:"Prime Membership",harga:35000},
+    {id:20,nama:"Prime Plus",harga:90000}
 
-    if(text.includes("royale")){
-        return "assets/products/royalepass.png";
-    }
+];
 
-    if(text.includes("prime plus")){
-        return "assets/products/primeplus.png";
-    }
+/* ==========================================
+   DATA PESANAN
+========================================== */
 
-    if(text.includes("prime")){
-        return "assets/products/prime.png";
-    }
+let selectedProduct = null;
 
-    return "uc.jpeg";
-     }
+let selectedPayment = "QRIS";
+
+let discount = 0;
+
+let voucherUsed = "";
 /* ==========================================
    BAGIAN 2
-   TAMPILKAN DAFTAR PRODUK
+   HELPER FUNCTIONS
+========================================== */
+
+/* Format Rupiah */
+
+function rupiah(angka){
+
+    return "Rp " + Number(angka).toLocaleString("id-ID");
+
+}
+
+/* Ambil gambar produk */
+
+function getProductImage(nama){
+
+    nama = nama.toLowerCase();
+
+    if(nama.includes("royale")){
+
+        return "assets/products/royalepass.png";
+
+    }
+
+    if(nama.includes("prime plus")){
+
+        return "assets/products/primeplus.png";
+
+    }
+
+    if(nama.includes("prime")){
+
+        return "assets/products/prime.png";
+
+    }
+
+    return "assets/products/uc.png";
+
+}
+
+/* Hitung Total */
+
+function getTotalHarga(){
+
+    if(selectedProduct === null){
+
+        return 0;
+
+    }
+
+    return selectedProduct.harga - discount;
+
+}
+
+/* Ambil Element */
+
+function $(id){
+
+    return document.getElementById(id);
+
+}
+/* ==========================================
+   BAGIAN 3
+   RENDER PRODUK
 ========================================== */
 
 function renderProducts(){
 
-    const productList = document.getElementById("productList");
+    const productList = $("productList");
 
     if(!productList){
 
-        console.error("Element #productList tidak ditemukan!");
+        console.error("Element #productList tidak ditemukan.");
 
         return;
 
@@ -101,26 +138,38 @@ function renderProducts(){
 
         productList.innerHTML += `
 
-        <div class="product-card" onclick="selectProduct(${index})">
+        <div class="product-card"
+             onclick="selectProduct(${index})">
 
             <img
                 src="${getProductImage(item.nama)}"
-                alt="${item.nama}"
-                class="product-image">
+                alt="${item.nama}">
 
             <h3>${item.nama}</h3>
 
-            <p class="product-price">
-                ${rupiah(item.harga)}
-            </p>
+            <div class="product-price">
 
-            <button class="btn-primary">
+                ${rupiah(item.harga)}
+
+            </div>
+
+            <button
+                type="button"
+                class="btn-primary">
+
                 Pilih
+
             </button>
 
         </div>
+
+        `;
+
+    });
+
+}
 /* ==========================================
-   BAGIAN 3
+   BAGIAN 4
    PILIH PRODUK
 ========================================== */
 
@@ -129,7 +178,7 @@ function selectProduct(index){
     // Simpan produk yang dipilih
     selectedProduct = products[index];
 
-    // Hapus status aktif semua card
+    // Reset semua card
     document.querySelectorAll(".product-card").forEach(card=>{
 
         card.classList.remove("active");
@@ -146,196 +195,214 @@ function selectProduct(index){
     }
 
     // Update Detail Pesanan
-    const produk = document.getElementById("produk");
+    if($("produk")){
 
-    const total = document.getElementById("total");
-
-    if(produk){
-
-        produk.textContent = selectedProduct.nama;
+        $("produk").textContent = selectedProduct.nama;
 
     }
 
-    if(total){
+    if($("total")){
 
-        total.textContent = rupiah(selectedProduct.harga - discount);
+        $("total").textContent =
+        rupiah(getTotalHarga());
 
     }
 
     // Update Ringkasan Checkout
-    const summaryProduk = document.getElementById("summaryProduk");
+    if($("summaryProduk")){
 
-    const summaryTotal = document.getElementById("summaryTotal");
-
-    if(summaryProduk){
-
-        summaryProduk.textContent = selectedProduct.nama;
+        $("summaryProduk").textContent =
+        selectedProduct.nama;
 
     }
 
-    if(summaryTotal){
+    if($("summaryTotal")){
 
-        summaryTotal.textContent = rupiah(selectedProduct.harga - discount);
+        $("summaryTotal").textContent =
+        rupiah(getTotalHarga());
 
     }
 
-}
-        `;
+    if($("summaryPayment")){
 
-    });
+        $("summaryPayment").textContent =
+        selectedPayment;
+
+    }
+
+    if($("summaryPayment2")){
+
+        $("summaryPayment2").textContent =
+        selectedPayment;
+
+    }
 
 }
 /* ==========================================
-   BAGIAN 4
-   VOUCHER PROMO
+   BAGIAN 5
+   SISTEM VOUCHER
 ========================================== */
 
+// Daftar Voucher
+const vouchers = {
+
+    "ARDZ10": 10,
+    "PUBG5": 5,
+    "HEMAT20": 20
+
+};
+
+// Terapkan Voucher
 function applyVoucher(){
 
-    // Harus pilih produk dulu
     if(selectedProduct === null){
 
         alert("Silakan pilih produk terlebih dahulu.");
-
         return;
 
     }
 
-    const voucherInput = document.getElementById("voucher");
-    const voucherInfo = document.getElementById("voucherInfo");
+    const input = $("voucher");
+    const info = $("voucherInfo");
 
-    if(!voucherInput) return;
+    if(!input) return;
 
-    const kode = voucherInput.value.trim().toUpperCase();
+    const code = input.value.trim().toUpperCase();
 
-    // Reset diskon
-    discount = 0;
+    if(code === ""){
 
-    // Voucher kosong
-    if(kode === ""){
-
-        if(voucherInfo){
-
-            voucherInfo.textContent = "";
-
-        }
-
-        updateTotal();
-
+        alert("Masukkan kode voucher.");
         return;
 
     }
 
-    // Voucher ditemukan
-    if(vouchers[kode]){
+    if(vouchers.hasOwnProperty(code)){
 
-        const persen = vouchers[kode];
+        voucherUsed = code;
+
+        const persen = vouchers[code];
 
         discount = Math.floor(
             selectedProduct.harga * persen / 100
         );
 
-        if(voucherInfo){
+        // Update Total
+        if($("total")){
 
-            voucherInfo.textContent =
+            $("total").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        // Informasi Voucher
+        if(info){
+
+            info.textContent =
             "✅ Voucher berhasil digunakan (" +
             persen + "% OFF)";
 
-            voucherInfo.style.color = "#22c55e";
+            info.style.color = "#22c55e";
 
         }
 
     }else{
 
-        if(voucherInfo){
+        voucherUsed = "";
 
-            voucherInfo.textContent =
-            "❌ Voucher tidak valid";
+        discount = 0;
 
-            voucherInfo.style.color = "#ef4444";
+        if(info){
+
+            info.textContent =
+            "❌ Voucher tidak valid.";
+
+            info.style.color = "#ef4444";
+
+        }
+
+        if($("total")){
+
+            $("total").textContent =
+            rupiah(selectedProduct.harga);
+
+        }
+
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(selectedProduct.harga);
 
         }
 
     }
 
-    updateTotal();
-
 }
 
-/* ==========================================
-   UPDATE TOTAL
-========================================== */
+// Tombol Voucher
+document.addEventListener("DOMContentLoaded",()=>{
 
-function updateTotal(){
+    const btn = $("applyVoucher");
 
-    if(selectedProduct === null) return;
+    if(btn){
 
-    const totalBayar =
-    selectedProduct.harga - discount;
-
-    const total =
-    document.getElementById("total");
-
-    if(total){
-
-        total.textContent =
-        rupiah(totalBayar);
+        btn.addEventListener("click",applyVoucher);
 
     }
 
-    const summaryTotal =
-    document.getElementById("summaryTotal");
+});
 
-    if(summaryTotal){
-
-        summaryTotal.textContent =
-        rupiah(totalBayar);
-
-    }
-/* ==========================================
-   BAGIAN 5
+        
+           /* ==========================================
+   BAGIAN 6
    METODE PEMBAYARAN
 ========================================== */
 
 function initPayment(){
 
-    const paymentCards = document.querySelectorAll(".payment-card");
+    const cards = document.querySelectorAll(".payment-card");
 
-    if(paymentCards.length === 0){
-
-        console.warn("Payment card tidak ditemukan.");
-
-        return;
-
-    }
-
-    paymentCards.forEach(card=>{
+    cards.forEach(card=>{
 
         card.addEventListener("click",function(){
 
-            // Hapus status aktif
-            paymentCards.forEach(item=>{
+            // Hapus pilihan sebelumnya
+            cards.forEach(item=>{
 
                 item.classList.remove("active");
 
             });
 
-            // Aktifkan card yang dipilih
+            // Aktifkan payment yang dipilih
             this.classList.add("active");
 
-            // Ambil nama payment
+            // Simpan metode pembayaran
             selectedPayment = this.dataset.payment;
 
-            // Update Ringkasan
-            const summaryPayment =
-            document.getElementById("summaryPayment");
+            // Update Detail Pesanan
+            if($("summaryPayment")){
 
-            if(summaryPayment){
-
-                summaryPayment.textContent =
+                $("summaryPayment").textContent =
                 selectedPayment;
 
             }
+
+            // Update Ringkasan Checkout
+            if($("summaryPayment2")){
+
+                $("summaryPayment2").textContent =
+                selectedPayment;
+
+            }
+
+            // Simpan otomatis
+            saveOrder();
 
         });
 
@@ -343,38 +410,40 @@ function initPayment(){
 
 }
 /* ==========================================
-   BAGIAN 6
+   BAGIAN 7
    CHECKOUT WHATSAPP
 ========================================== */
 
-function checkoutOrder(){
+function checkoutWhatsApp(){
 
-    // Produk harus dipilih
-    if(selectedProduct === null){
-
-        alert("Silakan pilih produk terlebih dahulu.");
-        return;
-
-    }
-
-    // Character ID
-    const userId =
-    document.getElementById("userId")?.value.trim() || "";
-
-    // Nickname
-    const nickname =
-    document.getElementById("nickname")?.value.trim() || "-";
+    // Validasi Character ID
+    const userId = $("userId")?.value.trim() || "";
 
     if(userId === ""){
 
-        alert("Masukkan Character ID PUBG terlebih dahulu.");
+        alert("Masukkan Character ID terlebih dahulu.");
+
+        $("userId").focus();
+
         return;
 
     }
 
-    // Hitung total
-    const totalBayar =
-    selectedProduct.harga - discount;
+    // Validasi Produk
+    if(selectedProduct === null){
+
+        alert("Silakan pilih produk terlebih dahulu.");
+
+        return;
+
+    }
+
+    // Data Tambahan
+    const nickname = $("nickname")?.value.trim() || "-";
+
+    const region = $("region")?.value || "Indonesia";
+
+    const total = getTotalHarga();
 
     // Pesan WhatsApp
     const pesan = `🎮 *ARDZ STORE*
@@ -391,99 +460,121 @@ Saya ingin melakukan Top Up PUBG Mobile.
 
 👤 Nickname : ${nickname}
 
+🌍 Region : ${region}
+
 💎 Produk : ${selectedProduct.nama}
 
 💰 Harga : ${rupiah(selectedProduct.harga)}
 
-🎁 Diskon : ${rupiah(discount)}
+🎁 Voucher : ${voucherUsed || "-"}
 
-💵 Total Bayar : ${rupiah(totalBayar)}
+💸 Diskon : ${rupiah(discount)}
+
+💵 Total Bayar : ${rupiah(total)}
 
 💳 Pembayaran : ${selectedPayment}
 
 ━━━━━━━━━━━━━━━━━━
 
+Mohon diproses.
+
 Terima kasih 🙏`;
 
-    // Buka WhatsApp
     window.open(
-        `https://wa.me/${083185954674}?text=${encodeURIComponent(pesan)}`,
+
+        "https://wa.me/" +
+        ADMIN_WA +
+        "?text=" +
+        encodeURIComponent(pesan),
+
         "_blank"
+
     );
 
 }
 
 /* ==========================================
-   PASANG EVENT CHECKOUT
+   TOMBOL CHECKOUT
 ========================================== */
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-    const checkoutBtn =
-    document.getElementById("checkoutBtn");
+    const btn = $("checkoutBtn");
 
-    if(checkoutBtn){
+    if(btn){
 
-        checkoutBtn.addEventListener("click",checkoutOrder);
+        btn.addEventListener("click",checkoutWhatsApp);
 
     }
 
 });
 /* ==========================================
-   BAGIAN 7
-   INISIALISASI & LOCALSTORAGE
+   BAGIAN 8
+   SIMPAN & MUAT DATA PESANAN
 ========================================== */
 
-// Simpan data terakhir
-function saveData(){
+const STORAGE_KEY = "pubg_last_order";
+
+// Simpan data pesanan
+function saveOrder(){
 
     const data = {
 
-        userId:
-        document.getElementById("userId")?.value || "",
+        userId: $("userId") ? $("userId").value : "",
 
-        nickname:
-        document.getElementById("nickname")?.value || "",
+        nickname: $("nickname") ? $("nickname").value : "",
 
-        payment:
-        selectedPayment,
+        region: $("region") ? $("region").value : "Indonesia",
 
-        product:
-        selectedProduct ? selectedProduct.id : null,
+        payment: selectedPayment,
 
-        discount:
-        discount
+        voucher: voucherUsed,
+
+        discount: discount,
+
+        productId: selectedProduct ? selectedProduct.id : null
 
     };
 
     localStorage.setItem(
-        "pubg_data",
+
+        STORAGE_KEY,
+
         JSON.stringify(data)
+
     );
 
 }
 
-// Load data terakhir
-function loadData(){
+// Muat data pesanan
+function loadOrder(){
 
-    const data =
-    JSON.parse(localStorage.getItem("pubg_data"));
+    const data = JSON.parse(
+
+        localStorage.getItem(STORAGE_KEY)
+
+    );
 
     if(!data) return;
 
     // Character ID
-    if(document.getElementById("userId")){
+    if($("userId")){
 
-        document.getElementById("userId").value =
-        data.userId || "";
+        $("userId").value = data.userId || "";
 
     }
 
     // Nickname
-    if(document.getElementById("nickname")){
+    if($("nickname")){
 
-        document.getElementById("nickname").value =
-        data.nickname || "";
+        $("nickname").value = data.nickname || "";
+
+    }
+
+    // Region
+    if($("region")){
+
+        $("region").value = data.region || "Indonesia";
 
     }
 
@@ -492,8 +583,7 @@ function loadData(){
 
         selectedPayment = data.payment;
 
-        document
-        .querySelectorAll(".payment-card")
+        document.querySelectorAll(".payment-card")
         .forEach(card=>{
 
             card.classList.remove("active");
@@ -506,25 +596,37 @@ function loadData(){
 
         });
 
-        const summaryPayment =
-        document.getElementById("summaryPayment");
+        if($("summaryPayment")){
 
-        if(summaryPayment){
+            $("summaryPayment").textContent =
+            selectedPayment;
 
-            summaryPayment.textContent =
+        }
+
+        if($("summaryPayment2")){
+
+            $("summaryPayment2").textContent =
             selectedPayment;
 
         }
 
     }
 
+    // Voucher
+    voucherUsed = data.voucher || "";
+
+    discount = data.discount || 0;
+
     // Produk
-    if(data.product){
+    if(data.productId){
 
-        const index =
-        products.findIndex(item=>item.id===data.product);
+        const index = products.findIndex(
 
-        if(index!==-1){
+            item => item.id === data.productId
+
+        );
+
+        if(index !== -1){
 
             selectProduct(index);
 
@@ -534,35 +636,225 @@ function loadData(){
 
 }
 
-// Simpan otomatis saat mengetik
-["userId","nickname"].forEach(id=>{
+// Simpan otomatis saat input berubah
+["userId","nickname","region"].forEach(id=>{
 
-    const el=document.getElementById(id);
+    const el = $(id);
 
     if(el){
 
-        el.addEventListener("input",saveData);
+        el.addEventListener("input",saveOrder);
+
+        el.addEventListener("change",saveOrder);
 
     }
 
 });
 
-// Simpan sebelum keluar halaman
-window.addEventListener("beforeunload",saveData);
+// Simpan saat halaman ditutup
+window.addEventListener(
 
-// ==========================================
-// JALANKAN SEMUA
-// ==========================================
+    "beforeunload",
+
+    saveOrder
+
+);
+/* ==========================================
+   BAGIAN 9
+   BACK TO TOP
+========================================== */
+
+function initBackToTop(){
+
+    const button = $("backTop");
+
+    if(!button) return;
+
+    // Sembunyikan saat pertama kali
+    button.style.display = "none";
+
+    // Munculkan saat scroll
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY > 300){
+
+            button.style.display = "flex";
+
+        }else{
+
+            button.style.display = "none";
+
+        }
+
+    });
+
+    // Kembali ke atas
+    button.addEventListener("click",()=>{
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+    });
+
+}
+/* ==========================================
+   BAGIAN 10
+   LIVE ORDER
+========================================== */
+
+const liveOrders = [
+
+    {nama:"Budi",kota:"Jakarta",produk:"60 UC"},
+    {nama:"Andi",kota:"Bandung",produk:"325 UC"},
+    {nama:"Rizky",kota:"Surabaya",produk:"Royale Pass"},
+    {nama:"Fajar",kota:"Medan",produk:"660 UC"},
+    {nama:"Agus",kota:"Semarang",produk:"Prime Membership"},
+    {nama:"Dimas",kota:"Makassar",produk:"120 UC"},
+    {nama:"Rian",kota:"Bekasi",produk:"180 UC"},
+    {nama:"Aldi",kota:"Depok",produk:"Prime Plus"},
+    {nama:"Reza",kota:"Bogor",produk:"1320 UC"},
+    {nama:"Ilham",kota:"Yogyakarta",produk:"30 UC"}
+
+];
+
+function startLiveOrder(){
+
+    const box = $("liveOrder");
+
+    if(!box) return;
+
+    function showOrder(){
+
+        const item = liveOrders[
+            Math.floor(Math.random()*liveOrders.length)
+        ];
+
+        box.innerHTML = `
+            <strong>🛒 Pesanan Baru</strong><br>
+            ${item.nama} dari ${item.kota}<br>
+            membeli <b>${item.produk}</b>
+        `;
+
+        box.classList.add("show");
+
+        setTimeout(()=>{
+
+            box.classList.remove("show");
+
+        },5000);
+
+    }
+
+    // Tampilkan pertama kali
+    setTimeout(showOrder,3000);
+
+    // Ulang setiap 12 detik
+    setInterval(showOrder,12000);
+
+       }
+/* ==========================================
+   BAGIAN 11
+   POPUP PROMO
+========================================== */
+
+function initPromoPopup(){
+
+    const popup = $("promoPopup");
+    const closeBtn = $("closePromo");
+    const promoBtn = $("promoButton");
+
+    if(!popup) return;
+
+    // Cek apakah popup sudah pernah ditampilkan
+    if(localStorage.getItem("pubg_promo_seen")){
+
+        popup.style.display = "none";
+        return;
+
+    }
+
+    // Tampilkan popup setelah 1 detik
+    setTimeout(()=>{
+
+        popup.classList.add("show");
+
+    },1000);
+
+    // Tombol Tutup
+    if(closeBtn){
+
+        closeBtn.addEventListener("click",()=>{
+
+            popup.classList.remove("show");
+
+            localStorage.setItem(
+                "pubg_promo_seen",
+                "true"
+            );
+
+        });
+
+    }
+
+    // Tombol Lihat Promo
+    if(promoBtn){
+
+        promoBtn.addEventListener("click",()=>{
+
+            popup.classList.remove("show");
+
+            localStorage.setItem(
+                "pubg_promo_seen",
+                "true"
+            );
+
+            const voucher = $("voucher");
+
+            if(voucher){
+
+                voucher.scrollIntoView({
+
+                    behavior:"smooth"
+
+                });
+
+            }
+
+        });
+
+    }
+
+   /* ==========================================
+   BAGIAN 12
+   INISIALISASI
+========================================== */
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-    // Tampilkan Produk
+    console.log("🎮 PUBG.js V5 Loaded");
+
+    // Render daftar produk
     renderProducts();
 
-    // Aktifkan Payment
+    // Inisialisasi metode pembayaran
     initPayment();
 
-    // Load Data
-    loadData();
+    // Muat data pesanan terakhir
+    loadOrder();
+
+    // Tombol Back To Top
+    initBackToTop();
+
+    // Live Order
+    startLiveOrder();
+
+    // Popup Promo
+    initPromoPopup();
 
 });
+}
