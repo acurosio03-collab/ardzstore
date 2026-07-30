@@ -366,7 +366,97 @@ function applyVoucher(){
             info.style.color="#ef4444";
 
         }
+/* ==========================================
+   BAGIAN 6
+   CHECKOUT WHATSAPP
+========================================== */
 
+const checkoutButton = document.getElementById("checkoutBtn");
+
+if(checkoutButton){
+
+    checkoutButton.addEventListener("click",checkoutWhatsApp);
+
+}
+
+function checkoutWhatsApp(){
+
+    // Validasi produk
+    if(selectedProduct===null){
+
+        alert("Silakan pilih produk terlebih dahulu.");
+
+        return;
+
+    }
+
+    // Ambil Character ID
+    const userIdInput=document.getElementById("userId");
+
+    const nicknameInput=document.getElementById("nickname");
+
+    const userId=userIdInput ?
+    userIdInput.value.trim() : "";
+
+    const nickname=nicknameInput ?
+    nicknameInput.value.trim() : "-";
+
+    if(userId===""){
+
+        alert("Masukkan Character ID terlebih dahulu.");
+
+        userIdInput.focus();
+
+        return;
+
+    }
+
+    // Hitung total
+    const totalHarga =
+    selectedProduct.harga-discount;
+
+    // Susun pesan
+    const pesan = `🎮 *ARDZ STORE*
+
+Halo Admin,
+
+Saya ingin melakukan Top Up PUBG Mobile.
+
+━━━━━━━━━━━━━━━
+
+🎮 Game : PUBG Mobile
+
+🆔 Character ID : ${userId}
+
+👤 Nickname : ${nickname}
+
+💎 Produk : ${selectedProduct.nama}
+
+💰 Harga : ${rupiah(selectedProduct.harga)}
+
+🎁 Diskon : ${rupiah(discount)}
+
+💵 Total Bayar : ${rupiah(totalHarga)}
+
+💳 Pembayaran : ${selectedPayment}
+
+━━━━━━━━━━━━━━━
+
+Mohon diproses ya 🙏`;
+
+    // Nomor WhatsApp
+    const nomor="6283185954674";
+
+    window.open(
+
+        "https://wa.me/"+nomor+
+        "?text="+encodeURIComponent(pesan),
+
+        "_blank"
+
+    );
+
+}
         alert("Kode voucher tidak ditemukan.");
 
     }
