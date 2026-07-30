@@ -858,3 +858,6 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 });
 }
+function renderProducts(){
+   console.log("RENDER PUBG JALAN");
+console.log(products);
