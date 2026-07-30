@@ -1,457 +1,979 @@
-// ==========================================
-// ARDZ STORE
-// FREE FIRE
-// ff.js
-// ==========================================
+/* ==========================================
+   ARDZ STORE
+   FREE FIRE
+   ff.js V1
+========================================== */
 
-// ==============================
-// DATA DARI PANEL ADMIN
-// ==============================
+"use strict";
 
-let dataNominal =
-JSON.parse(localStorage.getItem("nominal")) || [];
+/* ==========================================
+   KONFIGURASI
+========================================== */
 
-// ==============================
-// PRODUK BAWAAN
-// ==============================
+const ADMIN_WA = "6283185954674";
 
-const defaultProduk=[
+/* ==========================================
+   DATA PRODUK FREE FIRE
+========================================== */
 
-{
-game:"Free Fire",
-produk:"5 Diamond",
-harga:1000,
-badge:"HOT"
-},
+const products = [
 
-{
-game:"Free Fire",
-produk:"12 Diamond",
-harga:3000,
-badge:""
-},
+    {id:1,nama:"5 Diamond",harga:1000},
+    {id:2,nama:"12 Diamond",harga:2500},
+    {id:3,nama:"50 Diamond",harga:7000},
+    {id:4,nama:"70 Diamond",harga:10000},
+    {id:5,nama:"100 Diamond",harga:14000},
+    {id:6,nama:"140 Diamond",harga:19000},
+    {id:7,nama:"210 Diamond",harga:28000},
+    {id:8,nama:"355 Diamond",harga:47000},
+    {id:9,nama:"500 Diamond",harga:67000},
+    {id:10,nama:"720 Diamond",harga:95000},
+    {id:11,nama:"1000 Diamond",harga:133000},
+    {id:12,nama:"1450 Diamond",harga:190000},
+    {id:13,nama:"2180 Diamond",harga:285000},
+    {id:14,nama:"3640 Diamond",harga:475000},
+    {id:15,nama:"7290 Diamond",harga:950000},
 
-{
-game:"Free Fire",
-produk:"50 Diamond",
-harga:8000,
-badge:"BEST"
-},
-
-{
-game:"Free Fire",
-produk:"70 Diamond",
-harga:10000,
-badge:""
-},
-
-{
-game:"Free Fire",
-produk:"100 Diamond",
-harga:15000,
-badge:""
-},
-
-{
-game:"Free Fire",
-produk:"140 Diamond",
-harga:20000,
-badge:"TERLARIS"
-},
-
-{
-game:"Free Fire",
-produk:"210 Diamond",
-harga:29000,
-badge:""
-},
-
-{
-game:"Free Fire",
-produk:"355 Diamond",
-harga:47000,
-badge:""
-},
-
-{
-game:"Free Fire",
-produk:"500 Diamond",
-harga:66000,
-badge:""
-},
-
-{
-game:"Free Fire",
-produk:"720 Diamond",
-harga:94000,
-badge:"BEST"
-},
-
-{
-game:"Free Fire",
-produk:"1000 Diamond",
-harga:132000,
-badge:""
-},
-
-{
-game:"Free Fire",
-produk:"1450 Diamond",
-harga:191000,
-badge:""
-},
-
-{
-game:"Free Fire",
-produk:"2180 Diamond",
-harga:286000,
-badge:""
-},
-
-{
-game:"Free Fire",
-produk:"3640 Diamond",
-harga:475000,
-badge:""
-},
-
-{
-game:"Free Fire",
-produk:"7290 Diamond",
-harga:945000,
-badge:"HOT"
-},
-
-{
-game:"Free Fire",
-produk:"Weekly Membership",
-harga:28000,
-badge:"POPULER"
-},
-
-{
-game:"Free Fire",
-produk:"Monthly Membership",
-harga:85000,
-badge:""
-}
+    {id:16,nama:"Weekly Membership",harga:28000},
+    {id:17,nama:"Monthly Membership",harga:110000},
+    {id:18,nama:"Level Up Pass",harga:15000}
 
 ];
 
-// ==============================
-// GABUNGKAN DATA
-// ==============================
+/* ==========================================
+   DATA PESANAN
+========================================== */
 
-let produkFF=[];
+let selectedProduct = null;
 
-if(dataNominal.length>0){
+let selectedPayment = "QRIS";
 
-dataNominal.forEach(item=>{
+let discount = 0;
 
-let game=item.game.toLowerCase().trim();
+let voucherUsed = "";
+/* ==========================================
+   FF.JS V1
+   BAGIAN 2
+   HELPER FUNCTION
+========================================== */
 
-if(
+/* ==========================================
+   FORMAT RUPIAH
+========================================== */
 
-game=="free fire" ||
+function rupiah(angka){
 
-game=="ff"
+    return "Rp " + Number(angka).toLocaleString("id-ID");
 
-){
+}
 
-produkFF.push({
+/* ==========================================
+   GAMBAR PRODUK
+========================================== */
 
-produk:item.produk,
+function getProductImage(nama){
 
-harga:Number(item.supplier)+
-Number(item.profit),
+    nama = nama.toLowerCase();
 
-badge:"ADMIN"
+    if(nama.includes("weekly")){
+
+        return "assets/products/weekly.png";
+
+    }
+
+    if(nama.includes("monthly")){
+
+        return "assets/products/monthly.png";
+
+    }
+
+    if(nama.includes("level")){
+
+        return "assets/products/levelup.png";
+
+    }
+
+    return "diamond.jpeg";
+
+}
+
+/* ==========================================
+   HITUNG TOTAL
+========================================== */
+
+function getTotalHarga(){
+
+    if(selectedProduct === null){
+
+        return 0;
+
+    }
+
+    return selectedProduct.harga - discount;
+
+}
+
+/* ==========================================
+   HELPER AMBIL ELEMENT
+========================================== */
+
+function $(id){
+
+    return document.getElementById(id);
+
+}
+/* ==========================================
+   FF.JS V1
+   BAGIAN 3
+   RENDER PRODUK
+========================================== */
+
+function renderProducts(){
+
+    const productList = $("productList");
+
+    if(!productList){
+
+        console.error("Element #productList tidak ditemukan.");
+
+        return;
+
+    }
+
+    productList.innerHTML = "";
+
+    products.forEach((item,index)=>{
+
+        productList.innerHTML += `
+
+        <div class="product-card"
+             onclick="selectProduct(${index})">
+
+            <img
+                src="${getProductImage(item.nama)}"
+                alt="${item.nama}">
+
+            <h3>${item.nama}</h3>
+
+            <div class="product-price">
+
+                ${rupiah(item.harga)}
+
+            </div>
+
+            <button
+                type="button"
+                class="btn-primary">
+
+                Pilih
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+}
+/* ==========================================
+   FF.JS V1
+   BAGIAN 4
+   PILIH PRODUK
+========================================== */
+
+function selectProduct(index){
+
+    // Simpan produk yang dipilih
+    selectedProduct = products[index];
+
+    // Hapus status aktif dari semua card
+    document.querySelectorAll(".product-card")
+    .forEach(card=>{
+
+        card.classList.remove("active");
+
+    });
+
+    // Aktifkan card yang dipilih
+    const cards =
+    document.querySelectorAll(".product-card");
+
+    if(cards[index]){
+
+        cards[index].classList.add("active");
+
+    }
+
+    // Detail Pesanan
+    if($("produk")){
+
+        $("produk").textContent =
+        selectedProduct.nama;
+
+    }
+
+    if($("total")){
+
+        $("total").textContent =
+        rupiah(getTotalHarga());
+
+    }
+
+    // Ringkasan Checkout
+    if($("summaryProduk")){
+
+        $("summaryProduk").textContent =
+        selectedProduct.nama;
+
+    }
+
+    if($("summaryTotal")){
+
+        $("summaryTotal").textContent =
+        rupiah(getTotalHarga());
+
+    }
+
+    if($("summaryPayment")){
+
+        $("summaryPayment").textContent =
+        selectedPayment;
+
+    }
+
+    // Simpan otomatis
+    if(typeof saveOrder === "function"){
+
+        saveOrder();
+
+    }
+
+}
+/* ==========================================
+   FF.JS V1
+   BAGIAN 5
+   SISTEM VOUCHER
+========================================== */
+
+// Daftar Voucher
+const vouchers = {
+
+    "ARDZ10": 10,
+    "FF5": 5,
+    "HEMAT20": 20
+
+};
+
+// Terapkan Voucher
+function applyVoucher(){
+
+    if(selectedProduct === null){
+
+        alert("Silakan pilih produk terlebih dahulu.");
+
+        return;
+
+    }
+
+    const input = $("voucher");
+    const info = $("voucherInfo");
+
+    if(!input) return;
+
+    const code = input.value.trim().toUpperCase();
+
+    if(code === ""){
+
+        alert("Masukkan kode voucher.");
+
+        return;
+
+    }
+
+    if(vouchers.hasOwnProperty(code)){
+
+        voucherUsed = code;
+
+        const persen = vouchers[code];
+
+        discount = Math.floor(
+            selectedProduct.harga * persen / 100
+        );
+
+        // Update Detail Pesanan
+        if($("total")){
+
+            $("total").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        // Update Ringkasan
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        // Info Voucher
+        if(info){
+
+            info.textContent =
+            "✅ Voucher berhasil digunakan (" +
+            persen +
+            "% OFF)";
+
+            info.style.color = "#22c55e";
+
+        }
+
+        // Simpan
+        if(typeof saveOrder === "function"){
+
+            saveOrder();
+
+        }
+
+    }else{
+
+        voucherUsed = "";
+
+        discount = 0;
+
+        if(info){
+
+            info.textContent =
+            "❌ Voucher tidak valid.";
+
+            info.style.color = "#ef4444";
+
+        }
+
+        if($("total")){
+
+            $("total").textContent =
+            rupiah(selectedProduct.harga);
+
+        }
+
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(selectedProduct.harga);
+
+        }
+
+    }
+
+}
+
+/* ==========================================
+   TOMBOL VOUCHER
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const btn = $("applyVoucher");
+
+    if(btn){
+
+        btn.addEventListener(
+            "click",
+            applyVoucher
+        );
+
+    }
 
 });
+/* ==========================================
+   FF.JS V1
+   BAGIAN 6
+   SISTEM PEMBAYARAN
+========================================== */
+
+function initPayment(){
+
+    const cards =
+    document.querySelectorAll(".payment-card");
+
+    if(cards.length === 0){
+
+        console.warn("Payment Card tidak ditemukan.");
+
+        return;
+
+    }
+
+    cards.forEach(card=>{
+
+        card.addEventListener("click",function(){
+
+            // Hapus status aktif
+            cards.forEach(item=>{
+
+                item.classList.remove("active");
+
+            });
+
+            // Aktifkan metode pembayaran
+            this.classList.add("active");
+
+            // Simpan metode pembayaran
+            selectedPayment =
+            this.dataset.payment;
+
+            // Update Ringkasan
+            if($("summaryPayment")){
+
+                $("summaryPayment").textContent =
+                selectedPayment;
+
+            }
+
+            // Simpan otomatis
+            if(typeof saveOrder === "function"){
+
+                saveOrder();
+
+            }
+
+        });
+
+    });
 
 }
 
-});
+/* ==========================================
+   PEMBAYARAN DEFAULT
+========================================== */
+
+function setDefaultPayment(){
+
+    const first =
+    document.querySelector(".payment-card");
+
+    if(first){
+
+        first.classList.add("active");
+
+        selectedPayment =
+        first.dataset.payment || "QRIS";
+
+        if($("summaryPayment")){
+
+            $("summaryPayment").textContent =
+            selectedPayment;
+
+        }
+
+    }
 
 }
+/* ==========================================
+   FF.JS V1
+   BAGIAN 7
+   CHECKOUT WHATSAPP
+========================================== */
 
-// kalau panel admin kosong
+function checkoutWhatsApp(){
 
-if(produkFF.length==0){
+    // Validasi Player ID
+    const userId = $("userId")?.value.trim() || "";
 
-produkFF=defaultProduk;
+    if(userId === ""){
 
-}
+        alert("Masukkan Player ID terlebih dahulu.");
 
-// ==============================
+        $("userId").focus();
 
-const list=
+        return;
 
-document.getElementById("ff-products");
-// ==============================
-// TAMPILKAN PRODUK
-// ==============================
+    }
 
-function loadFF(){
+    // Validasi Produk
+    if(selectedProduct === null){
 
-if(!list) return;
+        alert("Silakan pilih Diamond terlebih dahulu.");
 
-list.innerHTML="";
+        return;
 
-produkFF.forEach((item,index)=>{
+    }
 
-let badge="";
+    // Ambil Nickname
+    const nickname =
+    $("nickname")?.value.trim() || "-";
 
-if(item.badge=="HOT"){
+    // Hitung Total
+    const total = getTotalHarga();
 
-badge='<div class="badge">🔥 HOT</div>';
-
-}
-
-else if(item.badge=="BEST"){
-
-badge='<div class="badge">⭐ BEST</div>';
-
-}
-
-else if(item.badge=="TERLARIS"){
-
-badge='<div class="badge">🏆 TERLARIS</div>';
-
-}
-
-else if(item.badge=="POPULER"){
-
-badge='<div class="badge">💎 POPULER</div>';
-
-}
-
-else if(item.badge=="ADMIN"){
-
-badge='<div class="badge">⚙ ADMIN</div>';
-
-}
-
-list.innerHTML+=`
-
-<div class="produk-card">
-
-${badge}
-
-<img
-src="assets/products/diamond.png"
-class="icon-diamond">
-
-<h3>
-
-${item.produk}
-
-</h3>
-
-<p>
-
-Diamond Free Fire
-
-</p>
-
-<h2>
-
-Rp ${Number(item.harga).toLocaleString("id-ID")}
-
-</h2>
-
-<button
-
-onclick="pilihProduk(${index})">
-
-PILIH
-
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-// ==============================
-// DATA PRODUK YANG DIPILIH
-// ==============================
-
-let produkDipilih = null;
-
-// ==============================
-// PILIH PRODUK
-// ==============================
-
-function pilihProduk(index){
-
-produkDipilih = produkFF[index];
-
-document.getElementById("produk").innerHTML =
-produkDipilih.produk;
-
-document.getElementById("total").innerHTML =
-"Rp " +
-Number(produkDipilih.harga).toLocaleString("id-ID");
-
-// Efek tombol aktif
-let semuaCard =
-document.querySelectorAll(".produk-card");
-
-semuaCard.forEach(card=>{
-
-card.style.border =
-"1px solid transparent";
-
-card.style.boxShadow =
-"none";
-
-});
-
-let cardDipilih =
-semuaCard[index];
-
-if(cardDipilih){
-
-cardDipilih.style.border =
-"2px solid #00d9ff";
-
-cardDipilih.style.boxShadow =
-"0 0 20px rgba(0,217,255,.6)";
-
-}
-
-// Scroll ke detail pesanan jika di HP
-let invoice =
-document.querySelector(".invoice");
-
-if(invoice){
-
-invoice.scrollIntoView({
-
-behavior:"smooth",
-
-block:"center"
-
-});
-
-}
-
-}
-
-// ==============================
-// RESET PILIHAN
-// ==============================
-
-function resetPilihan(){
-
-produkDipilih = null;
-
-document.getElementById("produk").innerHTML =
-"Belum Dipilih";
-
-document.getElementById("total").innerHTML =
-"Rp 0";
-
-let semuaCard =
-document.querySelectorAll(".produk-card");
-
-semuaCard.forEach(card=>{
-
-card.style.border =
-"1px solid transparent";
-
-card.style.boxShadow =
-"none";
-
-});
-
-}
-// ==============================
-// CHECKOUT WHATSAPP
-// ==============================
-
-function checkoutFF(){
-
-let userid =
-document.getElementById("userid").value.trim();
-
-let zoneid =
-document.getElementById("zoneid").value.trim();
-
-let payment =
-document.getElementById("payment").value;
-
-// Validasi ID
-if(userid==""){
-
-alert("Masukkan Player ID terlebih dahulu!");
-
-return;
-
-}
-
-// Validasi Produk
-if(produkDipilih==null){
-
-alert("Silakan pilih nominal terlebih dahulu!");
-
-return;
-
-}
-
-// Ambil data
-let produk = produkDipilih.produk;
-
-let harga = Number(produkDipilih.harga)
-.toLocaleString("id-ID");
-
-// Susun pesan
-let pesan =
-`🎮 *ARDZ STORE*
+    // Susun Pesan
+    const pesan = `🎮 *ARDZ STORE*
 
 Halo Admin,
 
 Saya ingin melakukan Top Up Free Fire.
 
-━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━
 
 🎮 Game : Free Fire
 
-🆔 Player ID : ${userid}
+🆔 Player ID : ${userId}
 
-🌐 Zone ID : ${zoneid=="" ? "-" : zoneid}
+👤 Nickname : ${nickname}
 
-💎 Produk : ${produk}
+💎 Produk : ${selectedProduct.nama}
 
-💰 Total : Rp ${harga}
+💰 Harga : ${rupiah(selectedProduct.harga)}
 
-💳 Pembayaran : ${payment}
+🎁 Voucher : ${voucherUsed || "-"}
 
-━━━━━━━━━━━━━━━
+💸 Diskon : ${rupiah(discount)}
 
-Mohon diproses ya, terima kasih.`;
+💵 Total Bayar : ${rupiah(total)}
 
-// Buka WhatsApp
-window.open(
+💳 Pembayaran : ${selectedPayment}
 
-"https://wa.me/6282295071107?text="+
-encodeURIComponent(pesan),
+━━━━━━━━━━━━━━━━━━
 
-"_blank"
+Mohon diproses.
 
-);
+Terima kasih 🙏`;
+
+    // Buka WhatsApp
+    window.open(
+
+        "https://wa.me/" +
+        ADMIN_WA +
+        "?text=" +
+        encodeURIComponent(pesan),
+
+        "_blank"
+
+    );
 
 }
 
-// ==============================
-// LOAD HALAMAN
-// ==============================
+/* ==========================================
+   TOMBOL CHECKOUT
+========================================== */
 
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener("DOMContentLoaded",()=>{
 
-loadFF();
+    const btn = $("checkoutBtn");
+
+    if(btn){
+
+        btn.addEventListener(
+
+            "click",
+
+            checkoutWhatsApp
+
+        );
+
+    }
+
+});
+/* ==========================================
+   FF.JS V1
+   BAGIAN 8
+   LOCAL STORAGE
+========================================== */
+
+const STORAGE_KEY = "ff_last_order";
+
+/* ==========================================
+   SIMPAN PESANAN
+========================================== */
+
+function saveOrder(){
+
+    const data = {
+
+        userId: $("userId") ? $("userId").value : "",
+
+        nickname: $("nickname") ? $("nickname").value : "",
+
+        payment: selectedPayment,
+
+        voucher: voucherUsed,
+
+        discount: discount,
+
+        productId: selectedProduct
+            ? selectedProduct.id
+            : null
+
+    };
+
+    localStorage.setItem(
+
+        STORAGE_KEY,
+
+        JSON.stringify(data)
+
+    );
+
+}
+
+/* ==========================================
+   MUAT PESANAN
+========================================== */
+
+function loadOrder(){
+
+    const data = JSON.parse(
+
+        localStorage.getItem(STORAGE_KEY)
+
+    );
+
+    if(!data){
+
+        return;
+
+    }
+
+    // Player ID
+    if($("userId")){
+
+        $("userId").value =
+        data.userId || "";
+
+    }
+
+    // Nickname
+    if($("nickname")){
+
+        $("nickname").value =
+        data.nickname || "";
+
+    }
+
+    // Payment
+    if(data.payment){
+
+        selectedPayment =
+        data.payment;
+
+        document
+        .querySelectorAll(".payment-card")
+        .forEach(card=>{
+
+            card.classList.remove("active");
+
+            if(card.dataset.payment === selectedPayment){
+
+                card.classList.add("active");
+
+            }
+
+        });
+
+        if($("summaryPayment")){
+
+            $("summaryPayment").textContent =
+            selectedPayment;
+
+        }
+
+    }
+
+    // Voucher
+    voucherUsed =
+    data.voucher || "";
+
+    discount =
+    data.discount || 0;
+
+    // Produk
+    if(data.productId){
+
+        const index =
+        products.findIndex(
+
+            item =>
+            item.id === data.productId
+
+        );
+
+        if(index !== -1){
+
+            selectProduct(index);
+
+        }
+
+    }
+
+}
+
+/* ==========================================
+   AUTO SAVE
+========================================== */
+
+["userId","nickname"].forEach(id=>{
+
+    const el = $(id);
+
+    if(el){
+
+        el.addEventListener(
+
+            "input",
+
+            saveOrder
+
+        );
+
+    }
+
+});
+
+/* ==========================================
+   SIMPAN SAAT TUTUP HALAMAN
+========================================== */
+
+window.addEventListener(
+
+    "beforeunload",
+
+    saveOrder
+
+);
+/* ==========================================
+   FF.JS V1
+   BAGIAN 9
+   LIVE ORDER + POPUP PROMO + EFEK
+========================================== */
+
+/* ==========================================
+   LIVE ORDER
+========================================== */
+
+const liveOrders = [
+
+    {nama:"Budi",kota:"Jakarta",produk:"70 Diamond"},
+    {nama:"Andi",kota:"Bandung",produk:"140 Diamond"},
+    {nama:"Rizky",kota:"Surabaya",produk:"Weekly Membership"},
+    {nama:"Fajar",kota:"Medan",produk:"355 Diamond"},
+    {nama:"Agus",kota:"Semarang",produk:"50 Diamond"},
+    {nama:"Dimas",kota:"Makassar",produk:"Monthly Membership"},
+    {nama:"Rian",kota:"Bekasi",produk:"1000 Diamond"},
+    {nama:"Aldi",kota:"Depok",produk:"Level Up Pass"}
+
+];
+
+function startLiveOrder(){
+
+    const box = $("liveOrder");
+
+    if(!box) return;
+
+    function showOrder(){
+
+        const item =
+        liveOrders[
+            Math.floor(
+                Math.random()*liveOrders.length
+            )
+        ];
+
+        box.innerHTML = `
+            <strong>🛒 Pesanan Baru</strong><br>
+            ${item.nama} dari ${item.kota}<br>
+            membeli <b>${item.produk}</b>
+        `;
+
+        box.classList.add("show");
+
+        setTimeout(()=>{
+
+            box.classList.remove("show");
+
+        },5000);
+
+    }
+
+    setTimeout(showOrder,3000);
+
+    setInterval(showOrder,12000);
+
+}
+
+/* ==========================================
+   POPUP PROMO
+========================================== */
+
+function initPromoPopup(){
+
+    const popup = $("promoPopup");
+    const close = $("closePromo");
+    const promo = $("promoButton");
+
+    if(!popup) return;
+
+    if(localStorage.getItem("ff_promo_seen")){
+
+        popup.style.display="none";
+
+        return;
+
+    }
+
+    setTimeout(()=>{
+
+        popup.classList.add("show");
+
+    },1000);
+
+    if(close){
+
+        close.addEventListener("click",()=>{
+
+            popup.classList.remove("show");
+
+            localStorage.setItem(
+                "ff_promo_seen",
+                "true"
+            );
+
+        });
+
+    }
+
+    if(promo){
+
+        promo.addEventListener("click",()=>{
+
+            popup.classList.remove("show");
+
+            localStorage.setItem(
+                "ff_promo_seen",
+                "true"
+            );
+
+            if($("voucher")){
+
+                $("voucher").scrollIntoView({
+
+                    behavior:"smooth"
+
+                });
+
+            }
+
+        });
+
+    }
+
+}
+
+/* ==========================================
+   BACK TO TOP
+========================================== */
+
+function initBackToTop(){
+
+    const button = $("backTop");
+
+    if(!button) return;
+
+    button.style.display="none";
+
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY>300){
+
+            button.style.display="flex";
+
+        }
+
+        else{
+
+            button.style.display="none";
+
+        }
+
+    });
+
+    button.addEventListener("click",()=>{
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+    });
+
+}
+
+/* ==========================================
+   EFEK CARD
+========================================== */
+
+function initCardEffect(){
+
+    document
+    .querySelectorAll(".product-card")
+    .forEach(card=>{
+
+        card.addEventListener("mouseenter",()=>{
+
+            card.style.transform="translateY(-8px)";
+
+        });
+
+        card.addEventListener("mouseleave",()=>{
+
+            if(!card.classList.contains("active")){
+
+                card.style.transform="translateY(0)";
+
+            }
+
+        });
+
+    });
+
+                      }
+/* ==========================================
+   FF.JS V1
+   BAGIAN 10
+   INISIALISASI FINAL
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("🎮 FF.js Loaded");
+
+    // Render daftar produk
+    renderProducts();
+
+    // Aktifkan sistem pembayaran
+    initPayment();
+
+    // Set pembayaran default
+    setDefaultPayment();
+
+    // Muat data pesanan terakhir
+    loadOrder();
+
+    // Live Order
+    startLiveOrder();
+
+    // Popup Promo
+    initPromoPopup();
+
+    // Tombol Back To Top
+    initBackToTop();
+
+    // Efek Card
+    initCardEffect();
+
+    console.log("✅ Free Fire siap digunakan.");
 
 });
