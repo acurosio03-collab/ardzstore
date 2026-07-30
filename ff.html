@@ -1,120 +1,614 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARDZ STORE - Free Fire</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>ARDZ STORE | Top Up Free Fire</title>
+
 <link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
+<!-- ==========================
+HEADER
+=========================== -->
+
 <header>
 
-<div class="logo">ARDZ STORE</div>
+<div class="navbar">
+
+<div class="logo">
+
+🎮 ARDZ STORE
+
+</div>
 
 <nav>
-<a href="index.html">Home</a>
-<a href="ml.html">ML</a>
-<a href="ff.html">FF</a>
-<a href="pubg.html">PUBG</a>
-<a href="hok.html">HOK</a>
-<a href="roblox.html">Roblox</a>
-<a href="valorant.html">Valorant</a>
+
+<a href="index.html">
+
+Home
+
+</a>
+
+<a href="ml.html">
+
+Mobile Legends
+
+</a>
+
+<a class="active" href="ff.html">
+
+Free Fire
+
+</a>
+
+<a href="pubg.html">
+
+PUBG
+
+</a>
+
+<a href="hok.html">
+
+Honor Of Kings
+
+</a>
+
+<a href="roblox.html">
+
+Roblox
+
+</a>
+
+<a href="valorant.html">
+
+Valorant
+
+</a>
+
 </nav>
+
+</div>
 
 </header>
 
-<section class="hero">
+<!-- ==========================
+BANNER
+=========================== -->
 
-<div class="hero-text">
+<section class="hero hero-ff">
 
-<h1>TOP UP FREE FIRE</h1>
+<div class="hero-overlay">
 
-<p>Diamond Free Fire Murah • Cepat • Aman 24 Jam</p>
+<h1>
+
+TOP UP FREE FIRE
+
+</h1>
+
+<p>
+
+Diamond Murah • Cepat • Aman • Terpercaya
+
+</p>
 
 </div>
 
 </section>
 
-<section>
+<!-- ==========================
+TOPUP
+=========================== -->
 
-<div class="topup-container">
+<section class="topup-container">
 
-<h2>Masukkan Player ID</h2>
+<div class="left">
+
+<div class="box">
+
+<h2>
+
+🎮 Masukkan Data Akun
+
+</h2>
 
 <input
 type="text"
 id="userid"
-placeholder="Masukkan Player ID Free Fire">
-
-<h2>Pilih Diamond</h2>
-
-<div id="ff-products" class="game-list"></div>
-
-</div>
-
-<h2>Metode Pembayaran</h2>
-
-<select id="payment">
-<option>DANA</option>
-<option>OVO</option>
-<option>GoPay</option>
-<option>QRIS</option>
-<option>Bank Transfer</option>
-</select>
-
-<div class="pay">
-
-<img src="dana.peg" alt="DANA">
-<img src="ovo.peg" alt="OVO">
-<img src="gopay.peg" alt="GoPay">
-<img src="qris.peg" alt="QRIS">
-
-</div>
-
-<h2>Nomor WhatsApp</h2>
+placeholder="Masukkan Player ID">
 
 <input
 type="text"
-id="nomorwa"
-placeholder="08xxxxxxxxxx">
+id="zoneid"
+placeholder="Zone ID (Opsional)">
 
-<div class="invoice">
-
-<h3>Detail Pesanan</h3>
-
-<p><b>Game :</b> Free Fire</p>
-
-<p><b>Produk :</b>
-<span id="produk">Belum Dipilih</span>
-</p>
-
-<p><b>Total :</b>
-<span id="total">Rp0</span>
-</p>
+<input
+type="text"
+id="nickname"
+placeholder="Nickname"
+readonly>
 
 </div>
 
-<button onclick="checkoutFF()">
+<div class="box">
 
-CHECKOUT SEKARANG
+<h2>
+
+💎 Pilih Diamond
+
+</h2>
+
+<div
+id="ff-products"
+class="produk-grid">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="box">
+
+<h2>
+
+💳 Metode Pembayaran
+
+</h2>
+
+<select id="payment">
+
+<option>DANA</option>
+
+<option>OVO</option>
+
+<option>GoPay</option>
+
+<option>QRIS</option>
+
+<option>Bank BCA</option>
+
+<option>Bank BRI</option>
+
+<option>Bank BNI</option>
+
+</select>
+
+<div class="payment-list">
+
+<img src="assets/payment/dana.png">
+
+<img src="assets/payment/ovo.png">
+
+<img src="assets/payment/gopay.png">
+
+<img src="assets/payment/qris.png">
+
+<img src="assets/payment/bca.png">
+
+<img src="assets/payment/bri.png">
+
+<img src="assets/payment/bni.png">
+
+</div>
+
+</div>
+<!-- ==========================
+DETAIL PESANAN
+=========================== -->
+
+<div class="box">
+
+<h2>
+📋 Detail Pesanan
+</h2>
+
+<div class="invoice">
+
+<div class="invoice-row">
+
+<span>Game</span>
+
+<b>Free Fire</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Produk</span>
+
+<b id="produk">
+
+Belum Dipilih
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Total</span>
+
+<b id="total">
+
+Rp 0
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Status</span>
+
+<b style="color:#00ff88">
+
+Menunggu Pembayaran
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+VOUCHER
+=========================== -->
+
+<div class="box">
+
+<h2>
+
+🎁 Voucher Promo
+
+</h2>
+
+<div class="voucher">
+
+<input
+type="text"
+id="voucher"
+placeholder="Masukkan Kode Voucher">
+
+<button>
+
+Gunakan
 
 </button>
 
 </div>
 
+</div>
+
+<!-- ==========================
+CATATAN
+=========================== -->
+
+<div class="box">
+
+<h2>
+
+📝 Catatan
+
+</h2>
+
+<textarea
+
+id="catatan"
+
+placeholder="Catatan untuk Admin (Opsional)"
+
+rows="4">
+
+</textarea>
+
+</div>
+
+<!-- ==========================
+CHECKOUT
+=========================== -->
+
+<button
+
+class="checkout-btn"
+
+onclick="checkoutFF()">
+
+🛒 CHECKOUT SEKARANG
+
+</button>
+
+<!-- ==========================
+KEUNGGULAN
+=========================== -->
+
+<div class="box">
+
+<h2>
+
+⭐ Kenapa Pilih ARDZ STORE?
+
+</h2>
+
+<ul class="fitur">
+
+<li>⚡ Proses Super Cepat</li>
+
+<li>🛡️ Aman 100%</li>
+
+<li>💎 Harga Murah</li>
+
+<li>📞 Support WhatsApp</li>
+
+<li>🕒 Online 24 Jam</li>
+
+<li>💳 Banyak Metode Pembayaran</li>
+
+</ul>
+
+</div>
+
+<!-- ==========================
+RATING TOKO
+=========================== -->
+
+<div class="box">
+
+<h2>
+
+🌟 Rating Pelanggan
+
+</h2>
+
+<p>
+
+⭐⭐⭐⭐⭐ 4.9 / 5
+
+</p>
+
+<p>
+
+Lebih dari 15
+  <!-- ==========================
+PRODUK TERLARIS
+========================== -->
+
+<section class="best-product">
+
+<h2 class="title">
+
+🔥 Produk Terlaris Free Fire
+
+</h2>
+
+<div class="best-grid">
+
+<div class="best-card">
+
+<img src="assets/products/diamond.png">
+
+<h3>140 Diamond</h3>
+
+<p>Produk paling banyak dibeli.</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/diamond.png">
+
+<h3>355 Diamond</h3>
+
+<p>Harga hemat untuk push rank.</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/diamond.png">
+
+<h3>720 Diamond</h3>
+
+<p>Best Seller minggu ini.</p>
+
+</div>
+
+</div>
+
 </section>
+
+<!-- ==========================
+INFORMASI
+========================== -->
+
+<section class="info">
+
+<h2 class="title">
+
+📢 Informasi Top Up
+
+</h2>
+
+<div class="box">
+
+<p>
+
+✔ Pastikan Player ID yang dimasukkan benar.
+
+</p>
+
+<p>
+
+✔ Diamond dikirim setelah pembayaran berhasil.
+
+</p>
+
+<p>
+
+✔ Kesalahan ID menjadi tanggung jawab pembeli.
+
+</p>
+
+<p>
+
+✔ Simpan bukti pembayaran sampai pesanan selesai.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+FAQ
+========================== -->
+
+<section class="faq">
+
+<h2 class="title">
+
+❓ Pertanyaan Umum
+
+</h2>
+
+<div class="box">
+
+<h3>Berapa lama proses top up?</h3>
+
+<p>
+
+Biasanya 1-5 menit setelah pembayaran diterima.
+
+</p>
+
+<hr>
+
+<h3>Apakah aman?</h3>
+
+<p>
+
+Ya, kami menggunakan metode top up resmi.
+
+</p>
+
+<hr>
+
+<h3>Bagaimana jika pesanan belum masuk?</h3>
+
+<p>
+
+Hubungi WhatsApp ARDZ STORE dengan bukti pembayaran.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+FOOTER
+========================== -->
 
 <footer>
 
-<h3>ARDZ STORE</h3>
+<div class="footer-container">
 
-<p>Top Up Game Murah • Aman • Terpercaya</p>
+<div>
+
+<h2>
+
+🎮 ARDZ STORE
+
+</h2>
+
+<p>
+
+Top Up Game Murah, Aman, Cepat dan Terpercaya.
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Hubungi Kami
+
+</h3>
+
+<p>
+
+📱 WhatsApp : 082295071107
+
+</p>
+
+<p>
+
+📧 Email : acurosio03@gmail.com
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Jam Operasional
+
+</h3>
+
+<p>
+
+24 Jam Non Stop
+
+</p>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+© 2026 ARDZ STORE. All Rights Reserved.
+
+</div>
 
 </footer>
+
+<!-- Tombol WhatsApp -->
+
+<a
+
+href="https://wa.me/6282295071107"
+
+class="wa-float"
+
+target="_blank">
+
+💬
+
+</a>
 
 <script src="ff.js"></script>
 
 </body>
+
 </html>
