@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ARDZ STORE - Roblox</title>
+
+<title>ARDZ STORE | Top Up Roblox</title>
 
 <link rel="stylesheet" href="style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 </head>
 
@@ -13,106 +21,599 @@
 
 <header>
 
-<div class="logo">ARDZ STORE</div>
+<div class="navbar">
+
+<div class="logo">
+
+🎮 ARDZ STORE
+
+</div>
 
 <nav>
+
 <a href="index.html">Home</a>
-<a href="ml.html">ML</a>
-<a href="ff.html">FF</a>
-<a href="pubg.html">PUBG</a>
-<a href="hok.html">HOK</a>
-<a href="roblox.html">Roblox</a>
+
+<a href="ml.html">Mobile Legends</a>
+
+<a href="ff.html">Free Fire</a>
+
+<a href="pubg.html">PUBG Mobile</a>
+
+<a href="hok.html">Honor Of Kings</a>
+
+<a class="active" href="roblox.html">Roblox</a>
+
+<a href="valorant.html">Valorant</a>
+
 </nav>
+
+</div>
 
 </header>
 
-<section class="hero">
+<section class="hero hero-roblox">
 
-<div class="hero-text">
+<div class="hero-overlay">
 
-<h1>TOP UP ROBUX</h1>
+<h1>
 
-<p>Top Up Robux Murah • Cepat • Aman 24 Jam</p>
+TOP UP ROBLOX
+
+</h1>
+
+<p>
+
+Robux Murah • Cepat • Aman • 24 Jam
+
+</p>
 
 </div>
 
 </section>
 
-<section>
+<section class="topup-container">
 
-<div class="topup-container">
+<div class="left">
 
-<h2>Masukkan Username Roblox</h2>
+<div class="box">
 
-<input type="text" id="userid" placeholder="Masukkan Username Roblox">
+<h2>
 
-<h2>Pilih Robux</h2>
+👤 Masukkan Username Roblox
 
-<div class="game-list">
+</h2>
+
+<input
+type="text"
+id="userid"
+placeholder="Masukkan Username Roblox">
+
+<input
+type="text"
+id="nickname"
+placeholder="Nickname"
+readonly>
 
 </div>
 
-<h2>Metode Pembayaran</h2>
+<div class="box">
+
+<h2>
+
+💎 Pilih Robux
+
+</h2>
+
+<div
+id="roblox-products"
+class="produk-grid">
+
+</div>
+
+</div>
+
+</div>
+
+<div class="right">
+
+<div class="box">
+
+<h2>
+
+💳 Metode Pembayaran
+
+</h2>
 
 <select id="payment">
 
 <option>DANA</option>
+
 <option>OVO</option>
+
 <option>GoPay</option>
+
 <option>QRIS</option>
-<option>Bank Transfer</option>
+
+<option>Bank BCA</option>
+
+<option>Bank BRI</option>
+
+<option>Bank BNI</option>
 
 </select>
 
-<div class="pay">
+<div class="payment-list">
 
-<img src="dana.png">
-<img src="ovo.png">
-<img src="gopay.png">
-<img src="qris.png">
+<img src="assets/payment/dana.png">
+
+<img src="assets/payment/ovo.png">
+
+<img src="assets/payment/gopay.png">
+
+<img src="assets/payment/qris.png">
+
+<img src="assets/payment/bca.png">
+
+<img src="assets/payment/bri.png">
+
+<img src="assets/payment/bni.png">
 
 </div>
 
-<h2>Nomor WhatsApp</h2>
+</div>
+<!-- ==========================
+DETAIL PESANAN
+========================== -->
 
-<input type="text" id="nomorwa" placeholder="08xxxxxxxxxx">
+<div class="box">
+
+<h2>
+
+📋 Detail Pesanan
+
+</h2>
 
 <div class="invoice">
 
-<h3>Detail Pesanan</h3>
+<div class="invoice-row">
 
-<p><b>Game :</b> Roblox</p>
+<span>Game</span>
 
-<p><b>Produk :</b>
-<span id="produk">Belum Dipilih</span>
-</p>
-
-<p><b>Total :</b>
-<span id="total">Rp0</span>
-</p>
+<b>Roblox</b>
 
 </div>
 
-<button onclick="checkoutRoblox()">
+<div class="invoice-row">
 
-CHECKOUT SEKARANG
+<span>Produk</span>
+
+<b id="produk">
+
+Belum Dipilih
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Total</span>
+
+<b id="total">
+
+Rp 0
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Status</span>
+
+<b style="color:#00ff88">
+
+Menunggu Pembayaran
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+VOUCHER
+========================== -->
+
+<div class="box">
+
+<h2>
+
+🎁 Voucher Promo
+
+</h2>
+
+<div class="voucher">
+
+<input
+
+type="text"
+
+id="voucher"
+
+placeholder="Masukkan Kode Voucher">
+
+<button>
+
+Gunakan
 
 </button>
 
 </div>
 
+</div>
+
+<!-- ==========================
+PRODUK SPESIAL
+========================== -->
+
+<div class="box">
+
+<h2>
+
+⭐ Produk Spesial
+
+</h2>
+
+<div class="special-list">
+
+<div class="special-item">
+
+<img
+src="assets/products/premium.png"
+class="icon-diamond">
+
+<div>
+
+<h3>
+
+Roblox Premium
+
+</h3>
+
+<p>
+
+Membership Bulanan Roblox
+
+</p>
+
+</div>
+
+</div>
+
+<div class="special-item">
+
+<img
+src="assets/products/giftcard.png"
+class="icon-diamond">
+
+<div>
+
+<h3>
+
+Gift Card Roblox
+
+</h3>
+
+<p>
+
+Redeem Robux Resmi
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================
+CATATAN
+========================== -->
+
+<div class="box">
+
+<h2>
+
+📝 Catatan
+
+</h2>
+
+<textarea
+
+id="catatan"
+
+rows="4"
+
+placeholder="Catatan untuk Admin (Opsional)">
+
+</textarea>
+
+</div>
+
+<!-- ==========================
+CHECKOUT
+========================== -->
+
+<button
+
+class="checkout-btn"
+
+onclick="checkoutRoblox()">
+
+🛒 CHECKOUT SEKARANG
+
+</button>
+
+<!-- ==========================
+KEUNGGULAN
+========================== -->
+
+<div class="box">
+
+<h2>
+
+🔥 Kenapa Pilih ARDZ STORE?
+
+</h2>
+
+<ul class="fitur">
+
+<li>⚡ Proses Cepat 1–5 Menit</li>
+
+<li>🛡️ Aman & Terpercaya</li>
+
+<li>💎 Harga Robux Murah</li>
+
+<li>📱 Customer Service 24 Jam</li>
+
+<li>💳 Banyak Metode Pembayaran</li>
+
+<li>🎁 Promo Menarik Setiap Hari</li>
+
+</ul>
+
+</div>
+
+<!-- ==========================
+RATING
+========================== -->
+
+<div class="box">
+
+<h2>
+
+⭐ Rating Pelanggan
+
+</h2>
+
+<p>
+
+⭐⭐⭐⭐⭐ 4.9 / 5
+
+</p>
+
+<p>
+
+Ribuan transaksi Roblox berhasil diproses.
+
+</p>
+
+</div>
+
+</div>
+
 </section>
+<!-- ==========================
+PRODUK TERLARIS
+========================== -->
+
+<section class="best-product">
+
+<h2 class="title">
+
+🔥 Produk Roblox Terlaris
+
+</h2>
+
+<div class="best-grid">
+
+<div class="best-card">
+
+<img src="assets/products/robux.png" alt="400 Robux">
+
+<h3>400 Robux</h3>
+
+<p>Paket paling banyak dibeli.</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/premium.png" alt="Premium">
+
+<h3>Roblox Premium</h3>
+
+<p>Membership resmi Roblox.</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/giftcard.png" alt="Gift Card">
+
+<h3>Gift Card</h3>
+
+<p>Redeem Robux resmi.</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+INFORMASI
+========================== -->
+
+<section class="info">
+
+<h2 class="title">
+
+📢 Informasi Top Up
+
+</h2>
+
+<div class="box">
+
+<p>✔ Pastikan Username Roblox yang dimasukkan sudah benar.</p>
+
+<p>✔ Robux akan diproses setelah pembayaran berhasil.</p>
+
+<p>✔ Kesalahan penulisan Username menjadi tanggung jawab pembeli.</p>
+
+<p>✔ Simpan bukti pembayaran hingga transaksi selesai.</p>
+
+<p>✔ Hubungi Admin jika pesanan belum diproses lebih dari 10 menit.</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+FAQ
+========================== -->
+
+<section class="faq">
+
+<h2 class="title">
+
+❓ Pertanyaan Umum
+
+</h2>
+
+<div class="box">
+
+<h3>Berapa lama proses top up?</h3>
+
+<p>Normalnya 1–5 menit setelah pembayaran dikonfirmasi.</p>
+
+<hr>
+
+<h3>Apakah aman?</h3>
+
+<p>Ya, top up dilakukan tanpa meminta password akun Roblox.</p>
+
+<hr>
+
+<h3>Bagaimana jika Robux belum masuk?</h3>
+
+<p>Silakan hubungi Admin melalui WhatsApp dengan bukti pembayaran.</p>
+
+</div>
+
+</section>
+
+<!-- ==========================
+FOOTER
+========================== -->
 
 <footer>
 
-<h3>ARDZ STORE</h3>
+<div class="footer-container">
 
-<p>Top Up Game Murah • Aman • Terpercaya</p>
+<div>
+
+<h2>
+
+🎮 ARDZ STORE
+
+</h2>
+
+<p>
+
+Top Up Game Murah • Aman • Terpercaya
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Hubungi Kami
+
+</h3>
+
+<p>
+
+📱 WhatsApp : 082295071107
+
+</p>
+
+<p>
+
+📧 Email : ardzstore@gmail.com
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Jam Operasional
+
+</h3>
+
+<p>
+
+24 Jam Non Stop
+
+</p>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+© 2026 ARDZ STORE. All Rights Reserved.
+
+</div>
 
 </footer>
-  
-<script src="roblox.js"></script>
 
+<!-- ==========================
+WHATSAPP FLOAT
+========================== -->
+
+<a
+href="https://wa.me/6282295071107"
+class="wa-float"
+target="_blank">
+
+💬
+
+</a>
+
+<script src="roblox.js"></script>
 
 </body>
 
