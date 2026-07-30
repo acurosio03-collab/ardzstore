@@ -1,396 +1,1005 @@
-// ==========================================
-// ARDZ STORE
-// ROBLOX
-// roblox.js
-// ==========================================
+/* ==========================================
+   ARDZ STORE
+   ROBLOX
+   roblox.js V1
+========================================== */
 
-// ==============================
-// DATA DARI PANEL ADMIN
-// ==============================
+"use strict";
 
-let dataNominal =
-JSON.parse(localStorage.getItem("nominal")) || [];
+/* ==========================================
+   KONFIGURASI
+========================================== */
 
-// ==============================
-// PRODUK BAWAAN ROBLOX
-// ==============================
+const ADMIN_WA = "6283185954674";
 
-const defaultProduk=[
+/* ==========================================
+   DATA PRODUK ROBLOX
+========================================== */
 
-{game:"Roblox",produk:"80 Robux",harga:15000,badge:"HOT"},
-{game:"Roblox",produk:"160 Robux",harga:29000,badge:""},
-{game:"Roblox",produk:"240 Robux",harga:43000,badge:""},
-{game:"Roblox",produk:"320 Robux",harga:57000,badge:""},
-{game:"Roblox",produk:"400 Robux",harga:71000,badge:"BEST"},
-{game:"Roblox",produk:"560 Robux",harga:98000,badge:""},
-{game:"Roblox",produk:"800 Robux",harga:139000,badge:"TERLARIS"},
-{game:"Roblox",produk:"1200 Robux",harga:208000,badge:""},
-{game:"Roblox",produk:"1700 Robux",harga:292000,badge:""},
-{game:"Roblox",produk:"2000 Robux",harga:343000,badge:""},
-{game:"Roblox",produk:"2800 Robux",harga:478000,badge:""},
-{game:"Roblox",produk:"4500 Robux",harga:760000,badge:"BEST"},
-{game:"Roblox",produk:"10000 Robux",harga:1680000,badge:"HOT"},
+const products = [
 
-{game:"Roblox",produk:"Roblox Premium 450",harga:85000,badge:"POPULER"},
-{game:"Roblox",produk:"Roblox Premium 1000",harga:170000,badge:"BEST"},
-{game:"Roblox",produk:"Gift Card Roblox",harga:50000,badge:""}
+    {id:1, nama:"80 Robux", harga:15000},
+    {id:2, nama:"160 Robux", harga:29000},
+    {id:3, nama:"240 Robux", harga:43000},
+    {id:4, nama:"400 Robux", harga:70000},
+    {id:5, nama:"800 Robux", harga:140000},
+    {id:6, nama:"1700 Robux", harga:280000},
+    {id:7, nama:"4500 Robux", harga:700000},
+    {id:8, nama:"10000 Robux", harga:1400000},
+
+    {id:9, nama:"Premium 450", harga:85000},
+    {id:10, nama:"Premium 1000", harga:170000},
+    {id:11, nama:"Premium 2200", harga:340000}
 
 ];
 
-// ==============================
-// AMBIL DATA DARI PANEL ADMIN
-// ==============================
+/* ==========================================
+   DATA PESANAN
+========================================== */
 
-let produkRoblox=[];
+let selectedProduct = null;
 
-if(dataNominal.length>0){
+let selectedPayment = "QRIS";
 
-dataNominal.forEach(item=>{
+let discount = 0;
 
-let game=item.game.toLowerCase().trim();
+let voucherUsed = "";
+/* ==========================================
+   ROBLOX.JS V1
+   BAGIAN 2
+   HELPER FUNCTION
+========================================== */
 
-if(
 
-game=="roblox"
+/* ==========================================
+   FORMAT RUPIAH
+========================================== */
 
-){
+function rupiah(angka){
 
-produkRoblox.push({
+    return "Rp " +
+    Number(angka).toLocaleString("id-ID");
 
-produk:item.produk,
+}
 
-harga:Number(item.supplier)+
-Number(item.profit),
 
-badge:"ADMIN"
+/* ==========================================
+   GAMBAR PRODUK
+========================================== */
+
+function getProductImage(nama){
+
+    nama = nama.toLowerCase();
+
+    // Premium
+    if(nama.includes("premium")){
+
+        return "assets/products/roblox-premium.png";
+
+    }
+
+    // Robux
+    return "assets/products/robux.png";
+
+}
+
+
+/* ==========================================
+   HITUNG TOTAL HARGA
+========================================== */
+
+function getTotalHarga(){
+
+    if(selectedProduct === null){
+
+        return 0;
+
+    }
+
+    return selectedProduct.harga - discount;
+
+}
+
+
+/* ==========================================
+   AMBIL ELEMENT HTML
+========================================== */
+
+function $(id){
+
+    return document.getElementById(id);
+
+}
+/* ==========================================
+   ROBLOX.JS V1
+   BAGIAN 3
+   RENDER PRODUK
+========================================== */
+
+function renderProducts(){
+
+    const productList = $("productList");
+
+    if(!productList){
+
+        console.error(
+            "Element #productList tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+    productList.innerHTML = "";
+
+    products.forEach((item,index)=>{
+
+        productList.innerHTML += `
+
+        <div class="product-card"
+             onclick="selectProduct(${index})">
+
+            <img
+                src="${getProductImage(item.nama)}"
+                alt="${item.nama}">
+
+            <h3>
+
+                ${item.nama}
+
+            </h3>
+
+            <div class="product-price">
+
+                ${rupiah(item.harga)}
+
+            </div>
+
+            <button
+                type="button"
+                class="btn-primary">
+
+                Pilih
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+/* ==========================================
+   ROBLOX.JS V1
+   BAGIAN 4
+   PILIH PRODUK
+========================================== */
+
+function selectProduct(index){
+
+    // Simpan produk yang dipilih
+    selectedProduct = products[index];
+
+    // Reset semua card
+    document.querySelectorAll(".product-card").forEach(card=>{
+
+        card.classList.remove("active");
+
+    });
+
+    // Aktifkan card yang dipilih
+    const cards = document.querySelectorAll(".product-card");
+
+    if(cards[index]){
+
+        cards[index].classList.add("active");
+
+    }
+
+    // Update Detail Pesanan
+    if($("produk")){
+
+        $("produk").textContent =
+        selectedProduct.nama;
+
+    }
+
+    if($("total")){
+
+        $("total").textContent =
+        rupiah(getTotalHarga());
+
+    }
+
+    // Update Ringkasan Checkout
+    if($("summaryProduk")){
+
+        $("summaryProduk").textContent =
+        selectedProduct.nama;
+
+    }
+
+    if($("summaryTotal")){
+
+        $("summaryTotal").textContent =
+        rupiah(getTotalHarga());
+
+    }
+
+    if($("summaryPayment")){
+
+        $("summaryPayment").textContent =
+        selectedPayment;
+
+    }
+
+    // Simpan otomatis jika fungsi sudah ada
+    if(typeof saveOrder === "function"){
+
+        saveOrder();
+
+    }
+
+}
+/* ==========================================
+   ROBLOX.JS V1
+   BAGIAN 5
+   SISTEM VOUCHER
+========================================== */
+
+/* ==========================================
+   DAFTAR VOUCHER
+========================================== */
+
+const vouchers = {
+
+    "ARDZ10": 10,
+
+    "ROBLOX5": 5,
+
+    "HEMAT20": 20
+
+};
+
+
+/* ==========================================
+   TERAPKAN VOUCHER
+========================================== */
+
+function applyVoucher(){
+
+    if(selectedProduct === null){
+
+        alert("Silakan pilih produk terlebih dahulu.");
+
+        return;
+
+    }
+
+    const input = $("voucher");
+    const info = $("voucherInfo");
+
+    if(!input) return;
+
+    const code = input.value.trim().toUpperCase();
+
+    if(code === ""){
+
+        alert("Masukkan kode voucher.");
+
+        return;
+
+    }
+
+    if(vouchers.hasOwnProperty(code)){
+
+        voucherUsed = code;
+
+        const persen = vouchers[code];
+
+        discount = Math.floor(
+            selectedProduct.harga * persen / 100
+        );
+
+        // Update Detail Pesanan
+        if($("total")){
+
+            $("total").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        // Update Ringkasan
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        // Informasi Voucher
+        if(info){
+
+            info.textContent =
+            "✅ Voucher berhasil digunakan (" +
+            persen +
+            "% OFF)";
+
+            info.style.color = "#22c55e";
+
+        }
+
+        // Simpan
+        if(typeof saveOrder === "function"){
+
+            saveOrder();
+
+        }
+
+    }else{
+
+        voucherUsed = "";
+
+        discount = 0;
+
+        if(info){
+
+            info.textContent =
+            "❌ Voucher tidak valid.";
+
+            info.style.color = "#ef4444";
+
+        }
+
+        if($("total")){
+
+            $("total").textContent =
+            rupiah(selectedProduct.harga);
+
+        }
+
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(selectedProduct.harga);
+
+        }
+
+    }
+
+}
+
+
+/* ==========================================
+   TOMBOL VOUCHER
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const btn = $("applyVoucher");
+
+    if(btn){
+
+        btn.addEventListener(
+
+            "click",
+
+            applyVoucher
+
+        );
+
+    }
 
 });
+/* ==========================================
+   ROBLOX.JS V1
+   BAGIAN 6
+   SISTEM PEMBAYARAN
+========================================== */
+
+function initPayment(){
+
+    const cards =
+    document.querySelectorAll(".payment-card");
+
+    if(cards.length === 0){
+
+        console.warn(
+            "Payment card tidak ditemukan."
+        );
+
+        return;
+
+    }
+
+    cards.forEach(card=>{
+
+        card.addEventListener(
+        "click",
+        function(){
+
+            // Hapus pilihan sebelumnya
+            cards.forEach(item=>{
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
+            // Aktifkan pembayaran
+            this.classList.add(
+                "active"
+            );
+
+            // Simpan metode pembayaran
+            selectedPayment =
+            this.dataset.payment;
+
+            // Update ringkasan
+            if($("summaryPayment")){
+
+                $("summaryPayment")
+                .textContent =
+                selectedPayment;
+
+            }
+
+            // Simpan otomatis
+            if(typeof saveOrder === "function"){
+
+                saveOrder();
+
+            }
+
+        });
+
+    });
 
 }
 
-});
+
+/* ==========================================
+   PEMBAYARAN DEFAULT
+========================================== */
+
+function setDefaultPayment(){
+
+    const first =
+    document.querySelector(
+        ".payment-card"
+    );
+
+    if(first){
+
+        first.classList.add(
+            "active"
+        );
+
+        selectedPayment =
+        first.dataset.payment ||
+        "QRIS";
+
+        if($("summaryPayment")){
+
+            $("summaryPayment")
+            .textContent =
+            selectedPayment;
+
+        }
+
+    }
 
 }
+/* ==========================================
+   ROBLOX.JS V1
+   BAGIAN 7
+   CHECKOUT WHATSAPP
+========================================== */
 
-// Jika panel admin kosong
+function checkoutWhatsApp(){
 
-if(produkRoblox.length==0){
+    // Validasi Username
+    const nickname =
+    $("nickname")?.value.trim() || "";
 
-produkRoblox=defaultProduk;
+    if(nickname === ""){
 
-}
+        alert("Masukkan Username Roblox terlebih dahulu.");
 
-// ==============================
+        $("nickname").focus();
 
-const list=
-document.getElementById("roblox-products");
-// ==============================
-// TAMPILKAN PRODUK ROBLOX
-// ==============================
+        return;
 
-function loadRoblox(){
+    }
 
-if(!list) return;
+    // Validasi User ID
+    const userId =
+    $("userId")?.value.trim() || "";
 
-list.innerHTML="";
+    if(userId === ""){
 
-produkRoblox.forEach((item,index)=>{
+        alert("Masukkan User ID Roblox terlebih dahulu.");
 
-let badge="";
+        $("userId").focus();
 
-switch(item.badge){
+        return;
 
-case "HOT":
-badge='<div class="badge">🔥 HOT</div>';
-break;
+    }
 
-case "BEST":
-badge='<div class="badge">⭐ BEST SELLER</div>';
-break;
+    // Validasi Produk
+    if(selectedProduct === null){
 
-case "TERLARIS":
-badge='<div class="badge">🏆 TERLARIS</div>';
-break;
+        alert("Silakan pilih produk Robux terlebih dahulu.");
 
-case "POPULER":
-badge='<div class="badge">💎 POPULER</div>';
-break;
+        return;
 
-case "ADMIN":
-badge='<div class="badge">⚙ ADMIN</div>';
-break;
+    }
 
-default:
-badge="";
+    // Total pembayaran
+    const total = getTotalHarga();
 
-}
-
-// ==============================
-// GAMBAR PRODUK
-// ==============================
-
-let gambar="assets/products/robux.png";
-
-let nama=item.produk.toLowerCase();
-
-if(nama.includes("premium")){
-
-gambar="assets/products/premium.png";
-
-}
-
-else if(nama.includes("gift")){
-
-gambar="assets/products/giftcard.png";
-
-}
-
-// ==============================
-// TAMPILKAN CARD
-// ==============================
-
-list.innerHTML += `
-
-<div class="produk-card">
-
-${badge}
-
-<img
-src="${gambar}"
-class="icon-diamond">
-
-<h3>
-
-${item.produk}
-
-</h3>
-
-<p>
-
-Roblox Robux
-
-</p>
-
-<h2>
-
-Rp ${Number(item.harga).toLocaleString("id-ID")}
-
-</h2>
-
-<button
-onclick="pilihProduk(${index})">
-
-PILIH
-
-</button>
-
-</div>
-
-`;
-
-});
-
-}
-// ==============================
-// PRODUK TERPILIH
-// ==============================
-
-let produkDipilih = null;
-
-// ==============================
-// PILIH PRODUK
-// ==============================
-
-function pilihProduk(index){
-
-produkDipilih = produkRoblox[index];
-
-// Isi Detail Pesanan
-document.getElementById("produk").innerHTML =
-produkDipilih.produk;
-
-document.getElementById("total").innerHTML =
-"Rp " +
-Number(produkDipilih.harga)
-.toLocaleString("id-ID");
-
-// Hapus efek pilihan sebelumnya
-let semuaCard =
-document.querySelectorAll(".produk-card");
-
-semuaCard.forEach(card=>{
-
-card.style.border =
-"2px solid transparent";
-
-card.style.boxShadow =
-"none";
-
-card.style.transform =
-"scale(1)";
-
-});
-
-// Efek card yang dipilih
-let cardDipilih =
-semuaCard[index];
-
-if(cardDipilih){
-
-cardDipilih.style.border =
-"2px solid #ff3b3b";
-
-cardDipilih.style.boxShadow =
-"0 0 20px rgba(255,59,59,.8)";
-
-cardDipilih.style.transform =
-"scale(1.03)";
-
-}
-
-// Scroll ke Detail Pesanan
-let invoice =
-document.querySelector(".invoice");
-
-if(invoice){
-
-invoice.scrollIntoView({
-
-behavior:"smooth",
-
-block:"center"
-
-});
-
-}
-
-}
-
-// ==============================
-// RESET PILIHAN
-// ==============================
-
-function resetPilihan(){
-
-produkDipilih = null;
-
-document.getElementById("produk").innerHTML =
-"Belum Dipilih";
-
-document.getElementById("total").innerHTML =
-"Rp 0";
-
-let semuaCard =
-document.querySelectorAll(".produk-card");
-
-semuaCard.forEach(card=>{
-
-card.style.border =
-"2px solid transparent";
-
-card.style.boxShadow =
-"none";
-
-card.style.transform =
-"scale(1)";
-
-});
-
-}
-
-// ==============================
-// FORMAT RUPIAH
-// ==============================
-
-function formatRupiah(angka){
-
-return "Rp " +
-Number(angka).toLocaleString("id-ID");
-
-}
-// ==============================
-// CHECKOUT WHATSAPP
-// ==============================
-
-function checkoutRoblox(){
-
-let userid =
-document.getElementById("userid").value.trim();
-
-let payment =
-document.getElementById("payment").value;
-
-let catatan =
-document.getElementById("catatan").value.trim();
-
-// Validasi Username
-if(userid==""){
-
-alert("Masukkan Username Roblox terlebih dahulu!");
-
-return;
-
-}
-
-// Validasi Produk
-if(produkDipilih==null){
-
-alert("Silakan pilih produk terlebih dahulu!");
-
-return;
-
-}
-
-// Ambil data produk
-let produk = produkDipilih.produk;
-
-let harga = Number(produkDipilih.harga)
-.toLocaleString("id-ID");
-
-// Susun pesan WhatsApp
-let pesan =
-`🎮 *ARDZ STORE*
+    // Pesan WhatsApp
+    const pesan = `🎮 *ARDZ STORE*
 
 Halo Admin,
 
 Saya ingin melakukan Top Up Roblox.
 
-━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━
 
 🎮 Game : Roblox
 
-👤 Username : ${userid}
+👤 Username : ${nickname}
 
-💎 Produk : ${produk}
+🆔 User ID : ${userId}
 
-💰 Total : Rp ${harga}
+💎 Produk : ${selectedProduct.nama}
 
-💳 Pembayaran : ${payment}
+💰 Harga : ${rupiah(selectedProduct.harga)}
 
-📝 Catatan : ${catatan=="" ? "-" : catatan}
+🎁 Voucher : ${voucherUsed || "-"}
 
-━━━━━━━━━━━━━━━
+💸 Diskon : ${rupiah(discount)}
 
-Mohon diproses ya.
+💵 Total Bayar : ${rupiah(total)}
+
+💳 Pembayaran : ${selectedPayment}
+
+━━━━━━━━━━━━━━━━━━
+
+Mohon diproses.
+
 Terima kasih 🙏`;
 
-window.open(
+    // Buka WhatsApp
+    window.open(
 
-"https://wa.me/6282295071107?text="+
-encodeURIComponent(pesan),
+        "https://wa.me/" +
+        ADMIN_WA +
+        "?text=" +
+        encodeURIComponent(pesan),
 
-"_blank"
+        "_blank"
 
-);
+    );
 
 }
 
-// ==============================
-// LOAD HALAMAN
-// ==============================
+/* ==========================================
+   TOMBOL CHECKOUT
+========================================== */
 
-document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener("DOMContentLoaded",()=>{
 
-loadRoblox();
+    const btn = $("checkoutBtn");
+
+    if(btn){
+
+        btn.addEventListener(
+
+            "click",
+
+            checkoutWhatsApp
+
+        );
+
+    }
+
+});
+/* ==========================================
+   ROBLOX.JS V1
+   BAGIAN 8
+   LOCAL STORAGE
+========================================== */
+
+/* ==========================================
+   KEY STORAGE
+========================================== */
+
+const STORAGE_KEY = "roblox_last_order";
+
+/* ==========================================
+   SIMPAN DATA PESANAN
+========================================== */
+
+function saveOrder(){
+
+    const data = {
+
+        userId: $("userId") ? $("userId").value : "",
+
+        nickname: $("nickname") ? $("nickname").value : "",
+
+        payment: selectedPayment,
+
+        voucher: voucherUsed,
+
+        discount: discount,
+
+        productId: selectedProduct ? selectedProduct.id : null
+
+    };
+
+    localStorage.setItem(
+
+        STORAGE_KEY,
+
+        JSON.stringify(data)
+
+    );
+
+}
+
+/* ==========================================
+   LOAD DATA PESANAN
+========================================== */
+
+function loadOrder(){
+
+    const data = JSON.parse(
+
+        localStorage.getItem(STORAGE_KEY)
+
+    );
+
+    if(!data) return;
+
+    // User ID
+    if($("userId")){
+
+        $("userId").value = data.userId || "";
+
+    }
+
+    // Username
+    if($("nickname")){
+
+        $("nickname").value = data.nickname || "";
+
+    }
+
+    // Pembayaran
+    if(data.payment){
+
+        selectedPayment = data.payment;
+
+        document.querySelectorAll(".payment-card")
+        .forEach(card=>{
+
+            card.classList.remove("active");
+
+            if(card.dataset.payment === selectedPayment){
+
+                card.classList.add("active");
+
+            }
+
+        });
+
+        if($("summaryPayment")){
+
+            $("summaryPayment").textContent =
+            selectedPayment;
+
+        }
+
+    }
+
+    // Voucher
+    voucherUsed = data.voucher || "";
+
+    discount = data.discount || 0;
+
+    // Produk terakhir
+    if(data.productId){
+
+        const index = products.findIndex(
+
+            item => item.id === data.productId
+
+        );
+
+        if(index !== -1){
+
+            selectProduct(index);
+
+        }
+
+    }
+
+}
+
+/* ==========================================
+   AUTO SAVE INPUT
+========================================== */
+
+["userId","nickname"].forEach(id=>{
+
+    const el = $(id);
+
+    if(el){
+
+        el.addEventListener("input", saveOrder);
+
+        el.addEventListener("change", saveOrder);
+
+    }
+
+});
+
+/* ==========================================
+   SIMPAN SAAT MENUTUP HALAMAN
+========================================== */
+
+window.addEventListener(
+
+    "beforeunload",
+
+    saveOrder
+
+);
+/* ==========================================
+   ROBLOX.JS V1
+   BAGIAN 9
+   LIVE ORDER + POPUP + EFFECT
+========================================== */
+
+/* ==========================================
+   LIVE ORDER
+========================================== */
+
+const liveOrders = [
+
+    {nama:"Budi",kota:"Jakarta",produk:"80 Robux"},
+    {nama:"Andi",kota:"Bandung",produk:"400 Robux"},
+    {nama:"Rizky",kota:"Surabaya",produk:"Premium 450"},
+    {nama:"Fajar",kota:"Medan",produk:"800 Robux"},
+    {nama:"Agus",kota:"Semarang",produk:"1700 Robux"},
+    {nama:"Dimas",kota:"Makassar",produk:"Premium 1000"},
+    {nama:"Rian",kota:"Bekasi",produk:"240 Robux"},
+    {nama:"Aldi",kota:"Depok",produk:"4500 Robux"},
+    {nama:"Reza",kota:"Bogor",produk:"10000 Robux"},
+    {nama:"Ilham",kota:"Yogyakarta",produk:"160 Robux"}
+
+];
+
+function startLiveOrder(){
+
+    const box = $("liveOrder");
+
+    if(!box) return;
+
+    function showOrder(){
+
+        const item =
+        liveOrders[
+            Math.floor(
+                Math.random() *
+                liveOrders.length
+            )
+        ];
+
+        box.innerHTML = `
+            <strong>🛒 Pesanan Baru</strong><br>
+            ${item.nama} dari ${item.kota}<br>
+            membeli <b>${item.produk}</b>
+        `;
+
+        box.classList.add("show");
+
+        setTimeout(()=>{
+
+            box.classList.remove("show");
+
+        },5000);
+
+    }
+
+    setTimeout(showOrder,3000);
+
+    setInterval(showOrder,12000);
+
+}
+
+/* ==========================================
+   POPUP PROMO
+========================================== */
+
+function initPromoPopup(){
+
+    const popup = $("promoPopup");
+    const closeBtn = $("closePromo");
+    const promoBtn = $("promoButton");
+
+    if(!popup) return;
+
+    if(localStorage.getItem("roblox_promo_seen")){
+
+        popup.style.display = "none";
+
+        return;
+
+    }
+
+    setTimeout(()=>{
+
+        popup.classList.add("show");
+
+    },1000);
+
+    if(closeBtn){
+
+        closeBtn.addEventListener("click",()=>{
+
+            popup.classList.remove("show");
+
+            localStorage.setItem(
+                "roblox_promo_seen",
+                "true"
+            );
+
+        });
+
+    }
+
+    if(promoBtn){
+
+        promoBtn.addEventListener("click",()=>{
+
+            popup.classList.remove("show");
+
+            localStorage.setItem(
+                "roblox_promo_seen",
+                "true"
+            );
+
+            const voucher = $("voucher");
+
+            if(voucher){
+
+                voucher.scrollIntoView({
+
+                    behavior:"smooth"
+
+                });
+
+            }
+
+        });
+
+    }
+
+}
+
+/* ==========================================
+   BACK TO TOP
+========================================== */
+
+function initBackToTop(){
+
+    const button = $("backTop");
+
+    if(!button) return;
+
+    button.style.display = "none";
+
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY > 300){
+
+            button.style.display = "flex";
+
+        }else{
+
+            button.style.display = "none";
+
+        }
+
+    });
+
+    button.addEventListener("click",()=>{
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+    });
+
+}
+
+/* ==========================================
+   EFEK CARD PRODUK
+========================================== */
+
+function initCardEffect(){
+
+    document
+    .querySelectorAll(".product-card")
+    .forEach(card=>{
+
+        card.addEventListener("mouseenter",()=>{
+
+            card.style.transform =
+            "translateY(-8px)";
+
+        });
+
+        card.addEventListener("mouseleave",()=>{
+
+            if(
+                !card.classList.contains("active")
+            ){
+
+                card.style.transform =
+                "translateY(0)";
+
+            }
+
+        });
+
+    });
+
+       }
+/* ==========================================
+   ROBLOX.JS V1
+   BAGIAN 10
+   INISIALISASI FINAL
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    console.log("🎮 Roblox.js V1 Loaded");
+
+    // Render daftar produk
+    renderProducts();
+
+    // Inisialisasi metode pembayaran
+    initPayment();
+
+    // Set pembayaran default
+    setDefaultPayment();
+
+    // Muat data pesanan terakhir
+    loadOrder();
+
+    // Live Order
+    startLiveOrder();
+
+    // Popup Promo
+    initPromoPopup();
+
+    // Tombol Back To Top
+    initBackToTop();
+
+    // Efek Card
+    initCardEffect();
+
+    console.log("✅ Roblox siap digunakan.");
 
 });
