@@ -804,7 +804,7 @@ function initPromoPopup(){
     }
 
     // Tombol Lihat Promo
-    if(promoBtn){
+        if(promoBtn){
 
         promoBtn.addEventListener("click",()=>{
 
@@ -820,9 +820,7 @@ function initPromoPopup(){
             if(voucher){
 
                 voucher.scrollIntoView({
-
                     behavior:"smooth"
-
                 });
 
             }
@@ -831,7 +829,9 @@ function initPromoPopup(){
 
     }
 
-   /* ==========================================
+} // ← TAMBAHKAN INI
+
+/* ==========================================
    BAGIAN 12
    INISIALISASI
 ========================================== */
@@ -840,23 +840,18 @@ document.addEventListener("DOMContentLoaded",()=>{
 
     console.log("🎮 PUBG.js V5 Loaded");
 
-    // Render daftar produk
     renderProducts();
 
-    // Inisialisasi metode pembayaran
     initPayment();
 
-    // Muat data pesanan terakhir
     loadOrder();
 
-    // Tombol Back To Top
     initBackToTop();
 
-    // Live Order
     startLiveOrder();
 
-    // Popup Promo
     initPromoPopup();
 
 });
-}
+
+   
