@@ -379,3 +379,77 @@ counters.forEach(counter=>{
     observer.observe(counter);
 
 });
+/* =====================================
+Fade In Scroll Animation
+===================================== */
+
+/* Semua elemen yang akan dianimasikan */
+
+const fadeElements = document.querySelectorAll(
+
+`
+.section-title,
+.game-card,
+.promo-card,
+.best-card,
+.why-card,
+.step-card,
+.stat-card,
+.partner-card,
+.testimonial-card,
+.payment-card,
+.service-card,
+.cta-box,
+.footer-item
+`
+
+);
+
+/* Observer */
+
+const fadeObserver = new IntersectionObserver(
+
+(entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("fade-in");
+
+fadeObserver.unobserve(entry.target);
+
+}
+
+});
+
+},
+
+{
+
+threshold:0.15,
+
+rootMargin:"0px 0px -60px 0px"
+
+}
+
+);
+
+/* Persiapan */
+
+fadeElements.forEach((element,index)=>{
+
+element.style.opacity="0";
+
+element.style.transform="translateY(40px)";
+
+/* Delay sedikit agar muncul bergantian */
+
+element.style.transition=
+
+`opacity .7s ease ${index*0.05}s,
+ transform .7s ease ${index*0.05}s`;
+
+fadeObserver.observe(element);
+
+});
