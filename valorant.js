@@ -90,7 +90,7 @@ function getProductImage(nama){
     // Battle Pass
     if(nama.includes("battle")){
 
-        return "assets/products/battlepass.png";
+        return "bintang.jpeg";
 
     }
 
@@ -98,13 +98,13 @@ function getProductImage(nama){
     // Bundle
     if(nama.includes("bundle")){
 
-        return "assets/products/bundle.png";
+        return "bandle.jpeg";
 
     }
 
 
     // Valorant Point
-    return "assets/products/vp.png";
+    return "diamond.jpeg";
 
 }
 
