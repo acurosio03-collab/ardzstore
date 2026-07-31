@@ -74,23 +74,23 @@ function getProductImage(nama){
 
     if(nama.includes("royale")){
 
-        return "assets/products/royalepass.png";
+        return "bintang.jpeg";
 
     }
 
     if(nama.includes("prime plus")){
 
-        return "assets/products/primeplus.png";
+        return "bandle.jpeg";
 
     }
 
     if(nama.includes("prime")){
 
-        return "assets/products/prime.png";
+        return "bandle.jpeg";
 
     }
 
-    return "assets/products/uc.png";
+    return "diamond.jpeg";
 
 }
 
