@@ -135,7 +135,7 @@ function getProductImage(nama){
     // Coin
     if(nama.includes("coin")){
 
-        return "assets/products/ecoin.png";
+        return "bola.jpeg";
 
     }
 
@@ -143,7 +143,7 @@ function getProductImage(nama){
     // Match Pass
     if(nama.includes("pass")){
 
-        return "assets/products/matchpass.png";
+        return "bintang.jpeg";
 
     }
 
@@ -151,7 +151,7 @@ function getProductImage(nama){
     // Epic Player
     if(nama.includes("epic")){
 
-        return "assets/products/epicpack.png";
+        return "bandle.jpeg";
 
     }
 
@@ -159,13 +159,13 @@ function getProductImage(nama){
     // Special Pack
     if(nama.includes("special")){
 
-        return "assets/products/epack.png";
+        return "bandle.jpeg";
 
     }
 
 
     // Default
-    return "assets/products/ecoin.png";
+    return "bola.jpeg";
 
 }
 
