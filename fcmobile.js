@@ -87,26 +87,26 @@ function getProductImage(nama){
     // Star Pass
     if(nama.includes("star")){
 
-        return "assets/products/starpass.png";
+        return "bintang.jpeg";
 
     }
 
     // Welcome Pack
     if(nama.includes("welcome")){
 
-        return "assets/products/welcomepack.png";
+        return "bandle.jpeg";
 
     }
 
     // Bundle
     if(nama.includes("bundle")){
 
-        return "assets/products/fcbundle.png";
+        return "bandle.jpeg";
 
     }
 
     // Default FC Points
-    return "assets/products/fcpoints.png";
+    return "bola.jpeg";
 
 }
 
