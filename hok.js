@@ -87,19 +87,19 @@ function getProductImage(nama){
 
     if(nama.includes("weekly")){
 
-        return "assets/products/weeklycard.png";
+        return "bandle.jpeg";
 
     }
 
 
     if(nama.includes("monthly")){
 
-        return "assets/products/monthlycard.png";
+        return "bandle.jpeg";
 
     }
 
 
-    return "assets/products/token.png";
+    return "token.jpeg";
 
 }
 
