@@ -74,12 +74,12 @@ function getProductImage(nama){
     // Premium
     if(nama.includes("premium")){
 
-        return "assets/products/roblox-premium.png";
+        return "robux.jpeg";
 
     }
 
     // Robux
-    return "assets/products/robux.png";
+    return "robux.jpeg";
 
 }
 
