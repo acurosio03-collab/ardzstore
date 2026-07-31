@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+ARDZ STORE | Top Up Genshin Impact
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+</head>
+
+
+<body>
+
+
+
+<!-- =====================================
+HEADER
+===================================== -->
+
+
+<header>
+
+
+<div class="navbar">
+
+
+<div class="logo">
+
+🎮 ARDZ STORE
+
+</div>
+
+
+
+<nav>
+
+
+<a href="index.html">
+
+Home
+
+</a>
+
+
+<a href="ml.html">
+
+Mobile Legends
+
+</a>
+
+
+<a href="ff.html">
+
+Free Fire
+
+</a>
+
+
+<a href="roblox.html">
+
+Roblox
+
+</a>
+
+
+<a href="valorant.html">
+
+Valorant
+
+</a>
+
+
+<a href="codm.html">
+
+CODM
+
+</a>
+
+
+<a href="fcmobile.html">
+
+FC Mobile
+
+</a>
+
+
+<a href="efootball.html">
+
+eFootball
+
+</a>
+
+
+<a class="active" href="genshin.html">
+
+Genshin
+
+</a>
+
+
+
+</nav>
+
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+<!-- =====================================
+HERO GENSHIN
+===================================== -->
+
+
+<section class="hero hero-genshin">
+
+
+<div class="hero-overlay">
+
+
+<h1>
+
+✨ Top Up Genshin Impact
+
+</h1>
+
+
+<p>
+
+Genesis Crystal Murah • Cepat • Aman
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<!-- =====================================
+DATA AKUN GENSHIN
+===================================== -->
+
+
+<section class="player-box">
+
+
+<div class="box">
+
+
+<h2>
+
+🌟 Data Akun Genshin
+
+</h2>
+
+
+
+
+<div class="input-group">
+
+
+
+<label>
+
+UID Genshin
+
+</label>
+
+
+<input
+
+type="number"
+
+id="uid"
+
+placeholder="Masukkan UID Genshin">
+
+
+
+
+
+<label>
+
+Nickname
+
+</label>
+
+
+<input
+
+type="text"
+
+id="nickname"
+
+placeholder="Masukkan Nickname">
+
+
+
+
+
+
+<label>
+
+Server
+
+</label>
+
+
+<select id="server">
+
+
+<option value="Asia">
+
+Asia
+
+</option>
+
+
+<option value="America">
+
+America
+
+</option>
+
+
+<option value="Europe">
+
+Europe
+
+</option>
+
+
+<option value="TW/HK/MO">
+
+TW/HK/MO
+
+</option>
+
+
+</select>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =====================================
+LIST PRODUK
+===================================== -->
+
+
+<section class="products">
+
+
+<h2 class="title">
+
+💎 Pilih Genesis Crystal
+
+</h2>
+
+
+
+
+<div
+
+id="productList"
+
+class="product-grid">
+
+
+<!-- Produk otomatis dari genshin.js -->
+
+
+</div>
+
+
+</section>
+  <!-- =====================================
+DETAIL PESANAN GENSHIN
+===================================== -->
+
+<section class="order-detail">
+
+<div class="box">
+
+
+<h2>
+
+📋 Detail Pesanan
+
+</h2>
+
+
+
+<div class="invoice">
+
+
+
+<div class="invoice-row">
+
+<span>
+
+Game
+
+</span>
+
+
+<b>
+
+Genshin Impact
+
+</b>
+
+</div>
+
+
+
+
+
+<div class="invoice-row">
+
+<span>
+
+Produk
+
+</span>
+
+
+<b id="produk">
+
+Belum Dipilih
+
+</b>
+
+</div>
+
+
+
+
+
+<div class="invoice-row">
+
+<span>
+
+Total
+
+</span>
+
+
+<b id="total">
+
+Rp 0
+
+</b>
+
+</div>
+
+
+
+
+
+<div class="invoice-row">
+
+<span>
+
+Status
+
+</span>
+
+
+<b style="color:#22c55e">
+
+Menunggu Pembayaran
+
+</b>
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+
+
+
+<!-- =====================================
+VOUCHER GENSHIN
+===================================== -->
+
+
+<section class="voucher-section">
+
+
+<div class="box">
+
+
+<h2>
+
+🎁 Voucher Genshin
+
+</h2>
+
+
+
+
+<div class="voucher-box">
+
+
+
+<input
+
+type="text"
+
+id="voucher"
+
+placeholder="Masukkan kode voucher">
+
+
+
+
+
+<button
+
+id="applyVoucher"
+
+class="btn-primary">
+
+Gunakan
+
+</button>
+
+
+
+</div>
+
+
+
+
+<p id="voucherInfo"></p>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =====================================
+PRODUK TERLARIS GENSHIN
+===================================== -->
+
+
+<section class="best-product">
+
+
+<h2 class="title">
+
+🔥 Produk Genshin Terlaris
+
+</h2>
+
+
+
+
+<div class="best-grid">
+
+
+
+
+
+<div class="best-card">
+
+
+<img
+
+src="diamond.jpeg"
+
+alt="Genesis Crystal">
+
+
+
+<h3>
+
+980 Genesis Crystal
+
+</h3>
+
+
+<p>
+
+Paket favorit Traveler
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="best-card">
+
+
+<img
+
+src="bintang.jpeg"
+
+alt="Welkin Moon">
+
+
+
+<h3>
+
+Blessing of the Welkin Moon
+
+</h3>
+
+
+<p>
+
+30 Hari Primogems
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="best-card">
+
+
+<img
+
+src="bandle.jpeg"
+
+alt="Battle Pass">
+
+
+
+<h3>
+
+Gnostic Hymn Battle Pass
+
+</h3>
+
+
+<p>
+
+Hadiah eksklusif Genshin
+
+</p>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</section>
+  <!-- =====================================
+METODE PEMBAYARAN GENSHIN
+===================================== -->
+
+<section class="payment-section">
+
+<div class="box">
+
+
+<h2>
+
+💳 Pilih Metode Pembayaran
+
+</h2>
+
+
+
+<div class="payment-grid">
+
+
+
+<div class="payment-card active" data-payment="QRIS">
+
+
+<img src="qris.jpeg">
+
+
+<h3>
+
+QRIS
+
+</h3>
+
+
+<p>
+
+Semua E-Wallet
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="payment-card" data-payment="DANA">
+
+
+<img src="dana.jpeg">
+
+
+<h3>
+
+DANA
+
+</h3>
+
+
+<p>
+
+Pembayaran Cepat
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="payment-card" data-payment="OVO">
+
+
+<img src="ovo.jpeg">
+
+
+<h3>
+
+OVO
+
+</h3>
+
+
+<p>
+
+Saldo OVO
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="payment-card" data-payment="GoPay">
+
+
+<img src="gopay.jpeg">
+
+
+<h3>
+
+GoPay
+
+</h3>
+
+
+<p>
+
+Pembayaran Instan
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="payment-card" data-payment="ShopeePay">
+
+
+<img src="shoppepay.jpeg">
+
+
+<h3>
+
+ShopeePay
+
+</h3>
+
+
+<p>
+
+Transfer Mudah
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="payment-card" data-payment="BCA">
+
+
+<img src="bca.jpeg">
+
+
+<h3>
+
+BCA
+
+</h3>
+
+
+<p>
+
+Transfer Bank
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- =====================================
+RINGKASAN CHECKOUT GENSHIN
+===================================== -->
+
+
+<section class="checkout-summary">
+
+
+<div class="box">
+
+
+
+<h2>
+
+🧾 Ringkasan Checkout
+
+</h2>
+
+
+
+
+<div class="invoice">
+
+
+
+
+
+<div class="invoice-row">
+
+
+<span>
+
+Game
+
+</span>
+
+
+<b>
+
+Genshin Impact
+
+</b>
+
+
+</div>
+
+
+
+
+
+
+<div class="invoice-row">
+
+
+<span>
+
+UID
+
+</span>
+
+
+<b id="summaryUID">
+
+-
+
+</b>
+
+
+</div>
+
+
+
+
+
+
+<div class="invoice-row">
+
+
+<span>
+
+Produk
+
+</span>
+
+
+<b id="summaryProduk">
+
+Belum Dipilih
+
+</b>
+
+
+</div>
+
+
+
+
+
+
+<div class="invoice-row">
+
+
+<span>
+
+Total
+
+</span>
+
+
+<b id="summaryTotal">
+
+Rp 0
+
+</b>
+
+
+</div>
+
+
+
+
+
+
+<div class="invoice-row">
+
+
+<span>
+
+Pembayaran
+
+</span>
+
+
+<b id="summaryPayment">
+
+QRIS
+
+</b>
+
+
+</div>
+
+
+
+
+
+
+<div class="invoice-row">
+
+
+<span>
+
+Server
+
+</span>
+
+
+<b id="summaryServer">
+
+Asia
+
+</b>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+  <!-- =====================================
+CHECKOUT WHATSAPP GENSHIN
+===================================== -->
+
+
+<section class="checkout-section">
+
+
+<div class="box">
+
+
+
+<h2>
+
+🚀 Checkout Genshin Impact
+
+</h2>
+
+
+
+
+<p>
+
+Pastikan UID, Server, Produk dan Pembayaran sudah benar sebelum checkout.
+
+</p>
+
+
+
+
+
+<button
+
+id="checkoutBtn"
+
+class="btn-checkout">
+
+💬 Checkout via WhatsApp
+
+</button>
+
+
+
+
+</div>
+
+
+</section>
+  <!-- =====================================
+FOOTER GENSHIN
+===================================== -->
+
+
+<footer>
+
+
+<div class="footer-container">
+
+
+
+<div>
+
+<h2>
+
+🎮 ARDZ STORE
+
+</h2>
+
+
+<p>
+
+Top Up Game Murah, Cepat & Aman
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<h3>
+
+Kontak
+
+</h3>
+
+
+<p>
+
+📱 WhatsApp : 083185954674
+
+</p>
+
+
+<p>
+
+🕒 Layanan 24 Jam
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<h3>
+
+Game Populer
+
+</h3>
+
+
+<p>
+
+Genshin Impact
+
+</p>
+
+
+<p>
+
+eFootball
+
+</p>
+
+
+<p>
+
+FC Mobile
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<div class="copyright">
+
+
+© 2026 ARDZ STORE | Genshin Impact
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+
+<!-- =====================================
+WHATSAPP FLOATING
+===================================== -->
+
+
+<a
+
+href="https://wa.me/6283185954674"
+
+class="wa-float"
+
+target="_blank">
+
+
+💬
+
+
+</a>
+
+
+
+
+
+
+
+<!-- =====================================
+BACK TO TOP
+===================================== -->
+
+
+<button
+
+id="backTop"
+
+class="back-top">
+
+
+↑
+
+
+</button>
+
+
+
+
+
+
+
+
+<!-- =====================================
+LIVE ORDER
+===================================== -->
+
+
+<div
+
+id="liveOrder"
+
+class="live-order">
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- =====================================
+PROMO POPUP
+===================================== -->
+
+
+<div
+
+id="promoPopup"
+
+class="promo-popup">
+
+
+
+<div class="promo-content">
+
+
+
+<h2>
+
+✨ Promo Genshin
+
+</h2>
+
+
+
+
+<p>
+
+Gunakan voucher
+
+<b>
+
+GENSHIN10
+
+</b>
+
+untuk diskon top up.
+
+</p>
+
+
+
+
+
+<button
+
+id="promoButton"
+
+class="btn-primary">
+
+
+🎁 Gunakan Voucher
+
+
+</button>
+
+
+
+
+
+<button
+
+id="closePromo"
+
+class="btn-secondary">
+
+
+Tutup
+
+
+</button>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- =====================================
+SCRIPT GENSHIN
+===================================== -->
+
+
+<script src="genshin.js"></script>
+
+
+
+</body>
+
+</html>
