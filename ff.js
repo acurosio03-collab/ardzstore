@@ -77,19 +77,19 @@ function getProductImage(nama){
 
     if(nama.includes("weekly")){
 
-        return "assets/products/weekly.png";
+        return "diamond.jpeg";
 
     }
 
     if(nama.includes("monthly")){
 
-        return "assets/products/monthly.png";
+        return "diamond.jpeg";
 
     }
 
     if(nama.includes("level")){
 
-        return "assets/products/levelup.png";
+        return "diamond.jpeg";
 
     }
 
