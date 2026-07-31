@@ -163,19 +163,19 @@ function getProductImage(nama){
 
     if(nama.includes("weekly")){
 
-        return "assets/products/weekly.png";
+        return "weekly.jpeg";
 
     }
 
 
     if(nama.includes("twilight")){
 
-        return "assets/products/twilight.png";
+        return "star.jpeg";
 
     }
 
 
-    return "assets/products/diamond.png";
+    return "diamond.jpeg";
 
 }
 
