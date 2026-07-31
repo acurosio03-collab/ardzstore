@@ -181,7 +181,7 @@ function getProductImage(nama){
         nama.includes("crystal")
     ){
 
-        return "assets/products/genesis.png";
+        return "diamond.jpeg";
 
     }
 
@@ -195,7 +195,7 @@ function getProductImage(nama){
         nama.includes("welkin")
     ){
 
-        return "assets/products/welkin.png";
+        return "bintang.jpeg";
 
     }
 
@@ -209,7 +209,7 @@ function getProductImage(nama){
         nama.includes("battle")
     ){
 
-        return "assets/products/battlepass.png";
+        return "bandle.jpeg";
 
     }
 
@@ -218,7 +218,7 @@ function getProductImage(nama){
 
     // Default
 
-    return "assets/products/genesis.png";
+    return "diamond.jpeg";
 
 
 }
