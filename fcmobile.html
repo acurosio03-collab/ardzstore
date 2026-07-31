@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+ARDZ STORE | Top Up FC Mobile
+</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- =====================================
+HEADER
+===================================== -->
+
+<header>
+
+<div class="navbar">
+
+<div class="logo">
+
+🎮 ARDZ STORE
+
+</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="pubg.html">PUBG</a>
+
+<a href="ml.html">Mobile Legends</a>
+
+<a href="ff.html">Free Fire</a>
+
+<a href="hok.html">Honor of Kings</a>
+
+<a href="roblox.html">Roblox</a>
+
+<a href="valorant.html">Valorant</a>
+
+<a href="codm.html">COD Mobile</a>
+
+<a class="active" href="fcmobile.html">
+FC Mobile
+</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- =====================================
+HERO FC MOBILE
+===================================== -->
+
+<section class="hero hero-fcmobile">
+
+<div class="hero-overlay">
+
+<h1>
+
+Top Up FC Mobile
+
+</h1>
+
+<p>
+
+FC Points Murah • Cepat • Aman
+
+</p>
+
+</div>
+
+</section>
+
+<!-- =====================================
+DATA AKUN
+===================================== -->
+
+<section class="player-box">
+
+<div class="box">
+
+<h2>
+
+⚽ Data Akun FC Mobile
+
+</h2>
+
+<div class="input-group">
+
+<label>User ID</label>
+
+<input
+type="text"
+id="userId"
+placeholder="Masukkan User ID">
+
+<label>Nickname (Opsional)</label>
+
+<input
+type="text"
+id="nickname"
+placeholder="Masukkan Nickname">
+
+<label>Region</label>
+
+<select id="region">
+
+<option value="Asia">
+Asia
+</option>
+
+<option value="Global">
+Global
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+LIST PRODUK
+===================================== -->
+
+<section class="products">
+
+<h2 class="title">
+
+⚽ Pilih FC Points
+
+</h2>
+
+<div
+id="productList"
+class="product-grid">
+
+<!-- Diisi otomatis dari fcmobile.js -->
+
+</div>
+
+</section>
+<!-- =====================================
+DETAIL PESANAN FC MOBILE
+===================================== -->
+
+<section class="order-detail">
+
+<div class="box">
+
+<h2>
+
+📋 Detail Pesanan
+
+</h2>
+
+<div class="invoice">
+
+<div class="invoice-row">
+
+<span>Game</span>
+
+<b>FC Mobile</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Produk</span>
+
+<b id="produk">
+
+Belum Dipilih
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Total</span>
+
+<b id="total">
+
+Rp 0
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Status</span>
+
+<b style="color:#22c55e">
+
+Menunggu Pembayaran
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+VOUCHER
+===================================== -->
+
+<section class="voucher-section">
+
+<div class="box">
+
+<h2>
+
+🎁 Voucher FC Mobile
+
+</h2>
+
+<div class="voucher-box">
+
+<input
+type="text"
+id="voucher"
+placeholder="Masukkan kode voucher">
+
+<button
+id="applyVoucher"
+class="btn-primary">
+
+Gunakan
+
+</button>
+
+</div>
+
+<p id="voucherInfo"></p>
+
+</div>
+
+</section>
+
+<!-- =====================================
+PRODUK TERLARIS
+===================================== -->
+
+<section class="best-product">
+
+<h2 class="title">
+
+🔥 Produk FC Mobile Terlaris
+
+</h2>
+
+<div class="best-grid">
+
+<div class="best-card">
+
+<img src="assets/products/fcpoints.png" alt="520 FC Points">
+
+<h3>
+
+520 FC Points
+
+</h3>
+
+<p>
+
+Paling banyak dibeli pemain FC Mobile
+
+</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/starpass.png" alt="Star Pass">
+
+<h3>
+
+Star Pass Premium
+
+</h3>
+
+<p>
+
+Unlock hadiah eksklusif setiap musim
+
+</p>
+
+</div>
+
+<div class="best-card">
+
+<img src="assets/products/fcbundle.png" alt="Special Bundle">
+
+<h3>
+
+Special Bundle
+
+</h3>
+
+<p>
+
+Paket hemat dengan bonus item menarik
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+<!-- =====================================
+METODE PEMBAYARAN
+===================================== -->
+
+<section class="payment-section">
+
+<div class="box">
+
+<h2>
+
+💳 Pilih Metode Pembayaran
+
+</h2>
+
+<div class="payment-grid">
+
+<div class="payment-card active" data-payment="QRIS">
+
+<img src="qris.jpeg" alt="QRIS">
+
+<h3>QRIS</h3>
+
+<p>Semua E-Wallet</p>
+
+</div>
+
+<div class="payment-card" data-payment="DANA">
+
+<img src="dana.jpeg" alt="DANA">
+
+<h3>DANA</h3>
+
+<p>Pembayaran Cepat</p>
+
+</div>
+
+<div class="payment-card" data-payment="OVO">
+
+<img src="ovo.jpeg" alt="OVO">
+
+<h3>OVO</h3>
+
+<p>Saldo OVO</p>
+
+</div>
+
+<div class="payment-card" data-payment="GoPay">
+
+<img src="gopay.jpeg" alt="GoPay">
+
+<h3>GoPay</h3>
+
+<p>Pembayaran Instan</p>
+
+</div>
+
+<div class="payment-card" data-payment="ShopeePay">
+
+<img src="shoppepay.jpeg" alt="ShopeePay">
+
+<h3>ShopeePay</h3>
+
+<p>Transfer Mudah</p>
+
+</div>
+
+<div class="payment-card" data-payment="BCA">
+
+<img src="bca.jpeg" alt="BCA">
+
+<h3>BCA</h3>
+
+<p>Transfer Bank</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- =====================================
+RINGKASAN CHECKOUT
+===================================== -->
+
+<section class="checkout-summary">
+
+<div class="box">
+
+<h2>
+
+🧾 Ringkasan Pesanan
+
+</h2>
+
+<div class="invoice">
+
+<div class="invoice-row">
+
+<span>Produk</span>
+
+<b id="summaryProduk">
+
+Belum Dipilih
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Total</span>
+
+<b id="summaryTotal">
+
+Rp 0
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Pembayaran</span>
+
+<b id="summaryPayment">
+
+QRIS
+
+</b>
+
+</div>
+
+<div class="invoice-row">
+
+<span>Region</span>
+
+<b id="summaryRegion">
+
+Asia
+
+</b>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- =====================================
+CHECKOUT WHATSAPP
+===================================== -->
+
+<section class="checkout-section">
+
+<div class="box">
+
+<h2>
+
+🚀 Checkout FC Mobile
+
+</h2>
+
+<p>
+
+Pastikan User ID, Region, produk FC Points, dan metode pembayaran sudah benar sebelum melakukan checkout.
+
+</p>
+
+<button
+
+id="checkoutBtn"
+
+class="btn-checkout">
+
+💬 Checkout via WhatsApp
+
+</button>
+
+</div>
+
+  </section>
+  <!-- =====================================
+FOOTER
+===================================== -->
+
+<footer>
+
+<div class="footer-container">
+
+<div>
+
+<h2>
+
+🎮 ARDZ STORE
+
+</h2>
+
+<p>
+
+Top Up FC Mobile
+Murah • Cepat • Aman
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Hubungi Kami
+
+</h3>
+
+<p>
+
+📱 WhatsApp : 083185954674
+
+</p>
+
+<p>
+
+🕒 Layanan 24 Jam
+
+</p>
+
+</div>
+
+<div>
+
+<h3>
+
+Menu
+
+</h3>
+
+<p>
+
+FC Points
+
+</p>
+
+<p>
+
+Voucher Promo
+
+</p>
+
+</div>
+
+</div>
+
+<div class="copyright">
+
+© 2026 ARDZ STORE - FC Mobile
+
+</div>
+
+</footer>
+
+
+
+<!-- =====================================
+WHATSAPP FLOATING
+===================================== -->
+
+<a
+
+href="https://wa.me/6283185954674"
+
+class="wa-float"
+
+target="_blank">
+
+💬
+
+</a>
+
+
+
+<!-- =====================================
+BACK TO TOP
+===================================== -->
+
+<button
+
+id="backTop"
+
+class="back-top">
+
+↑
+
+</button>
+
+
+
+<!-- =====================================
+LIVE ORDER
+===================================== -->
+
+<div
+
+id="liveOrder"
+
+class="live-order">
+
+</div>
+
+
+
+<!-- =====================================
+POPUP PROMO
+===================================== -->
+
+<div
+
+id="promoPopup"
+
+class="promo-popup">
+
+<div class="promo-content">
+
+<h2>
+
+🎉 Promo FC Mobile
+
+</h2>
+
+<p>
+
+Gunakan voucher
+
+<b>ARDZ10</b>
+
+untuk mendapatkan diskon.
+
+</p>
+
+<button
+
+id="promoButton"
+
+class="btn-primary">
+
+🎁 Gunakan Voucher
+
+</button>
+
+<button
+
+id="closePromo"
+
+class="btn-secondary">
+
+Tutup
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================
+SCRIPT
+===================================== -->
+
+<script src="fcmobile.js"></script>
+
+</body>
+</html>
