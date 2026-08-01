@@ -2631,7 +2631,7 @@ document.addEventListener(
 
 
     console.log(
-        "⚽ ARDZ STORE bloodstrike Loaded"
+        " 🪙ARDZ STORE bloodstrike Loaded"
     );
 
 
