@@ -2617,3 +2617,86 @@ function initPaymentEffect(){
 
 
 }
+   bloodstrike.JS V1
+   BAGIAN 10
+   INISIALISASI FINAL
+========================================== */
+
+
+document.addEventListener(
+
+"DOMContentLoaded",
+
+()=>{
+
+
+    console.log(
+        "⚽ ARDZ STORE bloodstrike Loaded"
+    );
+
+
+
+    // Render semua produk
+
+    renderProducts();
+
+
+
+
+    // Load data sebelumnya
+
+    loadOrder();
+
+
+
+
+    // Sistem pembayaran
+
+    initPayment();
+
+
+
+
+    // Default pembayaran
+
+    setDefaultPayment();
+
+
+
+
+    // Live order
+
+    startLiveOrder();
+
+
+
+
+    // Popup promo
+
+    initPromoPopup();
+
+
+
+
+    // Tombol kembali atas
+
+    initBackToTop();
+
+
+
+
+    // Efek card
+
+    initCardEffect();
+
+
+
+
+    console.log(
+
+        "✅ Semua fitur bloodstrike aktif"
+
+    );
+
+
+});
