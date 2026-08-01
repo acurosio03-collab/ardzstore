@@ -162,7 +162,45 @@ function getProductImage(nama){
         return "bandle.jpeg";
 
     }
-  /* ==========================================
+
+    // Default
+    return "coin.jpeg";
+
+}
+
+
+
+
+
+/* ==========================================
+   HITUNG TOTAL HARGA
+========================================== */
+
+function getTotalHarga(){
+
+    if(selectedProduct === null){
+
+        return 0;
+
+    }
+
+    return selectedProduct.harga - discount;
+
+}
+
+
+
+
+
+/* ==========================================
+   ELEMENT HELPER
+========================================== */
+
+function $(id){
+
+    return document.getElementById(id);
+
+    }/* ==========================================
    DELTA.JS V1
    BAGIAN 3
    RENDER PRODUK
@@ -203,45 +241,7 @@ function renderProducts() {
 
     console.log("Render Produk Delta Force berhasil.");
 }
-
-    // Default
-    return "coin.jpeg";
-
-}
-
-
-
-
-
 /* ==========================================
-   HITUNG TOTAL HARGA
-========================================== */
-
-function getTotalHarga(){
-
-    if(selectedProduct === null){
-
-        return 0;
-
-    }
-
-    return selectedProduct.harga - discount;
-
-}
-
-
-
-
-
-/* ==========================================
-   ELEMENT HELPER
-========================================== */
-
-function $(id){
-
-    return document.getElementById(id);
-
-                    }/* ==========================================
    DELTA.JS V1
    BAGIAN 4
    PILIH PRODUK
@@ -1125,7 +1125,7 @@ function initPaymentEffect(){
 
     });
 
-    }
+}
 /* ==========================================
    DELTA.JS V1
    BAGIAN 10
