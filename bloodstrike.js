@@ -2617,86 +2617,105 @@ function initPaymentEffect(){
 
 
 }
-   bloodstrike.JS V1
+   /* ==========================================
+   BLOODSTRIKE.JS V1
    BAGIAN 10
    INISIALISASI FINAL
 ========================================== */
 
+document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener(
-
-"DOMContentLoaded",
-
-()=>{
-
-
-    console.log(
-        " 🪙ARDZ STORE bloodstrike Loaded"
-    );
-
-
+    console.log("🔫 ARDZ STORE Blood Strike Loaded");
 
     // Render semua produk
-
     renderProducts();
 
-
-
-
-    // Load data sebelumnya
-
+    // Muat data yang tersimpan
     loadOrder();
 
-
-
-
-    // Sistem pembayaran
-
+    // Inisialisasi pembayaran
     initPayment();
 
-
-
-
-    // Default pembayaran
-
+    // Pembayaran default
     setDefaultPayment();
 
-
-
-
-    // Live order
-
+    // Live Order
     startLiveOrder();
 
-
-
-
-    // Popup promo
-
+    // Popup Promo
     initPromoPopup();
 
-
-
-
-    // Tombol kembali atas
-
+    // Tombol Back To Top
     initBackToTop();
 
-
-
-
-    // Efek card
-
+    // Efek Card Produk
     initCardEffect();
 
+    // Efek Card Pembayaran
+    initPaymentEffect();
 
+    /* ======================================
+       UPDATE PLAYER ID KE RINGKASAN
+    ====================================== */
 
+    const playerId = $("playerId");
 
-    console.log(
+    if (playerId) {
 
-        "✅ Semua fitur bloodstrike aktif"
+        const updatePlayer = () => {
 
-    );
+            if ($("summaryPlayerId")) {
 
+                $("summaryPlayerId").textContent =
+                    playerId.value || "-";
+
+            }
+
+            if (typeof saveOrder === "function") {
+
+                saveOrder();
+
+            }
+
+        };
+
+        playerId.addEventListener("input", updatePlayer);
+
+        updatePlayer();
+
+    }
+
+    /* ======================================
+       UPDATE NICKNAME KE RINGKASAN
+    ====================================== */
+
+    const nickname = $("nickname");
+
+    if (nickname) {
+
+        const updateNickname = () => {
+
+            if ($("summaryNickname")) {
+
+                $("summaryNickname").textContent =
+                    nickname.value || "-";
+
+            }
+
+            if (typeof saveOrder === "function") {
+
+                saveOrder();
+
+            }
+
+        };
+
+        nickname.addEventListener("input", updateNickname);
+
+        updateNickname();
+
+    }
+
+    console.log("✅ Semua fitur Blood Strike aktif.");
 
 });
