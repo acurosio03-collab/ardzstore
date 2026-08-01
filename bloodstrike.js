@@ -204,7 +204,7 @@ function getProductImage(nama){
     ){
 
 
-        return "assets/products/bloodgold.png";
+        return "gold.jpeg";
 
 
     }
