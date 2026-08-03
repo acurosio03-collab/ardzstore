@@ -1464,3 +1464,173 @@ function initPaymentEffect(){
     });
 
 }
+/* ==========================================
+   TOKEN.JS V1
+   BAGIAN 10
+   INISIALISASI FINAL
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("⚡ ARDZ STORE Token PLN & Pulsa Loaded");
+
+    // Render produk pertama kali
+    renderProducts();
+
+    // Muat data LocalStorage
+    loadOrder();
+
+    // Inisialisasi pembayaran
+    initPayment();
+
+    // Set pembayaran default
+    setDefaultPayment();
+
+    // Live Order
+    startLiveOrder();
+
+    // Popup Promo
+    initPromoPopup();
+
+    // Back To Top
+    initBackToTop();
+
+    // Efek Card
+    initCardEffect();
+    initPaymentEffect();
+
+    /* ======================================
+       UPDATE KATEGORI
+    ====================================== */
+
+    const category = $("category");
+
+    if(category){
+
+        category.addEventListener("change", () => {
+
+            selectedCategory = category.value;
+
+            if($("summaryCategory")){
+
+                $("summaryCategory").textContent =
+                category.options[
+                    category.selectedIndex
+                ].text;
+
+            }
+
+            renderProducts();
+
+            saveOrder();
+
+        });
+
+    }
+
+    /* ======================================
+       UPDATE NOMOR / ID PELANGGAN
+    ====================================== */
+
+    const customerId = $("customerId");
+
+    if(customerId){
+
+        const updateCustomerId = () => {
+
+            if($("summaryCustomerId")){
+
+                $("summaryCustomerId").textContent =
+                customerId.value || "-";
+
+            }
+
+            saveOrder();
+
+        };
+
+        customerId.addEventListener(
+            "input",
+            updateCustomerId
+        );
+
+        updateCustomerId();
+
+    }
+
+    /* ======================================
+       UPDATE NAMA
+    ====================================== */
+
+    const customerName = $("customerName");
+
+    if(customerName){
+
+        const updateCustomerName = () => {
+
+            if($("summaryCustomerName")){
+
+                $("summaryCustomerName").textContent =
+                customerName.value || "-";
+
+            }
+
+            saveOrder();
+
+        };
+
+        customerName.addEventListener(
+            "input",
+            updateCustomerName
+        );
+
+        updateCustomerName();
+
+    }
+
+    /* ======================================
+       SINKRONKAN DATA PRODUK
+    ====================================== */
+
+    if(selectedProduct){
+
+        if($("produk")){
+
+            $("produk").textContent =
+            selectedProduct.nama;
+
+        }
+
+        if($("nominal")){
+
+            $("nominal").textContent =
+            selectedProduct.nama;
+
+        }
+
+        if($("total")){
+
+            $("total").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        if($("summaryProduk")){
+
+            $("summaryProduk").textContent =
+            selectedProduct.nama;
+
+        }
+
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+    }
+
+    console.log("✅ Semua fitur Token PLN & Pulsa berhasil diaktifkan.");
+
+});
