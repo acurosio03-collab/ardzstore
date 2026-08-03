@@ -1,0 +1,1466 @@
+/* ==========================================
+   ARDZ STORE
+   TOKEN PLN & PULSA
+   TOKEN.JS V1
+========================================== */
+
+"use strict";
+
+/* ==========================================
+   KONFIGURASI
+========================================== */
+
+// WhatsApp Admin
+const ADMIN_WA = "6283185954674";
+
+// Nama Halaman
+const PAGE_NAME = "Token PLN & Pulsa";
+
+// Jenis Produk Default
+let selectedCategory = "PLN";
+
+/* ==========================================
+   DATA PRODUK
+========================================== */
+
+const products = {
+
+    PLN: [
+
+        {
+            id: 1,
+            nama: "Token PLN 20.000",
+            harga: 22500
+        },
+
+        {
+            id: 2,
+            nama: "Token PLN 50.000",
+            harga: 52500
+        },
+
+        {
+            id: 3,
+            nama: "Token PLN 100.000",
+            harga: 102500
+        },
+
+        {
+            id: 4,
+            nama: "Token PLN 200.000",
+            harga: 202500
+        },
+
+        {
+            id: 5,
+            nama: "Token PLN 500.000",
+            harga: 502500
+        },
+
+        {
+            id: 6,
+            nama: "Token PLN 1.000.000",
+            harga: 1002500
+        }
+
+    ],
+
+    Pulsa: [
+
+        {
+            id: 101,
+            nama: "Pulsa Telkomsel 5.000",
+            harga: 7000
+        },
+
+        {
+            id: 102,
+            nama: "Pulsa Telkomsel 10.000",
+            harga: 12000
+        },
+
+        {
+            id: 103,
+            nama: "Pulsa Telkomsel 25.000",
+            harga: 27000
+        },
+
+        {
+            id: 104,
+            nama: "Pulsa Telkomsel 50.000",
+            harga: 52000
+        },
+
+        {
+            id: 105,
+            nama: "Pulsa Telkomsel 100.000",
+            harga: 102000
+        },
+
+        {
+            id: 106,
+            nama: "Pulsa XL 10.000",
+            harga: 12000
+        },
+
+        {
+            id: 107,
+            nama: "Pulsa XL 25.000",
+            harga: 27000
+        },
+
+        {
+            id: 108,
+            nama: "Pulsa XL 50.000",
+            harga: 52000
+        },
+
+        {
+            id: 109,
+            nama: "Pulsa Indosat 10.000",
+            harga: 12000
+        },
+
+        {
+            id: 110,
+            nama: "Pulsa Indosat 50.000",
+            harga: 52000
+        },
+
+        {
+            id: 111,
+            nama: "Pulsa Tri 10.000",
+            harga: 12000
+        },
+
+        {
+            id: 112,
+            nama: "Pulsa Smartfren 10.000",
+            harga: 12000
+        }
+
+    ]
+
+};
+
+/* ==========================================
+   DATA ORDER
+========================================== */
+
+// Produk yang dipilih
+let selectedProduct = null;
+
+// Metode pembayaran
+let selectedPayment = "QRIS";
+
+// Diskon
+let discount = 0;
+
+// Voucher
+let voucherUsed = "";
+/* ==========================================
+   TOKEN.JS V1
+   BAGIAN 2
+   HELPER FUNCTION
+========================================== */
+
+/* ==========================================
+   FORMAT RUPIAH
+========================================== */
+
+function rupiah(angka){
+
+    return "Rp " + Number(angka).toLocaleString("id-ID");
+
+}
+
+/* ==========================================
+   HELPER ELEMENT
+========================================== */
+
+function $(id){
+
+    return document.getElementById(id);
+
+}
+
+/* ==========================================
+   AMBIL DAFTAR PRODUK
+========================================== */
+
+function getCurrentProducts(){
+
+    return products[selectedCategory] || [];
+
+}
+
+/* ==========================================
+   HITUNG TOTAL
+========================================== */
+
+function getTotalHarga(){
+
+    if(selectedProduct === null){
+
+        return 0;
+
+    }
+
+    return selectedProduct.harga - discount;
+
+}
+
+/* ==========================================
+   GAMBAR PRODUK
+========================================== */
+
+function getProductImage(nama){
+
+    nama = nama.toLowerCase();
+
+    // TOKEN PLN
+    if(nama.includes("token")){
+
+        return "tokenpln.jpeg";
+
+    }
+
+    // TELKOMSEL
+    if(nama.includes("telkomsel")){
+
+        return "telkom.jpeg";
+
+    }
+
+    // XL
+    if(nama.includes("xl")){
+
+        return "xl.jpeg";
+
+    }
+
+    // INDOSAT
+    if(nama.includes("indosat")){
+
+        return "indosat.jpeg";
+
+    }
+
+    // TRI
+    if(nama.includes("tri")){
+
+        return "tri.jpeg";
+
+    }
+
+    // SMARTFREN
+    if(nama.includes("smartfren")){
+
+        return "smart.jpeg";
+
+    }
+
+    // Default
+    return "tokenpln.jpeg";
+
+}
+/* ==========================================
+   TOKEN.JS V1
+   BAGIAN 3
+   RENDER PRODUK
+========================================== */
+
+function renderProducts(){
+
+    const productList = $("productList");
+
+    if(!productList){
+
+        console.error("Element #productList tidak ditemukan.");
+
+        return;
+
+    }
+
+    // Kosongkan daftar produk
+    productList.innerHTML = "";
+
+    // Reset pilihan produk
+    selectedProduct = null;
+
+    if($("produk")) $("produk").textContent = "Belum Dipilih";
+    if($("nominal")) $("nominal").textContent = "-";
+    if($("total")) $("total").textContent = rupiah(0);
+
+    if($("summaryProduk")) $("summaryProduk").textContent = "Belum Dipilih";
+    if($("summaryTotal")) $("summaryTotal").textContent = rupiah(0);
+
+    // Ambil produk sesuai kategori
+    const list = getCurrentProducts();
+
+    list.forEach((item,index)=>{
+
+        const card = document.createElement("div");
+
+        card.className = "product-card";
+
+        card.innerHTML = `
+
+            <img
+            src="${getProductImage(item.nama)}"
+            alt="${item.nama}">
+
+            <h3>${item.nama}</h3>
+
+            <p class="price">
+
+                ${rupiah(item.harga)}
+
+            </p>
+
+            <button
+                class="btn-primary"
+                onclick="selectProduct(${index})">
+
+                Pilih
+
+            </button>
+
+        `;
+
+        productList.appendChild(card);
+
+    });
+
+    console.log(
+
+        "Render Produk:",
+
+        selectedCategory,
+
+        list.length,
+
+        "produk"
+
+    );
+
+}
+
+/* ==========================================
+   GANTI KATEGORI
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const category = $("category");
+
+    if(!category) return;
+
+    category.addEventListener("change",()=>{
+
+        selectedCategory = category.value;
+
+        if($("summaryCategory")){
+
+            $("summaryCategory").textContent =
+            category.options[
+                category.selectedIndex
+            ].text;
+
+        }
+
+        // Reset voucher
+        voucherUsed = "";
+        discount = 0;
+
+        if($("voucher")){
+
+            $("voucher").value = "";
+
+        }
+
+        if($("voucherInfo")){
+
+            $("voucherInfo").textContent = "";
+
+        }
+
+        renderProducts();
+
+        console.log(
+
+            "Kategori berubah:",
+
+            selectedCategory
+
+        );
+
+    });
+
+});
+/* ==========================================
+   TOKEN.JS V1
+   BAGIAN 4
+   PILIH PRODUK
+========================================== */
+
+function selectProduct(index){
+
+    // Ambil daftar produk sesuai kategori
+    const list = getCurrentProducts();
+
+    // Simpan produk yang dipilih
+    selectedProduct = list[index];
+
+    if(!selectedProduct) return;
+
+    // Hapus status aktif semua card
+    document.querySelectorAll(".product-card").forEach(card=>{
+
+        card.classList.remove("active");
+
+    });
+
+    // Aktifkan card yang dipilih
+    const cards = document.querySelectorAll(".product-card");
+
+    if(cards[index]){
+
+        cards[index].classList.add("active");
+
+    }
+
+    // Update Detail Pesanan
+    if($("produk")){
+
+        $("produk").textContent =
+        selectedProduct.nama;
+
+    }
+
+    if($("nominal")){
+
+        $("nominal").textContent =
+        selectedProduct.nama;
+
+    }
+
+    if($("total")){
+
+        $("total").textContent =
+        rupiah(getTotalHarga());
+
+    }
+
+    // Update Ringkasan Checkout
+    if($("summaryProduk")){
+
+        $("summaryProduk").textContent =
+        selectedProduct.nama;
+
+    }
+
+    if($("summaryTotal")){
+
+        $("summaryTotal").textContent =
+        rupiah(getTotalHarga());
+
+    }
+
+    // Update Nomor HP / ID PLN
+    const customerId =
+    $("customerId")?.value || "-";
+
+    if($("summaryCustomerId")){
+
+        $("summaryCustomerId").textContent =
+        customerId;
+
+    }
+
+    // Update Nama
+    const customerName =
+    $("customerName")?.value || "-";
+
+    if($("summaryCustomerName")){
+
+        $("summaryCustomerName").textContent =
+        customerName;
+
+    }
+
+    console.log(
+
+        "Produk dipilih:",
+
+        selectedProduct.nama
+
+    );
+
+    // Simpan jika fungsi sudah tersedia
+    if(typeof saveOrder === "function"){
+
+        saveOrder();
+
+    }
+
+}
+
+/* ==========================================
+   UPDATE DATA PELANGGAN
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const customerId = $("customerId");
+    const customerName = $("customerName");
+
+    if(customerId){
+
+        customerId.addEventListener("input",()=>{
+
+            if($("summaryCustomerId")){
+
+                $("summaryCustomerId").textContent =
+                customerId.value || "-";
+
+            }
+
+            if(typeof saveOrder==="function"){
+
+                saveOrder();
+
+            }
+
+        });
+
+    }
+
+    if(customerName){
+
+        customerName.addEventListener("input",()=>{
+
+            if($("summaryCustomerName")){
+
+                $("summaryCustomerName").textContent =
+                customerName.value || "-";
+
+            }
+
+            if(typeof saveOrder==="function"){
+
+                saveOrder();
+
+            }
+
+        });
+
+    }
+
+});
+/* ==========================================
+   TOKEN.JS V1
+   BAGIAN 5
+   SISTEM VOUCHER
+========================================== */
+
+/* ==========================================
+   DAFTAR VOUCHER
+========================================== */
+
+const vouchers = {
+
+    "TOKEN10": 10,
+
+    "ARDZ10": 10,
+
+    "HEMAT20": 20
+
+};
+
+/* ==========================================
+   APPLY VOUCHER
+========================================== */
+
+function applyVoucher(){
+
+    if(selectedProduct === null){
+
+        alert("Silakan pilih produk terlebih dahulu.");
+
+        return;
+
+    }
+
+    const input = $("voucher");
+    const info = $("voucherInfo");
+
+    if(!input) return;
+
+    const code = input.value.trim().toUpperCase();
+
+    if(code === ""){
+
+        alert("Masukkan kode voucher.");
+
+        return;
+
+    }
+
+    if(vouchers.hasOwnProperty(code)){
+
+        voucherUsed = code;
+
+        const persen = vouchers[code];
+
+        discount = Math.floor(
+            selectedProduct.harga * persen / 100
+        );
+
+        // Update total
+        if($("total")){
+
+            $("total").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        if(info){
+
+            info.innerHTML =
+            `✅ Voucher <b>${code}</b> berhasil digunakan (${persen}% OFF)`;
+
+            info.style.color = "#22c55e";
+
+        }
+
+        console.log(
+            "Voucher:",
+            code,
+            "Diskon:",
+            discount
+        );
+
+        if(typeof saveOrder === "function"){
+
+            saveOrder();
+
+        }
+
+    }else{
+
+        voucherUsed = "";
+
+        discount = 0;
+
+        if($("total")){
+
+            $("total").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        if(info){
+
+            info.innerHTML =
+            "❌ Voucher tidak valid.";
+
+            info.style.color = "#ef4444";
+
+        }
+
+    }
+
+}
+
+/* ==========================================
+   RESET VOUCHER
+========================================== */
+
+function resetVoucher(){
+
+    voucherUsed = "";
+
+    discount = 0;
+
+    if($("voucher")){
+
+        $("voucher").value = "";
+
+    }
+
+    if($("voucherInfo")){
+
+        $("voucherInfo").textContent = "";
+
+    }
+
+    if(selectedProduct){
+
+        if($("total")){
+
+            $("total").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+        if($("summaryTotal")){
+
+            $("summaryTotal").textContent =
+            rupiah(getTotalHarga());
+
+        }
+
+    }
+
+}
+
+/* ==========================================
+   BUTTON APPLY
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const btn = $("applyVoucher");
+
+    if(btn){
+
+        btn.addEventListener(
+            "click",
+            applyVoucher
+        );
+
+    }
+
+});
+/* ==========================================
+   TOKEN.JS V1
+   BAGIAN 6
+   SISTEM PEMBAYARAN
+========================================== */
+
+/* ==========================================
+   INISIALISASI PEMBAYARAN
+========================================== */
+
+function initPayment(){
+
+    const payments = document.querySelectorAll(".payment-card");
+
+    if(payments.length === 0){
+
+        console.warn("Payment Card tidak ditemukan.");
+
+        return;
+
+    }
+
+    payments.forEach(card=>{
+
+        card.addEventListener("click",()=>{
+
+            // Hapus active
+            payments.forEach(item=>{
+
+                item.classList.remove("active");
+
+            });
+
+            // Tambahkan active
+            card.classList.add("active");
+
+            // Simpan metode pembayaran
+            selectedPayment = card.dataset.payment;
+
+            // Update Ringkasan Checkout
+            if($("summaryPayment")){
+
+                $("summaryPayment").textContent =
+                selectedPayment;
+
+            }
+
+            console.log(
+                "Metode Pembayaran:",
+                selectedPayment
+            );
+
+            // Simpan LocalStorage
+            if(typeof saveOrder === "function"){
+
+                saveOrder();
+
+            }
+
+        });
+
+    });
+
+}
+
+/* ==========================================
+   PEMBAYARAN DEFAULT
+========================================== */
+
+function setDefaultPayment(){
+
+    const firstPayment =
+    document.querySelector(".payment-card");
+
+    if(!firstPayment) return;
+
+    firstPayment.classList.add("active");
+
+    selectedPayment =
+    firstPayment.dataset.payment || "QRIS";
+
+    if($("summaryPayment")){
+
+        $("summaryPayment").textContent =
+        selectedPayment;
+
+    }
+
+}
+
+/* ==========================================
+   GET METODE PEMBAYARAN
+========================================== */
+
+function getSelectedPayment(){
+
+    return selectedPayment || "QRIS";
+
+}
+/* ==========================================
+   TOKEN.JS V1
+   BAGIAN 7
+   CHECKOUT WHATSAPP
+========================================== */
+
+function checkoutWhatsApp(){
+
+    // Validasi Nomor HP / ID PLN
+    const customerId = $("customerId")?.value.trim() || "";
+
+    if(customerId === ""){
+
+        alert("Masukkan Nomor HP atau ID Pelanggan terlebih dahulu.");
+
+        $("customerId").focus();
+
+        return;
+
+    }
+
+    // Validasi Produk
+    if(selectedProduct === null){
+
+        alert("Silakan pilih produk terlebih dahulu.");
+
+        return;
+
+    }
+
+    const customerName =
+    $("customerName")?.value.trim() || "-";
+
+    const total = getTotalHarga();
+
+    let message = "";
+
+    /* ======================================
+       TOKEN PLN
+    ====================================== */
+
+    if(selectedCategory === "PLN"){
+
+        message = `⚡ *ARDZ STORE*
+
+Halo Admin,
+
+Saya ingin membeli *Token PLN*.
+
+━━━━━━━━━━━━━━
+
+⚡ Jenis Produk :
+Token PLN
+
+🆔 ID Pelanggan :
+${customerId}
+
+👤 Nama :
+${customerName}
+
+💳 Nominal :
+${selectedProduct.nama}
+
+💰 Harga :
+${rupiah(selectedProduct.harga)}
+
+🎁 Voucher :
+${voucherUsed || "-"}
+
+💸 Diskon :
+${rupiah(discount)}
+
+💵 Total Bayar :
+${rupiah(total)}
+
+💳 Pembayaran :
+${selectedPayment}
+
+━━━━━━━━━━━━━━
+
+Mohon segera diproses.
+
+Terima kasih 🙏`;
+
+    }
+
+    /* ======================================
+       PULSA
+    ====================================== */
+
+    else{
+
+        message = `📱 *ARDZ STORE*
+
+Halo Admin,
+
+Saya ingin membeli *Pulsa*.
+
+━━━━━━━━━━━━━━
+
+📱 Nomor Tujuan :
+${customerId}
+
+👤 Nama :
+${customerName}
+
+📦 Produk :
+${selectedProduct.nama}
+
+💰 Harga :
+${rupiah(selectedProduct.harga)}
+
+🎁 Voucher :
+${voucherUsed || "-"}
+
+💸 Diskon :
+${rupiah(discount)}
+
+💵 Total Bayar :
+${rupiah(total)}
+
+💳 Pembayaran :
+${selectedPayment}
+
+━━━━━━━━━━━━━━
+
+Mohon segera diproses.
+
+Terima kasih 🙏`;
+
+    }
+
+    window.open(
+
+        "https://wa.me/" +
+        ADMIN_WA +
+        "?text=" +
+        encodeURIComponent(message),
+
+        "_blank"
+
+    );
+
+}
+
+/* ==========================================
+   BUTTON CHECKOUT
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const btn = $("checkoutBtn");
+
+    if(btn){
+
+        btn.addEventListener(
+
+            "click",
+
+            checkoutWhatsApp
+
+        );
+
+    }
+
+});
+/* ==========================================
+   TOKEN.JS V1
+   BAGIAN 8
+   LOCAL STORAGE
+========================================== */
+
+const TOKEN_STORAGE_KEY = "ardz_token_order";
+
+/* ==========================================
+   SIMPAN DATA
+========================================== */
+
+function saveOrder(){
+
+    const data = {
+
+        category: selectedCategory,
+
+        customerId: $("customerId")?.value || "",
+
+        customerName: $("customerName")?.value || "",
+
+        productId: selectedProduct ? selectedProduct.id : null,
+
+        payment: selectedPayment,
+
+        voucher: voucherUsed,
+
+        discount: discount
+
+    };
+
+    localStorage.setItem(
+
+        TOKEN_STORAGE_KEY,
+
+        JSON.stringify(data)
+
+    );
+
+}
+
+/* ==========================================
+   MUAT DATA
+========================================== */
+
+function loadOrder(){
+
+    const data = JSON.parse(
+
+        localStorage.getItem(TOKEN_STORAGE_KEY)
+
+    );
+
+    if(!data) return;
+
+    /* ==========================
+       KATEGORI
+    ========================== */
+
+    selectedCategory = data.category || "PLN";
+
+    if($("category")){
+
+        $("category").value = selectedCategory;
+
+        $("summaryCategory").textContent =
+        $("category").options[
+            $("category").selectedIndex
+        ].text;
+
+    }
+
+    // Render ulang produk sesuai kategori
+    renderProducts();
+
+    /* ==========================
+       CUSTOMER
+    ========================== */
+
+    if($("customerId")){
+
+        $("customerId").value =
+        data.customerId || "";
+
+    }
+
+    if($("customerName")){
+
+        $("customerName").value =
+        data.customerName || "";
+
+    }
+
+    if($("summaryCustomerId")){
+
+        $("summaryCustomerId").textContent =
+        data.customerId || "-";
+
+    }
+
+    if($("summaryCustomerName")){
+
+        $("summaryCustomerName").textContent =
+        data.customerName || "-";
+
+    }
+
+    /* ==========================
+       VOUCHER
+    ========================== */
+
+    voucherUsed = data.voucher || "";
+
+    discount = data.discount || 0;
+
+    if($("voucher")){
+
+        $("voucher").value = voucherUsed;
+
+    }
+
+    /* ==========================
+       PRODUK
+    ========================== */
+
+    if(data.productId){
+
+        const list = getCurrentProducts();
+
+        const index = list.findIndex(
+
+            item => item.id === data.productId
+
+        );
+
+        if(index !== -1){
+
+            selectProduct(index);
+
+        }
+
+    }
+
+    /* ==========================
+       PEMBAYARAN
+    ========================== */
+
+    selectedPayment =
+    data.payment || "QRIS";
+
+    document
+    .querySelectorAll(".payment-card")
+    .forEach(card=>{
+
+        card.classList.remove("active");
+
+        if(card.dataset.payment === selectedPayment){
+
+            card.classList.add("active");
+
+        }
+
+    });
+
+    if($("summaryPayment")){
+
+        $("summaryPayment").textContent =
+        selectedPayment;
+
+    }
+
+}
+
+/* ==========================================
+   AUTO SAVE
+========================================== */
+
+[
+    "customerId",
+    "customerName",
+    "category"
+].forEach(id=>{
+
+    const input = $(id);
+
+    if(input){
+
+        input.addEventListener(
+            "input",
+            saveOrder
+        );
+
+        input.addEventListener(
+            "change",
+            saveOrder
+        );
+
+    }
+
+});
+
+/* ==========================================
+   SIMPAN SAAT KELUAR
+========================================== */
+
+window.addEventListener(
+
+    "beforeunload",
+
+    saveOrder
+
+);
+/* ==========================================
+   TOKEN.JS V1
+   BAGIAN 9
+   LIVE ORDER + POPUP + EFFECT
+========================================== */
+
+/* ==========================================
+   LIVE ORDER
+========================================== */
+
+const liveOrders = [
+
+    {
+        nama:"Rizky",
+        kota:"Jakarta",
+        produk:"Token PLN 100.000"
+    },
+
+    {
+        nama:"Andi",
+        kota:"Bandung",
+        produk:"Pulsa Telkomsel 50.000"
+    },
+
+    {
+        nama:"Budi",
+        kota:"Surabaya",
+        produk:"Pulsa XL 25.000"
+    },
+
+    {
+        nama:"Dimas",
+        kota:"Bekasi",
+        produk:"Token PLN 500.000"
+    },
+
+    {
+        nama:"Fajar",
+        kota:"Medan",
+        produk:"Pulsa Indosat 100.000"
+    },
+
+    {
+        nama:"Ayu",
+        kota:"Yogyakarta",
+        produk:"Pulsa Tri 10.000"
+    }
+
+];
+
+function startLiveOrder(){
+
+    const box = $("liveOrder");
+
+    if(!box) return;
+
+    function showOrder(){
+
+        const order = liveOrders[
+            Math.floor(
+                Math.random() *
+                liveOrders.length
+            )
+        ];
+
+        box.innerHTML = `
+            ⚡ <b>Pesanan Baru</b><br>
+            ${order.nama} dari ${order.kota}<br>
+            membeli<br>
+            <b>${order.produk}</b>
+        `;
+
+        box.classList.add("show");
+
+        setTimeout(()=>{
+
+            box.classList.remove("show");
+
+        },5000);
+
+    }
+
+    setTimeout(showOrder,3000);
+
+    setInterval(showOrder,12000);
+
+}
+
+/* ==========================================
+   POPUP PROMO
+========================================== */
+
+function initPromoPopup(){
+
+    const popup = $("promoPopup");
+    const close = $("closePromo");
+    const button = $("promoButton");
+
+    if(!popup) return;
+
+    setTimeout(()=>{
+
+        popup.classList.add("show");
+
+    },2500);
+
+    if(close){
+
+        close.onclick = ()=>{
+
+            popup.classList.remove("show");
+
+        };
+
+    }
+
+    if(button){
+
+        button.onclick = ()=>{
+
+            popup.classList.remove("show");
+
+            if($("voucher")){
+
+                $("voucher").scrollIntoView({
+
+                    behavior:"smooth"
+
+                });
+
+            }
+
+        };
+
+    }
+
+}
+
+/* ==========================================
+   BACK TO TOP
+========================================== */
+
+function initBackToTop(){
+
+    const btn = $("backTop");
+
+    if(!btn) return;
+
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY > 400){
+
+            btn.style.display = "flex";
+
+        }
+
+        else{
+
+            btn.style.display = "none";
+
+        }
+
+    });
+
+    btn.onclick = ()=>{
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+    };
+
+}
+
+/* ==========================================
+   EFEK CARD PRODUK
+========================================== */
+
+function initCardEffect(){
+
+    const cards =
+    document.querySelectorAll(".product-card");
+
+    cards.forEach(card=>{
+
+        card.addEventListener("mouseenter",()=>{
+
+            card.style.transform =
+            "translateY(-10px)";
+
+        });
+
+        card.addEventListener("mouseleave",()=>{
+
+            if(!card.classList.contains("active")){
+
+                card.style.transform =
+                "translateY(0)";
+
+            }
+
+        });
+
+    });
+
+}
+
+/* ==========================================
+   EFEK CARD PEMBAYARAN
+========================================== */
+
+function initPaymentEffect(){
+
+    const cards =
+    document.querySelectorAll(".payment-card");
+
+    cards.forEach(card=>{
+
+        card.addEventListener("mouseenter",()=>{
+
+            card.style.transform =
+            "scale(1.05)";
+
+        });
+
+        card.addEventListener("mouseleave",()=>{
+
+            card.style.transform =
+            "scale(1)";
+
+        });
+
+    });
+
+}
