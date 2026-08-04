@@ -51,32 +51,45 @@
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section id="home" class="relative pt-10 pb-16 overflow-hidden">
+    <!-- HERO SECTION DENGAN BANNER FOTO -->
+    <section id="home" class="relative pt-8 pb-12 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-gradient-to-r from-purple-900/40 via-indigo-900/20 to-slate-900 border border-purple-500/20 rounded-3xl p-8 md:p-14 shadow-2xl relative overflow-hidden">
-                <div class="absolute -right-10 -bottom-10 opacity-10 hidden md:block">
-                    <i class="fa-solid fa-gamepad text-9xl text-purple-400"></i>
-                </div>
-                <div class="relative z-10 max-w-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-gradient-to-r from-purple-950/60 via-indigo-950/40 to-slate-900 border border-purple-500/20 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
+                
+                <!-- Kolom Teks -->
+                <div class="relative z-10">
                     <span class="inline-block px-3.5 py-1.5 bg-purple-500/20 text-purple-300 rounded-full text-xs font-semibold mb-5 border border-purple-500/30 shadow-inner">
                         ⚡ 100% Aman & Terpercaya • Layanan 24 Jam Nonstop
                     </span>
-                    <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-6 leading-tight">
+                    <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4 leading-tight">
                         TOP UP GAME <span class="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">TERMURAH & TERCEPAT</span>
                     </h1>
-                    <p class="text-slate-300 text-base md:text-lg mb-8 leading-relaxed">
+                    <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed">
                         Nikmati proses top up instan, harga ramah di kantong, pilihan pembayaran lengkap, dan layanan pelanggan profesional yang siap membantu kapan saja.
                     </p>
                     <div class="flex flex-wrap gap-4">
-                        <a href="#game" class="px-8 py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-semibold rounded-xl shadow-lg shadow-purple-600/35 transition-all text-center">
+                        <a href="#game" class="px-7 py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-semibold rounded-xl shadow-lg shadow-purple-600/35 transition-all text-center text-sm">
                             🚀 Top Up Sekarang
                         </a>
-                        <a href="#promo" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 font-semibold rounded-xl transition-all text-center">
+                        <a href="#promo" class="px-7 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 font-semibold rounded-xl transition-all text-center text-sm">
                             🔥 Lihat Promo Hari Ini
                         </a>
                     </div>
                 </div>
+
+                <!-- Kolom Banner Foto -->
+                <div class="relative z-10 flex justify-center">
+                    <div class="w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-2xl border border-purple-500/30 bg-slate-900 relative group">
+                        <!-- Ganti banner.jpeg dengan nama file foto banner Anda -->
+                        <img src="banner.jpeg" alt="Banner ARDZ STORE" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/600x350?text=ARDZ+STORE+BANNER'">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
+                            <span class="text-xs font-semibold text-purple-300 bg-purple-950/80 px-3 py-1 rounded-full border border-purple-500/30">
+                                🎮 Pusat Top Up Games & Voucher Terlengkap
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -277,12 +290,12 @@
             </div>
         </div>
     </footer>
-
     <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/6283185954674" target="_blank" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-xl shadow-emerald-500/30 transition-all hover:scale-110">
         <i class="fa-brands fa-whatsapp"></i>
     </a>
-<!-- SCRIPT RENDER PRODUK DARI LOCALSTORAGE -->
+
+    <!-- SCRIPT RENDER PRODUK DARI LOCALSTORAGE -->
     <script>
         const defaultProducts = [
             { name: "Mobile Legends", category: "Diamond & Weekly Pass", img: "ml.jpeg", link: "ml.html" },
@@ -329,4 +342,3 @@
     </script>
 </body>
 </html>
-    
