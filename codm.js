@@ -76,26 +76,26 @@ function getProductImage(nama){
     // Battle Pass Bundle
     if(nama.includes("bundle")){
 
-        return "assets/products/battlepassbundle.png";
+        return "battlepas.jpeg";
 
     }
 
     // Battle Pass
     if(nama.includes("battle")){
 
-        return "assets/products/battlepass.png";
+        return "battlepas.jpeg";
 
     }
 
     // Ground Forces
     if(nama.includes("ground")){
 
-        return "assets/products/groundforces.png";
+        return "unitidpas.jpeg";
 
     }
 
     // COD Points
-    return "assets/products/cp.png";
+    return "cp.jpeg";
 
 }
 
