@@ -316,7 +316,7 @@ function getOperatorImage(operator){
             return "tri.jpeg";
 
         case "Smartfren":
-            return "smartfren.jpeg";
+            return "smart.jpeg";
 
         case "byU":
             return "byu.jpeg";
