@@ -7,7 +7,8 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head><body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-purple-500 selection:text-white">
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-purple-500 selection:text-white">
 
     <!-- HEADER / NAVBAR -->
     <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-slate-800">
@@ -37,20 +38,20 @@
             <div class="bg-gradient-to-r from-purple-900/40 via-indigo-900/20 to-slate-900 border border-purple-500/20 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
                 <div class="relative z-10 max-w-2xl">
                     <span class="inline-block px-3.5 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-semibold mb-4 border border-purple-500/30">
-                        ⚡ 100% Aman & Terpercaya
+                        ⚡ 100% Aman & Terpercaya • 24 Jam Nonstop
                     </span>
                     <h1 class="text-4xl md:text-6xl font-black tracking-tight mb-6">
                         TOP UP GAME <span class="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">TERMURAH</span>
                     </h1>
                     <p class="text-slate-400 text-lg mb-8">
-                        Cepat • Aman • Murah • Layanan Pelanggan 24 Jam Nonstop siap membantu transaksi gaming kamu.
+                        Cepat • Aman • Murah • Layanan Pelanggan siap membantu transaksi gaming dan kebutuhan digital kamu kapan saja.
                     </p>
                     <div class="flex flex-wrap gap-4">
                         <a href="#game" class="px-8 py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-semibold rounded-xl shadow-lg shadow-purple-600/35 transition-all">
                             Top Up Sekarang
                         </a>
-                        <a href="https://wa.me/6283185954674" target="_blank" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 font-semibold rounded-xl transition-all">
-                            Hubungi CS
+                        <a href="#promo" class="px-8 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 font-semibold rounded-xl transition-all">
+                            Lihat Promo 🔥
                         </a>
                     </div>
                 </div>
@@ -58,42 +59,113 @@
         </div>
     </section>
 
-    <!-- GAME POPULER SECTION (Dinamis dari Admin) -->
+    <!-- GAME POPULER SECTION (Dinamis dari Admin / LocalStorage) -->
     <section id="game" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
-            <div>
-                <h2 class="text-3xl font-bold tracking-tight mb-2">🎮 Game Populer & Produk</h2>
-                <p class="text-slate-400">Pilih game atau layanan produk yang ingin kamu top up.</p>
-            </div>
+        <div class="mb-10">
+            <h2 class="text-3xl font-bold tracking-tight mb-2">🎮 Game & Layanan Populer</h2>
+            <p class="text-slate-400">Pilih game atau produk digital yang ingin kamu top up.</p>
         </div>
 
         <!-- Grid Produk Dinamis -->
         <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <!-- Data produk akan dimuat otomatis lewat JavaScript dari LocalStorage -->
+            <!-- Dimuat otomatis lewat JavaScript -->
+        </div>
+    </section>
+
+    <!-- PROMO HARI INI -->
+    <section id="promo" class="py-16 bg-slate-900/40 border-y border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <h2 class="text-3xl font-bold tracking-tight mb-2">🔥 Promo Hari Ini</h2>
+                <p class="text-slate-400">Jangan lewatkan penawaran diskon terbaik dari ARDZ STORE.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl relative overflow-hidden">
+                    <span class="inline-block px-2.5 py-1 bg-rose-500/20 text-rose-400 text-xs font-bold rounded-lg mb-4">FLASH SALE</span>
+                    <h3 class="text-xl font-bold mb-2">Mobile Legends</h3>
+                    <p class="text-slate-400 text-sm mb-6">Diskon hingga <b class="text-white">15%</b> untuk Diamond & Weekly Pass pilihan.</p>
+                    <a href="ml.html" class="text-purple-400 hover:text-purple-300 font-semibold text-sm flex items-center">Top Up Sekarang →</a>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl relative overflow-hidden">
+                    <span class="inline-block px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold rounded-lg mb-4">BONUS</span>
+                    <h3 class="text-xl font-bold mb-2">Free Fire</h3>
+                    <p class="text-slate-400 text-sm mb-6">Dapatkan bonus Diamond ekstra setiap pembelian membership tertentu.</p>
+                    <a href="ff.html" class="text-purple-400 hover:text-purple-300 font-semibold text-sm flex items-center">Top Up Sekarang →</a>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl relative overflow-hidden">
+                    <span class="inline-block px-2.5 py-1 bg-purple-500/20 text-purple-400 text-xs font-bold rounded-lg mb-4">ROBUX</span>
+                    <h3 class="text-xl font-bold mb-2">Roblox</h3>
+                    <p class="text-slate-400 text-sm mb-6">Harga Robux lebih hemat dan ramah dikantong setiap harinya.</p>
+                    <a href="roblox.html" class="text-purple-400 hover:text-purple-300 font-semibold text-sm flex items-center">Top Up Sekarang →</a>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl relative overflow-hidden">
+                    <span class="inline-block px-2.5 py-1 bg-indigo-500/20 text-indigo-400 text-xs font-bold rounded-lg mb-4">LIMITED</span>
+                    <h3 class="text-xl font-bold mb-2">Valorant</h3>
+                    <p class="text-slate-400 text-sm mb-6">Promo Valorant Points resmi dengan harga spesial anti boncos.</p>
+                    <a href="valorant.html" class="text-purple-400 hover:text-purple-300 font-semibold text-sm flex items-center">Top Up Sekarang →</a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- MENGAPA PILIH KAMI -->
-    <section class="py-16 bg-slate-900/50 border-y border-slate-800/80 my-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-3">⭐ Kenapa Pilih ARDZ STORE?</h2>
-            <p class="text-slate-400 text-center mb-12">Alasan ribuan gamers mempercayai layanan kami.</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl">
-                    <div class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-xl flex items-center justify-center text-xl mb-4 font-bold">⚡</div>
-                    <h3 class="text-lg font-semibold mb-2">Proses Cepat</h3>
-                    <p class="text-slate-400 text-sm">Pesanan diproses dalam waktu 1–5 menit setelah pembayaran berhasil.</p>
+    <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <h2 class="text-3xl font-bold mb-3">⭐ Kenapa Pilih ARDZ STORE?</h2>
+            <p class="text-slate-400">Alasan ribuan gamers mempercayai layanan top up kami.</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl">
+                <div class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-xl flex items-center justify-center text-xl mb-4 font-bold">⚡</div>
+                <h3 class="text-lg font-semibold mb-2">Proses Cepat</h3>
+                <p class="text-slate-400 text-sm">Pesanan diproses secara instan dalam waktu 1–5 menit setelah pembayaran berhasil.</p>
+            </div>
+            <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl">
+                <div class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-xl flex items-center justify-center text-xl mb-4 font-bold">🛡️</div>
+                <h3 class="text-lg font-semibold mb-2">Aman & Terpercaya</h3>
+                <p class="text-slate-400 text-sm">Transaksi 100% aman tanpa pernah meminta password akun game Anda.</p>
+            </div>
+            <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl">
+                <div class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-xl flex items-center justify-center text-xl mb-4 font-bold">💳</div>
+                <h3 class="text-lg font-semibold mb-2">Pembayaran Lengkap</h3>
+                <p class="text-slate-400 text-sm">Mendukung QRIS, DANA, OVO, GoPay, ShopeePay, hingga Transfer Bank.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- METODE PEMBAYARAN -->
+    <section id="payment" class="py-16 bg-slate-900/40 border-t border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-3">💳 Metode Pembayaran Lengkap</h2>
+            <p class="text-slate-400 mb-10">Pilih metode pembayaran paling mudah dan praktis untukmu.</p>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl flex flex-col items-center">
+                    <img src="qris.jpeg" alt="QRIS" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=QRIS'">
+                    <span class="font-semibold text-sm">QRIS</span>
+                    <span class="text-xs text-slate-400">Semua E-Wallet</span>
                 </div>
-                <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl">
-                    <div class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-xl flex items-center justify-center text-xl mb-4 font-bold">🛡️</div>
-                    <h3 class="text-lg font-semibold mb-2">Aman & Terpercaya</h3>
-                    <p class="text-slate-400 text-sm">Transaksi aman tanpa perlu meminta password akun game kamu.</p>
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl flex flex-col items-center">
+                    <img src="dana.jpeg" alt="DANA" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=DANA'">
+                    <span class="font-semibold text-sm">DANA</span>
+                    <span class="text-xs text-slate-400">Pembayaran Instan</span>
                 </div>
-                <div class="p-6 bg-slate-900 border border-slate-800 rounded-2xl">
-                    <div class="w-12 h-12 bg-purple-600/20 text-purple-400 rounded-xl flex items-center justify-center text-xl mb-4 font-bold">💳</div>
-                    <h3 class="text-lg font-semibold mb-2">Pembayaran Lengkap</h3>
-                    <p class="text-slate-400 text-sm">Mendukung QRIS, DANA, OVO, GoPay, ShopeePay, hingga Transfer Bank.</p>
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl flex flex-col items-center">
+                    <img src="ovo.jpeg" alt="OVO" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=OVO'">
+                    <span class="font-semibold text-sm">OVO</span>
+                    <span class="text-xs text-slate-400">Praktis & Cepat</span>
+                </div>
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl flex flex-col items-center">
+                    <img src="gopay.jpeg" alt="GoPay" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=GoPay'">
+                    <span class="font-semibold text-sm">GoPay</span>
+                    <span class="text-xs text-slate-400">Aman Digunakan</span>
+                </div>
+                <div class="p-4 bg-slate-900 border border-slate-800 rounded-xl flex flex-col items-center">
+                    <img src="bca.jpeg" alt="BCA" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=BCA'">
+                    <span class="font-semibold text-sm">BCA</span>
+                    <span class="text-xs text-slate-400">Transfer Bank</span>
                 </div>
             </div>
         </div>
@@ -117,21 +189,31 @@
         <i class="fa-brands fa-whatsapp"></i>
     </a>
 
-    <!-- SCRIPT RENDER PRODUK DARI LOCALSTORAGE -->
+    <!-- SCRIPT RENDER PRODUK LENGKAP & DINAMIS -->
     <script>
-        // Data bawaan awal jika LocalStorage kosong
+        // Daftar lengkap seluruh produk awal
         const defaultProducts = [
             { name: "Mobile Legends", category: "Diamond & Weekly Pass", img: "ml.jpeg", link: "ml.html" },
             { name: "Free Fire", category: "Diamond & Membership", img: "ff.jpeg", link: "ff.html" },
             { name: "PUBG Mobile", category: "UC Murah", img: "pubg.jpeg", link: "pubg.html" },
             { name: "Honor Of Kings", category: "Tokens Murah", img: "hok.jpeg", link: "hok.html" },
             { name: "Roblox", category: "Robux & Premium", img: "roblox.jpeg", link: "roblox.html" },
-            { name: "Valorant", category: "Valorant Points", img: "valorant.jpeg", link: "valorant.html" }
+            { name: "Valorant", category: "Valorant Points", img: "valorant.jpeg", link: "valorant.html" },
+            { name: "Call of Duty Mobile", category: "Top Up CP Murah", img: "codm.jpeg", link: "codm.html" },
+            { name: "FC Mobile", category: "Top Up FC Points", img: "fc.jpeg", link: "fcmobile.html" },
+            { name: "eFootball", category: "Top Up Coins", img: "efootbal.jpeg", link: "efootball.html" },
+            { name: "Genshin Impact", category: "Genesis Crystal", img: "gensin.jpeg", link: "genshin.html" },
+            { name: "Blood Strike", category: "Top Up Gold", img: "bloods.jpeg", link: "bloodstrike.html" },
+            { name: "Delta Force", category: "Delta Coin", img: "delta.jpeg", link: "deltaforce.html" },
+            { name: "Arena Breakout", category: "Top Up Bonds", img: "arena.jpeg", link: "arenabreakout.html" },
+            { name: "Pulsa", category: "Semua Operator", img: "pulsa.jpeg", link: "pulsa.html" },
+            { name: "Token PLN", category: "Token Listrik", img: "tokenpln.jpeg", link: "token.html" }
         ];
 
         function loadProducts() {
             let products = JSON.parse(localStorage.getItem('ardz_products'));
-            if (!products) {
+            // Jika LocalStorage kosong atau belum ada data lengkap, set menggunakan defaultProducts lengkap
+            if (!products || products.length < defaultProducts.length) {
                 products = defaultProducts;
                 localStorage.setItem('ardz_products', JSON.stringify(products));
             }
