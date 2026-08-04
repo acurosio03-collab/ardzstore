@@ -909,3 +909,803 @@ document.addEventListener("DOMContentLoaded",()=>{
     }
 
 });
+/* ==========================================
+   PULSA.JS V1
+   BAGIAN 6
+   SISTEM PEMBAYARAN
+========================================== */
+
+/* ==========================================
+   INISIALISASI PEMBAYARAN
+========================================== */
+
+function initPayment(){
+
+    const payments =
+    document.querySelectorAll(".payment-card");
+
+    if(payments.length === 0){
+
+        console.warn("Payment Card tidak ditemukan.");
+
+        return;
+
+    }
+
+    payments.forEach(card=>{
+
+        card.addEventListener("click",()=>{
+
+            // Hapus status aktif
+            payments.forEach(item=>{
+
+                item.classList.remove("active");
+
+            });
+
+            // Aktifkan card dipilih
+            card.classList.add("active");
+
+            // Simpan metode pembayaran
+            selectedPayment =
+            card.dataset.payment;
+
+            // Update Ringkasan Checkout
+            if($("summaryPayment")){
+
+                $("summaryPayment").textContent =
+                selectedPayment;
+
+            }
+
+            console.log(
+                "Metode Pembayaran:",
+                selectedPayment
+            );
+
+            // Simpan otomatis
+            if(typeof saveOrder === "function"){
+
+                saveOrder();
+
+            }
+
+        });
+
+    });
+
+}
+
+/* ==========================================
+   SET PEMBAYARAN DEFAULT
+========================================== */
+
+function setDefaultPayment(){
+
+    const firstPayment =
+    document.querySelector(".payment-card");
+
+    if(!firstPayment) return;
+
+    firstPayment.classList.add("active");
+
+    selectedPayment =
+    firstPayment.dataset.payment || "QRIS";
+
+    if($("summaryPayment")){
+
+        $("summaryPayment").textContent =
+        selectedPayment;
+
+    }
+
+}
+
+/* ==========================================
+   AMBIL PEMBAYARAN AKTIF
+========================================== */
+
+function getSelectedPayment(){
+
+    return selectedPayment || "QRIS";
+
+}
+
+/* ==========================================
+   UPDATE RINGKASAN
+========================================== */
+
+function updatePaymentSummary(){
+
+    if($("summaryPayment")){
+
+        $("summaryPayment").textContent =
+        selectedPayment;
+
+    }
+
+}
+
+/* ==========================================
+   RESET PEMBAYARAN
+========================================== */
+
+function resetPayment(){
+
+    document
+    .querySelectorAll(".payment-card")
+    .forEach(card=>{
+
+        card.classList.remove("active");
+
+    });
+
+    selectedPayment = "QRIS";
+
+    const first =
+    document.querySelector(".payment-card");
+
+    if(first){
+
+        first.classList.add("active");
+
+    }
+
+    updatePaymentSummary();
+
+    if(typeof saveOrder === "function"){
+
+        saveOrder();
+
+    }
+
+}
+/* ==========================================
+   PULSA.JS V1
+   BAGIAN 7
+   CHECKOUT WHATSAPP
+========================================== */
+
+function checkoutWhatsApp(){
+
+    // Validasi Nomor Tujuan
+    const customerNumber =
+    $("customerNumber")?.value.trim() || "";
+
+    if(customerNumber === ""){
+
+        alert("Masukkan Nomor Tujuan terlebih dahulu.");
+
+        $("customerNumber").focus();
+
+        return;
+
+    }
+
+    // Validasi Produk
+    if(selectedProduct === null){
+
+        alert("Silakan pilih produk terlebih dahulu.");
+
+        return;
+
+    }
+
+    const customerName =
+    $("customerName")?.value.trim() || "-";
+
+    const total = getTotalHarga();
+
+    let message = "";
+
+    /* ======================================
+       PULSA REGULER
+    ====================================== */
+
+    if(selectedService === "Pulsa"){
+
+        message = `📱 *ARDZ STORE*
+
+Halo Admin,
+
+Saya ingin membeli *Pulsa Reguler*.
+
+━━━━━━━━━━━━━━
+
+📱 Layanan :
+Pulsa Reguler
+
+📡 Operator :
+${selectedOperator}
+
+📞 Nomor Tujuan :
+${customerNumber}
+
+👤 Nama :
+${customerName}
+
+💳 Produk :
+${selectedProduct.nama}
+
+💰 Harga :
+${rupiah(selectedProduct.harga)}
+
+🎁 Voucher :
+${voucherUsed || "-"}
+
+💸 Diskon :
+${rupiah(discount)}
+
+💵 Total Bayar :
+${rupiah(total)}
+
+💳 Pembayaran :
+${selectedPayment}
+
+━━━━━━━━━━━━━━
+
+Mohon segera diproses.
+
+Terima kasih 🙏`;
+
+    }
+
+    /* ======================================
+       PAKET DATA
+    ====================================== */
+
+    else{
+
+        message = `🌐 *ARDZ STORE*
+
+Halo Admin,
+
+Saya ingin membeli *Paket Data*.
+
+━━━━━━━━━━━━━━
+
+🌐 Layanan :
+Paket Data
+
+📡 Operator :
+${selectedOperator}
+
+📞 Nomor Tujuan :
+${customerNumber}
+
+👤 Nama :
+${customerName}
+
+📦 Paket :
+${selectedProduct.nama}
+
+💰 Harga :
+${rupiah(selectedProduct.harga)}
+
+🎁 Voucher :
+${voucherUsed || "-"}
+
+💸 Diskon :
+${rupiah(discount)}
+
+💵 Total Bayar :
+${rupiah(total)}
+
+💳 Pembayaran :
+${selectedPayment}
+
+━━━━━━━━━━━━━━
+
+Mohon segera diproses.
+
+Terima kasih 🙏`;
+
+    }
+
+    window.open(
+
+        "https://wa.me/" +
+        ADMIN_WA +
+        "?text=" +
+        encodeURIComponent(message),
+
+        "_blank"
+
+    );
+
+}
+
+/* ==========================================
+   BUTTON CHECKOUT
+========================================== */
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    const btn = $("checkoutBtn");
+
+    if(btn){
+
+        btn.addEventListener(
+
+            "click",
+
+            checkoutWhatsApp
+
+        );
+
+    }
+
+});
+/* ==========================================
+   PULSA.JS V1
+   BAGIAN 8
+   LOCAL STORAGE
+========================================== */
+
+const PULSA_STORAGE_KEY = "ardz_pulsa_order";
+
+/* ==========================================
+   SIMPAN DATA
+========================================== */
+
+function saveOrder(){
+
+    const data = {
+
+        service: selectedService,
+
+        operator: selectedOperator,
+
+        customerNumber: $("customerNumber")?.value || "",
+
+        customerName: $("customerName")?.value || "",
+
+        productId: selectedProduct ? selectedProduct.id : null,
+
+        payment: selectedPayment,
+
+        voucher: voucherUsed,
+
+        discount: discount
+
+    };
+
+    localStorage.setItem(
+
+        PULSA_STORAGE_KEY,
+
+        JSON.stringify(data)
+
+    );
+
+}
+
+/* ==========================================
+   MUAT DATA
+========================================== */
+
+function loadOrder(){
+
+    const data = JSON.parse(
+
+        localStorage.getItem(PULSA_STORAGE_KEY)
+
+    );
+
+    if(!data) return;
+
+    /* ==========================
+       LAYANAN
+    ========================== */
+
+    selectedService = data.service || "Pulsa";
+
+    if($("serviceType")){
+
+        $("serviceType").value = selectedService;
+
+        $("summaryService").textContent =
+        $("serviceType").options[
+            $("serviceType").selectedIndex
+        ].text;
+
+        $("service").textContent =
+        $("serviceType").options[
+            $("serviceType").selectedIndex
+        ].text;
+
+    }
+
+    /* ==========================
+       OPERATOR
+    ========================== */
+
+    selectedOperator = data.operator || "Telkomsel";
+
+    if($("operator")){
+
+        $("operator").value = selectedOperator;
+
+        $("summaryOperator").textContent =
+        selectedOperator;
+
+        $("operatorName").textContent =
+        selectedOperator;
+
+    }
+
+    // Render ulang produk
+    renderProducts();
+
+    /* ==========================
+       CUSTOMER
+    ========================== */
+
+    if($("customerNumber")){
+
+        $("customerNumber").value =
+        data.customerNumber || "";
+
+    }
+
+    if($("customerName")){
+
+        $("customerName").value =
+        data.customerName || "";
+
+    }
+
+    if($("summaryNumber")){
+
+        $("summaryNumber").textContent =
+        data.customerNumber || "-";
+
+    }
+
+    if($("summaryName")){
+
+        $("summaryName").textContent =
+        data.customerName || "-";
+
+    }
+
+    /* ==========================
+       VOUCHER
+    ========================== */
+
+    voucherUsed = data.voucher || "";
+
+    discount = data.discount || 0;
+
+    if($("voucher")){
+
+        $("voucher").value = voucherUsed;
+
+    }
+
+    /* ==========================
+       PRODUK
+    ========================== */
+
+    if(data.productId){
+
+        const list = getCurrentProducts();
+
+        const index = list.findIndex(
+
+            item => item.id === data.productId
+
+        );
+
+        if(index !== -1){
+
+            selectProduct(index);
+
+        }
+
+    }
+
+    /* ==========================
+       PEMBAYARAN
+    ========================== */
+
+    selectedPayment =
+    data.payment || "QRIS";
+
+    document
+    .querySelectorAll(".payment-card")
+    .forEach(card=>{
+
+        card.classList.remove("active");
+
+        if(card.dataset.payment === selectedPayment){
+
+            card.classList.add("active");
+
+        }
+
+    });
+
+    if($("summaryPayment")){
+
+        $("summaryPayment").textContent =
+        selectedPayment;
+
+    }
+
+}
+
+/* ==========================================
+   AUTO SAVE
+========================================== */
+
+[
+    "customerNumber",
+    "customerName",
+    "serviceType",
+    "operator"
+].forEach(id=>{
+
+    const input = $(id);
+
+    if(input){
+
+        input.addEventListener(
+            "input",
+            saveOrder
+        );
+
+        input.addEventListener(
+            "change",
+            saveOrder
+        );
+
+    }
+
+});
+
+/* ==========================================
+   SIMPAN SAAT MENUTUP HALAMAN
+========================================== */
+
+window.addEventListener(
+
+    "beforeunload",
+
+    saveOrder
+
+);
+/* ==========================================
+   PULSA.JS V1
+   BAGIAN 9
+   LIVE ORDER + POPUP + BACK TO TOP
+========================================== */
+
+/* ==========================================
+   LIVE ORDER
+========================================== */
+
+const liveOrders = [
+
+    "🟢 Andi membeli Pulsa Telkomsel 50.000",
+    "🟢 Budi membeli Paket Data XL 10 GB",
+    "🟢 Rina membeli Pulsa Indosat 25.000",
+    "🟢 Dika membeli Paket Data Tri 12 GB",
+    "🟢 Fajar membeli Pulsa Smartfren 100.000",
+    "🟢 Sinta membeli Paket Data by.U 25 GB",
+    "🟢 Aldi membeli Pulsa Axis 10.000"
+
+];
+
+let liveIndex = 0;
+
+function startLiveOrder(){
+
+    const box = $("liveOrder");
+
+    if(!box) return;
+
+    function show(){
+
+        box.innerHTML = liveOrders[liveIndex];
+
+        box.classList.add("show");
+
+        liveIndex++;
+
+        if(liveIndex >= liveOrders.length){
+
+            liveIndex = 0;
+
+        }
+
+        setTimeout(()=>{
+
+            box.classList.remove("show");
+
+        },4000);
+
+    }
+
+    show();
+
+    setInterval(show,6000);
+
+}
+
+/* ==========================================
+   POPUP PROMO
+========================================== */
+
+function initPromoPopup(){
+
+    const popup = $("promoPopup");
+
+    const close = $("closePromo");
+
+    const use = $("promoButton");
+
+    if(!popup) return;
+
+    setTimeout(()=>{
+
+        popup.classList.add("show");
+
+    },2000);
+
+    if(close){
+
+        close.onclick = ()=>{
+
+            popup.classList.remove("show");
+
+        };
+
+    }
+
+    if(use){
+
+        use.onclick = ()=>{
+
+            if($("voucher")){
+
+                $("voucher").value = "PULSA10";
+            }
+
+            popup.classList.remove("show");
+
+        };
+
+    }
+
+}
+
+/* ==========================================
+   BACK TO TOP
+========================================== */
+
+function initBackTop(){
+
+    const btn = $("backTop");
+
+    if(!btn) return;
+
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY > 300){
+
+            btn.style.display = "flex";
+
+        }else{
+
+            btn.style.display = "none";
+
+        }
+
+    });
+
+    btn.onclick = ()=>{
+
+        window.scrollTo({
+
+            top:0,
+
+            behavior:"smooth"
+
+        });
+
+    };
+
+}
+
+/* ==========================================
+   EFEK CARD
+========================================== */
+
+function initCardEffect(){
+
+    document
+    .querySelectorAll(".product-card")
+    .forEach(card=>{
+
+        card.addEventListener("mouseenter",()=>{
+
+            card.style.transform =
+            "translateY(-8px) scale(1.03)";
+
+        });
+
+        card.addEventListener("mouseleave",()=>{
+
+            card.style.transform =
+            "";
+
+        });
+
+    });
+
+       }
+/* ==========================================
+   ARDZ STORE
+   PULSA.JS V1
+   BAGIAN 10
+   INISIALISASI FINAL
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    console.log("==================================");
+    console.log("ARDZ STORE - Pulsa & Paket Data");
+    console.log("Pulsa.js V1 Loaded");
+    console.log("==================================");
+
+    // Set pembayaran default
+    setDefaultPayment();
+
+    // Aktifkan sistem pembayaran
+    initPayment();
+
+    // Render produk awal
+    renderProducts();
+
+    // Muat data LocalStorage
+    loadOrder();
+
+    // Live Order
+    startLiveOrder();
+
+    // Popup Promo
+    initPromoPopup();
+
+    // Back To Top
+    initBackTop();
+
+    // Efek Card
+    initCardEffect();
+
+    // Tombol promo otomatis
+    const promoBtn = $("promoButton");
+
+    if (promoBtn) {
+
+        promoBtn.addEventListener("click", () => {
+
+            if ($("voucher")) {
+
+                $("voucher").value = "PULSA10";
+
+                applyVoucher();
+
+            }
+
+        });
+
+    }
+
+    console.log("Semua fitur Pulsa berhasil dijalankan.");
+
+});
+
+/* ==========================================
+   SELESAI
+========================================== */
