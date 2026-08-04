@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARDZ STORE | Pulsa & Paket Data</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- =====================================
+HEADER
+===================================== -->
+
+<header>
+
+<div class="navbar">
+
+<div class="logo">
+
+📱 ARDZ STORE
+
+</div>
+
+<nav>
+
+<a href="index.html">Home</a>
+
+<a href="ml.html">Game</a>
+
+<a href="token.html">Token PLN</a>
+
+<a class="active" href="pulsa.html">Pulsa</a>
+
+</nav>
+
+</div>
+
+</header>
+
+<!-- =====================================
+HERO
+===================================== -->
+
+<section class="hero hero-pulsa">
+
+<div class="hero-overlay">
+
+<h1>📱 Pulsa & Paket Data</h1>
+
+<p>
+
+Isi Pulsa dan Paket Data Semua Operator
+Murah • Cepat • Aman • 24 Jam
+
+</p>
+
+</div>
+
+</section>
+
+<!-- =====================================
+DATA PEMBELIAN
+===================================== -->
+
+<section class="player-box">
+
+<div class="box">
+
+<h2>📋 Data Pembelian</h2>
+
+<label>Jenis Layanan</label>
+
+<select id="serviceType">
+
+<option value="Pulsa">📱 Pulsa Reguler</option>
+
+<option value="Data">🌐 Paket Data</option>
+
+</select>
+
+<label>Operator</label>
+
+<select id="operator">
+
+<option value="Telkomsel">Telkomsel</option>
+
+<option value="Indosat">Indosat IM3</option>
+
+<option value="XL">XL Axiata</option>
+
+<option value="Axis">Axis</option>
+
+<option value="Tri">Tri (3)</option>
+
+<option value="Smartfren">Smartfren</option>
+
+<option value="byU">by.U</option>
+
+</select>
+
+<label>Nomor Tujuan</label>
+
+<input
+type="tel"
+id="customerNumber"
+placeholder="Contoh: 081234567890">
+
+<label>Nama (Opsional)</label>
+
+<input
+type="text"
+id="customerName"
+placeholder="Masukkan Nama">
+
+</div>
+
+</section>
+
+<!-- =====================================
+DAFTAR PRODUK
+===================================== -->
+
+<section class="products">
+
+<h2 class="title">
+
+💎 Pilih Nominal
+
+</h2>
+
+<div
+id="productList"
+class="product-grid">
+
+<!-- Produk dibuat otomatis dari pulsa.js -->
+
+</div>
+
+</section>
+<!-- =====================================
+DETAIL PESANAN
+===================================== -->
+
+<section class="order-detail">
+
+    <div class="box">
+
+        <h2>📋 Detail Pesanan</h2>
+
+        <div class="invoice">
+
+            <div class="invoice-row">
+                <span>Layanan</span>
+                <b id="service">Pulsa Reguler</b>
+            </div>
+
+            <div class="invoice-row">
+                <span>Operator</span>
+                <b id="operatorName">Telkomsel</b>
+            </div>
+
+            <div class="invoice-row">
+                <span>Produk</span>
+                <b id="produk">Belum Dipilih</b>
+            </div>
+
+            <div class="invoice-row">
+                <span>Nominal</span>
+                <b id="nominal">-</b>
+            </div>
+
+            <div class="invoice-row">
+                <span>Total</span>
+                <b id="total">Rp 0</b>
+            </div>
+
+            <div class="invoice-row">
+                <span>Status</span>
+                <b style="color:#22c55e;">
+                    Menunggu Pembayaran
+                </b>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================
+VOUCHER
+===================================== -->
+
+<section class="voucher-section">
+
+    <div class="box">
+
+        <h2>🎁 Voucher Diskon</h2>
+
+        <div class="voucher-box">
+
+            <input
+                type="text"
+                id="voucher"
+                placeholder="Masukkan kode voucher">
+
+            <button
+                id="applyVoucher"
+                class="btn-primary">
+
+                Gunakan
+
+            </button>
+
+        </div>
+
+        <p id="voucherInfo"></p>
+
+    </div>
+
+</section>
+
+<!-- =====================================
+PRODUK TERLARIS
+===================================== -->
+
+<section class="best-product">
+
+    <h2 class="title">
+
+        🔥 Produk Terlaris
+
+    </h2>
+
+    <div class="best-grid">
+
+        <div class="best-card">
+
+            <img
+            src="telkom.jpeg"
+            alt="Telkomsel">
+
+            <h3>
+
+                📱 Telkomsel 50.000
+
+            </h3>
+
+            <p>
+
+                Favorit Pelanggan
+
+            </p>
+
+        </div>
+
+        <div class="best-card">
+
+            <img
+            src="xl.jpeg"
+            alt="XL">
+
+            <h3>
+
+                📱 XL 100.000
+
+            </h3>
+
+            <p>
+
+                Harga Terbaik
+
+            </p>
+
+        </div>
+
+        <div class="best-card">
+
+            <img
+            src="assets/products/data10gb.png"
+            alt="Paket Data">
+
+            <h3>
+
+                🌐 Paket Data 10 GB
+
+            </h3>
+
+            <p>
+
+                Penjualan Terlaris
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =====================================
+METODE PEMBAYARAN
+===================================== -->
+
+<section class="payment-section">
+
+    <div class="box">
+
+        <h2>💳 Metode Pembayaran</h2>
+
+        <div class="payment-grid">
+
+            <div class="payment-card active" data-payment="QRIS">
+
+                <img src="qris.jpeg" alt="QRIS">
+
+                <h3>QRIS</h3>
+
+                <p>Semua E-Wallet</p>
+
+            </div>
+
+            <div class="payment-card" data-payment="DANA">
+
+                <img src="dana.jpeg" alt="DANA">
+
+                <h3>DANA</h3>
+
+                <p>Pembayaran Instan</p>
+
+            </div>
+
+            <div class="payment-card" data-payment="OVO">
+
+                <img src="ovo.jpeg" alt="OVO">
+
+                <h3>OVO</h3>
+
+                <p>Saldo OVO</p>
+
+            </div>
+
+            <div class="payment-card" data-payment="GoPay">
+
+                <img src="gopay.jpeg" alt="GoPay">
+
+                <h3>GoPay</h3>
+
+                <p>Transfer Cepat</p>
+
+            </div>
+
+            <div class="payment-card" data-payment="ShopeePay">
+
+                <img src="shoppepay.jpeg" alt="ShopeePay">
+
+                <h3>ShopeePay</h3>
+
+                <p>Pembayaran Mudah</p>
+
+            </div>
+
+            <div class="payment-card" data-payment="BCA">
+
+                <img src="bca.jpeg" alt="BCA">
+
+                <h3>BCA</h3>
+
+                <p>Transfer Bank</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =====================================
+RINGKASAN CHECKOUT
+===================================== -->
+
+<section class="checkout-summary">
+
+    <div class="box">
+
+        <h2>🧾 Ringkasan Checkout</h2>
+
+        <div class="invoice">
+
+            <div class="invoice-row">
+
+                <span>Layanan</span>
+
+                <b id="summaryService">
+
+                    Pulsa Reguler
+
+                </b>
+
+            </div>
+
+            <div class="invoice-row">
+
+                <span>Operator</span>
+
+                <b id="summaryOperator">
+
+                    Telkomsel
+
+                </b>
+
+            </div>
+
+            <div class="invoice-row">
+
+                <span>Nomor Tujuan</span>
+
+                <b id="summaryNumber">
+
+                    -
+
+                </b>
+
+            </div>
+
+            <div class="invoice-row">
+
+                <span>Nama</span>
+
+                <b id="summaryName">
+
+                    -
+
+                </b>
+
+            </div>
+
+            <div class="invoice-row">
+
+                <span>Produk</span>
+
+                <b id="summaryProduk">
+
+                    Belum Dipilih
+
+                </b>
+
+            </div>
+
+            <div class="invoice-row">
+
+                <span>Total</span>
+
+                <b id="summaryTotal">
+
+                    Rp 0
+
+                </b>
+
+            </div>
+
+            <div class="invoice-row">
+
+                <span>Pembayaran</span>
+
+                <b id="summaryPayment">
+
+                    QRIS
+
+                </b>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- =====================================
+CHECKOUT
+===================================== -->
+
+<section class="checkout-section">
+
+    <div class="box">
+
+        <h2>🚀 Checkout Sekarang</h2>
+
+        <p>
+
+            Pastikan operator, nomor tujuan, nominal, dan metode pembayaran sudah benar sebelum melanjutkan.
+
+        </p>
+
+        <button
+            id="checkoutBtn"
+            class="btn-checkout">
+
+            💬 Checkout via WhatsApp
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =====================================
+INFORMASI
+===================================== -->
+
+<section class="info-section">
+
+    <div class="box">
+
+        <h2>📢 Informasi Penting</h2>
+
+        <ul class="info-list">
+
+            <li>📱 Pastikan nomor tujuan aktif dan benar.</li>
+
+            <li>🌐 Paket data akan mengikuti ketentuan operator.</li>
+
+            <li>⚡ Proses transaksi rata-rata 1–5 menit.</li>
+
+            <li>💳 Pilih metode pembayaran yang tersedia.</li>
+
+            <li>🎁 Gunakan voucher untuk mendapatkan potongan harga.</li>
+
+            <li>📞 Hubungi Admin jika pesanan belum masuk lebih dari 10 menit.</li>
+
+        </ul>
+
+    </div>
+
+</section>
+
+<!-- =====================================
+BANTUAN
+===================================== -->
+
+<section class="help-section">
+
+    <div class="box">
+
+        <h2>❓ Butuh Bantuan?</h2>
+
+        <p>
+
+            Jika mengalami kendala saat melakukan pembelian,
+            silakan hubungi Admin ARDZ STORE melalui WhatsApp.
+
+        </p>
+
+        <a
+            href="https://wa.me/6283185954674"
+            class="btn-primary"
+            target="_blank">
+
+            💬 Hubungi Admin
+
+        </a>
+
+    </div>
+
+</section>
+<!-- =====================================
+FOOTER
+===================================== -->
+
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-item">
+
+            <h2>📱 ARDZ STORE</h2>
+
+            <p>
+                Pulsa & Paket Data Murah, Aman, Cepat, dan Online 24 Jam.
+            </p>
+
+        </div>
+
+        <div class="footer-item">
+
+            <h3>Layanan</h3>
+
+            <ul>
+
+                <li>📱 Pulsa Semua Operator</li>
+
+                <li>🌐 Paket Data</li>
+
+                <li>⚡ Proses Cepat</li>
+
+                <li>💳 Pembayaran Lengkap</li>
+
+            </ul>
+
+        </div>
+
+        <div class="footer-item">
+
+            <h3>Kontak</h3>
+
+            <p>📞 WhatsApp : 083185954674</p>
+
+            <p>🕒 Online 24 Jam</p>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        © 2026 ARDZ STORE - All Rights Reserved
+
+    </div>
+
+</footer>
+
+<!-- =====================================
+WHATSAPP FLOATING
+===================================== -->
+
+<a
+href="https://wa.me/6283185954674"
+target="_blank"
+class="wa-float"
+title="Chat Admin">
+
+💬
+
+</a>
+
+<!-- =====================================
+BACK TO TOP
+===================================== -->
+
+<button
+id="backTop"
+class="back-top">
+
+⬆
+
+</button>
+
+<!-- =====================================
+LIVE ORDER
+===================================== -->
+
+<div
+id="liveOrder"
+class="live-order">
+
+</div>
+
+<!-- =====================================
+POPUP PROMO
+===================================== -->
+
+<div
+id="promoPopup"
+class="promo-popup">
+
+    <div class="promo-content">
+
+        <h2>🎉 Promo Spesial</h2>
+
+        <p>
+
+            Gunakan voucher
+            <b>PULSA10</b>
+
+            untuk mendapatkan
+            diskon pembelian Pulsa & Paket Data.
+
+        </p>
+
+        <button
+        id="promoButton"
+        class="btn-primary">
+
+            Gunakan Voucher
+
+        </button>
+
+        <button
+        id="closePromo"
+        class="btn-secondary">
+
+            Tutup
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =====================================
+JAVASCRIPT
+===================================== -->
+
+<script src="pulsa.js"></script>
+
+</body>
+</html>
