@@ -4,65 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - ARDZ STORE</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-purple-500 selection:text-white">
 
     <!-- Navbar Admin -->
-    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex justify-between items-center">
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex justify-between items-center sticky top-0 z-50 backdrop-blur-md bg-slate-900/80">
         <div class="flex items-center space-x-3">
+            <div class="bg-gradient-to-tr from-purple-600 to-indigo-600 p-2 rounded-xl shadow-lg shadow-purple-500/30">
+                <i class="fa-solid fa-gauge-high text-white text-sm"></i>
+            </div>
             <span class="font-bold text-lg bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">ARDZ ADMIN PANEL</span>
         </div>
-        <div class="flex items-center space-x-4">
-            <a href="../index.html" target="_blank" class="text-sm text-slate-300 hover:text-purple-400"><i class="fa-solid fa-globe mr-1"></i> Lihat Web</a>
-            <button onclick="logout()" class="px-4 py-2 bg-rose-600/20 text-rose-400 hover:bg-rose-600 hover:text-white rounded-lg text-sm transition-all border border-rose-500/30">
+        <div class="flex items-center space-x-3">
+            <button onclick="resetToDefault()" class="px-3.5 py-2 bg-amber-600/20 text-amber-400 hover:bg-amber-600 hover:text-white rounded-xl text-xs font-semibold transition-all border border-amber-500/30">
+                <i class="fa-solid fa-rotate-right mr-1"></i> Reset Default
+            </button>
+            <a href="../index.html" target="_blank" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition-all">
+                <i class="fa-solid fa-globe mr-1"></i> Lihat Web
+            </a>
+            <button onclick="logout()" class="px-3.5 py-2 bg-rose-600/20 text-rose-400 hover:bg-rose-600 hover:text-white rounded-xl text-xs font-semibold transition-all border border-rose-500/30">
                 <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
             </button>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <!-- Form Tambah Produk -->
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl h-fit">
-            <h2 class="text-lg font-bold mb-4 flex items-center"><i class="fa-solid fa-plus-circle text-purple-500 mr-2"></i> Tambah Produk Game</h2>
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl h-fit shadow-xl">
+            <h2 class="text-lg font-bold mb-4 flex items-center">
+                <i class="fa-solid fa-plus-circle text-purple-500 mr-2"></i> Tambah Produk Baru
+            </h2>
             <form id="add-product-form" onsubmit="addProduct(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1.5">Nama Game / Produk</label>
-                    <input type="text" id="prod-name" required placeholder="Contoh: Genshin Impact" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Nama Game / Produk</label>
+                    <input type="text" id="prod-name" required placeholder="Contoh: Genshin Impact" class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500 transition-colors">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1.5">Keterangan / Sub-judul</label>
-                    <input type="text" id="prod-cat" required placeholder="Contoh: Genesis Crystal" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Keterangan / Sub-judul</label>
+                    <input type="text" id="prod-cat" required placeholder="Contoh: Genesis Crystal" class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500 transition-colors">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1.5">Nama File Gambar (Opsional)</label>
-                    <input type="text" id="prod-img" value="ml.jpeg" placeholder="Contoh: ml.jpeg" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Nama File Gambar</label>
+                    <input type="text" id="prod-img" value="gensin.jpeg" placeholder="Contoh: gensin.jpeg" class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500 transition-colors">
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1.5">Link Halaman Detail</label>
-                    <input type="text" id="prod-link" value="ml.html" placeholder="Contoh: ml.html" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500">
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1.5">Link Halaman Detail</label>
+                    <input type="text" id="prod-link" value="genshin.html" placeholder="Contoh: genshin.html" class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500 transition-colors">
                 </div>
-                <button type="submit" class="w-full py-3 bg-purple-600 hover:bg-purple-500 font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition-all text-sm">
-                    Simpan Produk Baru
+                <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition-all text-sm">
+                    Simpan Produk
                 </button>
             </form>
         </div>
 
         <!-- Daftar Produk -->
-        <div class="lg:col-span-2 bg-slate-900 border border-slate-800 p-6 rounded-2xl">
-            <h2 class="text-lg font-bold mb-4 flex items-center"><i class="fa-solid fa-list text-purple-500 mr-2"></i> Daftar Produk Aktif</h2>
+        <div class="lg:col-span-2 bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-lg font-bold flex items-center">
+                    <i class="fa-solid fa-list text-purple-500 mr-2"></i> Daftar Produk Aktif
+                </h2>
+                <span id="product-count" class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs font-semibold border border-purple-500/30">0 Produk</span>
+            </div>
+            
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm">
-                    <thead class="bg-slate-950 text-slate-400 uppercase text-xs">
+                    <thead class="bg-slate-950 text-slate-400 uppercase text-xs tracking-wider">
                         <tr>
-                            <th class="p-3">Produk</th>
-                            <th class="p-3">Kategori</th>
-                            <th class="p-3 text-center">Aksi</th>
+                            <th class="p-3.5 rounded-l-xl">Produk</th>
+                            <th class="p-3.5">Kategori / Keterangan</th>
+                            <th class="p-3.5 text-center rounded-r-xl">Aksi</th>
                         </tr>
                     </thead>
-                    <tbody id="admin-product-list" class="divide-y divide-slate-800">
+                    <tbody id="admin-product-list" class="divide-y divide-slate-800/60">
                         <!-- Dimuat lewat JS -->
                     </tbody>
                 </table>
@@ -72,23 +89,33 @@
     </main>
 
     <script>
-        // Cek autentikasi
+        // Cek autentikasi login admin
         if (localStorage.getItem('ardz_logged_in') !== 'true') {
             window.location.href = 'login.html';
         }
 
+        // Daftar lengkap seluruh produk default yang sinkron dengan index.html
         const defaultProducts = [
             { name: "Mobile Legends", category: "Diamond & Weekly Pass", img: "ml.jpeg", link: "ml.html" },
             { name: "Free Fire", category: "Diamond & Membership", img: "ff.jpeg", link: "ff.html" },
             { name: "PUBG Mobile", category: "UC Murah", img: "pubg.jpeg", link: "pubg.html" },
             { name: "Honor Of Kings", category: "Tokens Murah", img: "hok.jpeg", link: "hok.html" },
             { name: "Roblox", category: "Robux & Premium", img: "roblox.jpeg", link: "roblox.html" },
-            { name: "Valorant", category: "Valorant Points", img: "valorant.jpeg", link: "valorant.html" }
+            { name: "Valorant", category: "Valorant Points", img: "valorant.jpeg", link: "valorant.html" },
+            { name: "Call of Duty Mobile", category: "Top Up CP Murah", img: "codm.jpeg", link: "codm.html" },
+            { name: "FC Mobile", category: "Top Up FC Points", img: "fc.jpeg", link: "fcmobile.html" },
+            { name: "eFootball", category: "Top Up Coins", img: "efootbal.jpeg", link: "efootball.html" },
+            { name: "Genshin Impact", category: "Genesis Crystal", img: "gensin.jpeg", link: "genshin.html" },
+            { name: "Blood Strike", category: "Top Up Gold", img: "bloods.jpeg", link: "bloodstrike.html" },
+            { name: "Delta Force", category: "Delta Coin", img: "delta.jpeg", link: "deltaforce.html" },
+            { name: "Arena Breakout", category: "Top Up Bonds", img: "arena.jpeg", link: "arenabreakout.html" },
+            { name: "Pulsa", category: "Semua Operator", img: "pulsa.jpeg", link: "pulsa.html" },
+            { name: "Token PLN", category: "Token Listrik", img: "tokenpln.jpeg", link: "token.html" }
         ];
 
         function getProducts() {
             let products = JSON.parse(localStorage.getItem('ardz_products'));
-            if (!products) {
+            if (!products || products.length === 0) {
                 products = defaultProducts;
                 localStorage.setItem('ardz_products', JSON.stringify(products));
             }
@@ -98,19 +125,22 @@
         function renderAdminTable() {
             const products = getProducts();
             const tbody = document.getElementById('admin-product-list');
+            document.getElementById('product-count').innerText = `${products.length} Produk`;
             tbody.innerHTML = '';
 
             products.forEach((p, index) => {
                 tbody.innerHTML += `
-                    <tr class="hover:bg-slate-800/50">
-                        <td class="p-3 flex items-center space-x-3">
-                            <img src="../${p.img}" class="w-10 h-10 rounded-lg object-cover bg-slate-800" onerror="this.src='https://via.placeholder.com/40'">
+                    <tr class="hover:bg-slate-800/40 transition-colors">
+                        <td class="p-3.5 flex items-center space-x-3">
+                            <div class="w-10 h-10 rounded-xl overflow-hidden bg-slate-800 flex-shrink-0 border border-slate-700">
+                                <img src="../${p.img}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/40?text=Img'">
+                            </div>
                             <span class="font-medium text-slate-200">${p.name}</span>
                         </td>
-                        <td class="p-3 text-slate-400">${p.category}</td>
-                        <td class="p-3 text-center">
-                            <button onclick="deleteProduct(${index})" class="px-3 py-1.5 bg-rose-600/20 text-rose-400 hover:bg-rose-600 hover:text-white rounded-lg text-xs transition-all border border-rose-500/30">
-                                <i class="fa-solid fa-trash"></i> Hapus
+                        <td class="p-3.5 text-slate-400">${p.category}</td>
+                        <td class="p-3.5 text-center">
+                            <button onclick="deleteProduct(${index})" class="px-3 py-1.5 bg-rose-600/20 text-rose-400 hover:bg-rose-600 hover:text-white rounded-xl text-xs font-semibold transition-all border border-rose-500/30">
+                                <i class="fa-solid fa-trash mr-1"></i> Hapus
                             </button>
                         </td>
                     </tr>
@@ -140,6 +170,14 @@
                 products.splice(index, 1);
                 localStorage.setItem('ardz_products', JSON.stringify(products));
                 renderAdminTable();
+            }
+        }
+
+        function resetToDefault() {
+            if (confirm('Kembalikan semua produk ke daftar awal default?')) {
+                localStorage.setItem('ardz_products', JSON.stringify(defaultProducts));
+                renderAdminTable();
+                alert('Produk berhasil di-reset ke default!');
             }
         }
 
