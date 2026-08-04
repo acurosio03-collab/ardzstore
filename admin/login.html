@@ -3,53 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Admin - ARDZ STORE</title>
+    <title>Dashboard Admin - ARDZ STORE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-slate-950 text-slate-100 flex items-center justify-center min-h-screen px-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
 
-    <div class="w-full max-w-md bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl">
-        <div class="text-center mb-8">
-            <div class="inline-block bg-purple-600/20 text-purple-400 p-3 rounded-2xl text-2xl mb-3">
-                <i class="fa-solid fa-lock"></i>
-            </div>
-            <h1 class="text-2xl font-bold tracking-tight">Admin Login</h1>
-            <p class="text-slate-400 text-sm mt-1">Masuk untuk mengelola produk ARDZ STORE</p>
+    <!-- Navbar Admin -->
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <span class="font-bold text-lg bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">ARDZ ADMIN PANEL</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <a href="../index.html" target="_blank" class="text-sm text-slate-300 hover:text-purple-400"><i class="fa-solid fa-globe mr-1"></i> Lihat Web</a>
+            <button onclick="logout()" class="px-4 py-2 bg-rose-600/20 text-rose-400 hover:bg-rose-600 hover:text-white rounded-lg text-sm transition-all border border-rose-500/30">
+                <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Form Tambah Produk -->
+        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl h-fit">
+            <h2 class="text-lg font-bold mb-4 flex items-center"><i class="fa-solid fa-plus-circle text-purple-500 mr-2"></i> Tambah Produk Game</h2>
+            <form id="add-product-form" onsubmit="addProduct(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1.5">Nama Game / Produk</label>
+                    <input type="text" id="prod-name" required placeholder="Contoh: Genshin Impact" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1.5">Keterangan / Sub-judul</label>
+                    <input type="text" id="prod-cat" required placeholder="Contoh: Genesis Crystal" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1.5">Nama File Gambar (Opsional)</label>
+                    <input type="text" id="prod-img" value="ml.jpeg" placeholder="Contoh: ml.jpeg" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase text-slate-400 mb-1.5">Link Halaman Detail</label>
+                    <input type="text" id="prod-link" value="ml.html" placeholder="Contoh: ml.html" class="w-full px-3.5 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-sm focus:outline-none focus:border-purple-500">
+                </div>
+                <button type="submit" class="w-full py-3 bg-purple-600 hover:bg-purple-500 font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition-all text-sm">
+                    Simpan Produk Baru
+                </button>
+            </form>
         </div>
 
-        <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
-            <div>
-                <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Username</label>
-                <input type="text" id="username" required placeholder="Masukkan username" class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:border-purple-500 text-sm">
+        <!-- Daftar Produk -->
+        <div class="lg:col-span-2 bg-slate-900 border border-slate-800 p-6 rounded-2xl">
+            <h2 class="text-lg font-bold mb-4 flex items-center"><i class="fa-solid fa-list text-purple-500 mr-2"></i> Daftar Produk Aktif</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-slate-950 text-slate-400 uppercase text-xs">
+                        <tr>
+                            <th class="p-3">Produk</th>
+                            <th class="p-3">Kategori</th>
+                            <th class="p-3 text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="admin-product-list" class="divide-y divide-slate-800">
+                        <!-- Dimuat lewat JS -->
+                    </tbody>
+                </table>
             </div>
-            <div>
-                <label class="block text-xs font-semibold uppercase text-slate-400 mb-2">Password</label>
-                <input type="password" id="password" required placeholder="Masukkan password" class="w-full px-4 py-3 bg-slate-950 border border-slate-800 rounded-xl focus:outline-none focus:border-purple-500 text-sm">
-            </div>
-            <button type="submit" class="w-full py-3.5 bg-purple-600 hover:bg-purple-500 font-semibold rounded-xl shadow-lg shadow-purple-600/30 transition-all text-sm">
-                Masuk Dashboard
-            </button>
-            <div class="text-center mt-4">
-                <a href="../index.html" class="text-xs text-slate-400 hover:text-purple-400 transition-colors">← Kembali ke Beranda</a>
-            </div>
-        </form>
-    </div>
+        </div>
+
+    </main>
 
     <script>
-        function handleLogin(e) {
-            e.preventDefault();
-            const user = document.getElementById('username').value;
-            const pass = document.getElementById('password').value;
+        // Cek autentikasi
+        if (localStorage.getItem('ardz_logged_in') !== 'true') {
+            window.location.href = 'login.html';
+        }
 
-            // Default login sederhana (bisa diganti sesuai keinginan)
-            if (user === 'admin' && pass === 'ardzstore123') {
-                localStorage.setItem('ardz_logged_in', 'true');
-                window.location.href = 'dashboard.html';
-            } else {
-                alert('Username atau Password salah! (Default: admin / ardzstore123)');
+        const defaultProducts = [
+            { name: "Mobile Legends", category: "Diamond & Weekly Pass", img: "ml.jpeg", link: "ml.html" },
+            { name: "Free Fire", category: "Diamond & Membership", img: "ff.jpeg", link: "ff.html" },
+            { name: "PUBG Mobile", category: "UC Murah", img: "pubg.jpeg", link: "pubg.html" },
+            { name: "Honor Of Kings", category: "Tokens Murah", img: "hok.jpeg", link: "hok.html" },
+            { name: "Roblox", category: "Robux & Premium", img: "roblox.jpeg", link: "roblox.html" },
+            { name: "Valorant", category: "Valorant Points", img: "valorant.jpeg", link: "valorant.html" }
+        ];
+
+        function getProducts() {
+            let products = JSON.parse(localStorage.getItem('ardz_products'));
+            if (!products) {
+                products = defaultProducts;
+                localStorage.setItem('ardz_products', JSON.stringify(products));
+            }
+            return products;
+        }
+
+        function renderAdminTable() {
+            const products = getProducts();
+            const tbody = document.getElementById('admin-product-list');
+            tbody.innerHTML = '';
+
+            products.forEach((p, index) => {
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-800/50">
+                        <td class="p-3 flex items-center space-x-3">
+                            <img src="../${p.img}" class="w-10 h-10 rounded-lg object-cover bg-slate-800" onerror="this.src='https://via.placeholder.com/40'">
+                            <span class="font-medium text-slate-200">${p.name}</span>
+                        </td>
+                        <td class="p-3 text-slate-400">${p.category}</td>
+                        <td class="p-3 text-center">
+                            <button onclick="deleteProduct(${index})" class="px-3 py-1.5 bg-rose-600/20 text-rose-400 hover:bg-rose-600 hover:text-white rounded-lg text-xs transition-all border border-rose-500/30">
+                                <i class="fa-solid fa-trash"></i> Hapus
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function addProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('prod-name').value;
+            const category = document.getElementById('prod-cat').value;
+            const img = document.getElementById('prod-img').value;
+            const link = document.getElementById('prod-link').value;
+
+            const products = getProducts();
+            products.push({ name, category, img, link });
+            localStorage.setItem('ardz_products', JSON.stringify(products));
+
+            document.getElementById('add-product-form').reset();
+            renderAdminTable();
+            alert('Produk berhasil ditambahkan!');
+        }
+
+        function deleteProduct(index) {
+            if (confirm('Apakah kamu yakin ingin menghapus produk ini?')) {
+                const products = getProducts();
+                products.splice(index, 1);
+                localStorage.setItem('ardz_products', JSON.stringify(products));
+                renderAdminTable();
             }
         }
+
+        function logout() {
+            localStorage.removeItem('ardz_logged_in');
+            window.location.href = 'login.html';
+        }
+
+        window.onload = renderAdminTable;
     </script>
 </body>
 </html>
