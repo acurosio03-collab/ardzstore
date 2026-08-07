@@ -1,205 +1,726 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Top Up Mobile Legends — ARDZ STORE</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARDZ STORE | Top Up Game Termurah, Tercepat &amp; Terpercaya</title>
+<meta name="description" content="Top up Mobile Legends, Free Fire, PUBG, Valorant, dan puluhan game lain. Proses otomatis 1-5 menit, bayar via QRIS, DANA, OVO, GoPay, dan bank transfer.">
+
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#0B0F17;
-    --bg-card:#141B27;
-    --bg-card-hover:#1B2433;
-    --ink:#F3F6FA;
-    --ink-soft:#8B97A8;
-    --violet:#8B5CF6;
-    --violet-deep:#6D3FE0;
-    --cyan:#33E6C4;
-    --gold:#FFB020;
-    --line: rgba(255,255,255,0.08);
-    --radius:18px;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:
-      radial-gradient(circle at 10% 0%, rgba(139,92,246,.16), transparent 45%),
-      radial-gradient(circle at 90% 20%, rgba(51,230,196,.10), transparent 40%),
-      var(--bg);
-    color:var(--ink);
-    font-family:'Inter', sans-serif;
-    line-height:1.55;
-  }
-  h1,h2,h3{font-family:'Space Grotesk',sans-serif; margin:0; letter-spacing:-0.01em;}
-  .mono{font-family:'Space Mono',monospace;}
-  a{color:inherit;}
-  .wrap{max-width:960px;margin:0 auto;padding:0 20px;}
-  :focus-visible{outline:3px solid var(--cyan); outline-offset:2px;}
-
-  header{
-    position:sticky; top:0; z-index:40;
-    background:rgba(11,15,23,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-  }
-  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:960px; margin:0 auto;}
-  .brand{display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:800;}
-  .brand .dot{width:10px;height:10px;border-radius:99px; background:var(--cyan); box-shadow:0 0 0 4px rgba(51,230,196,.2);}
-  .back-link{display:flex; align-items:center; gap:6px; font-size:.9rem; color:var(--ink-soft); text-decoration:none;}
-
-  main{padding:36px 0 80px;}
-
-  .product-head{display:flex; gap:18px; align-items:center; margin-bottom:32px;}
-  .product-icon{
-    width:64px; height:64px; border-radius:16px;
-    background:linear-gradient(135deg,var(--violet),var(--violet-deep));
-    display:flex; align-items:center; justify-content:center; font-size:1.8rem;
-    flex-shrink:0;
-  }
-  .product-head h1{font-size:1.5rem; margin-bottom:4px;}
-  .product-head p{margin:0; color:var(--ink-soft); font-size:.9rem;}
-
-  .section-label{
-    font-family:'Space Mono',monospace; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase;
-    color:var(--cyan); margin-bottom:14px; display:flex; align-items:center; gap:8px;
-  }
-  .section-label .n{
-    width:20px; height:20px; border-radius:6px; background:var(--bg-card); border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center; font-size:.7rem; color:var(--ink);
-  }
-
-  /* nominal grid */
-  .nominal-grid{
-    display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:44px;
-  }
-  @media (max-width:640px){ .nominal-grid{grid-template-columns:repeat(2,1fr);} }
-  .nominal-card{
-    background:var(--bg-card); border:1.5px solid var(--line); border-radius:14px;
-    padding:16px 14px; cursor:pointer; text-align:left;
-    transition:all .15s ease; position:relative;
-  }
-  .nominal-card:hover{background:var(--bg-card-hover); border-color:rgba(139,92,246,.4);}
-  .nominal-card.selected{
-    border-color:var(--violet); background:rgba(139,92,246,.12);
-    box-shadow:0 0 0 1px var(--violet);
-  }
-  .nominal-card .badge{
-    position:absolute; top:-9px; right:10px;
-    background:var(--gold); color:#3A2500; font-size:.65rem; font-weight:800;
-    padding:3px 8px; border-radius:99px; font-family:'Space Grotesk',sans-serif;
-  }
-  .nominal-card .amount{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.02rem; margin-bottom:6px;}
-  .nominal-card .price{font-family:'Space Mono',monospace; font-size:.88rem; color:var(--cyan);}
-
-  /* ringkasan */
-  .summary-bar{
-    display:flex; justify-content:space-between; align-items:center;
-    background:var(--bg-card); border:1px solid var(--line); border-radius:14px;
-    padding:16px 20px; margin-bottom:44px;
-  }
-  .summary-bar .lbl{font-size:.82rem; color:var(--ink-soft);}
-  .summary-bar .val{font-family:'Space Mono',monospace; font-weight:700; font-size:1.3rem; color:var(--ink);}
-
-  /* qris */
-  .qris-box{
-    background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
-    padding:28px; display:grid; grid-template-columns:220px 1fr; gap:28px; align-items:center;
-    margin-bottom:24px;
-  }
-  @media (max-width:640px){ .qris-box{grid-template-columns:1fr; text-align:center;} }
-  .qris-box img{width:100%; border-radius:12px; border:1px solid var(--line);}
-  .qris-steps{display:flex; flex-direction:column; gap:14px;}
-  .qris-step{display:flex; gap:12px; align-items:flex-start;}
-  .qris-step .num{
-    width:26px; height:26px; border-radius:99px; background:var(--violet); color:#fff;
-    display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:700;
-    flex-shrink:0; font-family:'Space Grotesk',sans-serif;
-  }
-  .qris-step p{margin:0; font-size:.9rem; color:var(--ink-soft);}
-  .qris-step b{color:var(--ink);}
-
-  .notice{
-    background:rgba(255,176,32,.1); border:1px solid rgba(255,176,32,.35);
-    border-radius:12px; padding:14px 16px; font-size:.85rem; color:#FFD187;
-    margin-bottom:32px; display:flex; gap:10px;
-  }
-
-  .confirm-box{
-    background:linear-gradient(135deg, rgba(139,92,246,.15), rgba(51,230,196,.08));
-    border:1px solid rgba(139,92,246,.3); border-radius:var(--radius);
-    padding:28px; text-align:center;
-  }
-  .confirm-box h2{font-size:1.2rem; margin-bottom:8px;}
-  .confirm-box p{color:var(--ink-soft); font-size:.9rem; margin:0 0 22px; max-width:44ch; margin-left:auto; margin-right:auto;}
-  .btn-wa{
-    display:inline-flex; align-items:center; gap:10px;
-    background:var(--violet); color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:700;
-    padding:15px 30px; border-radius:99px; text-decoration:none; font-size:1rem;
-    box-shadow:0 10px 26px -10px rgba(139,92,246,.6);
-    transition:transform .15s ease, background .15s ease;
-    border:none; cursor:pointer;
-  }
-  .btn-wa:hover{transform:translateY(-2px); background:var(--violet-deep);}
-  .btn-wa[disabled]{opacity:.4; cursor:not-allowed; transform:none;}
-  .confirm-hint{font-size:.78rem; color:var(--ink-soft); margin-top:14px;}
-
-  footer{border-top:1px solid var(--line); padding:26px 0; text-align:center; color:var(--ink-soft); font-size:.8rem;}
+/* ==== tambahan kecil khusus homepage, nggak ubah style.css ==== */
+#backTop{
+position:fixed;
+right:24px;
+bottom:24px;
+width:52px;
+height:52px;
+border-radius:50%;
+background:linear-gradient(135deg,#4f46e5,#06b6d4);
+color:#fff;
+border:none;
+font-size:20px;
+cursor:pointer;
+display:none;
+align-items:center;
+justify-content:center;
+opacity:0;
+transition:opacity .25s ease;
+box-shadow:0 12px 28px rgba(79,70,229,.4);
+z-index:9998;
+}
+.avatar-initial{
+width:52px;height:52px;border-radius:50%;
+display:flex;align-items:center;justify-content:center;
+font-weight:700;font-size:18px;color:#fff;
+background:linear-gradient(135deg,#4f46e5,#06b6d4);
+flex-shrink:0;
+}
+.payment-card.featured{
+border-color:#06b6d4;
+box-shadow:0 0 0 1px #06b6d4, 0 20px 45px rgba(6,182,212,.30);
+}
+.payment-flag{
+display:inline-block;
+margin-bottom:10px;
+padding:5px 12px;
+border-radius:30px;
+background:#22c55e;
+color:#fff;
+font-size:11px;
+font-weight:700;
+}
 </style>
+
 </head>
+
 <body>
 
-<header>
-  <div class="nav">
-    <div class="brand"><span class="dot"></span> ARDZ STORE</div>
-    <a class="back-link" href="#">← Kembali</a>
-  </div>
+<!-- =====================================
+LOADER
+===================================== -->
+
+<div class="loader">
+<div class="loader-spinner"></div>
+</div>
+
+<!-- =====================================
+HEADER
+===================================== -->
+
+<header class="header" id="top">
+<div class="container">
+
+<div class="logo">🎮 ARDZ <span>STORE</span></div>
+
+<nav class="navbar">
+<a href="#top" class="active">Home</a>
+<a href="#games">Semua Game</a>
+<a href="#promo">Promo</a>
+<a href="#cara-beli">Cara Beli</a>
+<a href="#testimoni">Testimoni</a>
+<a href="#pembayaran">Pembayaran</a>
+</nav>
+
+<a class="login-btn" href="https://wa.me/6283185954674" target="_blank" rel="noopener">💬 Chat Admin</a>
+
+<div class="menu-toggle">☰</div>
+
+</div>
 </header>
 
-<main class="wrap">
+<!-- =====================================
+HERO SLIDER
+===================================== -->
 
-  <div class="product-head">
-    <div class="product-icon">💎</div>
-    <div>
-      <h1>Top Up Mobile Legends — Diamond</h1>
-      <p>Proses otomatis 1–5 menit setelah bukti transfer dikonfirmasi.</p>
-    </div>
-  </div>
+<section class="hero">
+<div class="hero-slider">
 
-  <div class="section-label"><span class="n">1</span> Pilih Nominal</div>
-  <div class="nominal-grid" id="nominalGrid">
-    <button class="nominal-card" data-name="86 Diamond" data-price="20000">
-      <div class="amount">86 💎</div>
-      <div class="price mono">Rp20.000</div>
-    </button>
-    <button class="nominal-card" data-name="172 Diamond" data-price="38000">
-      <div class="amount">172 💎</div>
-      <div class="price mono">Rp38.000</div>
-    </button>
-    <button class="nominal-card" data-name="257 Diamond" data-price="55000">
-      <span class="badge">HEMAT</span>
-      <div class="amount">257 💎</div>
-      <div class="price mono">Rp55.000</div>
-    </button>
-    <button class="nominal-card" data-name="344 Diamond" data-price="70000">
-      <div class="amount">344 💎</div>
-      <div class="price mono">Rp70.000</div>
-    </button>
-    <button class="nominal-card" data-name="Weekly Pass" data-price="28000">
-      <div class="amount">Weekly Pass</div>
-      <div class="price mono">Rp28.000</div>
-    </button>
-    <button class="nominal-card" data-name="Twilight Pass" data-price="149000">
-      <span class="badge">POPULER</span>
-      <div class="amount">Twilight Pass</div>
-      <div class="price mono">Rp149.000</div>
-    </button>
-  </div>
+<div class="slide active">
+<img src="banner-slide1.jpg" alt="ARDZ STORE - Top Up Game Cepat Murah Aman">
+</div>
 
-  <div class="summary-bar">
-    <span class="lbl">Total yang harus dibayar</span>
-    <span class="val mono" id="totalPrice">Rp0</span>
-  </div>
-   <div class="section-label"><span class="n">2</span> Scan QRIS untuk Bayar</div>
-  <div class="qris-box">
-    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAPoAtADASIAAhEBAxEB/8QAHQABAAAHAQEAAAAAAAAAAAAAAAIDBAUGBwgBCf/EAGIQAAEDAwIDBQQGAgsLCQYCCwECAwQABREGBxIhMQgTFEFRImFxkRUyMzRSgSNTCRYXGEJicqGxstEkN1ZzdHWCkpSzwSU2ODlUVZOV0jVDRGOiwuFXJ0VGZHaD4vAmhNP/xAAcAQEBAAIDAQEAAAAAAAAAAAAAAQIGAwQFBwj/xAA7EQEAAgEDAwIEAwUFCAMAAAAAAQIDBAURITFBBhIiUWFxEzKRobHB0eEHFDOB8BUjNEJicqLxFlKS/9oADAMBAAIRAxEAPwDsulKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUFp1TfI+nrO5dJaVKZbUArh6gHzqpst1g3iA3Nt8hD7KxkKSc1RaysbWotOSrU8sth5PJXofI1z5pu/3zbLUK7fJKnraV4KRzSoZ+sn311s2ecV45/LL39t2jHuOmvGK3++r14+cfT6unaVbtO3mBfbY1Pt76XWnBnkeY9xq412ImJjmHhXpalpraOJgpSlViUrwKSSQCCR1Gele0ClKUClKUClKUClKUClKUCufLAN2NwNX6rk2zcD9r9ptl0dgRo7UNtwng6klSSfMeddB1oDRt+l6Z263Yv1vCPFwr9Oda4xkBQCcGgvw2/wB3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
+<div class="slide">
+<img src="banner-slide2.jpg" alt="Top Up Mobile Legends & Free Fire">
+</div>
+
+<div class="slide">
+<img src="banner-slide3.jpg" alt="Top Up PUBG Mobile & Valorant">
+</div>
+
+</div>
+
+<div class="overlay">
+<div class="hero-btn">
+<a href="#games" class="btn-primary">🎮 Pilih Game Sekarang</a>
+<a href="https://wa.me/6283185954674" target="_blank" rel="noopener" class="btn-secondary">💬 Chat Admin</a>
+</div>
+</div>
+
+<div class="slider-dot">
+<span class="dot active"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+</div>
+
+</section>
+
+<!-- =====================================
+RUNNING PROMO
+===================================== -->
+
+<div class="running-promo">
+<div class="marquee">
+<span>🔥 Promo member baru diskon 5% pakai kode ARDZ5 &nbsp;&nbsp;•&nbsp;&nbsp; ⚡ Proses top up otomatis 1-5 menit &nbsp;&nbsp;•&nbsp;&nbsp; 🔒 Transaksi 100% aman &amp; terpercaya &nbsp;&nbsp;•&nbsp;&nbsp; 💬 CS online 24 jam &nbsp;&nbsp;•&nbsp;&nbsp; </span>
+</div>
+</div>
+
+<!-- =====================================
+SEMUA GAME
+===================================== -->
+
+<section class="games" id="games">
+<div class="container">
+
+<div class="section-title">
+<h2>Semua Game Tersedia</h2>
+<p>Pilih game favoritmu, top up otomatis masuk dalam hitungan menit</p>
+</div>
+
+<div class="game-grid">
+
+<a href="ml.html" class="game-card">
+<span class="game-badge">Terlaris</span>
+<img src="ml.jpeg" alt="Mobile Legends">
+<h3>Mobile Legends</h3>
+<p>Top up Diamond ML, proses cepat &amp; aman.</p>
+</a>
+
+<a href="ff.html" class="game-card">
+<span class="game-badge">Terlaris</span>
+<img src="ff.jpeg" alt="Free Fire">
+<h3>Free Fire</h3>
+<p>Top up Diamond FF berbagai nominal.</p>
+</a>
+
+<a href="pubg.html" class="game-card">
+<img src="pubg.jpeg" alt="PUBG Mobile">
+<h3>PUBG Mobile</h3>
+<p>Top up UC PUBG Mobile resmi.</p>
+</a>
+
+<a href="hok.html" class="game-card">
+<img src="hok.jpeg" alt="Honor of Kings">
+<h3>Honor of Kings</h3>
+<p>Top up Token &amp; Bintang HOK.</p>
+</a>
+
+<a href="roblox.html" class="game-card">
+<img src="roblox.jpeg" alt="Roblox">
+<h3>Roblox</h3>
+<p>Top up Robux aman dan cepat.</p>
+</a>
+
+<a href="valorant.html" class="game-card">
+<img src="valorant.jpeg" alt="Valorant">
+<h3>Valorant</h3>
+<p>Top up Valorant Points (VP).</p>
+</a>
+
+<a href="genshin.html" class="game-card">
+<img src="gensin.jpeg" alt="Genshin Impact">
+<h3>Genshin Impact</h3>
+<p>Top up Genesis Crystal &amp; Blessing.</p>
+</a>
+
+<a href="codm.html" class="game-card">
+<img src="codm.jpeg" alt="Call of Duty Mobile">
+<h3>Call of Duty Mobile</h3>
+<p>Top up CP Call of Duty Mobile.</p>
+</a>
+
+<a href="fcmobile.html" class="game-card">
+<img src="fc.jpeg" alt="FC Mobile">
+<h3>FC Mobile</h3>
+<p>Top up FC Points &amp; paket bintang.</p>
+</a>
+
+<a href="arenabreakout.html" class="game-card">
+<img src="arena.jpeg" alt="Arena Breakout">
+<h3>Arena Breakout</h3>
+<p>Top up voucher Arena Breakout.</p>
+</a>
+
+<a href="deltaforce.html" class="game-card">
+<img src="delta.jpeg" alt="Delta Force">
+<h3>Delta Force</h3>
+<p>Top up saldo &amp; item Delta Force.</p>
+</a>
+
+<a href="bloodstrike.html" class="game-card">
+<img src="bloods.jpeg" alt="Blood Strike">
+<h3>Blood Strike</h3>
+<p>Top up Gold Blood Strike.</p>
+</a>
+
+<a href="efootball.html" class="game-card">
+<img src="efootbal.jpeg" alt="eFootball">
+<h3>eFootball</h3>
+<p>Top up Coin eFootball Mobile.</p>
+</a>
+
+<a href="token.html" class="game-card">
+<img src="token.jpeg" alt="Token & Voucher">
+<h3>Token &amp; Voucher Game</h3>
+<p>Token listrik &amp; voucher berbagai game.</p>
+</a>
+
+<a href="pulsa.html" class="game-card">
+<img src="pulsa.jpeg" alt="Pulsa & Paket Data">
+<h3>Pulsa &amp; Paket Data</h3>
+<p>Isi pulsa &amp; paket data semua operator.</p>
+</a>
+
+</div>
+</div>
+</section>
+
+<!-- =====================================
+PRODUK TERLARIS
+===================================== -->
+
+<section class="best-products">
+<div class="container">
+
+<div class="section-title">
+<h2>Produk Terlaris Minggu Ini</h2>
+<p>Yang paling banyak dibeli pelanggan ARDZ STORE</p>
+</div>
+
+<div class="best-grid">
+
+<a href="ml.html" class="best-card" style="text-decoration:none;color:inherit;">
+<span class="best-badge">🔥 Terlaris</span>
+<img src="ml.jpeg" alt="Mobile Legends">
+<h3>Mobile Legends</h3>
+<p>Diamond ML mulai dari Rp3.000</p>
+</a>
+
+<a href="ff.html" class="best-card" style="text-decoration:none;color:inherit;">
+<span class="best-badge blue">⚡ Proses Kilat</span>
+<img src="ff.jpeg" alt="Free Fire">
+<h3>Free Fire</h3>
+<p>Diamond FF mulai dari Rp3.000</p>
+</a>
+
+<a href="pubg.html" class="best-card" style="text-decoration:none;color:inherit;">
+<span class="best-badge orange">💎 Favorit</span>
+<img src="pubg.jpeg" alt="PUBG Mobile">
+<h3>PUBG Mobile</h3>
+<p>UC PUBG mulai dari Rp8.000</p>
+</a>
+
+<a href="valorant.html" class="best-card" style="text-decoration:none;color:inherit;">
+<span class="best-badge red">🎯 Baru</span>
+<img src="valorant.jpeg" alt="Valorant">
+<h3>Valorant</h3>
+<p>VP Valorant mulai dari Rp10.000</p>
+</a>
+
+</div>
+</div>
+</section>
+
+<!-- =====================================
+PROMO
+===================================== -->
+
+<section class="promo-section" id="promo">
+<div class="container">
+
+<div class="section-title">
+<h2>Promo Spesial</h2>
+<p>Jangan sampai kelewatan penawaran terbatas ini</p>
+</div>
+
+<div class="promo-grid">
+
+<div class="promo-card">
+<span class="promo-badge">Member Baru</span>
+<h3>Diskon 5% Transaksi Pertama</h3>
+<p>Khusus pelanggan baru, pakai kode <b>ARDZ5</b> saat checkout via WhatsApp.</p>
+<a href="https://wa.me/6283185954674" target="_blank" rel="noopener">Klaim sekarang →</a>
+</div>
+
+<div class="promo-card">
+<span class="promo-badge blue">Weekend</span>
+<h3>Cashback Saldo 2%</h3>
+<p>Top up di akhir pekan dapat cashback saldo buat transaksi berikutnya.</p>
+<a href="https://wa.me/6283185954674" target="_blank" rel="noopener">Klaim sekarang →</a>
+</div>
+
+<div class="promo-card">
+<span class="promo-badge orange">Repeat Order</span>
+<h3>Bonus Diamond Pelanggan Setia</h3>
+<p>Transaksi ke-5 dalam sebulan dapat bonus tambahan otomatis.</p>
+<a href="https://wa.me/6283185954674" target="_blank" rel="noopener">Klaim sekarang →</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- =====================================
+WHY US
+===================================== -->
+
+<section class="why-us">
+<div class="container">
+
+<div class="section-title">
+<h2>Kenapa Pilih ARDZ STORE?</h2>
+<p>Alasan ribuan gamer percaya top up di sini</p>
+</div>
+
+<div class="why-grid">
+
+<div class="why-card">
+<div class="why-icon">⚡</div>
+<h3>Proses Cepat</h3>
+<p>Diamond &amp; item masuk otomatis dalam 1-5 menit setelah pembayaran dikonfirmasi.</p>
+</div>
+
+<div class="why-card">
+<div class="why-icon">🔒</div>
+<h3>Aman &amp; Terpercaya</h3>
+<p>Sudah melayani 10.000+ transaksi tanpa hack, data akun kamu nggak diminta.</p>
+</div>
+
+<div class="why-card">
+<div class="why-icon">💰</div>
+<h3>Harga Termurah</h3>
+<p>Harga bersaing dibanding toko lain, cocok buat top up rutin harian.</p>
+</div>
+
+<div class="why-card">
+<div class="why-icon">🎧</div>
+<h3>CS Responsif</h3>
+<p>Admin fast response via WhatsApp, siap bantu dari jam 07.00-23.00.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- =====================================
+CARA BELI
+===================================== -->
+
+<section class="how-to-buy" id="cara-beli">
+<div class="container">
+
+<div class="section-title">
+<h2>Cara Top Up di ARDZ STORE</h2>
+<p>Cuma 4 langkah, nggak sampai 5 menit</p>
+</div>
+
+<div class="step-grid">
+
+<div class="step-card">
+<div class="step-number">1</div>
+<h3>Pilih Game</h3>
+<p>Klik game yang mau di-top up dari daftar di atas.</p>
+</div>
+
+<div class="step-card">
+<div class="step-number">2</div>
+<h3>Pilih Nominal</h3>
+<p>Tentukan jumlah Diamond/UC/item sesuai kebutuhan.</p>
+</div>
+
+<div class="step-card">
+<div class="step-number">3</div>
+<h3>Bayar &amp; Konfirmasi</h3>
+<p>Scan QRIS atau transfer, lalu kirim bukti ke admin via WhatsApp.</p>
+</div>
+
+<div class="step-card">
+<div class="step-number">4</div>
+<h3>Item Masuk Otomatis</h3>
+<p>Tunggu 1-5 menit, top up langsung masuk ke akun game kamu.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- =====================================
+STATISTIK
+===================================== -->
+
+<section class="statistics">
+<div class="container">
+
+<div class="section-title">
+<h2>ARDZ STORE Dalam Angka</h2>
+<p>Kepercayaan yang terus tumbuh setiap harinya</p>
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+<div class="stat-icon">🧾</div>
+<div class="counter">10000+</div>
+<p>Transaksi Selesai</p>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">😊</div>
+<div class="counter">5000+</div>
+<p>Pelanggan Aktif</p>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">⭐</div>
+<div class="counter">4.9/5</div>
+<p>Rating Kepuasan</p>
+</div>
+
+<div class="stat-card">
+<div class="stat-icon">🕒</div>
+<div class="counter">24 Jam</div>
+<p>Layanan Setiap Hari</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- =====================================
+PARTNER
+===================================== -->
+
+<section class="partner">
+<div class="container">
+
+<div class="section-title">
+<h2>Bekerja Sama Dengan Publisher Resmi</h2>
+<p>Top up aman lewat jalur resmi masing-masing game</p>
+</div>
+
+<div class="partner-grid">
+<div class="partner-card"><img src="moonton.jpeg" alt="Moonton"></div>
+<div class="partner-card"><img src="garena.jpeg" alt="Garena"></div>
+<div class="partner-card"><img src="tencent.jpeg" alt="Tencent"></div>
+<div class="partner-card"><img src="riot.jpeg" alt="Riot Games"></div>
+</div>
+</div>
+</section>
+
+<!-- =====================================
+TESTIMONI
+===================================== -->
+
+<section class="testimonial-section" id="testimoni">
+<div class="container">
+
+<div class="section-title">
+<h2>Kata Mereka yang Sudah Coba</h2>
+<p>Ulasan asli dari pelanggan ARDZ STORE</p>
+</div>
+
+<div class="testimonial-grid">
+
+<div class="testimonial-card">
+<span class="verified">✔ Pembeli Terverifikasi</span>
+<div class="stars">★★★★★</div>
+<p>"Top up ML langsung masuk kurang dari 3 menit, harganya juga lebih murah dari toko lain."</p>
+<div class="customer">
+<div class="avatar-initial">R</div>
+<div><h4>Rizky</h4><span>Jakarta</span></div>
+</div>
+</div>
+
+<div class="testimonial-card">
+<span class="verified">✔ Pembeli Terverifikasi</span>
+<div class="stars">★★★★★</div>
+<p>"Admin fast response, bayar pakai QRIS juga gampang tinggal scan langsung diproses."</p>
+<div class="customer">
+<div class="avatar-initial">N</div>
+<div><h4>Nadia</h4><span>Surabaya</span></div>
+</div>
+</div>
+
+<div class="testimonial-card">
+<span class="verified">✔ Pembeli Terverifikasi</span>
+<div class="stars">★★★★★</div>
+<p>"Udah langganan top up Free Fire di sini dari lama, belum pernah ada masalah sama sekali."</p>
+<div class="customer">
+<div class="avatar-initial">F</div>
+<div><h4>Fajar</h4><span>Semarang</span></div>
+</div>
+</div>
+
+</div>
+
+<div class="testimonial-control">
+<button class="testimonial-prev">←</button>
+<button class="testimonial-next">→</button>
+</div>
+
+</div>
+</section>
+
+<!-- =====================================
+CTA
+===================================== -->
+
+<section class="cta-section">
+<div class="container">
+<div class="cta-box">
+<h2>Belum Nemu Game Kamu?</h2>
+<p>Chat admin langsung, kami bantu cek ketersediaan top up untuk game yang kamu mainkan.</p>
+<div class="cta-button">
+<a href="https://wa.me/6283185954674" target="_blank" rel="noopener" class="btn-primary">💬 Chat Admin Sekarang</a>
+<a href="#games" class="btn-secondary">🎮 Lihat Semua Game</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- =====================================
+METODE PEMBAYARAN
+===================================== -->
+
+<section class="payment-section" id="pembayaran">
+<div class="container">
+
+<div class="section-title">
+<h2>Metode Pembayaran</h2>
+<p>Bayar pakai cara yang paling nyaman buat kamu</p>
+</div>
+
+<div class="payment-grid">
+
+<div class="payment-card featured">
+<span class="payment-flag">Direkomendasikan</span>
+<img src="qris.jpeg" alt="QRIS">
+<h3>QRIS</h3>
+<p>Scan pakai DANA, OVO, GoPay, atau m-Banking apa saja.</p>
+</div>
+
+<div class="payment-card">
+<img src="dana.jpeg" alt="DANA">
+<h3>DANA</h3>
+<p>Transfer langsung ke akun DANA toko.</p>
+</div>
+
+<div class="payment-card">
+<img src="ovo.jpeg" alt="OVO">
+<h3>OVO</h3>
+<p>Pembayaran cepat lewat OVO.</p>
+</div>
+
+<div class="payment-card">
+<img src="gopay.jpeg" alt="GoPay">
+<h3>GoPay</h3>
+<p>Bayar praktis pakai saldo GoPay.</p>
+</div>
+
+<div class="payment-card">
+<img src="shoppepay.jpeg" alt="ShopeePay">
+<h3>ShopeePay</h3>
+<p>Terima pembayaran via ShopeePay.</p>
+</div>
+
+<div class="payment-card">
+<img src="bca.jpeg" alt="BCA">
+<h3>BCA</h3>
+<p>Transfer bank BCA 24 jam.</p>
+</div>
+
+<div class="payment-card">
+<img src="bni.jpeg" alt="BNI">
+<h3>BNI</h3>
+<p>Transfer bank BNI 24 jam.</p>
+</div>
+
+<div class="payment-card">
+<img src="bri.jpeg" alt="BRI">
+<h3>BRI</h3>
+<p>Transfer bank BRI 24 jam.</p>
+</div>
+
+<div class="payment-card">
+<img src="mandiri.jpeg" alt="Mandiri">
+<h3>Mandiri</h3>
+<p>Transfer bank Mandiri 24 jam.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- =====================================
+FOOTER
+===================================== -->
+
+<footer class="footer" id="kontak">
+<div class="container">
+
+<div class="footer-grid">
+
+<div class="footer-item">
+<h2>🎮 ARDZ STORE</h2>
+<p>Top Up Game Termurah, Tercepat &amp; Terpercaya. Melayani top up Mobile Legends, Free Fire, PUBG, Valorant, dan puluhan game lainnya.</p>
+</div>
+
+<div class="footer-item">
+<h3>Menu</h3>
+<ul>
+<li><a href="#games">Semua Game</a></li>
+<li><a href="#promo">Promo</a></li>
+<li><a href="#cara-beli">Cara Beli</a></li>
+<li><a href="#testimoni">Testimoni</a></li>
+</ul>
+</div>
+
+<div class="footer-item">
+<h3>Game Populer</h3>
+<ul>
+<li><a href="ml.html">Mobile Legends</a></li>
+<li><a href="ff.html">Free Fire</a></li>
+<li><a href="pubg.html">PUBG Mobile</a></li>
+<li><a href="valorant.html">Valorant</a></li>
+</ul>
+</div>
+
+<div class="footer-item">
+<h3>Kontak &amp; Pembayaran</h3>
+<p>📱 WhatsApp: 083185954674</p>
+<p>🕒 Layanan 07.00-23.00 WIB</p>
+<div class="footer-payment" style="margin-top:14px;">
+<img src="qris.jpeg" alt="QRIS">
+<img src="dana.jpeg" alt="DANA">
+<img src="gopay.jpeg" alt="GoPay">
+</div>
+</div>
+
+</div>
+
+<hr>
+
+<div class="footer-bottom">
+<p>© 2026 ARDZ STORE. Semua hak dilindungi.</p>
+</div>
+
+</div>
+</footer>
+
+<!-- =====================================
+LIVE ORDER NOTIFICATION
+===================================== -->
+
+<div class="live-order">
+<div class="live-order-icon">🛒</div>
+<div class="live-order-info">
+<h4>Pesanan Baru!</h4>
+<p class="live-order-text"></p>
+</div>
+</div>
+
+<!-- =====================================
+PROMO POPUP
+===================================== -->
+
+<div class="promo-popup">
+<div class="promo-content">
+<button class="promo-close">×</button>
+<h2>🎉 Promo Member Baru</h2>
+<p>Gunakan kode voucher <b>ARDZ5</b> untuk diskon 5% di transaksi pertamamu.</p>
+<div>
+<a href="https://wa.me/6283185954674" target="_blank" rel="noopener" class="btn-primary" style="margin-right:10px;">🎁 Klaim Sekarang</a>
+<button class="promo-close btn-secondary">Nanti Saja</button>
+</div>
+</div>
+</div>
+
+<!-- =====================================
+BACK TO TOP
+===================================== -->
+
+<button id="backTop" onclick="scrollToTop()" aria-label="Kembali ke atas">↑</button>
+
+<!-- =====================================
+JAVASCRIPT
+===================================== -->
+
+<script src="index.js"></script>
+
+</body>
+</html>
