@@ -1,344 +1,206 @@
-<!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<!doctype html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARDZ STORE - Top Up Game Termurah & Tercepat</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        @keyframes marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        .animate-marquee {
-            display: inline-block;
-            white-space: nowrap;
-            animation: marquee 25s linear infinite;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Top Up Mobile Legends — ARDZ STORE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0B0F17;
+    --bg-card:#141B27;
+    --bg-card-hover:#1B2433;
+    --ink:#F3F6FA;
+    --ink-soft:#8B97A8;
+    --violet:#8B5CF6;
+    --violet-deep:#6D3FE0;
+    --cyan:#33E6C4;
+    --gold:#FFB020;
+    --line: rgba(255,255,255,0.08);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 10% 0%, rgba(139,92,246,.16), transparent 45%),
+      radial-gradient(circle at 90% 20%, rgba(51,230,196,.10), transparent 40%),
+      var(--bg);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif; margin:0; letter-spacing:-0.01em;}
+  .mono{font-family:'Space Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 20px;}
+  :focus-visible{outline:3px solid var(--cyan); outline-offset:2px;}
+
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(11,15,23,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 20px; max-width:960px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Space Grotesk',sans-serif; font-weight:800;}
+  .brand .dot{width:10px;height:10px;border-radius:99px; background:var(--cyan); box-shadow:0 0 0 4px rgba(51,230,196,.2);}
+  .back-link{display:flex; align-items:center; gap:6px; font-size:.9rem; color:var(--ink-soft); text-decoration:none;}
+
+  main{padding:36px 0 80px;}
+
+  .product-head{display:flex; gap:18px; align-items:center; margin-bottom:32px;}
+  .product-icon{
+    width:64px; height:64px; border-radius:16px;
+    background:linear-gradient(135deg,var(--violet),var(--violet-deep));
+    display:flex; align-items:center; justify-content:center; font-size:1.8rem;
+    flex-shrink:0;
+  }
+  .product-head h1{font-size:1.5rem; margin-bottom:4px;}
+  .product-head p{margin:0; color:var(--ink-soft); font-size:.9rem;}
+
+  .section-label{
+    font-family:'Space Mono',monospace; font-size:.75rem; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--cyan); margin-bottom:14px; display:flex; align-items:center; gap:8px;
+  }
+  .section-label .n{
+    width:20px; height:20px; border-radius:6px; background:var(--bg-card); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; font-size:.7rem; color:var(--ink);
+  }
+
+  /* nominal grid */
+  .nominal-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:44px;
+  }
+  @media (max-width:640px){ .nominal-grid{grid-template-columns:repeat(2,1fr);} }
+  .nominal-card{
+    background:var(--bg-card); border:1.5px solid var(--line); border-radius:14px;
+    padding:16px 14px; cursor:pointer; text-align:left;
+    transition:all .15s ease; position:relative;
+  }
+  .nominal-card:hover{background:var(--bg-card-hover); border-color:rgba(139,92,246,.4);}
+  .nominal-card.selected{
+    border-color:var(--violet); background:rgba(139,92,246,.12);
+    box-shadow:0 0 0 1px var(--violet);
+  }
+  .nominal-card .badge{
+    position:absolute; top:-9px; right:10px;
+    background:var(--gold); color:#3A2500; font-size:.65rem; font-weight:800;
+    padding:3px 8px; border-radius:99px; font-family:'Space Grotesk',sans-serif;
+  }
+  .nominal-card .amount{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.02rem; margin-bottom:6px;}
+  .nominal-card .price{font-family:'Space Mono',monospace; font-size:.88rem; color:var(--cyan);}
+
+  /* ringkasan */
+  .summary-bar{
+    display:flex; justify-content:space-between; align-items:center;
+    background:var(--bg-card); border:1px solid var(--line); border-radius:14px;
+    padding:16px 20px; margin-bottom:44px;
+  }
+  .summary-bar .lbl{font-size:.82rem; color:var(--ink-soft);}
+  .summary-bar .val{font-family:'Space Mono',monospace; font-weight:700; font-size:1.3rem; color:var(--ink);}
+
+  /* qris */
+  .qris-box{
+    background:var(--bg-card); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px; display:grid; grid-template-columns:220px 1fr; gap:28px; align-items:center;
+    margin-bottom:24px;
+  }
+  @media (max-width:640px){ .qris-box{grid-template-columns:1fr; text-align:center;} }
+  .qris-box img{width:100%; border-radius:12px; border:1px solid var(--line);}
+  .qris-steps{display:flex; flex-direction:column; gap:14px;}
+  .qris-step{display:flex; gap:12px; align-items:flex-start;}
+  .qris-step .num{
+    width:26px; height:26px; border-radius:99px; background:var(--violet); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-size:.78rem; font-weight:700;
+    flex-shrink:0; font-family:'Space Grotesk',sans-serif;
+  }
+  .qris-step p{margin:0; font-size:.9rem; color:var(--ink-soft);}
+  .qris-step b{color:var(--ink);}
+
+  .notice{
+    background:rgba(255,176,32,.1); border:1px solid rgba(255,176,32,.35);
+    border-radius:12px; padding:14px 16px; font-size:.85rem; color:#FFD187;
+    margin-bottom:32px; display:flex; gap:10px;
+  }
+
+  .confirm-box{
+    background:linear-gradient(135deg, rgba(139,92,246,.15), rgba(51,230,196,.08));
+    border:1px solid rgba(139,92,246,.3); border-radius:var(--radius);
+    padding:28px; text-align:center;
+  }
+  .confirm-box h2{font-size:1.2rem; margin-bottom:8px;}
+  .confirm-box p{color:var(--ink-soft); font-size:.9rem; margin:0 0 22px; max-width:44ch; margin-left:auto; margin-right:auto;}
+  .btn-wa{
+    display:inline-flex; align-items:center; gap:10px;
+    background:var(--violet); color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:700;
+    padding:15px 30px; border-radius:99px; text-decoration:none; font-size:1rem;
+    box-shadow:0 10px 26px -10px rgba(139,92,246,.6);
+    transition:transform .15s ease, background .15s ease;
+    border:none; cursor:pointer;
+  }
+  .btn-wa:hover{transform:translateY(-2px); background:var(--violet-deep);}
+  .btn-wa[disabled]{opacity:.4; cursor:not-allowed; transform:none;}
+  .confirm-hint{font-size:.78rem; color:var(--ink-soft); margin-top:14px;}
+
+  footer{border-top:1px solid var(--line); padding:26px 0; text-align:center; color:var(--ink-soft); font-size:.8rem;}
+</style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-purple-500 selection:text-white">
+<body>
 
-    <!-- RUNNING TEXT / TEKS BERJALAN Keren -->
-    <div class="bg-gradient-to-r from-purple-900 via-indigo-900 to-purple-900 text-purple-200 text-xs md:text-sm py-2.5 overflow-hidden whitespace-nowrap border-b border-purple-500/20 font-medium relative z-50">
-        <div class="animate-marquee">
-            🔥 <span class="text-white font-bold">SELAMAT DATANG DI ARDZ STORE</span> • Top Up Game Termurah, Proses Cepat 1–5 Menit, 100% Aman & Terpercaya • ⚡ Promo Diskon Spesial Setiap Hari • Buka 24 Jam Nonstop! Terima kasih telah mempercayai kami. 🚀
-        </div>
+<header>
+  <div class="nav">
+    <div class="brand"><span class="dot"></span> ARDZ STORE</div>
+    <a class="back-link" href="#">← Kembali</a>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="product-head">
+    <div class="product-icon">💎</div>
+    <div>
+      <h1>Top Up Mobile Legends — Diamond</h1>
+      <p>Proses otomatis 1–5 menit setelah bukti transfer dikonfirmasi.</p>
     </div>
+  </div>
 
-    <!-- HEADER / NAVBAR -->
-    <header class="sticky top-0 z-40 backdrop-blur-md bg-slate-950/80 border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3">
-                <div class="bg-gradient-to-tr from-purple-600 to-indigo-600 p-2.5 rounded-xl shadow-lg shadow-purple-500/30">
-                    <i class="fa-solid fa-gamepad text-xl text-white"></i>
-                </div>
-                <span class="text-xl font-black tracking-wider bg-gradient-to-r from-white via-slate-200 to-purple-400 bg-clip-text text-transparent">ARDZ STORE</span>
-            </div>
-            
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="#home" class="hover:text-purple-400 transition-colors">Home</a>
-                <a href="#game" class="hover:text-purple-400 transition-colors">Game</a>
-                <a href="#promo" class="hover:text-purple-400 transition-colors">Promo</a>
-                <a href="#testi" class="hover:text-purple-400 transition-colors">Testimoni</a>
-                <a href="#payment" class="hover:text-purple-400 transition-colors">Pembayaran</a>
-                <a href="admin/login.html" class="px-4 py-2 bg-purple-600 hover:bg-purple-500 rounded-xl text-white transition-all shadow-md shadow-purple-600/20 font-semibold">
-                    <i class="fa-solid fa-lock mr-2"></i>Admin
-                </a>
-            </nav>
-        </div>
-    </header>
+  <div class="section-label"><span class="n">1</span> Pilih Nominal</div>
+  <div class="nominal-grid" id="nominalGrid">
+    <button class="nominal-card" data-name="86 Diamond" data-price="20000">
+      <div class="amount">86 💎</div>
+      <div class="price mono">Rp20.000</div>
+    </button>
+    <button class="nominal-card" data-name="172 Diamond" data-price="38000">
+      <div class="amount">172 💎</div>
+      <div class="price mono">Rp38.000</div>
+    </button>
+    <button class="nominal-card" data-name="257 Diamond" data-price="55000">
+      <span class="badge">HEMAT</span>
+      <div class="amount">257 💎</div>
+      <div class="price mono">Rp55.000</div>
+    </button>
+    <button class="nominal-card" data-name="344 Diamond" data-price="70000">
+      <div class="amount">344 💎</div>
+      <div class="price mono">Rp70.000</div>
+    </button>
+    <button class="nominal-card" data-name="Weekly Pass" data-price="28000">
+      <div class="amount">Weekly Pass</div>
+      <div class="price mono">Rp28.000</div>
+    </button>
+    <button class="nominal-card" data-name="Twilight Pass" data-price="149000">
+      <span class="badge">POPULER</span>
+      <div class="amount">Twilight Pass</div>
+      <div class="price mono">Rp149.000</div>
+    </button>
+  </div>
 
-    <!-- HERO SECTION DENGAN BANNER FOTO -->
-    <section id="home" class="relative pt-8 pb-12 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-gradient-to-r from-purple-950/60 via-indigo-950/40 to-slate-900 border border-purple-500/20 rounded-3xl p-6 md:p-10 shadow-2xl relative overflow-hidden">
-                
-                <!-- Kolom Teks -->
-                <div class="relative z-10">
-                    <span class="inline-block px-3.5 py-1.5 bg-purple-500/20 text-purple-300 rounded-full text-xs font-semibold mb-5 border border-purple-500/30 shadow-inner">
-                        ⚡ 100% Aman & Terpercaya • Layanan 24 Jam Nonstop
-                    </span>
-                    <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4 leading-tight">
-                        TOP UP GAME <span class="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">TERMURAH & TERCEPAT</span>
-                    </h1>
-                    <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed">
-                        Nikmati proses top up instan, harga ramah di kantong, pilihan pembayaran lengkap, dan layanan pelanggan profesional yang siap membantu kapan saja.
-                    </p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#game" class="px-7 py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 font-semibold rounded-xl shadow-lg shadow-purple-600/35 transition-all text-center text-sm">
-                            🚀 Top Up Sekarang
-                        </a>
-                        <a href="#promo" class="px-7 py-3.5 bg-slate-900 hover:bg-slate-800 border border-slate-700 font-semibold rounded-xl transition-all text-center text-sm">
-                            🔥 Lihat Promo Hari Ini
-                        </a>
-                    </div>
-                </div>
+  <div class="summary-bar">
+    <span class="lbl">Total yang harus dibayar</span>
+    <span class="val mono" id="totalPrice">Rp0</span>
+  </div>
 
-                <!-- Kolom Banner Foto -->
-                <div class="relative z-10 flex justify-center">
-                    <div class="w-full h-64 md:h-80 rounded-2xl overflow-hidden shadow-2xl border border-purple-500/30 bg-slate-900 relative group">
-                        <!-- Ganti banner.jpeg dengan nama file foto banner Anda -->
-                        <img src="banner.jpeg" alt="Banner ARDZ STORE" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://via.placeholder.com/600x350?text=ARDZ+STORE+BANNER'">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-6">
-                            <span class="text-xs font-semibold text-purple-300 bg-purple-950/80 px-3 py-1 rounded-full border border-purple-500/30">
-                                🎮 Pusat Top Up Games & Voucher Terlengkap
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- GAME POPULER SECTION (Dinamis dari Admin) -->
-    <section id="game" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mb-10 text-center md:text-left">
-            <h2 class="text-3xl font-bold tracking-tight mb-2">🎮 Game & Layanan Populer</h2>
-            <p class="text-slate-400">Pilih game atau produk digital yang ingin kamu top up.</p>
-        </div>
-
-        <!-- Grid Produk Dinamis -->
-        <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <!-- Dimuat otomatis lewat JavaScript LocalStorage -->
-        </div>
-    </section>
-
-    <!-- PROMO HARI INI -->
-    <section id="promo" class="py-16 bg-slate-900/40 border-y border-slate-800/80 my-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-12 text-center md:text-left">
-                <h2 class="text-3xl font-bold tracking-tight mb-2">🔥 Promo Spesial Hari Ini</h2>
-                <p class="text-slate-400">Jangan lewatkan penawaran diskon terbaik dari ARDZ STORE.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-slate-900 border border-slate-800 hover:border-purple-500/40 p-6 rounded-3xl transition-all shadow-xl">
-                    <span class="inline-block px-3 py-1 bg-rose-500/20 text-rose-400 text-xs font-bold rounded-lg mb-4">FLASH SALE</span>
-                    <h3 class="text-xl font-bold mb-2">Mobile Legends</h3>
-                    <p class="text-slate-400 text-sm mb-6">Diskon spesial hingga <b class="text-white">15%</b> untuk Diamond & Weekly Pass pilihanmu.</p>
-                    <a href="ml.html" class="text-purple-400 hover:text-purple-300 font-semibold text-sm flex items-center">Top Up Sekarang →</a>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 hover:border-purple-500/40 p-6 rounded-3xl transition-all shadow-xl">
-                    <span class="inline-block px-3 py-1 bg-amber-500/20 text-amber-400 text-xs font-bold rounded-lg mb-4">BONUS DIAMOND</span>
-                    <h3 class="text-xl font-bold mb-2">Free Fire</h3>
-                    <p class="text-slate-400 text-sm mb-6">Dapatkan tambahan bonus Diamond ekstra setiap pembelian membership tertentu.</p>
-                    <a href="ff.html" class="text-purple-400 hover:text-purple-300 font-semibold text-sm flex items-center">Top Up Sekarang →</a>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 hover:border-purple-500/40 p-6 rounded-3xl transition-all shadow-xl">
-                    <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-300 text-xs font-bold rounded-lg mb-4">ROBUX HEMAT</span>
-                    <h3 class="text-xl font-bold mb-2">Roblox</h3>
-                    <p class="text-slate-400 text-sm mb-6">Harga Robux jauh lebih hemat dan ramah dikantong para gamers setiap hari.</p>
-                    <a href="roblox.html" class="text-purple-400 hover:text-purple-300 font-semibold text-sm flex items-center">Top Up Sekarang →</a>
-                </div>
-                <div class="bg-slate-900 border border-slate-800 hover:border-purple-500/40 p-6 rounded-3xl transition-all shadow-xl">
-                    <span class="inline-block px-3 py-1 bg-indigo-500/20 text-indigo-400 text-xs font-bold rounded-lg mb-4">LIMITED VP</span>
-                    <h3 class="text-xl font-bold mb-2">Valorant</h3>
-                    <p class="text-slate-400 text-sm mb-6">Promo Valorant Points resmi dengan harga spesial anti boncos.</p>
-                    <a href="valorant.html" class="text-purple-400 hover:text-purple-300 font-semibold text-sm flex items-center">Top Up Sekarang →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONI PELANGGAN (BINTANG 5) -->
-    <section id="testi" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-2xl mx-auto mb-12">
-            <h2 class="text-3xl font-bold mb-3">💬 Testimoni Pelanggan Setia</h2>
-            <p class="text-slate-400">Apa kata mereka yang sudah merasakan cepatnya layanan di ARDZ STORE?</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Testimoni 1 -->
-            <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-3xl flex flex-col justify-between shadow-lg relative">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full border border-emerald-500/20">✅ Terverifikasi</span>
-                        <div class="text-amber-400 text-xs space-x-0.5">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 text-sm italic mb-6 leading-relaxed">
-                        "Top up Mobile Legends cuma butuh waktu sekitar 2 menit langsung masuk akun. Sumpah recommended banget!"
-                    </p>
-                </div>
-                <div class="flex items-center space-x-3 pt-4 border-t border-slate-800/80">
-                    <div class="w-10 h-10 rounded-full bg-purple-600/30 text-purple-300 font-bold flex items-center justify-center text-sm border border-purple-500/30">RA</div>
-                    <div>
-                        <h4 class="font-bold text-sm text-slate-200">Rizky A.</h4>
-                        <span class="text-xs text-purple-400 font-medium">Mobile Legends</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimoni 2 -->
-            <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-3xl flex flex-col justify-between shadow-lg relative">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full border border-emerald-500/20">✅ Terverifikasi</span>
-                        <div class="text-amber-400 text-xs space-x-0.5">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 text-sm italic mb-6 leading-relaxed">
-                        "Harga Robux di sini jauh lebih murah dibanding tempat lain. Adminnya juga super ramah dan fast response."
-                    </p>
-                </div>
-                <div class="flex items-center space-x-3 pt-4 border-t border-slate-800/80">
-                    <div class="w-10 h-10 rounded-full bg-purple-600/30 text-purple-300 font-bold flex items-center justify-center text-sm border border-purple-500/30">NP</div>
-                    <div>
-                        <h4 class="font-bold text-sm text-slate-200">Nadia P.</h4>
-                        <span class="text-xs text-purple-400 font-medium">Roblox</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimoni 3 -->
-            <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-3xl flex flex-col justify-between shadow-lg relative">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full border border-emerald-500/20">✅ Terverifikasi</span>
-                        <div class="text-amber-400 text-xs space-x-0.5">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 text-sm italic mb-6 leading-relaxed">
-                        "Top up Valorant kilat banget, pembayaran gampang tinggal pakai QRIS anti ribet. Mantap ARDZ STORE!"
-                    </p>
-                </div>
-                <div class="flex items-center space-x-3 pt-4 border-t border-slate-800/80">
-                    <div class="w-10 h-10 rounded-full bg-purple-600/30 text-purple-300 font-bold flex items-center justify-center text-sm border border-purple-500/30">FD</div>
-                    <div>
-                        <h4 class="font-bold text-sm text-slate-200">Fajar D.</h4>
-                        <span class="text-xs text-purple-400 font-medium">Valorant</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimoni 4 -->
-            <div class="bg-slate-900/80 border border-slate-800 p-6 rounded-3xl flex flex-col justify-between shadow-lg relative">
-                <div>
-                    <div class="flex items-center justify-between mb-3">
-                        <span class="px-2.5 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full border border-emerald-500/20">✅ Terverifikasi</span>
-                        <div class="text-amber-400 text-xs space-x-0.5">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                    </div>
-                    <p class="text-slate-300 text-sm italic mb-6 leading-relaxed">
-                        "Udah jadi langganan tetap di sini buat beli Diamond Free Fire. Pelayanan selalu memuaskan dan terpercaya."
-                    </p>
-                </div>
-                <div class="flex items-center space-x-3 pt-4 border-t border-slate-800/80">
-                    <div class="w-10 h-10 rounded-full bg-purple-600/30 text-purple-300 font-bold flex items-center justify-center text-sm border border-purple-500/30">AS</div>
-                    <div>
-                        <h4 class="font-bold text-sm text-slate-200">Andi S.</h4>
-                        <span class="text-xs text-purple-400 font-medium">Free Fire</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- METODE PEMBAYARAN -->
-    <section id="payment" class="py-16 bg-slate-900/40 border-t border-slate-800/80">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-3">💳 Metode Pembayaran Lengkap</h2>
-            <p class="text-slate-400 mb-10">Pilih metode pembayaran paling mudah dan aman untukmu.</p>
-
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col items-center">
-                    <img src="qris.jpeg" alt="QRIS" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=QRIS'">
-                    <span class="font-semibold text-sm">QRIS</span>
-                    <span class="text-xs text-slate-400">Semua E-Wallet</span>
-                </div>
-                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col items-center">
-                    <img src="dana.jpeg" alt="DANA" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=DANA'">
-                    <span class="font-semibold text-sm">DANA</span>
-                    <span class="text-xs text-slate-400">Pembayaran Instan</span>
-                </div>
-                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col items-center">
-                    <img src="ovo.jpeg" alt="OVO" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=OVO'">
-                    <span class="font-semibold text-sm">OVO</span>
-                    <span class="text-xs text-slate-400">Praktis & Cepat</span>
-                </div>
-                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col items-center">
-                    <img src="gopay.jpeg" alt="GoPay" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=GoPay'">
-                    <span class="font-semibold text-sm">GoPay</span>
-                    <span class="text-xs text-slate-400">Aman Digunakan</span>
-                </div>
-                <div class="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex flex-col items-center">
-                    <img src="bca.jpeg" alt="BCA" class="h-8 object-contain mb-2 rounded" onerror="this.src='https://via.placeholder.com/80?text=BCA'">
-                    <span class="font-semibold text-sm">BCA</span>
-                    <span class="text-xs text-slate-400">Transfer Bank</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-950 border-t border-slate-800/80 pt-12 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div>
-                <span class="text-xl font-black tracking-wider text-white">ARDZ STORE</span>
-                <p class="text-slate-400 text-sm mt-1">Platform top up game termurah, tercepat, dan teraman di Indonesia.</p>
-            </div>
-            <div class="text-slate-500 text-sm">
-                &copy; 2026 ARDZ STORE. All Rights Reserved.
-            </div>
-        </div>
-    </footer>
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/6283185954674" target="_blank" class="fixed bottom-6 right-6 z-50 bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center text-2xl shadow-xl shadow-emerald-500/30 transition-all hover:scale-110">
-        <i class="fa-brands fa-whatsapp"></i>
-    </a>
-
-    <!-- SCRIPT RENDER PRODUK DARI LOCALSTORAGE -->
-    <script>
-        const defaultProducts = [
-            { name: "Mobile Legends", category: "Diamond & Weekly Pass", img: "ml.jpeg", link: "ml.html" },
-            { name: "Free Fire", category: "Diamond & Membership", img: "ff.jpeg", link: "ff.html" },
-            { name: "PUBG Mobile", category: "UC Murah", img: "pubg.jpeg", link: "pubg.html" },
-            { name: "Honor Of Kings", category: "Tokens Murah", img: "hok.jpeg", link: "hok.html" },
-            { name: "Roblox", category: "Robux & Premium", img: "roblox.jpeg", link: "roblox.html" },
-            { name: "Valorant", category: "Valorant Points", img: "valorant.jpeg", link: "valorant.html" },
-            { name: "Call of Duty Mobile", category: "Top Up CP Murah", img: "codm.jpeg", link: "codm.html" },
-            { name: "FC Mobile", category: "Top Up FC Points", img: "fc.jpeg", link: "fcmobile.html" },
-            { name: "eFootball", category: "Top Up Coins", img: "efootbal.jpeg", link: "efootball.html" },
-            { name: "Genshin Impact", category: "Genesis Crystal", img: "gensin.jpeg", link: "genshin.html" },
-            { name: "Blood Strike", category: "Top Up Gold", img: "bloods.jpeg", link: "bloodstrike.html" },
-            { name: "Delta Force", category: "Delta Coin", img: "delta.jpeg", link: "deltaforce.html" },
-            { name: "Arena Breakout", category: "Top Up Bonds", img: "arena.jpeg", link: "arenabreakout.html" },
-            { name: "Pulsa", category: "Semua Operator", img: "pulsa.jpeg", link: "pulsa.html" },
-            { name: "Token PLN", category: "Token Listrik", img: "tokenpln.jpeg", link: "token.html" }
-        ];
-
-        function loadProducts() {
-            let products = JSON.parse(localStorage.getItem('ardz_products'));
-            if (!products || products.length === 0) {
-                products = defaultProducts;
-                localStorage.setItem('ardz_products', JSON.stringify(products));
-            }
-
-            const grid = document.getElementById('product-grid');
-            grid.innerHTML = '';
-
-            products.forEach(p => {
-                grid.innerHTML += `
-                    <a href="${p.link}" class="group bg-slate-900 border border-slate-800 hover:border-purple-500/50 p-4 rounded-3xl text-center transition-all duration-300 hover:-translate-y-1 block shadow-lg">
-                        <div class="w-20 h-20 mx-auto mb-3 overflow-hidden rounded-2xl bg-slate-800 shadow-md border border-slate-700/50">
-                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" onerror="this.src='https://via.placeholder.com/80?text=Game'">
-                        </div>
-                        <h3 class="font-semibold text-sm text-slate-200 group-hover:text-purple-400 transition-colors">${p.name}</h3>
-                        <p class="text-xs text-slate-400 mt-1">${p.category}</p>
-                    </a>
-                `;
-            });
-        }
-
-        window.onload = loadProducts;
-    </script>
-</body>
-</html>
+  <div class="section-label"><span class="n">2</span> Scan QRIS untuk Bayar</div>
+  <div class="qris-box">
+    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAPoAtADASIAAhEBAxEB/8QAHQABAAAHAQEAAAAAAAAAAAAAAAIDBAUGBwgBCf/EAGIQAAEDAwIDBQQGAgsLCQYCCwECAwQABREGBxIhMQgTFEFRImFxkRUyMzRSgSNTCRYXGEJicqGxstEkN1ZzdHWCkpSzwSU2ODlUVZOV0jVDRGOiwuFXJ0VGZHaD4vAmhNP/xAAcAQEBAAIDAQEAAAAAAAAAAAAAAQIGAwQFBwj/xAA7EQEAAgEDAwIEAwUFCAMAAAAAAQIDBAURITFBBhIiUWFxEzKRobHB0eEHFDOB8BUjNEJicqLxFlKS/9oADAMBAAIRAxEAPwDsulKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUClKUFp1TfI+nrO5dJaVKZbUArh6gHzqpst1g3iA3Nt8hD7KxkKSc1RaysbWotOSrU8sth5PJXofI1z5pu/3zbLUK7fJKnraV4KRzSoZ+sn311s2ecV45/LL39t2jHuOmvGK3++r14+cfT6unaVbtO3mBfbY1Pt76XWnBnkeY9xq412ImJjmHhXpalpraOJgpSlViUrwKSSQCCR1Gele0ClKUClKUClKUClKUClKUCufLAN2NwNX6rk2zcD9r9ptl0dgRo7UNtwng6klSSfMeddB1oDRt+l6Z263Yv1vCPFwr9Oda4xkBQCcGgvw2/wB3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
